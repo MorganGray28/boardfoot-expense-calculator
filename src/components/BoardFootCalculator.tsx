@@ -1,40 +1,51 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 
+interface BoardFeetData {
+	numOfPieces: string;
+	thickness: string;
+	width: string;
+	length: string;
+	species: string;
+	price: string;
+}
+
 function BoardFootCalculator() {
-	const [numOfPieces, setNumOfPieces] = useState('');
-	const [thickness, setThickness] = useState('');
-	const [width, setWidth] = useState('');
-	const [length, setLength] = useState('');
+	const initialValues: BoardFeetData = {
+		numOfPieces: '',
+		thickness: '',
+		width: '',
+		length: '',
+		species: '',
+		price: '',
+	};
+
+	const [values, setValues] = useState(initialValues);
+	let boardFeet: number | undefined = 0;
+	let totalCost = 0;
+	if (values.numOfPieces && values.thickness && values.width && values.length) {
+		const { numOfPieces, thickness, width, length, price } = values;
+		// T" x W" x L" ÷ 144 = Bd. Ft.
+		boardFeet =
+			parseInt(numOfPieces) * ((parseFloat(thickness) * parseFloat(width) * parseFloat(length)) / 144);
+		if (boardFeet && price) {
+			totalCost = boardFeet * parseFloat(price);
+		}
+	}
 
 	function handleChange(e: ChangeEvent<HTMLInputElement>) {
-		let name = e.target.name;
-		if (name === 'numOfPieces') {
-			setNumOfPieces(e.target.value);
-		} else if (name === 'thickness') {
-			setThickness(e.target.value);
-		} else if (name === 'width') {
-			setWidth(e.target.value);
-		} else if (name === 'length') {
-			setLength(e.target.value);
-		}
+		setValues({ ...values, [e.target.name]: e.target.value });
+	}
+
+	function handleClearForm() {
+		setValues(initialValues);
 	}
 
 	function handleSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
-		console.log(numOfPieces);
-		console.log(thickness);
-		console.log(width);
-		console.log(length);
-
+		console.log('submitting form data');
+		console.log(values);
 		// clear the form after submit
 		handleClearForm();
-	}
-
-	function handleClearForm() {
-		setNumOfPieces('');
-		setThickness('');
-		setWidth('');
-		setLength('');
 	}
 
 	return (
@@ -42,37 +53,55 @@ function BoardFootCalculator() {
 			<form onSubmit={handleSubmit}>
 				<div className='boardfoot-container'>
 					<label htmlFor='numOfPieces'>Number of Pieces</label>
-					<input name='numOfPieces' value={numOfPieces} onChange={handleChange} type='number' />
+					<input name='numOfPieces' value={values.numOfPieces} onChange={handleChange} type='number' />
 
 					<label htmlFor='thickness'>Thickness</label>
 					<input
 						name='thickness'
-						value={thickness}
+						value={values.thickness}
 						placeholder='inches'
 						onChange={handleChange}
 						type='number'
 					/>
 
 					<label htmlFor='width'>Width</label>
-					<input name='width' value={width} placeholder='inches' onChange={handleChange} type='number' />
+					<input
+						name='width'
+						value={values.width}
+						placeholder='inches'
+						onChange={handleChange}
+						type='number'
+					/>
 
 					<label htmlFor='length'>Length</label>
-					<input name='length' value={length} placeholder='inches' onChange={handleChange} type='number' />
+					<input
+						name='length'
+						value={values.length}
+						placeholder='inches'
+						onChange={handleChange}
+						type='number'
+					/>
+					<p>
+						Total Board Feet: <span>{boardFeet}</span>
+					</p>
 				</div>
 
 				<p>Cost</p>
 				<div className='cost-container'>
 					<label>Species</label>
-					<input type='text' />
+					<input type='text' name='species' onChange={handleChange} value={values.species} />
 
 					<label>Price</label>
-					<input type='text' />
+					<input type='text' name='price' onChange={handleChange} value={values.price} />
 
-					<span>Total Cost</span>
-					<span>$45</span>
+					<p>
+						Total Cost: <span>{totalCost}</span>
+					</p>
 				</div>
 
-				<button onClick={handleClearForm}>Clear</button>
+				<button type='button' onClick={handleClearForm}>
+					Clear
+				</button>
 				<button type='submit'>Add to Project</button>
 			</form>
 		</div>
