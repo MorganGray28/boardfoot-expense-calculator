@@ -1,13 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
-
-interface BoardFeetData {
-	numOfPieces: string;
-	thickness: string;
-	width: string;
-	length: string;
-	species: string;
-	price: string;
-}
+import { BoardFeetData } from '../types/types';
 
 function BoardFootCalculator() {
 	const initialValues: BoardFeetData = {
