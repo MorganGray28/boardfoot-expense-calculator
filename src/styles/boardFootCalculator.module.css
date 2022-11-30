@@ -1,0 +1,40 @@
+.container {
+  max-width: 464px;
+  width: 35%;
+  min-height: 100vh;
+  background-color: #F2F2F2;
+  color: #1B4276;
+  padding: 0 3rem 
+}
+
+.heading {
+  padding: 3.75rem 0 2rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.boardfootContainer {
+  background-color: #FDFDFD;
+  display: flex;
+  flex-direction: column;
+}
+
+.subheading {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.labelInputGroup {
+  display: flex;
+  justify-content: space-between;
+}
+
+.inputUnitsGroup {
+  display: flex;
+}
+
+.inputUnitsGroup input {
+  border: none;
+  border-bottom: 1px solid #1B4276;
+}

@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { BoardFeetData } from '../types/types';
+import styles from '../styles/boardFootCalculator.module.css';
 
 function BoardFootCalculator() {
 	const initialValues: BoardFeetData = {
@@ -41,20 +42,23 @@ function BoardFootCalculator() {
 	}
 
 	return (
-		<div>
+		<div className={styles.container}>
+			<h4 className={styles.heading}>Board Foot Calculator</h4>
+			<p className={styles.subheading}>Board Feet</p>
 			<form onSubmit={handleSubmit}>
-				<div className='boardfoot-container'>
-					<label htmlFor='numOfPieces'>Number of Pieces</label>
-					<input name='numOfPieces' value={values.numOfPieces} onChange={handleChange} type='number' />
+				<div className={styles.boardfootContainer}>
+					<div className={styles.labelInputGroup}>
+						<label htmlFor='numOfPieces'>No. of Pieces</label>
+						<input name='numOfPieces' value={values.numOfPieces} onChange={handleChange} type='number' />
+					</div>
 
-					<label htmlFor='thickness'>Thickness</label>
-					<input
-						name='thickness'
-						value={values.thickness}
-						placeholder='inches'
-						onChange={handleChange}
-						type='number'
-					/>
+					<div className={styles.labelInputGroup}>
+						<label htmlFor='thickness'>Thickness</label>
+						<div className={styles.inputUnitsGroup}>
+							<input name='thickness' value={values.thickness} onChange={handleChange} type='number' />
+							<span>in</span>
+						</div>
+					</div>
 
 					<label htmlFor='width'>Width</label>
 					<input
@@ -74,7 +78,7 @@ function BoardFootCalculator() {
 						type='number'
 					/>
 					<p>
-						Total Board Feet: <span>{boardFeet}</span>
+						Total: <span>{boardFeet}</span>
 					</p>
 				</div>
 

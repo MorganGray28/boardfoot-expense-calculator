@@ -12,6 +12,9 @@ const Home: NextPage = () => {
 		<>
 			<Head>
 				<title>Woodworking Expense Calculator</title>
+				<link rel="preconnect" href="https://fonts.googleapis.com"/>
+				<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin='true'/>
+				<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
 				<meta
 					name='description'
 					content='Calculate woodworking expenses and lumber board feet'
@@ -19,9 +22,9 @@ const Home: NextPage = () => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<main>
-				<h1>Home Page</h1>
-				<BoardFootCalculator />
-				<Link href='/about'>About Page</Link>
+				<div className={styles.calculatorContainer}>
+					<BoardFootCalculator />
+				</div>
 			</main>
 		</>
 	);
