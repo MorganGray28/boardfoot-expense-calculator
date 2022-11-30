@@ -18,10 +18,12 @@
 	background-color: #fdfdfd;
 	display: flex;
 	flex-direction: column;
-}
 
-.boardfootContainer input {
-  text-align: right;
+		input {
+			text-align: right;
+			border: none;
+			border-bottom: 1px solid #1b4276;
+		}
 }
 
 .subheading {
@@ -36,9 +38,8 @@
 
 .inputUnitsGroup {
 	display: flex;
-}
-
-.inputUnitsGroup input {
-	border: none;
-	border-bottom: 1px solid #1b4276;
+		input {
+			border: none;
+			border-bottom: 1px solid #1b4276;
+		}
 }

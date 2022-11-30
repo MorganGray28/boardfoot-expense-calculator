@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { BoardFeetData } from '../types/types';
-import styles from '../styles/boardFootCalculator.module.css';
+import styles from '../styles/boardFootCalculator.module.scss';
 
 function BoardFootCalculator() {
 	const initialValues: BoardFeetData = {
