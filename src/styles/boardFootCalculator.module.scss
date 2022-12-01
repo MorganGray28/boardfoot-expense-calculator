@@ -1,14 +1,19 @@
+$primary-blue: #1b4276;
+$secondary-blue: #2e486b;
+$background-color: #f7f7f7;
+$divider-color: #0000000a;
+
 .container {
-	max-width: 464px;
+	max-width: 500px;
 	width: 35%;
 	min-height: 100vh;
-	background-color: #f2f2f2;
-	color: #1b4276;
+	background-color: $background-color;
+	color: $primary-blue;
 	padding: 0 3rem;
 }
 
 .heading {
-	padding: 3.75rem 0 2rem 0;
+	padding: 2rem 0 4rem 0;
 	font-size: 1.5rem;
 	font-weight: 700;
 	text-align: center;
@@ -16,30 +21,86 @@
 
 .boardfootContainer {
 	background-color: #fdfdfd;
+	color: $secondary-blue;
 	display: flex;
 	flex-direction: column;
+	border-radius: 13px;
+	padding: 1.25rem;
+	box-shadow: 2px 3px 9px 2px $divider-color;
 
 		input {
+	//FIXME: adjust the width of the inputs
+			font-size: 1rem;
 			text-align: right;
+			background: none;
 			border: none;
-			border-bottom: 1px solid #1b4276;
+			border-bottom: 1px solid $primary-blue;
 		}
 }
 
 .subheading {
 	font-size: 1rem;
 	font-weight: 600;
+	padding-bottom: 1rem;
 }
 
 .labelInputGroup {
 	display: flex;
 	justify-content: space-between;
+	padding: 1rem .5rem;
+
+	// adds separation from container to totals
+	&:nth-last-child(2) {
+		padding-bottom: 2.5rem;
+		border-bottom: 1px solid rgba(27, 66, 118, .2);
+	}
+
+	// adds bold to total font
+	&:last-child {
+		font-weight: 600;
+		color: $primary-blue;
+	}
 }
 
 .inputUnitsGroup {
 	display: flex;
-		input {
-			border: none;
-			border-bottom: 1px solid #1b4276;
-		}
+	//FIXME: adjust the width of the inputs
+	justify-content: flex-end;
+}
+
+.clearButton {
+	display: block;
+	font-family: 'Quicksand', sans-serif;
+	font-size: 1rem;
+	font-weight: 500;
+	border: none;
+	background: none;
+	margin: 1rem 0 2rem auto;
+	padding: 0;
+	cursor: pointer;
+	text-decoration: underline;
+	color: rgba(224, 39, 55, 1);
+
+	&:hover {
+		color: rgb(173, 26, 38);
+	}
+}
+
+.primaryButton {
+	background-color: $primary-blue;
+	font-family: 'Quicksand', sans-serif;
+	font-size: .875rem;
+	font-weight: 500;
+	border: none;
+	color: white;
+	padding: 1rem 2rem;
+	cursor: pointer;
+	border-radius: 7px;
+	margin: 3rem auto 0 auto;
+	display: block;
+	transition: all 300ms ease;
+
+	&:hover {
+		background-color: darken($color: $primary-blue, $amount: 5%);
+	}
 }

@@ -51,7 +51,6 @@ function BoardFootCalculator() {
 						<label htmlFor='numOfPieces'>No. of Pieces</label>
 						<input name='numOfPieces' value={values.numOfPieces} onChange={handleChange} type='number' />
 					</div>
-
 					<div className={styles.labelInputGroup}>
 						<label htmlFor='thickness'>Thickness</label>
 						<div className={styles.inputUnitsGroup}>
@@ -59,46 +58,52 @@ function BoardFootCalculator() {
 							<span>in</span>
 						</div>
 					</div>
-
-					<label htmlFor='width'>Width</label>
-					<input
-						name='width'
-						value={values.width}
-						placeholder='inches'
-						onChange={handleChange}
-						type='number'
-					/>
-
-					<label htmlFor='length'>Length</label>
-					<input
-						name='length'
-						value={values.length}
-						placeholder='inches'
-						onChange={handleChange}
-						type='number'
-					/>
-					<p>
-						Total: <span>{boardFeet}</span>
-					</p>
+					<div className={styles.labelInputGroup}>
+						<label htmlFor='width'>Width</label>
+						<div className={styles.inputUnitsGroup}>
+							<input name='width' value={values.width} onChange={handleChange} type='number' />
+							<span>in</span>
+						</div>
+					</div>
+					{/* // TODO: Add the 4/4, 6/4, 8/4 buttons that add values into the thickness value */}
+					<div className={`${styles.labelInputGroup} ${styles.length}`}>
+						<label htmlFor='length'>Length</label>
+						<div className={styles.inputUnitsGroup}>
+							<input name='length' value={values.length} onChange={handleChange} type='number' />
+							<span>in</span>
+						</div>
+					</div>
+					<div className={styles.labelInputGroup}>
+						<p>Total:</p>
+						<p>{boardFeet} BF</p>
+					</div>
 				</div>
 
-				<p>Cost</p>
-				<div className='cost-container'>
-					<label>Species</label>
-					<input type='text' name='species' onChange={handleChange} value={values.species} />
-
-					<label>Price</label>
-					<input type='text' name='price' onChange={handleChange} value={values.price} />
-
-					<p>
-						Total Cost: <span>{totalCost}</span>
-					</p>
-				</div>
-
-				<button type='button' onClick={handleClearForm}>
+				<button className={styles.clearButton} type='button' onClick={handleClearForm}>
 					Clear
 				</button>
-				<button type='submit'>Add to Project</button>
+
+				<p className={styles.subheading}>Cost</p>
+				<div className={styles.boardfootContainer}>
+					<div className={styles.labelInputGroup}>
+						<label>Species</label>
+						<input type='text' name='species' onChange={handleChange} value={values.species} />
+					</div>
+
+					<div className={styles.labelInputGroup}>
+						<label>Price</label>
+						<input type='text' name='price' onChange={handleChange} value={values.price} />
+					</div>
+
+					<div className={styles.labelInputGroup}>
+						<p>Total Cost:</p>
+						<p>${totalCost}</p>
+					</div>
+				</div>
+
+				<button type='submit' className={styles.primaryButton}>
+					Add to Project
+				</button>
 			</form>
 		</div>
 	);
