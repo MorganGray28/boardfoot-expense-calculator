@@ -10,18 +10,22 @@ function BoardFootCalculator() {
 		length: '',
 		species: '',
 		price: '',
+		tax: '',
 	};
 
 	const [values, setValues] = useState(initialValues);
 	let boardFeet: number | undefined = 0;
 	let totalCost = 0;
 	if (values.numOfPieces && values.thickness && values.width && values.length) {
-		const { numOfPieces, thickness, width, length, price } = values;
+		const { numOfPieces, thickness, width, length, price, tax } = values;
 		// T" x W" x L" ÷ 144 = Bd. Ft.
 		boardFeet =
 			parseInt(numOfPieces) * ((parseFloat(thickness) * parseFloat(width) * parseFloat(length)) / 144);
 		if (boardFeet && price) {
 			totalCost = boardFeet * parseFloat(price);
+			if (tax) {
+				totalCost += (parseFloat(tax) / 100) * totalCost;
+			}
 		}
 	}
 
@@ -93,6 +97,14 @@ function BoardFootCalculator() {
 					<div className={styles.labelInputGroup}>
 						<label>Price</label>
 						<input type='text' name='price' onChange={handleChange} value={values.price} />
+					</div>
+
+					<div className={styles.labelInputGroup}>
+						<label>Tax</label>
+						<div className={styles.inputUnitsGroup}>
+							<input type='text' name='tax' onChange={handleChange} value={values.tax} />
+							<span>%</span>
+						</div>
 					</div>
 
 					<div className={styles.labelInputGroup}>

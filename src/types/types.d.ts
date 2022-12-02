@@ -5,4 +5,5 @@ export interface BoardFeetData {
 	length: string;
 	species: string;
 	price: string;
+	tax: string;
 }
