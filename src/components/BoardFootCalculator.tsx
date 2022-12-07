@@ -96,13 +96,13 @@ function BoardFootCalculator() {
 
 					<div className={styles.labelInputGroup}>
 						<label>Price</label>
-						<input type='text' name='price' onChange={handleChange} value={values.price} />
+						<input type='number' name='price' onChange={handleChange} value={values.price} />
 					</div>
 
 					<div className={styles.labelInputGroup}>
 						<label>Tax</label>
 						<div className={styles.inputUnitsGroup}>
-							<input type='text' name='tax' onChange={handleChange} value={values.tax} />
+							<input type='number' name='tax' onChange={handleChange} value={values.tax} />
 							<span>%</span>
 						</div>
 					</div>
