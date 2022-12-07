@@ -4,7 +4,7 @@ $background-color: #f7f7f7;
 $divider-color: #0000000a;
 
 .container {
-	// max-width: 500px;
+	max-width: 500px;
 	width: 35%;
 	min-height: 100vh;
 	background-color: $background-color;
@@ -35,6 +35,16 @@ $divider-color: #0000000a;
 			background: none;
 			border: none;
 			border-bottom: 1px solid $primary-blue;
+
+			&::-webkit-outer-spin-button,
+			&::-webkit-inner-spin-button {
+  			-webkit-appearance: none;
+  			margin: 0;
+			}
+		}
+
+		& input[type=number] {
+			-moz-appearance: textfield;	
 		}
 }
 
