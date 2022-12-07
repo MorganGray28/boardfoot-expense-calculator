@@ -30,7 +30,9 @@ $divider-color: #0000000a;
 
 		input {
 	//FIXME: adjust the width of the inputs
-			font-size: 1rem;
+			font-family: 'Inter', sans-serif;
+			font-size: 1.5rem;
+			width: 6rem;
 			text-align: right;
 			background: none;
 			border: none;
@@ -38,12 +40,14 @@ $divider-color: #0000000a;
 
 			&::-webkit-outer-spin-button,
 			&::-webkit-inner-spin-button {
+				appearance: none;
   			-webkit-appearance: none;
   			margin: 0;
 			}
 		}
 
 		& input[type=number] {
+			appearance: textfield;
 			-moz-appearance: textfield;	
 		}
 }
@@ -57,6 +61,7 @@ $divider-color: #0000000a;
 .labelInputGroup {
 	display: flex;
 	justify-content: space-between;
+	align-items: flex-end;
 	padding: 1rem .5rem;
 
 	// adds separation from container to totals
@@ -76,6 +81,10 @@ $divider-color: #0000000a;
 	display: flex;
 	//FIXME: adjust the width of the inputs
 	justify-content: flex-end;
+	align-items: flex-end;
+	& span {
+		margin-left: .5rem;
+	}
 }
 
 .clearButton {
