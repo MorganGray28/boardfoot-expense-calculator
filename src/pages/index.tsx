@@ -10,6 +10,16 @@ import BoardFootCalculator from '../components/BoardFootCalculator';
 const Home: NextPage = () => {
 	return (
 		<>
+			{/* 
+				//FIXME: Research proper way to import google fonts into header 
+				// TODO: Add Sign in functionality with next auth
+				// TODO: Create Landing Page Component for unregistered/logged out users 
+				// TODO: Create Project Expense Component to list all expenses for current Project
+				// TODO: Create Consumables Component to list all consumables 
+				// TODO: Create current project select input to view all expenses
+				// TODO: Design layout for adding general expenses to project expenses
+				// TODO: Design layout for adding consumables 
+			*/}
 			<Head>
 				<title>Woodworking Expense Calculator</title>
 				<link rel='preconnect' href='https://fonts.googleapis.com' />

@@ -107,6 +107,8 @@ function BoardFootCalculator() {
 						</div>
 					</div>
 
+					{/* TODO: Add in price breakdown before + after tax */}
+
 					<div className={styles.labelInputGroup}>
 						<p>Total Cost:</p>
 						<p>${totalCost}</p>
