@@ -14,22 +14,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Project {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Lumber    Lumber[]
-}
-
-model Lumber {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name      String?
-  project   Project  @relation(fields: [projectId], references: [id])
-  projectId String
-}
-
 model Example {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
@@ -71,6 +55,38 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  projects      Project[]
+}
+
+model Project {
+  id          String       @id @default(cuid())
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  User        User         @relation(fields: [userId], references: [id])
+  userId      String
+  lumber      Lumber[]
+  consumables Consumable[]
+}
+
+model Lumber {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String?
+  numPieces Int
+  thickness Int
+  project   Project  @relation(fields: [projectId], references: [id])
+  projectId String
+}
+
+model Consumable {
+  id            String    @id @default(cuid())
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  productName   String
+  price         Int
+  usePercentage Int
+  projects      Project[]
 }
 
 model VerificationToken {
