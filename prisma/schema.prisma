@@ -62,21 +62,27 @@ model Project {
   id          String       @id @default(cuid())
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
-  User        User         @relation(fields: [userId], references: [id])
+  user        User         @relation(fields: [userId], references: [id])
   userId      String
+  name        String
   lumber      Lumber[]
   consumables Consumable[]
 }
 
 model Lumber {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name      String?
-  numPieces Int
-  thickness Int
-  project   Project  @relation(fields: [projectId], references: [id])
-  projectId String
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  name        String?
+  numOfPieces Int
+  thickness   Int
+  width       Int
+  length      Int
+  species     String
+  price       Int
+  tax         Int
+  project     Project  @relation(fields: [projectId], references: [id])
+  projectId   String
 }
 
 model Consumable {
