@@ -19,4 +19,16 @@
   background: none;
   border: 1px solid variables.$primary-blue;
   color: variables.$primary-blue;
+  transition: all 200ms ease;
+
+  &:hover {
+    background-color: variables.$primary-blue-hover-bg;
+    border: 1px solid variables.$primary-blue-hover-text;
+    color: variables.$primary-blue-hover-text;
+  }
+
+  &:active {
+    background-color: darken(variables.$primary-blue-hover-bg, 40%);
+    color: darken(variables.$primary-blue-hover-text, 40%);
+  }
 }
