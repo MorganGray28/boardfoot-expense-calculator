@@ -1,0 +1,22 @@
+@use 'variables';
+
+@mixin button {
+  padding: 1rem 2rem;
+  border-radius: 7px;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+@mixin primary-button {
+  @include button;
+  background-color: variables.$primary-blue;
+  color: white;
+  border: none;
+}
+
+@mixin outline-primary-button {
+  @include button;
+  background: none;
+  border: 1px solid variables.$primary-blue;
+  color: variables.$primary-blue;
+}

@@ -1,4 +1,4 @@
-import styles from '../styles/index.module.css';
+import styles from '../styles/index.module.scss';
 import { type NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -31,9 +31,15 @@ const Home: NextPage = () => {
 				<meta name='description' content='Calculate woodworking expenses and lumber board feet' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<main>
+			<main className={styles.dashboard}>
 				<div className={styles.calculatorContainer}>
 					<BoardFootCalculator />
+				</div>
+				<div className={styles.projectContainer}>
+					<nav className={styles.navbar}>
+						<h1>Woodworking Expense Tracker</h1>
+						<button className={styles.loginButton}>Sign In</button>
+					</nav>
 				</div>
 			</main>
 		</>

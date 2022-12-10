@@ -1,14 +1,9 @@
-$primary-blue: #1b4276;
-$secondary-blue: #2e486b;
-$background-color: #f7f7f7;
-$divider-color: #0000000a;
+@use 'variables';
 
 .container {
-	max-width: 500px;
-	width: 35%;
 	min-height: 100vh;
-	background-color: $background-color;
-	color: $primary-blue;
+	background-color: variables.$background-color;
+	color: variables.$primary-blue;
 	padding: 0 3rem;
 }
 
@@ -21,12 +16,12 @@ $divider-color: #0000000a;
 
 .boardfootContainer {
 	background-color: #fdfdfd;
-	color: $secondary-blue;
+	color: variables.$secondary-blue;
 	display: flex;
 	flex-direction: column;
 	border-radius: 13px;
 	padding: 1rem;
-	box-shadow: 2px 3px 9px 2px $divider-color;
+	box-shadow: 2px 3px 9px 2px variables.$divider-color;
 
 		input {
 	//FIXME: adjust the width of the inputs
@@ -36,7 +31,7 @@ $divider-color: #0000000a;
 			text-align: right;
 			background: none;
 			border: none;
-			border-bottom: 1px solid $primary-blue;
+			border-bottom: 1px solid variables.$primary-blue;
 
 			&::-webkit-outer-spin-button,
 			&::-webkit-inner-spin-button {
@@ -73,7 +68,7 @@ $divider-color: #0000000a;
 	// adds bold to total font
 	&:last-child {
 		font-weight: 600;
-		color: $primary-blue;
+		color: variables.$primary-blue;
 	}
 }
 
@@ -106,7 +101,7 @@ $divider-color: #0000000a;
 }
 
 .primaryButton {
-	background-color: $primary-blue;
+	background-color: variables.$primary-blue;
 	font-family: 'Quicksand', sans-serif;
 	font-size: .875rem;
 	font-weight: 500;
@@ -120,6 +115,6 @@ $divider-color: #0000000a;
 	transition: all 300ms ease;
 
 	&:hover {
-		background-color: darken($color: $primary-blue, $amount: 5%);
+		background-color: darken($color: variables.$primary-blue, $amount: 5%);
 	}
 }

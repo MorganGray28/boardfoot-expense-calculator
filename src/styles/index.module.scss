@@ -1,0 +1,31 @@
+@use 'variables';
+@use 'mixins';
+
+.dashboard {
+  display: flex;
+}
+
+.calculatorContainer {
+  max-width: 500px;
+	width: 35%;
+}
+
+.projectContainer {
+  width: 100%;
+  text-align: center;
+}
+
+.navbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+
+  & h1 {
+    flex-grow: 1;
+  }
+}
+
+.loginButton {
+  @include mixins.outline-primary-button;
+}
