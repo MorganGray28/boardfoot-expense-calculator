@@ -23,8 +23,6 @@ const Home: NextPage = () => {
 	return (
 		<>
 			{/* 
-				//FIXME: Research proper way to import google fonts into header 
-				// TODO: Add Sign in functionality with next auth
 				// TODO: Create Landing Page Component for unregistered/logged out users 
 				// TODO: Create Project Expense Component to list all expenses for current Project
 				// TODO: Create Consumables Component to list all consumables 
@@ -34,12 +32,6 @@ const Home: NextPage = () => {
 			*/}
 			<Head>
 				<title>Woodworking Expense Calculator</title>
-				<link rel='preconnect' href='https://fonts.googleapis.com' />
-				<link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='true' />
-				<link
-					href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Quicksand:wght@500&display=swap'
-					rel='stylesheet'
-				/>
 				<meta name='description' content='Calculate woodworking expenses and lumber board feet' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
