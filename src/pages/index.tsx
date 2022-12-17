@@ -8,6 +8,18 @@ import { trpc } from '../utils/trpc';
 import BoardFootCalculator from '../components/BoardFootCalculator';
 
 const Home: NextPage = () => {
+	const { data: session, status } = useSession();
+	console.log(session);
+	console.log(status);
+
+	function handleSignIn() {
+		signIn();
+	}
+
+	function handleSignOut() {
+		signOut();
+	}
+
 	return (
 		<>
 			{/* 
@@ -31,17 +43,33 @@ const Home: NextPage = () => {
 				<meta name='description' content='Calculate woodworking expenses and lumber board feet' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<main className={styles.dashboard}>
+			<div className={styles.dashboard}>
 				<div className={styles.calculatorContainer}>
 					<BoardFootCalculator />
 				</div>
 				<div className={styles.projectContainer}>
 					<nav className={styles.navbar}>
+						{session && (
+							<p>
+								Hello, <span className={styles.username}>{session.user?.name}</span>
+							</p>
+						)}
 						<h1>Woodworking Expense Tracker</h1>
-						<button className={styles.loginButton}>Sign In</button>
+						{session ? (
+							<button onClick={handleSignOut} className={styles.loginButton}>
+								Sign Out
+							</button>
+						) : (
+							<button onClick={handleSignIn} className={styles.loginButton}>
+								Sign In
+							</button>
+						)}
 					</nav>
+					<main>
+						<h4>Project content goes here</h4>
+					</main>
 				</div>
-			</main>
+			</div>
 		</>
 	);
 };

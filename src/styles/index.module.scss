@@ -21,14 +21,31 @@
   align-items: center;
   padding: 1rem 3.5rem;
 
+  & p {
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: variables.$primary-blue;
+
+  }
+
   & h1 {
     flex-grow: 1;
     font-size: 2rem;
     font-weight: 600;
-    color: variables.$primary-blue;
+  }
+}
+
+.username {
+  text-decoration: underline;
+  color: variables.$primary-blue;
+  cursor: pointer;
+
+  &:hover {
+    color: variables.$primary-blue-hover-text;
   }
 }
 
 .loginButton {
   @include mixins.outline-primary-button;
+  right: 1rem;
 }
