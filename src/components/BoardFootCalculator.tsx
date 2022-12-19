@@ -2,6 +2,10 @@ import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { BoardFeetData } from '../types/types';
 import styles from '../styles/boardFootCalculator.module.scss';
 
+// TODO: Validate user input with Zod
+// TODO: Convert user input to numbers
+// TODO: make call to our backend api to add lumber expense to projects
+
 function BoardFootCalculator() {
 	const initialValues: BoardFeetData = {
 		numOfPieces: '',
@@ -15,16 +19,25 @@ function BoardFootCalculator() {
 
 	const [values, setValues] = useState(initialValues);
 	let boardFeet: number | undefined = 0;
+	let preTax = 0;
+	let postTax = 0;
 	let totalCost = 0;
+	let formattedTax = 0;
 	if (values.numOfPieces && values.thickness && values.width && values.length) {
 		const { numOfPieces, thickness, width, length, price, tax } = values;
 		// T" x W" x L" ÷ 144 = Bd. Ft.
 		boardFeet =
 			parseInt(numOfPieces) * ((parseFloat(thickness) * parseFloat(width) * parseFloat(length)) / 144);
+		boardFeet = parseFloat(boardFeet.toFixed(2));
 		if (boardFeet && price) {
-			totalCost = boardFeet * parseFloat(price);
+			preTax = parseFloat((boardFeet * parseFloat(price)).toFixed(2));
 			if (tax) {
-				totalCost += (parseFloat(tax) / 100) * totalCost;
+				formattedTax = parseFloat(((parseFloat(tax) / 100) * preTax).toFixed(2));
+				postTax = (parseFloat(tax) / 100) * preTax + preTax;
+				postTax = parseFloat(postTax.toFixed(2));
+				totalCost = postTax;
+			} else {
+				totalCost = preTax;
 			}
 		}
 	}
@@ -70,7 +83,7 @@ function BoardFootCalculator() {
 						</div>
 					</div>
 					{/* // TODO: Add the 4/4, 6/4, 8/4 buttons that add values into the thickness value */}
-					<div className={`${styles.labelInputGroup} ${styles.length}`}>
+					<div className={`${styles.labelInputGroup} ${styles.length} ${styles.borderBottom}`}>
 						<label htmlFor='length'>Length</label>
 						<div className={styles.inputUnitsGroup}>
 							<input name='length' value={values.length} onChange={handleChange} type='number' />
@@ -99,7 +112,7 @@ function BoardFootCalculator() {
 						<input type='number' name='price' onChange={handleChange} value={values.price} />
 					</div>
 
-					<div className={styles.labelInputGroup}>
+					<div className={`${styles.labelInputGroup} ${styles.borderBottom}`}>
 						<label>Tax</label>
 						<div className={styles.inputUnitsGroup}>
 							<input type='number' name='tax' onChange={handleChange} value={values.tax} />
@@ -107,7 +120,12 @@ function BoardFootCalculator() {
 						</div>
 					</div>
 
-					{/* TODO: Add in price breakdown before + after tax */}
+					{values.tax && (
+						<div className={`${styles.tax}`}>
+							<p>${preTax}</p>
+							<p>+ ${formattedTax}</p>
+						</div>
+					)}
 
 					<div className={styles.labelInputGroup}>
 						<p>Total Cost:</p>

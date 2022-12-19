@@ -59,17 +59,22 @@
 	align-items: flex-end;
 	padding: 1rem .5rem;
 
-	// adds separation from container to totals
-	&:nth-last-child(2) {
-		padding-bottom: 1.5rem;
-		border-bottom: 1px solid rgba(27, 66, 118, .2);
-	}
-
 	// adds bold to total font
 	&:last-child {
 		font-weight: 600;
 		color: variables.$primary-blue;
 	}
+}
+
+.borderBottom {
+	padding-bottom: 1.5rem;
+	border-bottom: 1px solid rgba(27, 66, 118, .2);
+}
+
+.tax {
+	padding-top: 1rem;
+	text-align: right;
+	font-size: .8rem;
 }
 
 .inputUnitsGroup {
