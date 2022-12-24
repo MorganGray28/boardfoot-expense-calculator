@@ -6,7 +6,11 @@ import styles from '../styles/boardFootCalculator.module.scss';
 // TODO: Convert user input to numbers
 // TODO: make call to our backend api to add lumber expense to projects
 
-function BoardFootCalculator() {
+type Props = {
+	handleModal: () => void;
+};
+
+function BoardFootCalculator({ handleModal }: Props) {
 	const initialValues: BoardFeetData = {
 		numOfPieces: '',
 		thickness: '',
@@ -133,7 +137,7 @@ function BoardFootCalculator() {
 					</div>
 				</div>
 
-				<button type='submit' className={styles.primaryButton}>
+				<button onClick={handleModal} className={styles.primaryButton}>
 					Add to Project
 				</button>
 			</form>

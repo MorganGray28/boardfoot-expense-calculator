@@ -2,12 +2,15 @@ import styles from '../styles/index.module.scss';
 import { type NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useState } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 
 import { trpc } from '../utils/trpc';
 import BoardFootCalculator from '../components/BoardFootCalculator';
+import Modal from '../components/Modal';
 
 const Home: NextPage = () => {
+	const [modalOpen, setModalOpen] = useState(false);
 	const { data: session, status } = useSession();
 	console.log(session);
 	console.log(status);
@@ -18,6 +21,14 @@ const Home: NextPage = () => {
 
 	function handleSignOut() {
 		signOut();
+	}
+
+	function handleClose() {
+		setModalOpen(false);
+	}
+
+	function handleOpen() {
+		setModalOpen(true);
 	}
 
 	return (
@@ -37,7 +48,7 @@ const Home: NextPage = () => {
 			</Head>
 			<div className={styles.dashboard}>
 				<div className={styles.calculatorContainer}>
-					<BoardFootCalculator />
+					<BoardFootCalculator handleModal={handleOpen} />
 				</div>
 				<div className={styles.projectContainer}>
 					<nav className={styles.navbar}>
@@ -59,6 +70,7 @@ const Home: NextPage = () => {
 					</nav>
 					<main>
 						<h4>Project content goes here</h4>
+						<Modal open={modalOpen} onClose={handleClose} />
 					</main>
 				</div>
 			</div>
