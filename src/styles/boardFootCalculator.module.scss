@@ -2,7 +2,7 @@
 
 .container {
 	height: 100vh;
-	overflow-y: scroll;
+	overflow-y: auto;
 	background-color: variables.$background-color;
 	color: variables.$primary-blue;
 	padding: 0 3rem;
@@ -49,6 +49,7 @@
 }
 
 .subheading {
+	margin-top: 1rem;
 	font-size: 1rem;
 	font-weight: 600;
 	padding-bottom: 1rem;
@@ -62,6 +63,7 @@
 
 	// adds bold to total font
 	&:last-child {
+		padding-bottom: 0;
 		font-weight: 600;
 		color: variables.$primary-blue;
 	}
@@ -129,10 +131,10 @@
 {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1);
-    background-color: rgb(215, 215, 215);
+    background-color: rgb(210, 210, 210);
 
 		&:hover {
-    background-color: hsl(0, 0%, 79%);
+    background-color: hsl(0, 0%, 76%);
 		}
 }
 

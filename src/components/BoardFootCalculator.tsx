@@ -64,8 +64,8 @@ function BoardFootCalculator({ handleModal }: Props) {
 
 	return (
 		<div className={styles.container}>
-			<h4 className={styles.heading}>Board Foot Calculator</h4>
-			<p className={styles.subheading}>Board Feet</p>
+			{/* <h4 className={styles.heading}>Board Foot Calculator</h4> */}
+			<p className={styles.subheading}>Board Feet Calculator</p>
 			<form onSubmit={handleSubmit}>
 				<div className={styles.boardfootContainer}>
 					<div className={styles.labelInputGroup}>
