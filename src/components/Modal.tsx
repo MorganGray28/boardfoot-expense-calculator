@@ -3,18 +3,19 @@ import { createPortal } from 'react-dom';
 import styles from '../styles/modal.module.scss';
 
 type Props = {
+	children: React.ReactNode;
 	open: boolean;
 	onClose: () => void;
 };
 
-function Modal({ open, onClose }: Props) {
+function Modal({ children, open, onClose }: Props) {
 	if (!open) return null;
 
 	return createPortal(
 		<>
 			<div className={styles.modalBackground} />
 			<div className={styles.modal}>
-				<p>Modal info here</p>
+				{children}
 				<button onClick={onClose}>close</button>
 			</div>
 		</>,

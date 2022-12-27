@@ -8,6 +8,7 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import { trpc } from '../utils/trpc';
 import BoardFootCalculator from '../components/BoardFootCalculator';
 import Modal from '../components/Modal';
+import AddToProjectForm from '../components/AddToProjectForm';
 
 const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);
@@ -70,7 +71,9 @@ const Home: NextPage = () => {
 					</nav>
 					<main>
 						<h4>Project content goes here</h4>
-						<Modal open={modalOpen} onClose={handleClose} />
+						<Modal open={modalOpen} onClose={handleClose}>
+							<AddToProjectForm />
+						</Modal>
 					</main>
 				</div>
 			</div>
