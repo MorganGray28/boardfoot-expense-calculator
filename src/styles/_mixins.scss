@@ -1,10 +1,12 @@
 @use 'variables';
 
 @mixin button {
+	font-family: 'Quicksand', sans-serif;
   padding: 1rem 2rem;
   border-radius: 7px;
-  font-size: 1rem;
-  font-weight: 400;
+	font-size: .875rem;
+	font-weight: 500;
+	cursor: pointer;
 }
 
 @mixin primary-button {
@@ -12,6 +14,11 @@
   background-color: variables.$primary-blue;
   color: white;
   border: none;
+}
+
+@mixin primary-button-disabled {
+  @include primary-button;
+  opacity: 50%;
 }
 
 @mixin outline-primary-button {

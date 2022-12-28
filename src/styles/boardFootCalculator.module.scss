@@ -1,4 +1,5 @@
 @use 'variables';
+@use 'mixins';
 
 .container {
 	height: 100vh;
@@ -109,15 +110,7 @@
 }
 
 .primaryButton {
-	background-color: variables.$primary-blue;
-	font-family: 'Quicksand', sans-serif;
-	font-size: .875rem;
-	font-weight: 500;
-	border: none;
-	color: white;
-	padding: 1rem 2rem;
-	cursor: pointer;
-	border-radius: 7px;
+	@include mixins.primary-button;
 	margin: 1.5rem auto 1.5rem auto;
 	display: block;
 	transition: all 300ms ease;
@@ -125,6 +118,19 @@
 	&:hover {
 		background-color: darken($color: variables.$primary-blue, $amount: 5%);
 	}
+}
+
+.primaryButtonDisabled {
+	@include mixins.primary-button-disabled;
+	margin: 1.5rem auto 1.5rem auto;
+	display: block;
+	cursor: default;
+}
+
+.helpMessage {
+	text-align: center;
+	color: variables.$secondary-blue;
+	font-size: .875rem;
 }
 
 .container::-webkit-scrollbar-thumb

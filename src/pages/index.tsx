@@ -2,7 +2,7 @@ import styles from '../styles/index.module.scss';
 import { type NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 
 import { trpc } from '../utils/trpc';
@@ -13,8 +13,8 @@ import AddToProjectForm from '../components/AddToProjectForm';
 const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);
 	const { data: session, status } = useSession();
-	console.log(session);
-	console.log(status);
+	// console.log(session);
+	// console.log(status);
 
 	function handleSignIn() {
 		signIn();
@@ -70,7 +70,6 @@ const Home: NextPage = () => {
 						)}
 					</nav>
 					<main>
-						<h4>Project content goes here</h4>
 						<Modal open={modalOpen} onClose={handleClose}>
 							<AddToProjectForm />
 						</Modal>

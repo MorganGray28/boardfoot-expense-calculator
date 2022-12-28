@@ -13,8 +13,8 @@ function Modal({ children, open, onClose }: Props) {
 
 	return createPortal(
 		<>
-			<div className={styles.modalBackground} />
-			<div className={styles.modal}>
+			<div className={styles.modalBackground} onClick={onClose} />
+			<div className={styles.modal} onClick={(e) => e.stopPropagation()}>
 				{children}
 				<button onClick={onClose}>close</button>
 			</div>

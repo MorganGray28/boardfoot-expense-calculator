@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
+import { useSession } from 'next-auth/react';
 import { BoardFeetData } from '../types/types';
 import styles from '../styles/boardFootCalculator.module.scss';
 
@@ -20,6 +21,8 @@ function BoardFootCalculator({ handleModal }: Props) {
 		price: '',
 		tax: '',
 	};
+
+	const { data: session, status } = useSession();
 
 	const [values, setValues] = useState(initialValues);
 	let boardFeet: number | undefined = 0;
@@ -57,7 +60,7 @@ function BoardFootCalculator({ handleModal }: Props) {
 	function handleSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		console.log('submitting form data');
-		console.log(values);
+		// console.log(values);
 		// clear the form after submit
 		handleClearForm();
 	}
@@ -137,9 +140,14 @@ function BoardFootCalculator({ handleModal }: Props) {
 					</div>
 				</div>
 
-				<button onClick={handleModal} className={styles.primaryButton}>
+				<button
+					disabled={!session}
+					onClick={handleModal}
+					className={session ? styles.primaryButton : styles.primaryButtonDisabled}
+				>
 					Add to Project
 				</button>
+				{!session && <p className={styles.helpMessage}>please sign in to add lumber to a project</p>}
 			</form>
 		</div>
 	);
