@@ -5,10 +5,7 @@ import { trpc } from '../utils/trpc';
 
 function AddToProjectForm() {
 	const { data: session, status } = useSession();
-	if (session && session.user) {
-		let projects = trpc.user.getProjectsById.useQuery(session.user.id);
-		console.log(projects.data);
-	}
+
 	return (
 		<div className={styles.container}>
 			<p>This will be a form to add lumber to specific projects</p>
