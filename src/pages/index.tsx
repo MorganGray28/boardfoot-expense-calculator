@@ -9,12 +9,13 @@ import { trpc } from '../utils/trpc';
 import BoardFootCalculator from '../components/BoardFootCalculator';
 import Modal from '../components/Modal';
 import AddToProjectForm from '../components/AddToProjectForm';
+import Dashboard from '../components/Dashboard';
 
 const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);
 	const { data: session, status } = useSession();
-	// console.log(session);
-	// console.log(status);
+
+	const userData = trpc.user.getUserData.useQuery(session?.user?.id!);
 
 	function handleSignIn() {
 		signIn();
@@ -73,6 +74,8 @@ const Home: NextPage = () => {
 						<Modal open={modalOpen} onClose={handleClose}>
 							<AddToProjectForm />
 						</Modal>
+						{session && session.user ? <Dashboard /> : <p>log in to save and track your expenses</p>}
+						{userData.data && userData.data.projects.map((d) => <p>{d.name}</p>)}
 					</main>
 				</div>
 			</div>

@@ -7,17 +7,26 @@ export const userRouter = router({
 			where: {
 				userId: input,
 			},
+			orderBy: [
+				{
+					updatedAt: 'desc',
+				},
+			],
+		});
+	}),
+	getUserData: protectedProcedure.input(z.string()).query(({ ctx, input }) => {
+		return ctx.prisma.user.findUnique({
+			where: {
+				id: input,
+			},
+			include: {
+				projects: {
+					include: {
+						lumber: true,
+						consumables: true,
+					},
+				},
+			},
 		});
 	}),
 });
-
-/*
-export const authRouter = router({
-  getSession: publicProcedure.query(({ ctx }) => {
-    return ctx.session;
-  }),
-  getSecretMessage: protectedProcedure.query(() => {
-    return "you can see this secret message!";
-  }),
-});
-*/
