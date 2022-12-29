@@ -75,12 +75,12 @@ model Lumber {
   updatedAt   DateTime @updatedAt
   name        String?
   numOfPieces Int
-  thickness   Int
-  width       Int
-  length      Int
+  thickness   Float
+  width       Float
+  length      Float
   species     String
-  price       Int
-  tax         Int
+  price       Float
+  tax         Float
   project     Project  @relation(fields: [projectId], references: [id])
   projectId   String
 }
