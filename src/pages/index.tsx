@@ -15,8 +15,6 @@ const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);
 	const { data: session, status } = useSession();
 
-	const userData = trpc.user.getUserData.useQuery(session?.user?.id!);
-
 	function handleSignIn() {
 		signIn();
 	}
@@ -75,7 +73,6 @@ const Home: NextPage = () => {
 							<AddToProjectForm />
 						</Modal>
 						{session && session.user ? <Dashboard /> : <p>log in to save and track your expenses</p>}
-						{userData.data && userData.data.projects.map((d) => <p>{d.name}</p>)}
 					</main>
 				</div>
 			</div>

@@ -1,21 +1,22 @@
 import { router, protectedProcedure } from '../trpc';
 import { z } from 'zod';
 
-const dimensionLumberInput = z.object({
-	numOfPieces: z.string(),
-	thickness: z.string(),
-	width: z.string(),
-	length: z.string(),
+export const BoardFeetSchema = z.object({
+	numOfPieces: z.number().positive().min(1),
+	thickness: z.number(),
+	width: z.number(),
+	length: z.number(),
 	species: z.string(),
-	price: z.string(),
-	tax: z.string(),
+	price: z.number(),
+	tax: z.number(),
 });
 
 export const lumberRouter = router({
-	addDimensionLumber: protectedProcedure.input(dimensionLumberInput).mutation(async ({ ctx, input }) => {
+	addDimensionLumber: protectedProcedure.input(BoardFeetSchema).mutation(async ({ ctx, input }) => {
 		try {
+			const parsedInput = BoardFeetSchema.safeParse(input);
 			await ctx.prisma.lumber.create({
-				data: {},
+				data: { ...input, projectId: 'adflkj324sadfa' },
 			});
 		} catch (err) {
 			console.log(err);

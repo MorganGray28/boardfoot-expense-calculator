@@ -1,9 +1,4 @@
-export interface BoardFeetData {
-	numOfPieces: string;
-	thickness: string;
-	width: string;
-	length: string;
-	species: string;
-	price: string;
-	tax: string;
-}
+import { z } from 'zod';
+import { BoardFeetSchema } from '../server/trpc/router/lumber';
+
+export type BoardFeetType = z.infer<typeof BoardFeetSchema>;

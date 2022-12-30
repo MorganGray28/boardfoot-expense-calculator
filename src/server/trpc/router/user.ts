@@ -25,6 +25,7 @@ export const userRouter = router({
 						lumber: true,
 						consumables: true,
 					},
+					orderBy: [{ updatedAt: 'desc' }],
 				},
 			},
 		});
