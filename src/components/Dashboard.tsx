@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { trpc } from '../utils/trpc';
 import { ActiveProjectForm } from './ActiveProjectForm';
+import ExpenseAndConsumableGroup from './ExpenseAndConsumableGroup';
+import ExpenseTable from './ExpenseTable';
+import ConsumableTable from './ConsumableTable';
 
 /*
 createdAt: Wed Dec 28 2022 15:15:59 GMT-0800 (Pacific Standard Time) {}
@@ -36,6 +39,10 @@ export default function Dashboard() {
 					activeProject={activeProject}
 					updateActiveProject={setActiveProject}
 				/>
+				<ExpenseAndConsumableGroup>
+					<ExpenseTable />
+					<ConsumableTable />
+				</ExpenseAndConsumableGroup>
 			</div>
 		);
 	} else {
