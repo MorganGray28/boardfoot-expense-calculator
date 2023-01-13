@@ -2,10 +2,8 @@ import styles from '../styles/index.module.scss';
 import { type NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
-
-import { trpc } from '../utils/trpc';
 import BoardFootCalculator from '../components/BoardFootCalculator';
 import Modal from '../components/Modal';
 import AddToProjectForm from '../components/AddToProjectForm';
@@ -35,9 +33,6 @@ const Home: NextPage = () => {
 		<>
 			{/* 
 				// TODO: Create Landing Page Component for unregistered/logged out users 
-				// TODO: Create Project Expense Component to list all expenses for current Project
-				// TODO: Create Consumables Component to list all consumables 
-				// TODO: Create current project select input to view all expenses
 				// TODO: Design layout for adding general expenses to project expenses
 				// TODO: Design layout for adding consumables 
 			*/}
