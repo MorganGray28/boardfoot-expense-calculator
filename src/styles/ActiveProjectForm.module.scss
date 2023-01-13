@@ -1,7 +1,22 @@
+@use 'variables';
+
 .container {
   margin-bottom: 5rem;
+  text-align: center;
 }
 
 .header {
-  padding: 2rem 0 .5rem 0;
+  padding: 2rem 0 1rem 0;
+  font-size: .875rem;
+  font-weight: 600;
+  color: variables.$primary-blue;
+}
+
+.selectInput {
+  border: 2px solid variables.$primary-blue;
+  border-radius: 14px;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: variables.$primary-blue;
 }

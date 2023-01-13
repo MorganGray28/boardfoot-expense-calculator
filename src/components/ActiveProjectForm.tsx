@@ -8,11 +8,19 @@ interface PropsType {
 	updateActiveProject: Dispatch<SetStateAction<string>>;
 }
 
+// TODO: Style the Select arrow svg
+// TODO: Style the Select dropdown list
+
 export function ActiveProjectForm({ projects, activeProject, updateActiveProject }: PropsType) {
 	return (
 		<div className={styles.container}>
 			<p className={styles.header}>Choose a Project</p>
-			<select name='projectList' value={activeProject} onChange={(e) => updateActiveProject(e.target.value)}>
+			<select
+				className={styles.selectInput}
+				name='projectList'
+				value={activeProject}
+				onChange={(e) => updateActiveProject(e.target.value)}
+			>
 				{projects.map((p) => (
 					<option value={p.name} key={p.id}>
 						{p.name}
