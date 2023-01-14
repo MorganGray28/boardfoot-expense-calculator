@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { useEffect, Dispatch, SetStateAction } from 'react';
 import styles from '../styles/ActiveProjectForm.module.scss';
 import { ProjectType } from './Dashboard';
 
@@ -12,6 +12,15 @@ interface PropsType {
 // TODO: Style the Select dropdown list
 
 export function ActiveProjectForm({ projects, activeProject, updateActiveProject }: PropsType) {
+	useEffect(() => {
+		if (projects && projects[0]) {
+			console.log(projects);
+			updateActiveProject(projects[0].name);
+		}
+	}, []);
+
+	console.log(activeProject);
+
 	return (
 		<div className={styles.container}>
 			<p className={styles.header}>Choose a Project</p>

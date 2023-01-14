@@ -75,8 +75,6 @@ function BoardFootCalculator({ handleModal }: Props) {
 		handleClearForm();
 	}
 
-	console.log(values.tax);
-
 	return (
 		<div className={styles.container}>
 			{/* <h4 className={styles.heading}>Board Foot Calculator</h4> */}

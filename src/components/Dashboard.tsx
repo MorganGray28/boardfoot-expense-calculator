@@ -29,7 +29,11 @@ export default function Dashboard() {
 	const [activeProject, setActiveProject] = useState('');
 
 	const projects = trpc.user.getProjectsById.useQuery(session?.user?.id!);
+
 	const userData = trpc.user.getUserData.useQuery(session?.user?.id!);
+
+	// console.log(userData.data);
+	console.log(activeProject);
 
 	if (projects.data) {
 		return (
