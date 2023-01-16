@@ -7,6 +7,10 @@ export const userRouter = router({
 			where: {
 				userId: input,
 			},
+			include: {
+				lumber: true,
+				consumables: true,
+			},
 			orderBy: [
 				{
 					updatedAt: 'desc',
