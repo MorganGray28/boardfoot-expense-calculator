@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../styles/ExpenseTable.module.scss';
 import CostList from './CostList';
-import { ProjectType, LumberType, ConsumableType } from './Dashboard';
+import { ProjectType } from './Dashboard';
 import LumberExpenseListItem from './LumberExpenseListItem';
 
 interface PropsType {
@@ -20,9 +20,12 @@ export default function ExpenseTable({ activeProject }: PropsType) {
 					key={l.id}
 					lumberName={l.lumberName}
 					species={l.species}
+					numOfPieces={l.numOfPieces}
 					thickness={l.thickness}
-					boardFeet={22}
-					cost={200}
+					width={l.width}
+					length={l.length}
+					price={l.price}
+					tax={l.tax}
 				/>
 			));
 		}

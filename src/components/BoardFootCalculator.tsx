@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { BoardFeetType } from '../types/types';
+import { calculateBoardFeet } from '../utils/calculationsUtils';
 import styles from '../styles/boardFootCalculator.module.scss';
 import { trpc } from '../utils/trpc';
 
@@ -32,8 +33,7 @@ function BoardFootCalculator({ handleModal }: Props) {
 	if (values.numOfPieces && values.thickness && values.width && values.length) {
 		const { numOfPieces, thickness, width, length, price, tax } = values;
 		// T" x W" x L" ÷ 144 = Bd. Ft.
-		boardFeet = numOfPieces * ((thickness * width * length) / 144);
-		boardFeet = parseFloat(boardFeet.toFixed(2));
+		boardFeet = calculateBoardFeet({ numOfPieces, thickness, width, length });
 		if (boardFeet && price) {
 			preTax = parseFloat((boardFeet * price).toFixed(2));
 			if (tax) {
