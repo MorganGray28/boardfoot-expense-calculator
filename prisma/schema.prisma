@@ -73,7 +73,7 @@ model Lumber {
   id          String   @id @default(cuid())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  name        String?
+  lumberName  String?
   numOfPieces Int
   thickness   Float
   width       Float

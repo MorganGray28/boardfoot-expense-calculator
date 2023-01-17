@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../styles/LumberExpenseListItem.module.scss';
 
 interface PropTypes {
-	name: string;
+	lumberName?: string;
 	species: string;
 	thickness: number;
 	boardFeet: number;
@@ -11,10 +11,16 @@ interface PropTypes {
 
 // TODO: Style the item container for alternating background colors
 
-export default function LumberExpenseListItem({ name, species, thickness, boardFeet, cost }: PropTypes) {
+export default function LumberExpenseListItem({
+	lumberName,
+	species,
+	thickness,
+	boardFeet,
+	cost,
+}: PropTypes) {
 	return (
 		<div className={styles.container}>
-			<h2 className={styles.name}>{name}</h2>
+			<h2 className={styles.name}>{lumberName}</h2>
 			<div className={styles.flexContainer}>
 				<div className={styles.speciesThicknessGroup}>
 					<p className={styles.species}>{species}</p>

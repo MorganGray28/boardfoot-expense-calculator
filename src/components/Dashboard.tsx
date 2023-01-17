@@ -15,6 +15,28 @@ userId: "clbyb148i0000vocsn6ai0qig"
 [[Prototype]]: Object
 
 */
+export interface LumberType {
+	id: string;
+	createdAt: Date;
+	updatedAt: Date;
+	lumberName?: string;
+	numOfPieces: number;
+	thickness: number;
+	width: number;
+	length: number;
+	species: string;
+	price: number;
+	tax: number;
+}
+
+export interface ConsumableType {
+	id: string;
+	createdAt: Date;
+	updatedAt: Date;
+	productName: string;
+	price: number;
+	usePercentage: number;
+}
 
 export interface ProjectType {
 	createdAt: Date;
@@ -22,20 +44,19 @@ export interface ProjectType {
 	name: string;
 	updatedAt: Date;
 	userId: string;
+	lumber: LumberType[];
+	consumables: ConsumableType[];
 }
 
 export default function Dashboard() {
 	const { data: session } = useSession();
-	const [activeProject, setActiveProject] = useState('');
+	const [activeProject, setActiveProject] = useState<ProjectType | null>(null);
 
 	const projects = trpc.user.getProjectsById.useQuery(session?.user?.id!);
 
 	const userData = trpc.user.getUserData.useQuery(session?.user?.id!);
 
-	// console.log(userData.data);
-	console.log(activeProject);
-
-	if (projects.data) {
+	if (projects && projects.data) {
 		return (
 			<div>
 				<ActiveProjectForm
@@ -44,8 +65,8 @@ export default function Dashboard() {
 					updateActiveProject={setActiveProject}
 				/>
 				<ExpenseAndConsumableGroup>
-					<ExpenseTable />
-					<ConsumableTable />
+					<ExpenseTable activeProject={activeProject} />
+					<ConsumableTable activeProject={activeProject} />
 				</ExpenseAndConsumableGroup>
 			</div>
 		);
