@@ -8,10 +8,13 @@ import BoardFootCalculator from '../components/BoardFootCalculator';
 import Modal from '../components/Modal';
 import AddToProjectForm from '../components/AddToProjectForm';
 import Dashboard from '../components/Dashboard';
+import { BoardFeetType } from '../types/types';
 
 const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);
 	const { data: session, status } = useSession();
+	// double check the preferred way to store values from the BF Calculator
+	const [currentCalculatorValues, setCurrentCalculatorValues] = useState<BoardFeetType | null>(null);
 
 	function handleSignIn() {
 		signIn();
@@ -25,7 +28,8 @@ const Home: NextPage = () => {
 		setModalOpen(false);
 	}
 
-	function handleOpen() {
+	function handleOpen(values: BoardFeetType) {
+		setCurrentCalculatorValues(values);
 		setModalOpen(true);
 	}
 
@@ -37,6 +41,7 @@ const Home: NextPage = () => {
 				// TODO: Design layout for adding consumables 
 				// TODO: Add Dummy data for multiple projects in our database
 					// TODO: Connect our Active Project to our data 
+				// TODO: Look into using Context for Active Project and current Board Feet calculator values
 			
 			*/}
 			<Head>
@@ -68,7 +73,7 @@ const Home: NextPage = () => {
 					</nav>
 					<main>
 						<Modal open={modalOpen} onClose={handleClose}>
-							<AddToProjectForm />
+							<AddToProjectForm values={currentCalculatorValues} />
 						</Modal>
 						{session && session.user ? <Dashboard /> : <p>log in to save and track your expenses</p>}
 					</main>

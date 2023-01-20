@@ -11,7 +11,10 @@ interface PropsType {
 export default function ConsumableTable({ activeProject }: PropsType) {
 	return (
 		<div className={styles.container}>
-			<CostList category='Consumables'>
+			<CostList
+				category='Consumables'
+				description="Apply specific consumable costs for each Project's expenses"
+			>
 				<ConsumableListItem name='Blue Shop Towels' cost={15} />
 			</CostList>
 		</div>

@@ -14,6 +14,7 @@ interface PropTypes {
 }
 
 // TODO: Style the item container for alternating background colors
+// TODO: Style the cost value to a different color to help separate and accent itself
 
 export default function LumberExpenseListItem({
 	lumberName,

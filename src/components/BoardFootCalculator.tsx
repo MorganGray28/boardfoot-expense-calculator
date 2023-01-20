@@ -8,7 +8,7 @@ import { trpc } from '../utils/trpc';
 // TODO: Validate user input with Zod
 
 type Props = {
-	handleModal: () => void;
+	handleModal: (val: BoardFeetType) => void;
 };
 
 function BoardFootCalculator({ handleModal }: Props) {
@@ -69,9 +69,10 @@ function BoardFootCalculator({ handleModal }: Props) {
 
 	function handleSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
+		handleModal(values);
 		// console.log('submitting form data');
 		// console.log(values);
-		postLumber.mutate(values);
+		// postLumber.mutate(values);
 		handleClearForm();
 	}
 
@@ -157,7 +158,7 @@ function BoardFootCalculator({ handleModal }: Props) {
 
 				<button
 					disabled={!session}
-					onClick={handleModal}
+					type='submit'
 					className={session ? styles.primaryButton : styles.primaryButtonDisabled}
 				>
 					Add to Project

@@ -32,7 +32,9 @@ export default function ExpenseTable({ activeProject }: PropsType) {
 	}
 	return (
 		<div className={styles.container}>
-			<CostList category='Project Expenses'>{lumberListItems}</CostList>
+			<CostList category='Project Expenses' description='List of all expenses for this Project'>
+				{lumberListItems}
+			</CostList>
 		</div>
 	);
 }
