@@ -4,7 +4,11 @@ import styles from '../styles/addToProjectForm.module.scss';
 import { BoardFeetType } from '../types/types';
 import { trpc } from '../utils/trpc';
 
-function AddToProjectForm(values: BoardFeetType) {
+type PropsType = {
+	values: BoardFeetType | null;
+};
+
+function AddToProjectForm(values: PropsType) {
 	const { data: session, status } = useSession();
 	console.log(values);
 

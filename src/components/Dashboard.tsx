@@ -15,11 +15,11 @@ userId: "clbyb148i0000vocsn6ai0qig"
 [[Prototype]]: Object
 
 */
-export interface LumberType {
+export type LumberType = {
 	id: string;
 	createdAt: Date;
 	updatedAt: Date;
-	lumberName?: string;
+	name?: string | null;
 	numOfPieces: number;
 	thickness: number;
 	width: number;
@@ -27,18 +27,18 @@ export interface LumberType {
 	species: string;
 	price: number;
 	tax: number;
-}
+};
 
-export interface ConsumableType {
+export type ConsumableType = {
 	id: string;
 	createdAt: Date;
 	updatedAt: Date;
 	productName: string;
 	price: number;
 	usePercentage: number;
-}
+};
 
-export interface ProjectType {
+export type ProjectType = {
 	createdAt: Date;
 	id: string;
 	name: string;
@@ -46,7 +46,7 @@ export interface ProjectType {
 	userId: string;
 	lumber: LumberType[];
 	consumables: ConsumableType[];
-}
+};
 
 export default function Dashboard() {
 	const { data: session } = useSession();
@@ -54,7 +54,7 @@ export default function Dashboard() {
 
 	const projects = trpc.user.getProjectsById.useQuery(session?.user?.id!);
 
-	const userData = trpc.user.getUserData.useQuery(session?.user?.id!);
+	// const userData = trpc.user.getUserData.useQuery(session?.user?.id!);
 
 	if (projects && projects.data) {
 		return (

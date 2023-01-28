@@ -18,7 +18,7 @@ export default function ExpenseTable({ activeProject }: PropsType) {
 			lumberListItems = activeProject.lumber.map((l) => (
 				<LumberExpenseListItem
 					key={l.id}
-					lumberName={l.lumberName}
+					name={l.name}
 					species={l.species}
 					numOfPieces={l.numOfPieces}
 					thickness={l.thickness}

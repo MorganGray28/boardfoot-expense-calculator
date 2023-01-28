@@ -3,7 +3,7 @@ import styles from '../styles/LumberExpenseListItem.module.scss';
 import { calculateBoardFeet, calculateCostFromBF } from '../utils/calculationsUtils';
 
 interface PropTypes {
-	lumberName?: string;
+	name?: string | null;
 	species: string;
 	numOfPieces: number;
 	thickness: number;
@@ -17,7 +17,7 @@ interface PropTypes {
 // TODO: Style the cost value to a different color to help separate and accent itself
 
 export default function LumberExpenseListItem({
-	lumberName,
+	name,
 	species,
 	numOfPieces,
 	thickness,
@@ -31,7 +31,7 @@ export default function LumberExpenseListItem({
 
 	return (
 		<div className={styles.container}>
-			<h2 className={styles.name}>{lumberName}</h2>
+			<h2 className={styles.name}>{name}</h2>
 			<div className={styles.flexContainer}>
 				<div className={styles.speciesThicknessGroup}>
 					<p className={styles.species}>{species}</p>
