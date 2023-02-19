@@ -7,11 +7,11 @@ import { trpc } from '../utils/trpc';
 
 // TODO: Validate user input with Zod
 
-type Props = {
+type PropsType = {
 	handleModal: (val: BoardFeetType) => void;
 };
 
-function BoardFootCalculator({ handleModal }: Props) {
+function BoardFootCalculator({ handleModal }: PropsType) {
 	const initialValues: BoardFeetType = {
 		numOfPieces: 0,
 		thickness: 0,
