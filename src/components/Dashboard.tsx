@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { trpc } from '../utils/trpc';
 import { ActiveProjectForm } from './ActiveProjectForm';
@@ -48,11 +48,21 @@ export type ProjectType = {
 	consumables: ConsumableType[];
 };
 
-export default function Dashboard() {
+type PropsType = {
+	updateProjects(): void;
+};
+
+export default function Dashboard(updateProjects: ProjectType) {
 	const { data: session } = useSession();
 	const [activeProject, setActiveProject] = useState<ProjectType | null>(null);
 
 	const projects = trpc.user.getProjectsById.useQuery(session?.user?.id!);
+
+	useEffect(() => {
+		if (projects.data) {
+			console.log(projects.data);
+		}
+	}, [projects]);
 
 	// const userData = trpc.user.getUserData.useQuery(session?.user?.id!);
 

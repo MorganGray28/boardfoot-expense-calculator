@@ -7,7 +7,7 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import BoardFootCalculator from '../components/BoardFootCalculator';
 import Modal from '../components/Modal';
 import AddToProjectForm from '../components/AddToProjectForm';
-import Dashboard from '../components/Dashboard';
+import Dashboard, { ProjectType } from '../components/Dashboard';
 import { BoardFeetType } from '../types/types';
 
 const Home: NextPage = () => {
@@ -15,6 +15,9 @@ const Home: NextPage = () => {
 	const { data: session, status } = useSession();
 	// double check the preferred way to store values from the BF Calculator
 	const [currentCalculatorValues, setCurrentCalculatorValues] = useState<BoardFeetType | null>(null);
+	const [projects, setProjects] = useState<ProjectType[] | null>([]);
+
+	console.log(currentCalculatorValues);
 
 	function handleSignIn() {
 		signIn();
@@ -28,9 +31,13 @@ const Home: NextPage = () => {
 		setModalOpen(false);
 	}
 
-	function handleOpen(values: BoardFeetType) {
+	function handleOpen(values: BoardFeetType, projects: ProjectType[]) {
 		setCurrentCalculatorValues(values);
 		setModalOpen(true);
+	}
+
+	function updateProjects(projectList: ProjectType[]) {
+		setProjects(projectList);
 	}
 
 	return (
@@ -75,7 +82,11 @@ const Home: NextPage = () => {
 						<Modal open={modalOpen} onClose={handleClose}>
 							<AddToProjectForm values={currentCalculatorValues} />
 						</Modal>
-						{session && session.user ? <Dashboard /> : <p>log in to save and track your expenses</p>}
+						{session && session.user ? (
+							<Dashboard updateProjects={updateProjects} />
+						) : (
+							<p>log in to save and track your expenses</p>
+						)}
 					</main>
 				</div>
 			</div>
