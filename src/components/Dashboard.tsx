@@ -6,6 +6,12 @@ import ExpenseAndConsumableGroup from './ExpenseAndConsumableGroup';
 import ExpenseTable from './ExpenseTable';
 import ConsumableTable from './ConsumableTable';
 
+// TODO: make modal work for adding lumber from bf calculator
+// TODO: work on consumables table to adjust percentage for each
+// TODO: make add consumables form component to add new consumables
+// TODO: basic responsiveness
+// TODO: Make sure it's presentable and deploy
+
 /*
 createdAt: Wed Dec 28 2022 15:15:59 GMT-0800 (Pacific Standard Time) {}
 id: "clc89zzyu0000voj0oblg43f4"

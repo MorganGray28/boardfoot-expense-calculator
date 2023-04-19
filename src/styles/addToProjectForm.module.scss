@@ -1,5 +1,64 @@
+@use 'variables';
+@use 'mixins';
+
 .container {
+  background: hsla(0, 0%, 95%, 1);
+  border-radius: 14px;
+  padding: 2rem;
   width: 400px;
-  height: 600px;
+  min-height: 500px;
   background-color: white;
+}
+
+.header {
+  color: variables.$primary-blue;
+  border-bottom: 1px solid variables.$primary-blue;
+}
+
+.search-input {
+
+}
+
+.projectList {
+  color: variables.$secondary-blue;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.projectListItem {
+  background: hsla(0, 0%, 91%, 1);
+  margin-bottom: .5rem;
+  margin-right: .5rem;
+  padding: .5rem;
+  border-radius: 7px;
+}
+
+.projectName {
+  padding-bottom: .4rem;
+  font-weight: 600;
+  font-size: .875rem;
+}
+
+.projectSpecies {
+  padding-bottom: .25rem;
+  font-size: .75rem;
+}
+
+.projectCost {
+  font-size: .75rem;
+}
+
+.buttonGroup {
+  margin-top: .5rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 .5rem;
+}
+
+.dangerBtn {
+  @include mixins.outline-danger-button;
+}
+
+.approveBtn {
+  @include mixins.primary-button;
 }

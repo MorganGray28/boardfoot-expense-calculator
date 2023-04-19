@@ -39,3 +39,9 @@
     color: darken(variables.$primary-blue-hover-text, 40%);
   }
 }
+
+@mixin outline-danger-button {
+  @include outline-primary-button;
+  border: 1px solid red;
+  color: red;
+}
