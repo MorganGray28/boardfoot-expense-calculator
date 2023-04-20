@@ -1,0 +1,25 @@
+@use 'variables';
+@use 'mixins';
+
+.projectListItem {
+  background: hsla(0, 0%, 91%, 1);
+  margin-bottom: .5rem;
+  margin-right: .5rem;
+  padding: .5rem;
+  border-radius: 7px;
+}
+
+.projectName {
+  padding-bottom: .4rem;
+  font-weight: 600;
+  font-size: .875rem;
+}
+
+.projectSpecies {
+  padding-bottom: .25rem;
+  font-size: .75rem;
+}
+
+.projectCost {
+  font-size: .75rem;
+}

@@ -3,6 +3,7 @@ import React from 'react';
 import styles from '../styles/addToProjectForm.module.scss';
 import { BoardFeetType } from '../types/types';
 import { trpc } from '../utils/trpc';
+import ProjectFormListItem from './ProjectFormListItem';
 
 type PropsType = {
 	values: BoardFeetType | null;
@@ -17,41 +18,13 @@ function AddToProjectForm(values: PropsType) {
 			<h4 className={styles.header}>Add Lumber to a Project</h4>
 			<input type='text' placeholder='Search Projects' />
 			<ul className={styles.projectList}>
-				<li className={styles.projectListItem}>
-					<p className={styles.projectName}>Mid Century Modern Coffee Table</p>
-					<p className={styles.projectSpecies}>Walnut</p>
-					<p className={styles.projectCost}>$275</p>
-				</li>
-				<li className={styles.projectListItem}>
-					<p className={styles.projectName}>Outdoor Slat Bench</p>
-					<p className={styles.projectSpecies}>White Oak</p>
-					<p className={styles.projectCost}>$400</p>
-				</li>
-				<li className={styles.projectListItem}>
-					<p className={styles.projectName}>Walnut Burl Coffee Table</p>
-					<p className={styles.projectSpecies}>Walnut Burl Slab, Walnut, Steel</p>
-					<p className={styles.projectCost}>$750</p>
-				</li>
-				<li className={styles.projectListItem}>
-					<p className={styles.projectName}>Rustic Cutting Board</p>
-					<p className={styles.projectSpecies}>Olivewood</p>
-					<p className={styles.projectCost}>$90</p>
-				</li>
-				<li className={styles.projectListItem}>
-					<p className={styles.projectName}>Modern Picture Frame</p>
-					<p className={styles.projectSpecies}>Walnut</p>
-					<p className={styles.projectCost}>$85</p>
-				</li>
-				<li className={styles.projectListItem}>
-					<p className={styles.projectName}>Outdoor Slat Bench</p>
-					<p className={styles.projectSpecies}>White Oak</p>
-					<p className={styles.projectCost}>$400</p>
-				</li>
-				<li className={styles.projectListItem}>
-					<p className={styles.projectName}>Walnut Burl Coffee Table</p>
-					<p className={styles.projectSpecies}>Walnut Burl Slab, Walnut, Steel</p>
-					<p className={styles.projectCost}>$750</p>
-				</li>
+				<ProjectFormListItem name='Mid Century Modern Coffee Table' species='Walnut' cost={275} />
+				<ProjectFormListItem name='Outdoor Slat Bench' species='White Oak' cost={400} />
+				<ProjectFormListItem name='Rustic Cutting Board' species='Olivewood' cost={90} />
+				<ProjectFormListItem name='Walnut Burl Coffee Table' species='Walnut Burl Slab' cost={275} />
+				<ProjectFormListItem name='Modern Picture Frame' species='Walnut' cost={75} />
+				<ProjectFormListItem name='Book Shelf' species='Walnut' cost={400} />
+				<ProjectFormListItem name='End Grain Cutting Board' species='Walnut' cost={95} />
 			</ul>
 
 			<div className={styles.buttonGroup}>
