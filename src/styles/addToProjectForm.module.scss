@@ -15,8 +15,29 @@
   border-bottom: 1px solid variables.$primary-blue;
 }
 
-.search-input {
+.searchInput {
+  font-weight: 500;
+  width: 90%;
+  font-size: 1rem;
+  color: variables.$primary-blue;
+  padding: 1rem 0 1rem .5rem;
+  margin: 1rem 0 1.5rem 0;
+  border-radius: 14px;
+  border: 2px solid variables.$primary-blue;
 
+  &:active, &:focus {
+    border: 2px solid variables.$primary-blue-hover-text;
+    outline: none;
+    color: variables.$primary-blue-hover-text;
+
+    &::placeholder {
+      color: variables.$primary-blue-hover-text;
+    }
+  }
+
+  &::placeholder {
+    color: variables.$primary-blue;
+  }
 }
 
 .projectList {
