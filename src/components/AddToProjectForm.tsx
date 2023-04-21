@@ -13,7 +13,9 @@ type PropsType = {
 function AddToProjectForm({ values, onClose }: PropsType) {
 	const [search, setSearch] = useState('');
 	const { data: session, status } = useSession();
-	console.log(values);
+	const projectList = trpc.user.getProjectsById.useQuery(session?.user?.id!).data;
+	console.log(`retrieving project list from trpc call to list as projects to add lumber to:`);
+	console.log(projectList);
 
 	const mockProjects = [
 		{

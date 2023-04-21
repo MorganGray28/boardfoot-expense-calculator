@@ -17,8 +17,6 @@ const Home: NextPage = () => {
 	const [currentCalculatorValues, setCurrentCalculatorValues] = useState<BoardFeetType | null>(null);
 	const [projects, setProjects] = useState<ProjectType[] | null>([]);
 
-	console.log(currentCalculatorValues);
-
 	function handleSignIn() {
 		signIn();
 	}
