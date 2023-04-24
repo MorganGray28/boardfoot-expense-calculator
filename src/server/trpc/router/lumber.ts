@@ -12,14 +12,27 @@ export const BoardFeetSchema = z.object({
 });
 
 export const lumberRouter = router({
-	addDimensionLumber: protectedProcedure.input(BoardFeetSchema).mutation(async ({ ctx, input }) => {
-		try {
-			const parsedInput = BoardFeetSchema.safeParse(input);
-			await ctx.prisma.lumber.create({
-				data: { ...input, projectId: 'adflkj324sadfa' },
-			});
-		} catch (err) {
-			console.log(err);
-		}
-	}),
+	addDimensionLumber: protectedProcedure
+		.input(
+			z.object({
+				numOfPieces: z.number().positive().min(1),
+				thickness: z.number().positive(),
+				width: z.number().positive(),
+				length: z.number().positive(),
+				species: z.string(),
+				price: z.number(),
+				tax: z.number(),
+				projectId: z.string(),
+			})
+		)
+		.mutation(async ({ ctx, input }) => {
+			try {
+				// const parsedInput = BoardFeetSchema.safeParse(input);
+				await ctx.prisma.lumber.create({
+					data: input,
+				});
+			} catch (err) {
+				console.log(err);
+			}
+		}),
 });

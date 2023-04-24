@@ -1,72 +1,58 @@
 import { useSession } from 'next-auth/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../styles/addToProjectForm.module.scss';
-import { BoardFeetType } from '../types/types';
+import { BoardFeetType, ProjectType } from '../types/types';
 import { trpc } from '../utils/trpc';
 import ProjectFormListItem from './ProjectFormListItem';
 
 type PropsType = {
 	values: BoardFeetType | null;
 	onClose: () => void;
+	refetchProjects: any;
 };
 
-function AddToProjectForm({ values, onClose }: PropsType) {
+function AddToProjectForm({ values, onClose, refetchProjects }: PropsType) {
 	const [search, setSearch] = useState('');
 	const { data: session, status } = useSession();
-	const projectList = trpc.user.getProjectsById.useQuery(session?.user?.id!).data;
-	console.log(`retrieving project list from trpc call to list as projects to add lumber to:`);
-	console.log(projectList);
+	const projectList: ProjectType[] | undefined = trpc.user.getProjectsById.useQuery(session?.user?.id!, {
+		enabled: session?.user !== undefined,
+	}).data;
 
-	const mockProjects = [
-		{
-			name: 'Mid Century Modern Coffee Table',
-			species: 'Walnut',
-			cost: 275,
-		},
-		{
-			name: 'Outdoor Slat Bench',
-			species: 'White Oak',
-			cost: 400,
-		},
-		{
-			name: 'Rustic Cutting Board',
-			species: 'Olive wood',
-			cost: 90,
-		},
-		{
-			name: 'Modern Picture Frame',
-			species: 'Walnut',
-			cost: 75,
-		},
-		{
-			name: 'Book Shelf',
-			species: 'Walnut',
-			cost: 450,
-		},
-		{
-			name: 'End Grain Cutting Board',
-			species: 'Walnut',
-			cost: 55,
-		},
-	];
+	const addLumber = trpc.lumber.addDimensionLumber.useMutation({
+		onSuccess: () => refetchProjects(),
+		onSettled: () => onClose(),
+	});
 
-	let filteredProjectListItems = mockProjects
-		.filter((project) => {
-			if (search) {
-				return project.name.toLowerCase().includes(search.toLowerCase());
-			} else {
-				return project;
-			}
-		})
-		.map((filteredProjects) => {
-			return (
-				<ProjectFormListItem
-					name={filteredProjects.name}
-					species={filteredProjects.species}
-					cost={filteredProjects.cost}
-				/>
-			);
-		});
+	function handleClick(projectId: string, values: BoardFeetType) {
+		console.log(projectId);
+		console.log(values);
+		addLumber.mutate({ ...values, projectId });
+	}
+
+	let filteredProjectListItems;
+	if (projectList !== undefined) {
+		filteredProjectListItems = projectList
+			.filter((project) => {
+				if (search) {
+					return project.name.toLowerCase().includes(search.toLowerCase());
+				} else {
+					return project;
+				}
+			})
+			.map((project, index) => {
+				return (
+					<ProjectFormListItem
+						values={values}
+						handleClick={handleClick}
+						id={project.id}
+						key={index}
+						name={project.name}
+						species={project.species}
+						cost={project.cost}
+					/>
+				);
+			});
+	}
 
 	return (
 		<div className={styles.container}>
@@ -78,17 +64,7 @@ function AddToProjectForm({ values, onClose }: PropsType) {
 				type='text'
 				placeholder='Search Projects'
 			/>
-			<ul className={styles.projectList}>
-				{filteredProjectListItems}
-				{/* <ProjectFormListItem name='Mid Century Modern Coffee Table' species='Walnut' cost={275} />
-				<ProjectFormListItem name='Outdoor Slat Bench' species='White Oak' cost={400} />
-				<ProjectFormListItem name='Rustic Cutting Board' species='Olivewood' cost={90} />
-				<ProjectFormListItem name='Walnut Burl Coffee Table' species='Walnut Burl Slab' cost={275} />
-				<ProjectFormListItem name='Modern Picture Frame' species='Walnut' cost={75} />
-				<ProjectFormListItem name='Book Shelf' species='Walnut' cost={400} />
-				<ProjectFormListItem name='End Grain Cutting Board' species='Walnut' cost={95} /> */}
-			</ul>
-
+			<ul className={styles.projectList}>{filteredProjectListItems}</ul>
 			<div className={styles.buttonGroup}>
 				<button onClick={onClose} className={styles.dangerBtn}>
 					Cancel

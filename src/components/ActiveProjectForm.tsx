@@ -1,6 +1,6 @@
 import React, { useEffect, Dispatch, SetStateAction, ChangeEvent } from 'react';
 import styles from '../styles/ActiveProjectForm.module.scss';
-import { ProjectType } from './Dashboard';
+import { ProjectType } from '../types/types';
 
 // FIXME: activeProject has bugs showing the right value in select input vs the activeProject
 // FIXME: Redesign Data flow and shape for activeProject
@@ -10,7 +10,7 @@ import { ProjectType } from './Dashboard';
 interface PropsType {
 	projects: ProjectType[];
 	activeProject: ProjectType | null;
-	updateActiveProject: Dispatch<SetStateAction<ProjectType | null>>;
+	updateActiveProject: (project: ProjectType) => void;
 }
 
 export function ActiveProjectForm({ projects, activeProject, updateActiveProject }: PropsType) {

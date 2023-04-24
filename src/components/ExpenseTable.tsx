@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from '../styles/ExpenseTable.module.scss';
 import CostList from './CostList';
-import { ProjectType } from './Dashboard';
+import { ProjectType } from '../types/types';
 import LumberExpenseListItem from './LumberExpenseListItem';
+import { trpc } from '../utils/trpc';
 
 interface PropsType {
 	activeProject: ProjectType | null;
@@ -10,12 +11,14 @@ interface PropsType {
 
 export default function ExpenseTable({ activeProject }: PropsType) {
 	let lumberListItems;
-	if (activeProject) {
-		console.log(activeProject);
+	const { data: singleProjectData, refetch: refetchActiveProjectExpenses } = trpc.project.getProject.useQuery(
+		activeProject?.id!
+	);
 
+	if (activeProject) {
 		// TODO: Import Cost and BoardFeet calculation functions to calculate cost/bf instead of storing in DB
-		if (activeProject.lumber.length) {
-			lumberListItems = activeProject.lumber.map((l) => (
+		if (singleProjectData) {
+			lumberListItems = singleProjectData.lumber.map((l) => (
 				<LumberExpenseListItem
 					key={l.id}
 					name={l.name}

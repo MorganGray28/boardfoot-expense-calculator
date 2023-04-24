@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { useSession } from 'next-auth/react';
 import { trpc } from '../utils/trpc';
+import { LumberType, ConsumableType, ProjectType } from '../types/types';
 import { ActiveProjectForm } from './ActiveProjectForm';
 import ExpenseAndConsumableGroup from './ExpenseAndConsumableGroup';
 import ExpenseTable from './ExpenseTable';
@@ -21,64 +22,38 @@ userId: "clbyb148i0000vocsn6ai0qig"
 [[Prototype]]: Object
 
 */
-export type LumberType = {
-	id: string;
-	createdAt: Date;
-	updatedAt: Date;
-	name?: string | null;
-	numOfPieces: number;
-	thickness: number;
-	width: number;
-	length: number;
-	species: string;
-	price: number;
-	tax: number;
-};
-
-export type ConsumableType = {
-	id: string;
-	createdAt: Date;
-	updatedAt: Date;
-	productName: string;
-	price: number;
-	usePercentage: number;
-};
-
-export type ProjectType = {
-	createdAt: Date;
-	id: string;
-	name: string;
-	updatedAt: Date;
-	userId: string;
-	lumber: LumberType[];
-	consumables: ConsumableType[];
-};
 
 type PropsType = {
-	updateProjects(): void;
+	activeProject: ProjectType | null;
+	updateActiveProject: (project: ProjectType) => void;
 };
 
-export default function Dashboard(updateProjects: ProjectType) {
+export default function Dashboard({ activeProject, updateActiveProject }: PropsType) {
 	const { data: session } = useSession();
-	const [activeProject, setActiveProject] = useState<ProjectType | null>(null);
+	// const [activeProject, setActiveProject] = useState<ProjectType | null>(null);
 
-	const projects = trpc.user.getProjectsById.useQuery(session?.user?.id!);
-
-	useEffect(() => {
-		if (projects.data) {
-			console.log(projects.data);
+	const { data: projects, refetch: refetchProjects } = trpc.user.getProjectsById.useQuery(
+		session?.user?.id!,
+		{
+			enabled: session?.user !== undefined,
 		}
-	}, [projects]);
+	);
+
+	// useEffect(() => {
+	// 	// if (projects.data) {
+	// 		// console.log(projects.data);
+	// 	}
+	// }, [projects]);
 
 	// const userData = trpc.user.getUserData.useQuery(session?.user?.id!);
 
-	if (projects && projects.data) {
+	if (projects) {
 		return (
 			<div>
 				<ActiveProjectForm
-					projects={projects.data}
+					projects={projects}
 					activeProject={activeProject}
-					updateActiveProject={setActiveProject}
+					updateActiveProject={updateActiveProject}
 				/>
 				<ExpenseAndConsumableGroup>
 					<ExpenseTable activeProject={activeProject} />
