@@ -25,7 +25,7 @@ userId: "clbyb148i0000vocsn6ai0qig"
 
 type PropsType = {
 	activeProject: ProjectType | null;
-	updateActiveProject: (project: ProjectType) => void;
+	updateActiveProject: (project: ProjectType | null) => void;
 };
 
 export default function Dashboard({ activeProject, updateActiveProject }: PropsType) {

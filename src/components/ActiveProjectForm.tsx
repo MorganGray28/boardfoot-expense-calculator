@@ -10,7 +10,7 @@ import { ProjectType } from '../types/types';
 interface PropsType {
 	projects: ProjectType[];
 	activeProject: ProjectType | null;
-	updateActiveProject: (project: ProjectType) => void;
+	updateActiveProject: (project: ProjectType | null) => void;
 }
 
 export function ActiveProjectForm({ projects, activeProject, updateActiveProject }: PropsType) {

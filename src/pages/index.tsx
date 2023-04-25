@@ -27,7 +27,7 @@ const Home: NextPage = () => {
 		}
 	);
 
-	function setNewActiveProject(project: ProjectType) {
+	function setNewActiveProject(project: ProjectType | null) {
 		setActiveProject(project);
 	}
 
