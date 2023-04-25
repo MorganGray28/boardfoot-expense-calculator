@@ -12,6 +12,12 @@ import { ProjectType } from '../types/types';
 import { BoardFeetType } from '../types/types';
 import { trpc } from '../utils/trpc';
 
+// TODO: refactor to have all components contained in this page
+// TODO: Add project expense input
+// TODO: Add consumable expense input
+// TODO: Add slider adjustment to checked consumables
+// TODO: Adjust styling so totals are tallied and displayed underneath the two expense lists
+
 const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);
 	const { data: session, status } = useSession();
