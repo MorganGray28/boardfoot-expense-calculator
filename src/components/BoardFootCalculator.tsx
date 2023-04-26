@@ -70,15 +70,11 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 	function handleSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		handleModal(values);
-		// console.log('submitting form data');
-		// console.log(values);
-		// postLumber.mutate(values);
 		handleClearForm();
 	}
 
 	return (
 		<div className={styles.container}>
-			{/* <h4 className={styles.heading}>Board Foot Calculator</h4> */}
 			<p className={styles.subheading}>Board Feet Calculator</p>
 			<form onSubmit={handleSubmit}>
 				<div className={styles.boardfootContainer}>

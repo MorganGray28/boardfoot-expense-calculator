@@ -103,16 +103,4 @@ const Home: NextPage = () => {
 	);
 };
 
-{
-	/* 
-				// TODO: Create Landing Page Component for unregistered/logged out users 
-				// TODO: Design layout for adding general expenses to project expenses
-				// TODO: Design layout for adding consumables 
-				// TODO: Add Dummy data for multiple projects in our database
-					// TODO: Connect our Active Project to our data 
-				// TODO: Look into using Context for Active Project and current Board Feet calculator values
-			
-			*/
-}
-
 export default Home;
