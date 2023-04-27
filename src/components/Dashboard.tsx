@@ -30,6 +30,13 @@ export default function Dashboard({ projects, activeProject, updateActiveProject
 					activeProject={activeProject}
 					updateActiveProject={updateActiveProject}
 				/>
+				{/* //TODO: Add styling to styles sheet */}
+				<h3 style={{ textAlign: 'center' }}>{activeProject?.name}</h3>
+				<div className='button-group' style={{ display: 'flex', justifyContent: 'center' }}>
+					{/* //TODO: Add functionality to buttons */}
+					<button>Edit</button>
+					<button>Delete</button>
+				</div>
 				<ExpenseAndConsumableGroup>
 					<ExpenseTable activeProject={newActiveProject} />
 					<ConsumableTable activeProject={activeProject} />
