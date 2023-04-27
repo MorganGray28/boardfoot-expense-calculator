@@ -13,4 +13,16 @@ export const projectRouter = router({
 			},
 		});
 	}),
+
+	createProject: protectedProcedure.input(z.string()).mutation(async ({ ctx, input }) => {
+		const userId = ctx.session.user.id;
+		try {
+			const project = await ctx.prisma.project.create({
+				data: { name: input, userId },
+			});
+			return project;
+		} catch (err) {
+			console.log(err);
+		}
+	}),
 });

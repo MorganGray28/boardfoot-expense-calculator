@@ -84,11 +84,7 @@ const Home: NextPage = () => {
 					</nav>
 					<main>
 						<Modal open={modalOpen} onClose={handleClose}>
-							<AddToProjectForm
-								onClose={handleClose}
-								values={currentCalculatorValues}
-								refetchProjects={refetchProjects}
-							/>
+							<AddToProjectForm onClose={handleClose} values={currentCalculatorValues} />
 						</Modal>
 						{session && session.user ? (
 							<Dashboard

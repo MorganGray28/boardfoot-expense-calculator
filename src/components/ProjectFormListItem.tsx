@@ -8,7 +8,7 @@ type PropsType = {
 	cost: number;
 	id: string;
 	values: BoardFeetType | null;
-	handleClick: (id: string, values: BoardFeetType | null) => any;
+	handleClick: (id: string, values: BoardFeetType | null) => void;
 };
 
 function ProjectFormListItem({ name, species, cost, id, values, handleClick }: PropsType) {

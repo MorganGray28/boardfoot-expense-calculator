@@ -8,25 +8,27 @@ import ProjectFormListItem from './ProjectFormListItem';
 type PropsType = {
 	values: BoardFeetType | null;
 	onClose: () => void;
-	refetchProjects: any;
 };
 
-function AddToProjectForm({ values, onClose, refetchProjects }: PropsType) {
+function AddToProjectForm({ values, onClose }: PropsType) {
 	const [search, setSearch] = useState('');
 	const { data: session, status } = useSession();
 	const projectList: ProjectType[] | undefined = trpc.user.getProjectsById.useQuery(session?.user?.id!, {
 		enabled: session?.user !== undefined,
 	}).data;
+	const ctx = trpc.useContext();
 
 	const addLumber = trpc.lumber.addDimensionLumber.useMutation({
-		onSuccess: () => refetchProjects(),
+		onSuccess: () => ctx.user.getProjectsById.invalidate(),
 		onSettled: () => onClose(),
 	});
 
-	function handleClick(projectId: string, values: BoardFeetType) {
-		console.log(projectId);
+	function handleClick(id: string, values: BoardFeetType | null) {
+		console.log(id);
 		console.log(values);
-		addLumber.mutate({ ...values, projectId });
+		if (values) {
+			addLumber.mutate({ ...values, projectId: id });
+		}
 	}
 
 	let filteredProjectListItems;

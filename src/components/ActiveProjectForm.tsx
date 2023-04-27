@@ -1,6 +1,7 @@
-import React, { useEffect, Dispatch, SetStateAction, ChangeEvent } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import styles from '../styles/ActiveProjectForm.module.scss';
 import { ProjectType } from '../types/types';
+import { trpc } from '../utils/trpc';
 
 // FIXME: activeProject has bugs showing the right value in select input vs the activeProject
 // FIXME: Redesign Data flow and shape for activeProject
@@ -14,35 +15,80 @@ interface PropsType {
 }
 
 export function ActiveProjectForm({ projects, activeProject, updateActiveProject }: PropsType) {
-	// console.log(projects);
+	const [isCreatingNewProject, setIsCreatingNewProject] = useState(false);
+	const [newProjectName, setNewProjectName] = useState('');
+
+	const { mutate: addNewProject, isLoading: isCreating } = trpc.project.createProject.useMutation({
+		onSuccess: () => {
+			setNewProjectName('');
+			setIsCreatingNewProject(false);
+			ctx.user.getProjectsById.invalidate();
+		},
+	});
+
+	const ctx = trpc.useContext();
 
 	function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
 		if (!e.target.value) {
 			updateActiveProject(null);
 		}
-		// console.log(e.target.value);
 		let newActiveProject = projects.filter((p) => p.id === e.target.value);
 		if (newActiveProject && newActiveProject[0]) {
 			updateActiveProject(newActiveProject[0]);
 		}
 	}
 
-	return (
-		<div className={styles.container}>
-			<p className={styles.header}>Choose a Project</p>
-			<select
-				className={styles.selectInput}
-				name='projectList'
-				onChange={(e) => handleChange(e)}
-				value={activeProject?.id}
-			>
-				<option value={''}></option>
-				{projects.map((project) => (
-					<option value={project.id} key={project.id}>
-						{project.name}
-					</option>
-				))}
-			</select>
-		</div>
-	);
+	function handleCancelNewProject() {
+		setIsCreatingNewProject(false);
+		setNewProjectName('');
+	}
+
+	function handleSubmitNewProject() {
+		if (newProjectName) {
+			const newProject = addNewProject(newProjectName);
+		}
+	}
+
+	let content;
+
+	if (isCreatingNewProject) {
+		content = (
+			<>
+				<label htmlFor='newProject'>New Project Name</label>
+				<input
+					id='newProject'
+					type='text'
+					placeholder='enter project name'
+					value={newProjectName}
+					onChange={(e) => setNewProjectName(e.target.value)}
+				/>
+				<button onClick={() => handleCancelNewProject()}>Cancel</button>
+				<button disabled={isCreating} onClick={() => handleSubmitNewProject()}>
+					Create Project
+				</button>
+			</>
+		);
+	} else {
+		content = (
+			<>
+				<p className={styles.header}>Choose a Project</p>
+				<select
+					className={styles.selectInput}
+					name='projectList'
+					onChange={(e) => handleChange(e)}
+					value={activeProject?.id}
+				>
+					<option value={''}></option>
+					{projects.map((project) => (
+						<option value={project.id} key={project.id}>
+							{project.name}
+						</option>
+					))}
+				</select>
+				<button onClick={() => setIsCreatingNewProject(true)}>Create New Project</button>
+			</>
+		);
+	}
+
+	return <div className={styles.container}>{content}</div>;
 }
