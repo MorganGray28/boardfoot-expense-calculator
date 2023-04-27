@@ -7,45 +7,20 @@ import ExpenseAndConsumableGroup from './ExpenseAndConsumableGroup';
 import ExpenseTable from './ExpenseTable';
 import ConsumableTable from './ConsumableTable';
 
-// TODO: make modal work for adding lumber from bf calculator
-// TODO: work on consumables table to adjust percentage for each
-// TODO: make add consumables form component to add new consumables
-// TODO: basic responsiveness
-// TODO: Make sure it's presentable and deploy
-
-/*
-createdAt: Wed Dec 28 2022 15:15:59 GMT-0800 (Pacific Standard Time) {}
-id: "clc89zzyu0000voj0oblg43f4"
-name: "Shelf"
-updatedAt: Wed Dec 28 2022 15:15:49 GMT-0800 (Pacific Standard Time) {}
-userId: "clbyb148i0000vocsn6ai0qig"
-[[Prototype]]: Object
-
-*/
-
 type PropsType = {
+	projects: ProjectType[] | undefined;
 	activeProject: ProjectType | null;
 	updateActiveProject: (project: ProjectType | null) => void;
 };
 
-export default function Dashboard({ activeProject, updateActiveProject }: PropsType) {
+export default function Dashboard({ projects, activeProject, updateActiveProject }: PropsType) {
 	const { data: session } = useSession();
-	// const [activeProject, setActiveProject] = useState<ProjectType | null>(null);
 
-	const { data: projects, refetch: refetchProjects } = trpc.user.getProjectsById.useQuery(
-		session?.user?.id!,
-		{
-			enabled: session?.user !== undefined,
-		}
-	);
+	let newActiveProject;
 
-	// useEffect(() => {
-	// 	// if (projects.data) {
-	// 		// console.log(projects.data);
-	// 	}
-	// }, [projects]);
-
-	// const userData = trpc.user.getUserData.useQuery(session?.user?.id!);
+	if (activeProject) {
+		newActiveProject = projects?.filter((project) => project.id === activeProject.id)[0];
+	}
 
 	if (projects) {
 		return (
@@ -56,7 +31,7 @@ export default function Dashboard({ activeProject, updateActiveProject }: PropsT
 					updateActiveProject={updateActiveProject}
 				/>
 				<ExpenseAndConsumableGroup>
-					<ExpenseTable activeProject={activeProject} />
+					<ExpenseTable activeProject={newActiveProject} />
 					<ConsumableTable activeProject={activeProject} />
 				</ExpenseAndConsumableGroup>
 			</div>

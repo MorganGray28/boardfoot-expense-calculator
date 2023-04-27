@@ -12,7 +12,6 @@ import { ProjectType } from '../types/types';
 import { BoardFeetType } from '../types/types';
 import { trpc } from '../utils/trpc';
 
-// TODO: refactor to have all components contained in this page
 // TODO: Add project expense input
 // TODO: Add consumable expense input
 // TODO: Add slider adjustment to checked consumables
@@ -26,7 +25,7 @@ const Home: NextPage = () => {
 	const { data: projectList, refetch: refetchProjects } = trpc.user.getProjectsById.useQuery(
 		session?.user?.id!,
 		{
-			enabled: session?.user !== undefined,
+			enabled: session?.user?.id !== undefined,
 			onSuccess(data) {
 				setActiveProject(activeProject ?? data[0] ?? null);
 			},
@@ -92,7 +91,11 @@ const Home: NextPage = () => {
 							/>
 						</Modal>
 						{session && session.user ? (
-							<Dashboard activeProject={activeProject} updateActiveProject={setNewActiveProject} />
+							<Dashboard
+								projects={projectList}
+								activeProject={activeProject}
+								updateActiveProject={setNewActiveProject}
+							/>
 						) : (
 							<p>log in to save and track your expenses</p>
 						)}
