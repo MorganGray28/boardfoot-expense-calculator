@@ -3,11 +3,6 @@ import styles from '../styles/ActiveProjectForm.module.scss';
 import { ProjectType } from '../types/types';
 import { trpc } from '../utils/trpc';
 
-// FIXME: activeProject has bugs showing the right value in select input vs the activeProject
-// FIXME: Redesign Data flow and shape for activeProject
-// TODO: Style the Select arrow svg
-// TODO: Style the Select dropdown list
-
 interface PropsType {
 	projects: ProjectType[];
 	activeProject: ProjectType | null;

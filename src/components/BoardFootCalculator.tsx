@@ -5,8 +5,6 @@ import { calculateBoardFeet } from '../utils/calculationsUtils';
 import styles from '../styles/boardFootCalculator.module.scss';
 import { trpc } from '../utils/trpc';
 
-// TODO: Validate user input with Zod
-
 type PropsType = {
 	handleModal: (values: BoardFeetType) => void;
 };
