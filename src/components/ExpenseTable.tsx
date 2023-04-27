@@ -12,7 +12,8 @@ interface PropsType {
 export default function ExpenseTable({ activeProject }: PropsType) {
 	let lumberListItems;
 	const { data: singleProjectData, refetch: refetchActiveProjectExpenses } = trpc.project.getProject.useQuery(
-		activeProject?.id!
+		activeProject?.id!,
+		{ enabled: activeProject !== null }
 	);
 
 	if (activeProject) {
