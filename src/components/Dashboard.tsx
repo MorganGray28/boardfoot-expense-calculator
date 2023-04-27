@@ -15,11 +15,23 @@ type PropsType = {
 
 export default function Dashboard({ projects, activeProject, updateActiveProject }: PropsType) {
 	const { data: session } = useSession();
+	const ctx = trpc.useContext();
+	const { mutate: deleteProject, isLoading: isDeleting } = trpc.project.deleteProject.useMutation({
+		onSuccess: () => {
+			ctx.user.getProjectsById.invalidate();
+		},
+	});
 
 	let newActiveProject;
-
 	if (activeProject) {
 		newActiveProject = projects?.filter((project) => project.id === activeProject.id)[0];
+	}
+
+	function handleDeleteProject() {
+		if (activeProject) {
+			const nextActiveProject = deleteProject(activeProject.id);
+			// FIXME: Once active project is deleted, update the active project
+		}
 	}
 
 	if (projects) {
@@ -35,7 +47,7 @@ export default function Dashboard({ projects, activeProject, updateActiveProject
 				<div className='button-group' style={{ display: 'flex', justifyContent: 'center' }}>
 					{/* //TODO: Add functionality to buttons */}
 					<button>Edit</button>
-					<button>Delete</button>
+					<button onClick={handleDeleteProject}>Delete</button>
 				</div>
 				<ExpenseAndConsumableGroup>
 					<ExpenseTable activeProject={newActiveProject} />

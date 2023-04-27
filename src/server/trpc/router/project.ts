@@ -29,4 +29,16 @@ export const projectRouter = router({
 			console.log(err);
 		}
 	}),
+
+	deleteProject: protectedProcedure.input(z.string()).mutation(async ({ ctx, input }) => {
+		try {
+			const project = await ctx.prisma.project.delete({
+				where: {
+					id: input,
+				},
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	}),
 });
