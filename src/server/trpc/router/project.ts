@@ -19,6 +19,10 @@ export const projectRouter = router({
 		try {
 			const project = await ctx.prisma.project.create({
 				data: { name: input, userId },
+				include: {
+					lumber: true,
+					consumables: true,
+				},
 			});
 			return project;
 		} catch (err) {

@@ -13,7 +13,7 @@ export function ActiveProjectForm({ projects, activeProject, updateActiveProject
 	const [isCreatingNewProject, setIsCreatingNewProject] = useState(false);
 	const [newProjectName, setNewProjectName] = useState('');
 
-	const { mutate: addNewProject, isLoading: isCreating } = trpc.project.createProject.useMutation({
+	const { mutateAsync: addNewProject, isLoading: isCreating } = trpc.project.createProject.useMutation({
 		onSuccess: () => {
 			setNewProjectName('');
 			setIsCreatingNewProject(false);
@@ -38,9 +38,12 @@ export function ActiveProjectForm({ projects, activeProject, updateActiveProject
 		setNewProjectName('');
 	}
 
-	function handleSubmitNewProject() {
+	async function handleSubmitNewProject() {
 		if (newProjectName) {
-			const newProject = addNewProject(newProjectName);
+			const newProject = await addNewProject(newProjectName);
+			if (newProject) {
+				updateActiveProject(newProject);
+			}
 		}
 	}
 
