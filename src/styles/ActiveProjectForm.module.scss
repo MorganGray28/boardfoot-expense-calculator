@@ -1,7 +1,7 @@
 @use 'variables';
 
 .container {
-  margin-bottom: 5rem;
+  min-height: 15rem;
   text-align: center;
 }
 
@@ -13,6 +13,7 @@
 }
 
 .selectInput {
+  min-width: 10rem;
   border: 2px solid variables.$primary-blue;
   border-radius: 14px;
   padding: 1rem;
