@@ -27,10 +27,19 @@ const Home: NextPage = () => {
 		{
 			enabled: session?.user?.id !== undefined,
 			onSuccess(data) {
-				setActiveProject(activeProject ?? data[0] ?? null);
+				console.log('data from onSuccess of fetching projectList');
+				console.log(data);
+				if (!data[0]) {
+					setActiveProject(null);
+				} else {
+					setActiveProject(activeProject ?? data[0] ?? null);
+				}
 			},
 		}
 	);
+
+	console.log('active project in index ');
+	console.log(activeProject);
 
 	function setNewActiveProject(project: ProjectType | null) {
 		setActiveProject(project);

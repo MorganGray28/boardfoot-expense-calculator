@@ -22,6 +22,9 @@ export default function Dashboard({ projects, activeProject, updateActiveProject
 		},
 	});
 
+	console.log('active project in Dashboard:');
+	console.log(activeProject);
+
 	let newActiveProject;
 	if (activeProject) {
 		newActiveProject = projects?.filter((project) => project.id === activeProject.id)[0];
