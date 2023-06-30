@@ -35,4 +35,15 @@ export const lumberRouter = router({
 				console.log(err);
 			}
 		}),
+	deleteDimensionLumber: protectedProcedure.input(z.string()).mutation(async ({ ctx, input }) => {
+		try {
+			await ctx.prisma.lumber.delete({
+				where: {
+					id: input,
+				},
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	}),
 });
