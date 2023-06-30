@@ -16,14 +16,12 @@ type PropsType = {
 export default function Dashboard({ projects, activeProject, updateActiveProject }: PropsType) {
 	const { data: session } = useSession();
 	const ctx = trpc.useContext();
-	const { mutate: deleteProject, isLoading: isDeleting } = trpc.project.deleteProject.useMutation({
+	const { mutateAsync: deleteProject, isLoading: isDeleting } = trpc.project.deleteProject.useMutation({
 		onSuccess: () => {
 			ctx.user.getProjectsById.invalidate();
+			updateActiveProject(null);
 		},
 	});
-
-	console.log('active project in Dashboard:');
-	console.log(activeProject);
 
 	let newActiveProject;
 	if (activeProject) {
@@ -47,11 +45,17 @@ export default function Dashboard({ projects, activeProject, updateActiveProject
 				/>
 				{/* //TODO: Add styling to styles sheet */}
 				<h3 style={{ textAlign: 'center' }}>{activeProject?.name}</h3>
-				<div className='button-group' style={{ display: 'flex', justifyContent: 'center' }}>
-					{/* //TODO: Add functionality to buttons */}
-					<button>Edit</button>
-					<button onClick={handleDeleteProject}>Delete</button>
-				</div>
+				{projects.length ? (
+					<div className='button-group' style={{ display: 'flex', justifyContent: 'center' }}>
+						{/* //TODO: Add functionality to buttons */}
+						<button>Edit</button>
+						<button onClick={handleDeleteProject} disabled={isDeleting}>
+							Delete
+						</button>
+					</div>
+				) : (
+					''
+				)}
 				<ExpenseAndConsumableGroup>
 					<ExpenseTable activeProject={newActiveProject} />
 					<ConsumableTable activeProject={activeProject} />
