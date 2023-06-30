@@ -16,6 +16,11 @@ import { trpc } from '../utils/trpc';
 // TODO: Add consumable expense input
 // TODO: Add slider adjustment to checked consumables
 // TODO: Adjust styling so totals are tallied and displayed underneath the two expense lists
+// TODO: Add Modal that confirms you want to delete a project
+// TODO: Edit Project Name button functionality
+// TODO: EDIT and DELETE functions for each Expense Item
+// TODO: Add 4/4, 6/4, and 8/4 quick select options on our BF Calculator form under Thickness
+// FIXME: Adding new project with lumber doesn't update the dashboard to the newly created project
 
 const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);
@@ -27,8 +32,6 @@ const Home: NextPage = () => {
 		{
 			enabled: session?.user?.id !== undefined,
 			onSuccess(data) {
-				console.log('data from onSuccess of fetching projectList');
-				console.log(data);
 				if (!data[0]) {
 					setActiveProject(null);
 				} else {
@@ -37,9 +40,6 @@ const Home: NextPage = () => {
 			},
 		}
 	);
-
-	console.log('active project in index ');
-	console.log(activeProject);
 
 	function setNewActiveProject(project: ProjectType | null) {
 		setActiveProject(project);
