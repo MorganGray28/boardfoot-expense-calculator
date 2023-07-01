@@ -15,6 +15,7 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 		thickness: 0,
 		width: 0,
 		length: 0,
+		name: '',
 		species: '',
 		price: 0,
 		tax: 0,
@@ -48,7 +49,7 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 	const postLumber = trpc.lumber.addDimensionLumber.useMutation();
 
 	function handleChange(e: ChangeEvent<HTMLInputElement>) {
-		if (e.target.name === 'species') {
+		if (e.target.name === 'species' || e.target.name === 'name') {
 			setValues({ ...values, [e.target.name]: e.target.value });
 		} else if (e.target.name === 'numOfPieces') {
 			setValues({ ...values, [e.target.name]: parseInt(e.target.value) });
@@ -119,6 +120,19 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 
 				<p className={styles.subheading}>Cost</p>
 				<div className={styles.boardfootContainer}>
+					<div className={styles.labelInputGroup}>
+						<label htmlFor='name'>Description</label>
+						<p className={styles.optionalText}>(optional)</p>
+						<input
+							type='text'
+							id='name'
+							name='name'
+							onChange={handleChange}
+							value={values.name}
+							placeholder='Table Legs'
+						/>
+					</div>
+
 					<div className={styles.labelInputGroup}>
 						<label>Species</label>
 						<input type='text' name='species' onChange={handleChange} value={values.species} />

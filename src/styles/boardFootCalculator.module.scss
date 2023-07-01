@@ -57,6 +57,7 @@
 }
 
 .labelInputGroup {
+	position: relative;
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-end;
@@ -68,6 +69,12 @@
 		font-weight: 600;
 		color: variables.$primary-blue;
 	}
+}
+
+.optionalText {
+	position: absolute;
+	bottom: 0;
+	font-size: .75rem;
 }
 
 .borderBottom {
