@@ -12,6 +12,7 @@ import { ProjectType } from '../types/types';
 import { BoardFeetType } from '../types/types';
 import { trpc } from '../utils/trpc';
 
+// TODO: Redesign schema to include specific consumables from a consumable type
 // TODO: Add project expense input
 // TODO: Add consumable expense input
 // TODO: Add slider adjustment to checked consumables
@@ -21,6 +22,7 @@ import { trpc } from '../utils/trpc';
 // TODO: EDIT and DELETE functions for each Expense Item
 // TODO: Add 4/4, 6/4, and 8/4 quick select options on our BF Calculator form under Thickness
 // FIXME: Adding new project with lumber doesn't update the dashboard to the newly created project
+// TODO: Style any unstyled components
 
 const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);
