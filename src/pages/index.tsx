@@ -14,9 +14,12 @@ import { trpc } from '../utils/trpc';
 
 // TODO: Redesign schema to include specific consumables from a consumable type
 // TODO: Add project expense input
+// TODO: Make different expense categories/schemas:
+// 1) Dimensional Lumber Expense: name, BF, species, price per BF, tax
+// 2) Flat Cost per Item Expense: name, amount, price, optional tax
 // TODO: Add consumable expense input
 // TODO: Add slider adjustment to checked consumables
-// TODO: Adjust styling so totals are tallied and displayed underneath the two expense lists
+// TODO: Create ExpenseTotals Component that displays material costs, consumable totals, and Project Expense Totals
 // TODO: Add Modal that confirms you want to delete a project
 // TODO: Edit Project Name button functionality
 // TODO: EDIT and DELETE functions for each Expense Item
