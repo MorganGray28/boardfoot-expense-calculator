@@ -7,6 +7,7 @@
 }
 
 .name {
+  text-transform: capitalize;
   font-size: 1rem;
   color: variables.$primary-blue;
   text-align: center;
@@ -21,6 +22,7 @@
 }
 
 .species {
+  text-transform: capitalize;
   font-weight: 600;
 }
 
