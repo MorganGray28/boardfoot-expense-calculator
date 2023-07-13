@@ -69,7 +69,7 @@ model Project {
   description String?
   lumber      Lumber[]
   consumables Consumable[]
-  Expense     Expense[]
+  expenses    Expense[]
 }
 
 model Lumber {
