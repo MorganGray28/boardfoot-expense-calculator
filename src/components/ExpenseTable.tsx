@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from '../styles/ExpenseTable.module.scss';
-import CostList from './CostList';
 import { ProjectType } from '../types/types';
 import LumberExpenseListItem from './LumberExpenseListItem';
 import { calculateBoardFeet, calculateCostFromBF } from '../utils/calculationsUtils';
@@ -41,9 +40,14 @@ export default function ExpenseTable({ activeProject }: PropsType) {
 	}
 	return (
 		<div className={styles.container}>
-			<CostList category='Project Expenses' description='List of all expenses for this Project'>
-				{lumberListItems}
-			</CostList>
+			<div className={styles.categoryContainer}>
+				<div className={styles.flexGroup}>
+					<h4 className={styles.category}>Project Expenses</h4>
+					<p className={styles.categoryDescription}>List of all expenses for this Project</p>
+				</div>
+				<button>Add Expense</button>
+			</div>
+			<div className={styles.list}>{lumberListItems}</div>
 			<p>Total Expenses:</p>
 			<p>{totalExpense}</p>
 		</div>
