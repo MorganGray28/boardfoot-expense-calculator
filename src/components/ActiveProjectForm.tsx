@@ -83,7 +83,7 @@ export function ActiveProjectForm({ projects, activeProject, updateActiveProject
 						</option>
 					))}
 				</select>
-				<button onClick={() => setIsCreatingNewProject(true)}>Create New Project</button>
+				<button onClick={() => setIsCreatingNewProject(true)}>New Project</button>
 			</>
 		);
 	}

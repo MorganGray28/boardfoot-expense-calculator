@@ -1,12 +1,12 @@
 @use 'variables';
 
 .container {
-  min-height: 15rem;
+  min-height: 12rem;
   text-align: center;
 }
 
 .header {
-  padding: 2rem 0 1rem 0;
+  padding: 1rem 0 1rem 0;
   font-size: .875rem;
   font-weight: 600;
   color: variables.$primary-blue;
