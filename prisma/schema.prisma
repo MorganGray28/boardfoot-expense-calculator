@@ -69,6 +69,7 @@ model Project {
   description String?
   lumber      Lumber[]
   consumables Consumable[]
+  Expense     Expense[]
 }
 
 model Lumber {
@@ -85,6 +86,17 @@ model Lumber {
   tax         Float
   project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId   String
+}
+
+model Expense {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  amount    Int
+  name      String
+  cost      Float
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String
 }
 
 model Consumable {
