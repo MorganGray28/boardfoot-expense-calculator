@@ -18,10 +18,10 @@ export default function ConsumableTable({ activeProject }: PropsType) {
 		<div className={styles.container}>
 			<div className={styles.categoryContainer}>
 				<div className={styles.flexGroup}>
-					<h4 className={styles.category}>Project Expenses</h4>
-					<p className={styles.categoryDescription}>List of all expenses for this Project</p>
+					<h4 className={styles.category}>Consumables</h4>
+					<p className={styles.categoryDescription}>Apply consumable costs to this Project</p>
 				</div>
-				<button>Add Expense</button>
+				<button>Add Consumable</button>
 			</div>
 			<div className={styles.list}>{consumableList}</div>
 		</div>
