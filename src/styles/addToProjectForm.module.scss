@@ -2,17 +2,11 @@
 @use 'mixins';
 
 .container {
-  background: hsla(0, 0%, 95%, 1);
-  border-radius: 14px;
-  padding: 2rem;
-  width: 500px;
-  min-height: 500px;
-  background-color: white;
+  @include mixins.modal-container;
 }
 
 .header {
-  color: variables.$primary-blue;
-  border-bottom: 1px solid variables.$primary-blue;
+  @include mixins.modal-header;
 }
 
 .searchInput {

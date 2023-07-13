@@ -1,4 +1,14 @@
 @use 'variables';
+@use 'mixins';
+
+.modalContainer {
+  @include mixins.modal-container;
+  min-width: 38rem;
+}
+
+.header {
+  @include mixins.modal-header;
+}
 
 .container {
   width: 430px;
