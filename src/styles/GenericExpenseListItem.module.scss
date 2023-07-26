@@ -1,0 +1,41 @@
+@use 'variables';
+
+.container {
+  padding: 1rem;
+  color: variables.$primary-blue;
+  border-bottom: 1px solid variables.$primary-blue;
+  font-size: .875rem;
+}
+
+.listItem {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.name {
+  text-transform: capitalize;
+  font-size: 1rem;
+  color: variables.$primary-blue;
+  text-align: center;
+  padding-bottom: .5rem;
+}
+
+.flexContainer {
+  font-size: .875rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.species {
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.boardFeet {
+  font-weight: 600;
+}
+
+.cost {
+  font-weight: 600;
+}

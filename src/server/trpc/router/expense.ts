@@ -31,4 +31,22 @@ export const expenseRouter = router({
 			console.log(err);
 		}
 	}),
+	addManyExpenses: protectedProcedure
+		.input(
+			z.array(
+				z.object({
+					amount: z.number(),
+					name: z.string(),
+					cost: z.number(),
+					projectId: z.string(),
+				})
+			)
+		)
+		.mutation(async ({ ctx, input }) => {
+			try {
+				await ctx.prisma.expense.createMany({ data: input });
+			} catch (err) {
+				console.log(err);
+			}
+		}),
 });

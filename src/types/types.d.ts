@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { BoardFeetSchema } from '../server/trpc/router/lumber';
+import { Expense } from '@prisma/client';
 
 export type BoardFeetType = z.infer<typeof BoardFeetSchema>;
 
@@ -15,6 +16,22 @@ export type LumberType = {
 	species: string;
 	price: number;
 	tax: number;
+};
+
+export type ExpenseType = {
+	amount: number;
+	name: string;
+	cost: number;
+	[key: string | number]: string | number;
+};
+
+export type ExpenseTypeDB = {
+	id: string;
+	createdAt: Date;
+	updatedAt: Date;
+	amount: number;
+	name: string;
+	cost: number;
 };
 
 export type ConsumableType = {
@@ -34,4 +51,5 @@ export type ProjectType = {
 	userId: string;
 	lumber: LumberType[];
 	consumables: ConsumableType[];
+	expenses: ExpenseTypeDB[];
 };

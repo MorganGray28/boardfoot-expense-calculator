@@ -2,6 +2,7 @@
 @use 'mixins';
 
 .modalContainer {
+  position: relative;
   @include mixins.modal-container;
   min-width: 38rem;
 }
@@ -39,4 +40,23 @@
   max-height: 30rem;
   padding-right: .5rem;
   overflow-y: auto;
+}
+
+.btngroup {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.expenseInputContainer {
+  display: flex;
+  position: relative;
+
+  & input {
+    width: 100%;
+  }
 }

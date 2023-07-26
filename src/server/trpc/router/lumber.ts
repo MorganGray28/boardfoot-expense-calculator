@@ -1,3 +1,4 @@
+import { TRPCError } from '@trpc/server';
 import { router, protectedProcedure } from '../trpc';
 import { z } from 'zod';
 
@@ -34,7 +35,7 @@ export const lumberRouter = router({
 					data: input,
 				});
 			} catch (err) {
-				console.log(err);
+				throw err;
 			}
 		}),
 	deleteDimensionLumber: protectedProcedure.input(z.string()).mutation(async ({ ctx, input }) => {

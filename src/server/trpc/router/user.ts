@@ -10,6 +10,7 @@ export const userRouter = router({
 			include: {
 				lumber: true,
 				consumables: true,
+				expenses: true,
 			},
 			orderBy: [
 				{
