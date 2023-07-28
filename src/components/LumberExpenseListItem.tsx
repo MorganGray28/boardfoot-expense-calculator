@@ -49,7 +49,7 @@ export default function LumberExpenseListItem({
 					<p className={styles.thickness}>{thickness}"</p>
 				</div>
 				<p className={styles.boardFeet}>{boardFeet} BF</p>
-				<p className={styles.cost}>${cost}</p>
+				<p className={styles.cost}>${cost.toFixed(2)}</p>
 			</div>
 			<button onClick={handleDelete} disabled={deleteLumber.isLoading}>
 				Delete

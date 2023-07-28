@@ -28,7 +28,7 @@ function GenericExpenseListItem({ id, name, cost, amount }: PropsType) {
 				<p className={styles.listItem}>{name}</p>
 				<div className='flex-vertical-container'>
 					<p className={styles.listItem}>Total:</p>
-					<p className={styles.listItem}>${amount * cost}</p>
+					<p className={styles.listItem}>${(amount * cost).toFixed(2)}</p>
 				</div>
 			</div>
 			<button onClick={handleDelete} disabled={deleteExpense.isLoading}>
