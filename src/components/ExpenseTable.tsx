@@ -51,10 +51,8 @@ export default function ExpenseTable({ activeProject }: PropsType) {
 	}
 
 	function handleDelete(index: number) {
-		console.log('delete input at index ' + index);
 		let data = [...expenses];
 		data.splice(index, 1);
-		console.log(data);
 		setExpenses(data);
 	}
 
@@ -204,7 +202,7 @@ export default function ExpenseTable({ activeProject }: PropsType) {
 					{lumberListItems} {genericExpenseList}
 				</div>
 				<p>Total Expenses:</p>
-				<p>{totalExpense}</p>
+				<p>${totalExpense.toFixed(2)}</p>
 			</div>
 		</>
 	);
