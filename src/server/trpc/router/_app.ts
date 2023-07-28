@@ -1,5 +1,6 @@
 import { router } from '../trpc';
 import { authRouter } from './auth';
+import { consumableRouter } from './consumable';
 import { expenseRouter } from './expense';
 import { lumberRouter } from './lumber';
 import { projectRouter } from './project';
@@ -11,6 +12,7 @@ export const appRouter = router({
 	lumber: lumberRouter,
 	project: projectRouter,
 	expense: expenseRouter,
+	consumable: consumableRouter,
 });
 
 // export type definition of API
