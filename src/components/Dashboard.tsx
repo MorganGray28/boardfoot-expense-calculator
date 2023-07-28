@@ -44,7 +44,7 @@ export default function Dashboard({ projects, activeProject, updateActiveProject
 					updateActiveProject={updateActiveProject}
 				/>
 				{/* //TODO: Add styling to styles sheet */}
-				<h3 style={{ textAlign: 'center' }}>{activeProject?.name}</h3>
+				<h3 style={{ textAlign: 'center', textTransform: 'capitalize' }}>{activeProject?.name}</h3>
 				{projects.length ? (
 					<div className='button-group' style={{ display: 'flex', justifyContent: 'center' }}>
 						{/* //TODO: Add functionality to buttons */}
