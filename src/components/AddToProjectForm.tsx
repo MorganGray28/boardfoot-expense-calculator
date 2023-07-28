@@ -91,6 +91,7 @@ function AddToProjectForm({ values, onClose, updateActiveProject }: PropsType) {
 			})
 			.map((project, index) => {
 				return (
+					// FIXME: look into species and cost ts errors
 					<ProjectFormListItem
 						values={values}
 						handleClick={handleClick}

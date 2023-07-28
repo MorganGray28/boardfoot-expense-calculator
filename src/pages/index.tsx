@@ -22,6 +22,7 @@ import { trpc } from '../utils/trpc';
 // TODO: EDIT and DELETE functions for each Expense Item
 // TODO: Add 4/4, 6/4, and 8/4 quick select options on our BF Calculator form under Thickness
 // FIXME: Adding new project with lumber doesn't update the dashboard to the newly created project
+// FIXME: Only conditionally show the expense and consumable table if there's an active project selected
 // TODO: Style any unstyled components
 
 const Home: NextPage = () => {
