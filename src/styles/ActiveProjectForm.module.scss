@@ -21,6 +21,7 @@
   font-weight: 600;
   color: variables.$primary-blue;
   transition: border 200ms ease;
+  text-transform: capitalize;
 
   
   &:hover {
