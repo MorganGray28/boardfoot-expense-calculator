@@ -22,6 +22,7 @@ export const projectRouter = router({
 				include: {
 					lumber: true,
 					consumables: true,
+					expenses: true,
 				},
 			});
 			return project;

@@ -38,9 +38,9 @@ export type ConsumableType = {
 	id: string;
 	createdAt: Date;
 	updatedAt: Date;
-	productName: string;
-	price: number;
-	usePercentage: number;
+	name: string;
+	cost: number;
+	amount: number;
 };
 
 export type ProjectType = {
