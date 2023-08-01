@@ -37,17 +37,25 @@ export default function ConsumableTable({ activeProject }: PropsType) {
 			setModalIsOpen(false);
 		},
 	});
-	// retrieve list of all consumables to display
-	const getAllConsumables = trpc.consumable.getAllConsumables;
 
 	const { data: consumableList } = trpc.consumable.getAllConsumables.useQuery(session?.user?.id!);
 	let consumableListArray: JSX.Element[] | null;
 	if (consumableList) {
+		console.log(consumableList);
 		consumableListArray = consumableList.map((consumable) => {
+			let checked;
+			if (activeProject && activeProject.consumables.filter((c) => c.id === consumable.id).length) {
+				checked = true;
+			} else {
+				checked = false;
+			}
+			console.log(consumableListArray);
 			return (
 				<ConsumableListItem
+					activeProject={activeProject}
 					key={consumable.id}
 					id={consumable.id}
+					checked={checked}
 					name={consumable.name}
 					cost={consumable.cost}
 				/>
