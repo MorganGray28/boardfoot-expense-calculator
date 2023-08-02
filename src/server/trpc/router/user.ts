@@ -9,7 +9,6 @@ export const userRouter = router({
 			},
 			include: {
 				lumber: true,
-				consumables: true,
 				expenses: true,
 			},
 			orderBy: [
@@ -28,7 +27,6 @@ export const userRouter = router({
 				projects: {
 					include: {
 						lumber: true,
-						consumables: true,
 					},
 					orderBy: [{ updatedAt: 'desc' }],
 				},

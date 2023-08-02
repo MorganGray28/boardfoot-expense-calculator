@@ -9,7 +9,6 @@ export const projectRouter = router({
 			},
 			include: {
 				lumber: true,
-				consumables: true,
 			},
 		});
 	}),
@@ -21,7 +20,6 @@ export const projectRouter = router({
 				data: { name: input, userId },
 				include: {
 					lumber: true,
-					consumables: true,
 					expenses: true,
 				},
 			});
