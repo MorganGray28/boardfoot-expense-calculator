@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 import styles from '../styles/ExpenseTable.module.scss';
 import ConsumableListItem from './ConsumableListItem';
-import { ConsumableType, ExpenseType, ProjectType } from '../types/types';
+import { ConsumableType, ProjectType } from '../types/types';
 import { useSession } from 'next-auth/react';
 import Modal from './Modal';
 import { trpc } from '../utils/trpc';
@@ -18,8 +18,6 @@ type ConsumableInputType = {
 };
 
 type ConsumableInputTypeWithId = ConsumableInputType & { userId: string };
-
-type ConsumableWithId = ConsumableType & { userId: string };
 
 export default function ConsumableTable({ activeProject }: PropsType) {
 	const { data: session, status } = useSession();
@@ -41,21 +39,13 @@ export default function ConsumableTable({ activeProject }: PropsType) {
 	const { data: consumableList } = trpc.consumable.getAllConsumables.useQuery(session?.user?.id!);
 	let consumableListArray: JSX.Element[] | null;
 	if (consumableList) {
-		console.log(consumableList);
 		consumableListArray = consumableList.map((consumable) => {
-			let checked;
-			if (activeProject && activeProject.consumables.filter((c) => c.id === consumable.id).length) {
-				checked = true;
-			} else {
-				checked = false;
-			}
-			console.log(consumableListArray);
 			return (
 				<ConsumableListItem
 					activeProject={activeProject}
 					key={consumable.id}
 					id={consumable.id}
-					checked={checked}
+					amount={consumable.amount}
 					name={consumable.name}
 					cost={consumable.cost}
 				/>
@@ -116,9 +106,6 @@ export default function ConsumableTable({ activeProject }: PropsType) {
 		if (invalidInput) {
 			alert("Please make sure the consumable inputs aren't blank or invalid");
 		} else {
-			// addExpenses.mutateAsync(expensesWithProjectId);
-			// console.log(expensesWithProjectId);
-			// console.log(consumables);
 			let consumablesWithUserId;
 			if (session && session.user) {
 				consumablesWithUserId = consumables.map((consumable) => {
@@ -141,7 +128,7 @@ export default function ConsumableTable({ activeProject }: PropsType) {
 					min={0}
 					name='amount'
 					value={consumable.amount ? consumable.amount : ''}
-					placeholder='amount applied'
+					placeholder='Percentage of cost to apply'
 					onChange={(e) => handleChange(index, e)}
 				/>
 				<input

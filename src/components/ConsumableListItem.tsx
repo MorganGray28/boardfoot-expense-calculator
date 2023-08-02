@@ -5,36 +5,19 @@ import { trpc } from '../utils/trpc';
 
 interface PropTypes {
 	name: string;
+	amount: number;
 	cost: number;
 	id: string;
-	checked: boolean;
 	activeProject: ProjectType | null;
 }
 
-export default function ConsumableListItem({ name, cost, id, checked, activeProject }: PropTypes) {
+export default function ConsumableListItem({ name, amount, cost, id, activeProject }: PropTypes) {
 	const ctx = trpc.useContext();
-	const toggleConsumableInProject = trpc.consumable.toggleConsumableInActiveProject.useMutation({
-		onSettled: () => {
-			ctx.consumable.getAllConsumables.invalidate();
-		},
-	});
-	// let checked;
-	// if (activeProject?.consumables.filter((c) => c.id === id).length) {
-	// 	checked = true;
-	// } else {
-	// 	checked = false;
-	// }
-
-	function handleCheck() {
-		if (id && activeProject && activeProject.id) {
-			toggleConsumableInProject.mutateAsync({ consumableId: id, projectId: activeProject.id });
-		}
-	}
 
 	return (
 		<div className={styles.container}>
-			<input className={styles.checkbox} type='checkbox' checked={checked} onChange={handleCheck} />
 			<h2 className={styles.name}>{name}</h2>
+			<p className={styles.percentage}>{amount}</p>
 			<p className={styles.cost}>${cost}</p>
 		</div>
 	);
