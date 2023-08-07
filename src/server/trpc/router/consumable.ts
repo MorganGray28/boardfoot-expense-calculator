@@ -25,6 +25,30 @@ export const consumableRouter = router({
 			where: {
 				userId: input,
 			},
+			orderBy: {
+				createdAt: 'desc',
+			},
 		});
 	}),
+	updateConsumable: protectedProcedure
+		.input(
+			z.object({
+				name: z.string(),
+				amount: z.number(),
+				cost: z.number(),
+				id: z.string(),
+			})
+		)
+		.mutation(async ({ ctx, input }) => {
+			try {
+				await ctx.prisma.consumable.update({
+					data: { name: input.name, cost: input.cost, amount: input.amount },
+					where: {
+						id: input.id,
+					},
+				});
+			} catch (err) {
+				console.log(err);
+			}
+		}),
 });
