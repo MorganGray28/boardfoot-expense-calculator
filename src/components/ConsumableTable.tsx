@@ -42,7 +42,6 @@ export default function ConsumableTable({ activeProject }: PropsType) {
 		consumableListArray = consumableList.map((consumable) => {
 			return (
 				<ConsumableListItem
-					activeProject={activeProject}
 					key={consumable.id}
 					id={consumable.id}
 					amount={consumable.amount}
