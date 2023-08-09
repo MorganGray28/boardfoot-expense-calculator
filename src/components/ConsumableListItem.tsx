@@ -13,7 +13,6 @@ type PropsType = InputFieldsType & { id: string };
 export default function ConsumableListItem({ name, amount, cost, id }: PropsType) {
 	const [isEditing, setIsEditing] = useState(false);
 	const [editInputFields, setEditInputFields] = useState<InputFieldsType>({ name, amount, cost });
-	console.log(editInputFields);
 
 	const ctx = trpc.useContext();
 	const updateConsumable = trpc.consumable.updateConsumable.useMutation({
@@ -21,6 +20,10 @@ export default function ConsumableListItem({ name, amount, cost, id }: PropsType
 		onSettled: () => setIsEditing(false),
 	});
 	let { isLoading } = updateConsumable;
+	const { mutateAsync: deleteConsumable, isLoading: isDeleting } =
+		trpc.consumable.deleteConsumable.useMutation({
+			onSuccess: () => ctx.consumable.getAllConsumables.invalidate(),
+		});
 
 	function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
 		const key = e.currentTarget.name as keyof InputFieldsType;
@@ -38,30 +41,35 @@ export default function ConsumableListItem({ name, amount, cost, id }: PropsType
 		setEditInputFields(updatedData);
 	}
 
+	function handleCancel() {
+		console.log('canceled');
+
+		setEditInputFields({ name, amount, cost });
+		setIsEditing(false);
+	}
+
+	function handleDelete() {
+		deleteConsumable(id);
+	}
+
 	function handleSubmit(e: React.FormEvent) {
+		console.log('submitted');
 		e.preventDefault();
 
 		// if nothing is changed, we don't make an api call
 		if (name === editInputFields.name && cost === editInputFields.cost && amount === editInputFields.amount) {
 			setIsEditing(false);
+		} else if (!editInputFields.name || !editInputFields.cost || !editInputFields.amount) {
+			alert('Please fill out empty input fields');
 		} else {
 			updateConsumable.mutateAsync({ ...editInputFields, id });
 		}
 	}
 
-	// add edit button to trigger input fields
-	// edit toggles isEditing State
-	// renders inputs for name, amount, and cost and a done button
-	// done button triggers a submit function that calls an updateConsumable api call
-	// updateConsumable mutation accepts the updated fields and the id of the consumable item to
-	// onSuccess of the updateConsumable useMutation, we'll invalidate our getAllConsumables query
-	// TODO: Add a disabled property for the Done button while it's loading
-	// Also set isEditing to false after we submit our mutation
-
 	if (isEditing) {
 		return (
 			<div className={styles.container}>
-				<form className={styles.editForm} onSubmit={handleSubmit}>
+				<form className={styles.editForm} onSubmit={handleSubmit} noValidate>
 					<input type='text' name='name' id='name' value={editInputFields.name} onChange={handleChange} />
 					<input
 						type='number'
@@ -77,7 +85,12 @@ export default function ConsumableListItem({ name, amount, cost, id }: PropsType
 						value={editInputFields.cost || ''}
 						onChange={handleChange}
 					/>
-					<button disabled={isLoading}>Done</button>
+					<button type='button' onClick={handleCancel}>
+						Cancel
+					</button>
+					<button type='submit' disabled={isLoading}>
+						Done
+					</button>
 				</form>
 			</div>
 		);
@@ -88,6 +101,9 @@ export default function ConsumableListItem({ name, amount, cost, id }: PropsType
 				<p className={styles.percentage}>{amount}%</p>
 				<p className={styles.cost}>${cost.toFixed(2)}</p>
 				<button onClick={() => setIsEditing(true)}>Edit</button>
+				<button onClick={handleDelete} disabled={isDeleting}>
+					X
+				</button>
 			</div>
 		);
 	}

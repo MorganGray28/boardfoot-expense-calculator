@@ -51,4 +51,15 @@ export const consumableRouter = router({
 				console.log(err);
 			}
 		}),
+	deleteConsumable: protectedProcedure.input(z.string()).mutation(async ({ ctx, input }) => {
+		try {
+			await ctx.prisma.consumable.delete({
+				where: {
+					id: input,
+				},
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	}),
 });
