@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import styles from '../styles/ExpenseTable.module.scss';
 import { ProjectType, ExpenseType } from '../types/types';
 import LumberExpenseListItem from './LumberExpenseListItem';
@@ -61,7 +61,8 @@ export default function ExpenseTable({ activeProject }: PropsType) {
 		setModalOpen(false);
 	}
 
-	function handleSubmitExpenses() {
+	function handleSubmit(e: FormEvent) {
+		e.preventDefault();
 		// check if there are any invalid fields, if so, alert user to use valid inputs
 		let invalidInput = false;
 		for (let expense of expenses) {
@@ -85,12 +86,6 @@ export default function ExpenseTable({ activeProject }: PropsType) {
 			}
 		}
 		// set expenses state to our initial single expense object
-	}
-
-	function handleSubmit(e: FormEvent) {
-		e.preventDefault();
-
-		console.log(expenses);
 	}
 
 	let expensesFormList = expenses.map((expense, index) => {
@@ -181,10 +176,10 @@ export default function ExpenseTable({ activeProject }: PropsType) {
 					<form onSubmit={(e) => handleSubmit(e)}>{expensesFormList}</form>
 					<button onClick={handleAddExpense}>Add Another Expense</button>
 					<div className={styles.btngroup}>
-						<button className='cancel-btn' onClick={handleCancelExpenses}>
+						<button className='cancel-btn' type='button' onClick={handleCancelExpenses}>
 							Cancel
 						</button>
-						<button className='done-btn' onClick={handleSubmitExpenses}>
+						<button className='done-btn' type='submit' onClick={(e) => handleSubmit(e)}>
 							Done
 						</button>
 					</div>

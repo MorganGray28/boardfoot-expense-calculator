@@ -33,7 +33,6 @@ export default function Dashboard({ projects, activeProject, updateActiveProject
 	function handleDeleteProject() {
 		if (activeProject) {
 			const nextActiveProject = deleteProject(activeProject.id);
-			// FIXME: Once active project is deleted, update the active project
 		}
 	}
 
