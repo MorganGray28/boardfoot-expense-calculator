@@ -14,6 +14,8 @@ type PropsType = {
 };
 
 export default function Dashboard({ projects, activeProject, updateActiveProject }: PropsType) {
+	const [isEditingProject, setIsEditingProject] = useState(false);
+
 	const { data: session } = useSession();
 	const ctx = trpc.useContext();
 	const { mutateAsync: deleteProject, isLoading: isDeleting } = trpc.project.deleteProject.useMutation({
@@ -43,18 +45,28 @@ export default function Dashboard({ projects, activeProject, updateActiveProject
 					activeProject={activeProject}
 					updateActiveProject={updateActiveProject}
 				/>
-				<h3 style={{ textAlign: 'center', textTransform: 'capitalize' }}>{activeProject?.name}</h3>
-				{projects.length ? (
-					<div className='button-group' style={{ display: 'flex', justifyContent: 'center' }}>
-						{/* //TODO: Add functionality to buttons */}
-						<button>Edit</button>
-						<button onClick={handleDeleteProject} disabled={isDeleting}>
-							Delete
-						</button>
-					</div>
+				{isEditingProject && activeProject ? (
+					<EditProjectNameForm
+						projectName={activeProject.name}
+						id={activeProject.id}
+						setIsEditingProject={setIsEditingProject}
+					/>
 				) : (
-					''
+					<>
+						<h3 style={{ textAlign: 'center', textTransform: 'capitalize' }}>{activeProject?.name}</h3>
+						{projects.length && activeProject ? (
+							<div className='button-group' style={{ display: 'flex', justifyContent: 'center' }}>
+								<button onClick={() => setIsEditingProject(true)}>Edit</button>
+								<button onClick={handleDeleteProject} disabled={isDeleting}>
+									Delete
+								</button>
+							</div>
+						) : (
+							''
+						)}
+					</>
 				)}
+
 				<ExpenseAndConsumableGroup>
 					<ExpenseTable activeProject={newActiveProject} />
 					<ConsumableTable activeProject={activeProject} />
@@ -64,4 +76,56 @@ export default function Dashboard({ projects, activeProject, updateActiveProject
 	} else {
 		return <p>Loading...</p>;
 	}
+}
+
+function EditProjectNameForm({
+	projectName,
+	id,
+	setIsEditingProject,
+}: {
+	projectName: string;
+	id: string;
+	setIsEditingProject: Dispatch<SetStateAction<boolean>>;
+}) {
+	const [projectNameInput, setProjectNameInput] = useState(projectName);
+
+	const ctx = trpc.useContext();
+	const {
+		mutateAsync: updateProjectName,
+		error,
+		isError,
+	} = trpc.project.updateProjectName.useMutation({
+		onError: () => console.log('there is an error'),
+		onSettled: async () => await ctx.user.getProjectsById.invalidate(),
+	});
+
+	function handleNameInputChange(e: React.FormEvent<HTMLInputElement>) {
+		setProjectNameInput(e.currentTarget.value);
+	}
+
+	function handleSubmit(e: React.FormEvent) {
+		e.preventDefault();
+		console.log({ id, projectNameInput });
+		updateProjectName({ projectId: id, newName: projectNameInput });
+		if (!error) {
+			setIsEditingProject(false);
+		}
+	}
+
+	return (
+		<form onSubmit={(e) => handleSubmit(e)}>
+			<label htmlFor='projectName'>Edit Project Name</label>
+			<input
+				type='text'
+				id='projectName'
+				name='projectName'
+				value={projectNameInput}
+				onChange={(e) => handleNameInputChange(e)}
+			/>
+			<button type='button' onClick={() => setIsEditingProject(false)}>
+				Cancel
+			</button>
+			<button type='submit'>Done</button>
+		</form>
+	);
 }

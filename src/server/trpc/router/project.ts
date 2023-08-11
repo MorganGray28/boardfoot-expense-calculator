@@ -1,3 +1,5 @@
+import { TRPCError } from '@trpc/server';
+import { trpc } from '../../../utils/trpc';
 import { router, protectedProcedure } from '../trpc';
 import { z } from 'zod';
 
@@ -75,4 +77,26 @@ export const projectRouter = router({
 			console.log(err);
 		}
 	}),
+
+	updateProjectName: protectedProcedure
+		.input(
+			z.object({
+				projectId: z.string(),
+				newName: z.string(),
+			})
+		)
+		.mutation(async ({ ctx, input }) => {
+			try {
+				const updated = await ctx.prisma.project.update({
+					data: {
+						name: input.newName,
+					},
+					where: {
+						id: input.projectId,
+					},
+				});
+			} catch (err) {
+				console.log(err);
+			}
+		}),
 });

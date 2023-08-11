@@ -14,7 +14,6 @@ import { trpc } from '../utils/trpc';
 
 // TODO: Create ExpenseTotals Component that displays material costs, consumable totals, and Project Expense Totals
 // TODO: Add Modal that confirms you want to delete a project
-// TODO: Edit Project Name button functionality
 // TODO: EDIT and DELETE functions for each Expense Item
 // TODO: Add 4/4, 6/4, and 8/4 quick select options on our BF Calculator form under Thickness
 // FIXME: Adding new project with lumber doesn't update the dashboard to the newly created project
@@ -29,11 +28,11 @@ const Home: NextPage = () => {
 		session?.user?.id!,
 		{
 			enabled: session?.user?.id !== undefined,
-			onSuccess(data) {
+			onSuccess: async (data) => {
 				if (!data[0]) {
 					setActiveProject(null);
 				} else {
-					setActiveProject(activeProject ?? data[0] ?? null);
+					await setActiveProject(data[0] ?? null);
 				}
 			},
 		}
