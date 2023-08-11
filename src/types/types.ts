@@ -50,6 +50,5 @@ export type ProjectType = {
 	updatedAt: Date;
 	userId: string;
 	lumber: LumberType[];
-	consumables: ConsumableType[];
 	expenses: ExpenseTypeDB[];
 };

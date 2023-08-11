@@ -59,17 +59,6 @@ function AddToProjectForm({ values, onClose, updateActiveProject }: PropsType) {
 				description: newProjectDescription,
 				values,
 			});
-
-			// Assign the newly created Project as our new Active Project using it's ID returned from our mutation
-
-			// if (projectList && newProject) {
-			// 	let newActive = projectList.filter((p) => p.id === newProject.id)[0];
-			// 	if (newActive) {
-			// 		console.log(newActive);
-			// 		console.log(projectList);
-			// 		updateActiveProject(newActive);
-			// 	}
-			// }
 		}
 	}
 
@@ -90,16 +79,17 @@ function AddToProjectForm({ values, onClose, updateActiveProject }: PropsType) {
 				}
 			})
 			.map((project, index) => {
+				// FIXME: calculate the cost of all expenses and set equal to cost variable to be passed down
+				let cost = 0;
 				return (
-					// FIXME: look into species and cost ts errors
 					<ProjectFormListItem
 						values={values}
 						handleClick={handleClick}
 						id={project.id}
 						key={index}
 						name={project.name}
-						species={project.species}
-						cost={project.cost}
+						// species={project.species}
+						cost={cost}
 					/>
 				);
 			});

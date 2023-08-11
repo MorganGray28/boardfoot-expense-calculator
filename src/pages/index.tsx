@@ -28,11 +28,11 @@ const Home: NextPage = () => {
 		session?.user?.id!,
 		{
 			enabled: session?.user?.id !== undefined,
-			onSuccess: async (data) => {
+			onSuccess: (data) => {
 				if (!data[0]) {
 					setActiveProject(null);
 				} else {
-					await setActiveProject(data[0] ?? null);
+					setActiveProject(data[0] ?? null);
 				}
 			},
 		}
