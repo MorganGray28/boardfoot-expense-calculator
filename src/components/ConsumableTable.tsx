@@ -1,14 +1,9 @@
-import React, { ReactElement, useState } from 'react';
+import React, { useState } from 'react';
 import styles from '../styles/ExpenseTable.module.scss';
 import ConsumableListItem from './ConsumableListItem';
-import { ConsumableType, ProjectType } from '../types/types';
 import { useSession } from 'next-auth/react';
 import Modal from './Modal';
 import { trpc } from '../utils/trpc';
-
-interface PropsType {
-	activeProject: ProjectType | null;
-}
 
 type ConsumableInputType = {
 	name: string;
@@ -19,7 +14,7 @@ type ConsumableInputType = {
 
 type ConsumableInputTypeWithId = ConsumableInputType & { userId: string };
 
-export default function ConsumableTable({ activeProject }: PropsType) {
+export default function ConsumableTable() {
 	const { data: session, status } = useSession();
 	const [consumables, setConsumables] = useState<ConsumableInputType[]>([{ name: '', amount: 0, cost: 0 }]);
 	const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -53,11 +48,6 @@ export default function ConsumableTable({ activeProject }: PropsType) {
 	} else {
 		consumableListArray = null;
 	}
-	// if (activeProject) {
-	// 	consumableList = activeProject.consumables.map((consumable) => (
-	// 		<ConsumableListItem name={consumable.productName} cost={consumable.price} />
-	// 	));
-	// }
 
 	function handleOpenModal() {
 		setModalIsOpen(true);
@@ -101,7 +91,7 @@ export default function ConsumableTable({ activeProject }: PropsType) {
 				invalidInput = true;
 			}
 		}
-		// submit expenses array to backend trpc route to createMany expenses for our active project
+		// submit expenses array to backend trpc route to createMany expenses
 		if (invalidInput) {
 			alert("Please make sure the consumable inputs aren't blank or invalid");
 		} else {

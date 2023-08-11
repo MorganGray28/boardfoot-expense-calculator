@@ -68,7 +68,7 @@ export default function Dashboard({ projects, activeProject, updateActiveProject
 
 				<ExpenseAndConsumableGroup>
 					<ExpenseTable activeProject={newActiveProject} />
-					<ConsumableTable activeProject={activeProject} />
+					<ConsumableTable />
 				</ExpenseAndConsumableGroup>
 			</div>
 		);
