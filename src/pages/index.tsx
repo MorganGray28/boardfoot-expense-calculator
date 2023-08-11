@@ -16,7 +16,6 @@ import { trpc } from '../utils/trpc';
 // TODO: Add Modal that confirms you want to delete a project
 // TODO: EDIT and DELETE functions for each Expense Item
 // TODO: Add 4/4, 6/4, and 8/4 quick select options on our BF Calculator form under Thickness
-// FIXME: Adding new project with lumber doesn't update the dashboard to the newly created project
 // FIXME: Only conditionally show the expense and consumable table if there's an active project selected
 
 const Home: NextPage = () => {
@@ -28,15 +27,21 @@ const Home: NextPage = () => {
 		session?.user?.id!,
 		{
 			enabled: session?.user?.id !== undefined,
-			onSuccess: (data) => {
-				if (!data[0]) {
-					setActiveProject(null);
-				} else {
-					setActiveProject(data[0] ?? null);
-				}
-			},
+			// onSuccess: (data) => {
+			// 	if (!data[0]) {
+			// 		setActiveProject(null);
+			// 	} else {
+			// 		setActiveProject(data[0] ?? null);
+			// 	}
+			// },
 		}
 	);
+
+	useEffect(() => {
+		if (projectList && projectList[0]) {
+			setActiveProject(projectList[0]);
+		}
+	}, [projectList]);
 
 	function setNewActiveProject(project: ProjectType | null) {
 		setActiveProject(project);
