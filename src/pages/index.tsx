@@ -23,29 +23,15 @@ const Home: NextPage = () => {
 	const { data: session, status } = useSession();
 	const [currentCalculatorValues, setCurrentCalculatorValues] = useState<BoardFeetType | null>(null);
 	const [activeProject, setActiveProject] = useState<ProjectType | null>(null);
-	const { data: projectList, refetch: refetchProjects } = trpc.user.getProjectsById.useQuery(
-		session?.user?.id!,
-		{
-			enabled: session?.user?.id !== undefined,
-			// onSuccess: (data) => {
-			// 	if (!data[0]) {
-			// 		setActiveProject(null);
-			// 	} else {
-			// 		setActiveProject(data[0] ?? null);
-			// 	}
-			// },
-		}
-	);
+	const { data: projectList } = trpc.user.getProjectsById.useQuery(session?.user?.id!, {
+		enabled: session?.user?.id !== undefined,
+	});
 
 	useEffect(() => {
 		if (projectList && projectList[0]) {
 			setActiveProject(projectList[0]);
 		}
 	}, [projectList]);
-
-	function setNewActiveProject(project: ProjectType | null) {
-		setActiveProject(project);
-	}
 
 	function handleSignIn() {
 		signIn();
@@ -98,14 +84,14 @@ const Home: NextPage = () => {
 							<AddToProjectForm
 								onClose={handleClose}
 								values={currentCalculatorValues}
-								updateActiveProject={setNewActiveProject}
+								setActiveProject={setActiveProject}
 							/>
 						</Modal>
 						{session && session.user ? (
 							<Dashboard
 								projects={projectList}
 								activeProject={activeProject}
-								updateActiveProject={setNewActiveProject}
+								setActiveProject={setActiveProject}
 							/>
 						) : (
 							<p>log in to save and track your expenses</p>

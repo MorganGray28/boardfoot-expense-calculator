@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import styles from '../styles/ActiveProjectForm.module.scss';
 import { ProjectType } from '../types/types';
 import { trpc } from '../utils/trpc';
@@ -6,10 +6,10 @@ import { trpc } from '../utils/trpc';
 interface PropsType {
 	projects: ProjectType[];
 	activeProject: ProjectType | null;
-	updateActiveProject: (project: ProjectType | null) => void;
+	setActiveProject: Dispatch<SetStateAction<ProjectType | null>>;
 }
 
-export function ActiveProjectForm({ projects, activeProject, updateActiveProject }: PropsType) {
+export function ActiveProjectForm({ projects, activeProject, setActiveProject }: PropsType) {
 	const [isCreatingNewProject, setIsCreatingNewProject] = useState(false);
 	const [newProjectName, setNewProjectName] = useState('');
 
@@ -25,11 +25,11 @@ export function ActiveProjectForm({ projects, activeProject, updateActiveProject
 
 	function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
 		if (!e.target.value) {
-			updateActiveProject(null);
+			setActiveProject(null);
 		}
 		let newActiveProject = projects.filter((p) => p.id === e.target.value);
 		if (newActiveProject && newActiveProject[0]) {
-			updateActiveProject(newActiveProject[0]);
+			setActiveProject(newActiveProject[0]);
 		}
 	}
 
@@ -42,7 +42,7 @@ export function ActiveProjectForm({ projects, activeProject, updateActiveProject
 		if (newProjectName) {
 			const newProject = await addNewProject(newProjectName);
 			if (newProject) {
-				updateActiveProject(newProject);
+				setActiveProject(newProject);
 			}
 		}
 	}

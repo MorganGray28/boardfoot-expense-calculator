@@ -1,5 +1,3 @@
-import { TRPCError } from '@trpc/server';
-import { trpc } from '../../../utils/trpc';
 import { router, protectedProcedure } from '../trpc';
 import { z } from 'zod';
 

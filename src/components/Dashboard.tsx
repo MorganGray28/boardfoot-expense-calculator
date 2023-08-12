@@ -1,7 +1,6 @@
-import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
-import { useSession } from 'next-auth/react';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 import { trpc } from '../utils/trpc';
-import { LumberType, ConsumableType, ProjectType } from '../types/types';
+import { ProjectType } from '../types/types';
 import { ActiveProjectForm } from './ActiveProjectForm';
 import ExpenseAndConsumableGroup from './ExpenseAndConsumableGroup';
 import ExpenseTable from './ExpenseTable';
@@ -10,18 +9,17 @@ import ConsumableTable from './ConsumableTable';
 type PropsType = {
 	projects: ProjectType[] | undefined;
 	activeProject: ProjectType | null;
-	updateActiveProject: (project: ProjectType | null) => void;
+	setActiveProject: Dispatch<SetStateAction<ProjectType | null>>;
 };
 
-export default function Dashboard({ projects, activeProject, updateActiveProject }: PropsType) {
+export default function Dashboard({ projects, activeProject, setActiveProject }: PropsType) {
 	const [isEditingProject, setIsEditingProject] = useState(false);
 
-	const { data: session } = useSession();
 	const ctx = trpc.useContext();
 	const { mutateAsync: deleteProject, isLoading: isDeleting } = trpc.project.deleteProject.useMutation({
 		onSuccess: () => {
 			ctx.user.getProjectsById.invalidate();
-			updateActiveProject(null);
+			setActiveProject(null);
 		},
 	});
 
@@ -42,7 +40,7 @@ export default function Dashboard({ projects, activeProject, updateActiveProject
 				<ActiveProjectForm
 					projects={projects}
 					activeProject={activeProject}
-					updateActiveProject={updateActiveProject}
+					setActiveProject={setActiveProject}
 				/>
 				{isEditingProject && activeProject ? (
 					<EditProjectNameForm

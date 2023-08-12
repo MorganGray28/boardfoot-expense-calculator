@@ -1,5 +1,5 @@
 import { useSession } from 'next-auth/react';
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import styles from '../styles/addToProjectForm.module.scss';
 import { BoardFeetType, ProjectType } from '../types/types';
 import { trpc } from '../utils/trpc';
@@ -8,10 +8,10 @@ import ProjectFormListItem from './ProjectFormListItem';
 type PropsType = {
 	values: BoardFeetType | null;
 	onClose: () => void;
-	updateActiveProject: (project: ProjectType | null) => void;
+	setActiveProject: Dispatch<SetStateAction<ProjectType | null>>;
 };
 
-function AddToProjectForm({ values, onClose, updateActiveProject }: PropsType) {
+function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 	const [search, setSearch] = useState('');
 	const [isCreatingNew, setIsCreatingNew] = useState(false);
 	const [newProjectName, setNewProjectName] = useState('');
@@ -42,7 +42,7 @@ function AddToProjectForm({ values, onClose, updateActiveProject }: PropsType) {
 			if (projectList) {
 				let newActive = projectList.filter((p) => p.id === id)[0];
 				if (newActive) {
-					updateActiveProject(newActive);
+					setActiveProject(newActive);
 				}
 			}
 		}
