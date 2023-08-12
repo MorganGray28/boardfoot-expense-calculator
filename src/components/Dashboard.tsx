@@ -9,10 +9,11 @@ import ConsumableTable from './ConsumableTable';
 type PropsType = {
 	projects: ProjectType[] | undefined;
 	activeProject: ProjectType | null;
+	isLoading: boolean;
 	setActiveProject: Dispatch<SetStateAction<ProjectType | null>>;
 };
 
-export default function Dashboard({ projects, activeProject, setActiveProject }: PropsType) {
+export default function Dashboard({ projects, activeProject, setActiveProject, isLoading }: PropsType) {
 	const [isEditingProject, setIsEditingProject] = useState(false);
 
 	const ctx = trpc.useContext();
@@ -33,7 +34,7 @@ export default function Dashboard({ projects, activeProject, setActiveProject }:
 		}
 	}
 
-	if (projects) {
+	if (projects?.length) {
 		return (
 			<div>
 				<ActiveProjectForm
@@ -71,8 +72,23 @@ export default function Dashboard({ projects, activeProject, setActiveProject }:
 				</ExpenseAndConsumableGroup>
 			</div>
 		);
+	} else if (isLoading) {
+		return (
+			<div>
+				<p>Loading...</p>
+			</div>
+		);
 	} else {
-		return <p>Loading...</p>;
+		return (
+			// TODO: Change this to a more inviting initial create your first project input
+			<div>
+				<ActiveProjectForm
+					projects={projects}
+					activeProject={activeProject}
+					setActiveProject={setActiveProject}
+				/>
+			</div>
+		);
 	}
 }
 

@@ -21,7 +21,7 @@ const Home: NextPage = () => {
 	const { data: session, status } = useSession();
 	const [currentCalculatorValues, setCurrentCalculatorValues] = useState<BoardFeetType | null>(null);
 	const [activeProject, setActiveProject] = useState<ProjectType | null>(null);
-	const { data: projectList } = trpc.user.getProjectsById.useQuery(session?.user?.id!, {
+	const { data: projectList, isLoading } = trpc.user.getProjectsById.useQuery(session?.user?.id!, {
 		enabled: session?.user?.id !== undefined,
 	});
 
@@ -89,6 +89,7 @@ const Home: NextPage = () => {
 						</Modal>
 						{session && session.user ? (
 							<Dashboard
+								isLoading={isLoading}
 								projects={projectList}
 								activeProject={activeProject}
 								setActiveProject={setActiveProject}
