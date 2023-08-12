@@ -71,6 +71,24 @@
 	}
 }
 
+.quarterThicknessContainer {
+	display: flex;
+	position: absolute;
+	bottom: -.375rem;
+	right: 0rem;
+
+	& p {
+		padding-right: .75rem;
+		font-size: .9rem;
+		color: rgb(38, 38, 212);
+		cursor: pointer;
+
+		&:hover {
+			color: rgb(0, 0, 167);
+		}
+	}
+}
+
 .optionalText {
 	position: absolute;
 	bottom: 0;

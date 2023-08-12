@@ -13,8 +13,7 @@ import { trpc } from '../utils/trpc';
 
 // TODO: Create ExpenseTotals Component that displays material costs, consumable totals, and Project Expense Totals
 // TODO: Add Modal that confirms you want to delete a project
-// TODO: EDIT and DELETE functions for each Expense Item
-// TODO: Add 4/4, 6/4, and 8/4 quick select options on our BF Calculator form under Thickness
+// TODO: EDIT function for each Expense Item
 // FIXME: Only conditionally show the expense and consumable table if there's an active project selected
 
 const Home: NextPage = () => {

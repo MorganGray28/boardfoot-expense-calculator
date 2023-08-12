@@ -92,6 +92,11 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 							<input name='thickness' value={values.thickness || ''} onChange={handleChange} type='number' />
 							<span>in</span>
 						</div>
+						<div className={styles.quarterThicknessContainer}>
+							<p onClick={() => setValues({ ...values, thickness: 1 })}>4/4</p>
+							<p onClick={() => setValues({ ...values, thickness: 1.5 })}>6/4</p>
+							<p onClick={() => setValues({ ...values, thickness: 2 })}>8/4</p>
+						</div>
 					</div>
 					<div className={styles.labelInputGroup}>
 						<label htmlFor='width'>Width</label>
