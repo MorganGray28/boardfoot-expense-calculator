@@ -19,7 +19,6 @@ export default function Dashboard({ projects, activeProject, setActiveProject }:
 	const { mutateAsync: deleteProject, isLoading: isDeleting } = trpc.project.deleteProject.useMutation({
 		onSuccess: () => {
 			ctx.user.getProjectsById.invalidate();
-			setActiveProject(null);
 		},
 	});
 
@@ -50,7 +49,9 @@ export default function Dashboard({ projects, activeProject, setActiveProject }:
 					/>
 				) : (
 					<>
-						<h3 style={{ textAlign: 'center', textTransform: 'capitalize' }}>{activeProject?.name}</h3>
+						<h3 style={{ textAlign: 'center', textTransform: 'capitalize' }}>
+							{activeProject?.name ? activeProject.name : ''}
+						</h3>
 						{projects.length && activeProject ? (
 							<div className='button-group' style={{ display: 'flex', justifyContent: 'center' }}>
 								<button onClick={() => setIsEditingProject(true)}>Edit</button>

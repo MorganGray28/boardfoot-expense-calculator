@@ -1,7 +1,6 @@
 import styles from '../styles/index.module.scss';
 import { type NextPage } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import BoardFootCalculator from '../components/BoardFootCalculator';
@@ -30,6 +29,8 @@ const Home: NextPage = () => {
 	useEffect(() => {
 		if (projectList && projectList[0]) {
 			setActiveProject(projectList[0]);
+		} else {
+			setActiveProject(null);
 		}
 	}, [projectList]);
 
