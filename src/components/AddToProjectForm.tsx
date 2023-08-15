@@ -16,7 +16,7 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 	const [isCreatingNew, setIsCreatingNew] = useState(false);
 	const [newProjectName, setNewProjectName] = useState('');
 	const [newProjectDescription, setNewProjectDescription] = useState('');
-	const { data: session, status } = useSession();
+	const { data: session } = useSession();
 	const projectList: ProjectType[] | undefined = trpc.user.getProjectsById.useQuery(session?.user?.id!, {
 		enabled: session?.user !== undefined,
 	}).data;
@@ -37,22 +37,14 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 			if (data) {
 				setActiveProject(data);
 			}
-		},
-		onSettled: () => {
 			ctx.user.getProjectsById.invalidate();
-			onClose();
 		},
+		onSettled: () => onClose(),
 	});
 
 	function handleClick(id: string, values: BoardFeetType | null) {
 		if (values) {
 			addLumber.mutate({ ...values, projectId: id });
-			// if (projectList) {
-			// 	let newActive = projectList.filter((p) => p.id === id)[0];
-			// 	if (newActive) {
-			// 		setActiveProject(newActive);
-			// 	}
-			// }
 		}
 	}
 

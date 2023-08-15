@@ -25,9 +25,8 @@ export function ActiveProjectForm({
 		}
 	}
 
-	let content;
-	content = (
-		<>
+	return (
+		<div className={styles.container}>
 			<p className={styles.header}>Choose a Project</p>
 			<select
 				className={styles.selectInput}
@@ -42,8 +41,6 @@ export function ActiveProjectForm({
 				))}
 			</select>
 			<button onClick={() => setIsCreatingNewProject(true)}>New Project</button>
-		</>
+		</div>
 	);
-
-	return <div className={styles.container}>{content}</div>;
 }

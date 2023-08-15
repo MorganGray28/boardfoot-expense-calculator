@@ -42,8 +42,6 @@ export default function ConsumableListItem({ name, amount, cost, id }: PropsType
 	}
 
 	function handleCancel() {
-		console.log('canceled');
-
 		setEditInputFields({ name, amount, cost });
 		setIsEditing(false);
 	}
@@ -53,7 +51,6 @@ export default function ConsumableListItem({ name, amount, cost, id }: PropsType
 	}
 
 	function handleSubmit(e: React.FormEvent) {
-		console.log('submitted');
 		e.preventDefault();
 
 		// if nothing is changed, we don't make an api call

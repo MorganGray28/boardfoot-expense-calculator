@@ -23,7 +23,6 @@ export default function ConsumableTable() {
 	// trpc api call for creating consumables
 	const addConsumables = trpc.consumable.addNewConsumables.useMutation({
 		onSuccess: () => {
-			ctx.user.getProjectsById.invalidate();
 			ctx.consumable.getAllConsumables.invalidate();
 		},
 		onSettled: () => {

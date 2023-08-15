@@ -26,11 +26,6 @@ export default function Dashboard({ projects, activeProject, setActiveProject, i
 		},
 	});
 
-	let newActiveProject;
-	if (activeProject) {
-		newActiveProject = projects?.filter((project) => project.id === activeProject.id)[0];
-	}
-
 	function handleDeleteProject() {
 		if (activeProject) {
 			deleteProject(activeProject.id);
@@ -94,6 +89,7 @@ export default function Dashboard({ projects, activeProject, setActiveProject, i
 	} else {
 		return (
 			// TODO: Change this to a more inviting initial create your first project input
+			// TODO: Also, incorporate Project Description in creating new project
 			<div>
 				<NewProjectForm
 					cancel={false}
@@ -139,7 +135,6 @@ function EditProjectNameForm({
 
 	function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
-		console.log({ id, projectNameInput });
 		updateProjectName({ projectId: id, newName: projectNameInput });
 		if (!error) {
 			setIsEditingProject(false);

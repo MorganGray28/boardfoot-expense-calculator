@@ -14,8 +14,6 @@ import { trpc } from '../utils/trpc';
 // TODO: Create ExpenseTotals Component that displays material costs, consumable totals, and Project Expense Totals
 // TODO: Add Modal that confirms you want to delete a project
 // TODO: EDIT function for each Expense Item
-// FIXME: Only conditionally show the expense and consumable table if there's an active project selected
-// FIXME: adding lumber doesn't refetch or invalidate our active project
 
 const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);

@@ -21,7 +21,7 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 		tax: 0,
 	};
 
-	const { data: session, status } = useSession();
+	const { data: session } = useSession();
 
 	const [values, setValues] = useState(initialValues);
 	let boardFeet: number | undefined = 0;
@@ -105,7 +105,6 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 							<span>in</span>
 						</div>
 					</div>
-					{/* // TODO: Add the 4/4, 6/4, 8/4 buttons that add values into the thickness value */}
 					<div className={`${styles.labelInputGroup} ${styles.length} ${styles.borderBottom}`}>
 						<label htmlFor='length'>Length</label>
 						<div className={styles.inputUnitsGroup}>
