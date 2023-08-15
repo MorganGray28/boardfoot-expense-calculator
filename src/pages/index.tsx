@@ -14,7 +14,6 @@ import { trpc } from '../utils/trpc';
 // TODO: Create ExpenseTotals Component that displays material costs, consumable totals, and Project Expense Totals
 // TODO: Add Modal that confirms you want to delete a project
 // TODO: EDIT function for each Expense Item
-// TODO: AddToProjectForm: add cost to project list items, and message for when no projects are available
 // TODO: Take away the active project name in dashboard and add the EDIT/DELETE functionality to the ActiveProjectForm
 // TODO: Add optional description below the active project form
 // TODO: Add project totals that break down lumber, expenses, consumables, and total cost for each project

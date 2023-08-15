@@ -4,7 +4,7 @@ import styles from '../styles/addToProjectForm.module.scss';
 import { BoardFeetType, ProjectType } from '../types/types';
 import { trpc } from '../utils/trpc';
 import ProjectFormListItem from './ProjectFormListItem';
-import { calculateBoardFeet } from '../utils/calculationsUtils';
+import { calculateBoardFeet, calculateCostFromBF } from '../utils/calculationsUtils';
 
 type PropsType = {
 	values: BoardFeetType | null;
@@ -69,9 +69,30 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 		setIsCreatingNew(false);
 	}
 
+	let projectsWithCost;
+	if (projectList) {
+		// mapping over our projectList to calculate and sum up each project's cost for lumber and expenses
+		projectsWithCost = projectList.map((project) => {
+			let projectFormatted = { ...project, cost: 0 };
+			projectFormatted.lumber.forEach((l) => {
+				let bf = calculateBoardFeet({
+					numOfPieces: l.numOfPieces,
+					thickness: l.thickness,
+					width: l.width,
+					length: l.length,
+				});
+				projectFormatted.cost += calculateCostFromBF({ boardFeet: bf, price: l.price, tax: l.tax });
+			});
+			projectFormatted.expenses.forEach((e) => {
+				projectFormatted.cost += e.cost * e.amount;
+			});
+			return projectFormatted;
+		});
+	}
+
 	let filteredProjectListItems;
-	if (projectList !== undefined) {
-		filteredProjectListItems = projectList
+	if (projectsWithCost !== undefined) {
+		filteredProjectListItems = projectsWithCost
 			.filter((project) => {
 				if (search) {
 					return project.name.toLowerCase().includes(search.toLowerCase());
@@ -80,8 +101,6 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 				}
 			})
 			.map((project, index) => {
-				// FIXME: calculate the cost of all expenses and set equal to cost variable to be passed down
-
 				// add an array of all the unique species of lumber to be shown
 				let species: string[] = [];
 				project.lumber.forEach((l) => {
@@ -89,7 +108,6 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 						species.push(l.species.toLowerCase());
 					}
 				});
-				let cost = 0;
 				return (
 					<ProjectFormListItem
 						values={values}
@@ -98,7 +116,7 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 						key={index}
 						name={project.name}
 						species={species}
-						cost={cost}
+						cost={project.cost}
 					/>
 				);
 			});
@@ -106,7 +124,7 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 
 	let formContent;
 
-	if (!isCreatingNew) {
+	if (!isCreatingNew && projectList && projectList.length) {
 		formContent = (
 			<>
 				<h4 className={styles.header}>Add Lumber to a Project</h4>
