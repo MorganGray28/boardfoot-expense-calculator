@@ -23,13 +23,21 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 	const ctx = trpc.useContext();
 
 	const addLumber = trpc.lumber.addDimensionLumber.useMutation({
-		onSuccess: () => {
+		onSuccess: (data) => {
+			if (data) {
+				setActiveProject(data.project);
+			}
 			ctx.user.getProjectsById.invalidate();
 		},
 		onSettled: () => onClose(),
 	});
 
 	const addNewProjectWithLumber = trpc.project.createProjectWithLumber.useMutation({
+		onSuccess: (data) => {
+			if (data) {
+				setActiveProject(data);
+			}
+		},
 		onSettled: () => {
 			ctx.user.getProjectsById.invalidate();
 			onClose();
@@ -39,12 +47,12 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 	function handleClick(id: string, values: BoardFeetType | null) {
 		if (values) {
 			addLumber.mutate({ ...values, projectId: id });
-			if (projectList) {
-				let newActive = projectList.filter((p) => p.id === id)[0];
-				if (newActive) {
-					setActiveProject(newActive);
-				}
-			}
+			// if (projectList) {
+			// 	let newActive = projectList.filter((p) => p.id === id)[0];
+			// 	if (newActive) {
+			// 		setActiveProject(newActive);
+			// 	}
+			// }
 		}
 	}
 

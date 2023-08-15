@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import React, { Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import styles from '../styles/ExpenseTable.module.scss';
 import { ProjectType, ExpenseType } from '../types/types';
 import LumberExpenseListItem from './LumberExpenseListItem';
@@ -8,19 +8,23 @@ import { trpc } from '../utils/trpc';
 import GenericExpenseListItem from './GenericExpenseListItem';
 
 interface PropsType {
-	activeProject: ProjectType | undefined;
+	activeProject: ProjectType | null;
+	setActiveProject: Dispatch<SetStateAction<ProjectType | null>>;
 }
 
 type ExpenseWithId = ExpenseType & { projectId: string };
 
-export default function ExpenseTable({ activeProject }: PropsType) {
+export default function ExpenseTable({ activeProject, setActiveProject }: PropsType) {
 	const [modalOpen, setModalOpen] = useState(false);
 	const [expenses, setExpenses] = useState<ExpenseType[]>([{ amount: 0, name: '', cost: 0 }]);
 
 	const ctx = trpc.useContext();
 	// trpc api call for creating expenses
 	const addExpenses = trpc.expense.addManyExpenses.useMutation({
-		onSuccess: () => {
+		onSuccess: (data) => {
+			if (data) {
+				setActiveProject(data);
+			}
 			ctx.user.getProjectsById.invalidate();
 		},
 		onSettled: () => {
@@ -81,7 +85,6 @@ export default function ExpenseTable({ activeProject }: PropsType) {
 					return expense as ExpenseWithId;
 				});
 				addExpenses.mutateAsync(expensesWithProjectId);
-				console.log(expensesWithProjectId);
 				setExpenses([{ amount: 0, name: '', cost: 0 }]);
 			}
 		}
@@ -150,6 +153,7 @@ export default function ExpenseTable({ activeProject }: PropsType) {
 					length={l.length}
 					price={l.price}
 					tax={l.tax}
+					setActiveProject={setActiveProject}
 				/>
 			);
 		});
@@ -158,6 +162,7 @@ export default function ExpenseTable({ activeProject }: PropsType) {
 			totalExpense += exp.amount * exp.cost;
 			return (
 				<GenericExpenseListItem
+					setActiveProject={setActiveProject}
 					key={exp.id}
 					id={exp.id}
 					name={exp.name}

@@ -13,20 +13,48 @@ export const expenseRouter = router({
 		)
 		.mutation(async ({ ctx, input }) => {
 			try {
-				await ctx.prisma.expense.create({
+				let expense = await ctx.prisma.expense.create({
 					data: input,
+					include: {
+						project: {
+							include: {
+								expenses: true,
+								lumber: true,
+							},
+						},
+					},
 				});
+				return expense.project;
 			} catch (err) {
 				console.log(err);
 			}
 		}),
 	deleteExpense: protectedProcedure.input(z.string()).mutation(async ({ ctx, input }) => {
 		try {
-			await ctx.prisma.expense.delete({
+			let deleted = await ctx.prisma.expense.delete({
 				where: {
 					id: input,
 				},
+				include: {
+					project: {
+						include: {
+							expenses: true,
+							lumber: true,
+						},
+					},
+				},
 			});
+
+			let updatedProject = await ctx.prisma.project.findFirst({
+				where: {
+					id: deleted.project.id,
+				},
+				include: {
+					expenses: true,
+					lumber: true,
+				},
+			});
+			return updatedProject;
 		} catch (err) {
 			console.log(err);
 		}
@@ -44,7 +72,21 @@ export const expenseRouter = router({
 		)
 		.mutation(async ({ ctx, input }) => {
 			try {
-				await ctx.prisma.expense.createMany({ data: input });
+				let projectId = input[0]?.projectId;
+
+				await ctx.prisma.expense.createMany({
+					data: input,
+				});
+				let project = await ctx.prisma.project.findFirst({
+					where: {
+						id: projectId,
+					},
+					include: {
+						lumber: true,
+						expenses: true,
+					},
+				});
+				return project;
 			} catch (err) {
 				console.log(err);
 			}

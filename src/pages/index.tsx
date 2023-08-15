@@ -15,6 +15,7 @@ import { trpc } from '../utils/trpc';
 // TODO: Add Modal that confirms you want to delete a project
 // TODO: EDIT function for each Expense Item
 // FIXME: Only conditionally show the expense and consumable table if there's an active project selected
+// FIXME: adding lumber doesn't refetch or invalidate our active project
 
 const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);
@@ -23,15 +24,16 @@ const Home: NextPage = () => {
 	const [activeProject, setActiveProject] = useState<ProjectType | null>(null);
 	const { data: projectList, isLoading } = trpc.user.getProjectsById.useQuery(session?.user?.id!, {
 		enabled: session?.user?.id !== undefined,
+		onSuccess: (data) => {
+			setActiveProject(activeProject ?? data[0] ?? null);
+		},
 	});
 
-	useEffect(() => {
-		if (projectList && projectList[0]) {
-			setActiveProject(projectList[0]);
-		} else {
-			setActiveProject(null);
-		}
-	}, [projectList]);
+	// useEffect(() => {
+	// 	if (projectList && projectList[0]) {
+	// 		setActiveProject(activeProject ?? projectList[0] ?? null);
+	// 	}
+	// }, [projectList]);
 
 	function handleSignIn() {
 		signIn();

@@ -30,8 +30,16 @@ export const lumberRouter = router({
 		.mutation(async ({ ctx, input }) => {
 			try {
 				// const parsedInput = BoardFeetSchema.safeParse(input);
-				await ctx.prisma.lumber.create({
+				return await ctx.prisma.lumber.create({
 					data: input,
+					include: {
+						project: {
+							include: {
+								expenses: true,
+								lumber: true,
+							},
+						},
+					},
 				});
 			} catch (err) {
 				throw err;
@@ -39,11 +47,30 @@ export const lumberRouter = router({
 		}),
 	deleteDimensionLumber: protectedProcedure.input(z.string()).mutation(async ({ ctx, input }) => {
 		try {
-			await ctx.prisma.lumber.delete({
+			let deleted = await ctx.prisma.lumber.delete({
 				where: {
 					id: input,
 				},
+				include: {
+					project: {
+						include: {
+							expenses: true,
+							lumber: true,
+						},
+					},
+				},
 			});
+			let updatedProject = await ctx.prisma.project.findFirst({
+				where: {
+					id: deleted.project.id,
+				},
+				include: {
+					expenses: true,
+					lumber: true,
+				},
+			});
+
+			return updatedProject;
 		} catch (err) {
 			console.log(err);
 		}

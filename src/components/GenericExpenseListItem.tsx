@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styles from '../styles/GenericExpenseListItem.module.scss';
 import { trpc } from '../utils/trpc';
+import { ProjectType } from '../types/types';
 
 type PropsType = {
 	id: string;
 	name: string;
 	cost: number;
 	amount: number;
+	setActiveProject: Dispatch<SetStateAction<ProjectType | null>>;
 };
 
-function GenericExpenseListItem({ id, name, cost, amount }: PropsType) {
+function GenericExpenseListItem({ id, name, cost, amount, setActiveProject }: PropsType) {
 	const ctx = trpc.useContext();
 	const deleteExpense = trpc.expense.deleteExpense.useMutation({
-		onSettled: () => ctx.user.getProjectsById.invalidate(),
+		onSuccess: (data) => {
+			if (data) {
+				setActiveProject(data);
+			}
+			ctx.user.getProjectsById.invalidate();
+		},
 	});
 
 	function handleDelete() {

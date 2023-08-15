@@ -5,6 +5,7 @@ import { ActiveProjectForm } from './ActiveProjectForm';
 import ExpenseAndConsumableGroup from './ExpenseAndConsumableGroup';
 import ExpenseTable from './ExpenseTable';
 import ConsumableTable from './ConsumableTable';
+import NewProjectForm from './NewProjectForm';
 
 type PropsType = {
 	projects: ProjectType[] | undefined;
@@ -15,10 +16,12 @@ type PropsType = {
 
 export default function Dashboard({ projects, activeProject, setActiveProject, isLoading }: PropsType) {
 	const [isEditingProject, setIsEditingProject] = useState(false);
+	const [isCreatingNewProject, setIsCreatingNewProject] = useState(false);
 
 	const ctx = trpc.useContext();
 	const { mutateAsync: deleteProject, isLoading: isDeleting } = trpc.project.deleteProject.useMutation({
 		onSuccess: () => {
+			setActiveProject(null);
 			ctx.user.getProjectsById.invalidate();
 		},
 	});
@@ -30,22 +33,32 @@ export default function Dashboard({ projects, activeProject, setActiveProject, i
 
 	function handleDeleteProject() {
 		if (activeProject) {
-			const nextActiveProject = deleteProject(activeProject.id);
+			deleteProject(activeProject.id);
 		}
 	}
 
 	if (projects?.length) {
 		return (
 			<div>
-				<ActiveProjectForm
-					projects={projects}
-					activeProject={activeProject}
-					setActiveProject={setActiveProject}
-				/>
+				{isCreatingNewProject ? (
+					<NewProjectForm
+						cancel={true}
+						setActiveProject={setActiveProject}
+						setIsCreatingNewProject={setIsCreatingNewProject}
+					/>
+				) : (
+					<ActiveProjectForm
+						projects={projects}
+						activeProject={activeProject}
+						setActiveProject={setActiveProject}
+						setIsCreatingNewProject={setIsCreatingNewProject}
+					/>
+				)}
 				{isEditingProject && activeProject ? (
 					<EditProjectNameForm
 						projectName={activeProject.name}
 						id={activeProject.id}
+						setActiveProject={setActiveProject}
 						setIsEditingProject={setIsEditingProject}
 					/>
 				) : (
@@ -67,7 +80,7 @@ export default function Dashboard({ projects, activeProject, setActiveProject, i
 				)}
 
 				<ExpenseAndConsumableGroup>
-					<ExpenseTable activeProject={newActiveProject} />
+					<ExpenseTable activeProject={activeProject} setActiveProject={setActiveProject} />
 					<ConsumableTable />
 				</ExpenseAndConsumableGroup>
 			</div>
@@ -82,10 +95,10 @@ export default function Dashboard({ projects, activeProject, setActiveProject, i
 		return (
 			// TODO: Change this to a more inviting initial create your first project input
 			<div>
-				<ActiveProjectForm
-					projects={projects}
-					activeProject={activeProject}
+				<NewProjectForm
+					cancel={false}
 					setActiveProject={setActiveProject}
+					setIsCreatingNewProject={setIsCreatingNewProject}
 				/>
 			</div>
 		);
@@ -96,21 +109,28 @@ function EditProjectNameForm({
 	projectName,
 	id,
 	setIsEditingProject,
+	setActiveProject,
 }: {
 	projectName: string;
 	id: string;
+	setActiveProject: Dispatch<SetStateAction<ProjectType | null>>;
 	setIsEditingProject: Dispatch<SetStateAction<boolean>>;
 }) {
 	const [projectNameInput, setProjectNameInput] = useState(projectName);
 
 	const ctx = trpc.useContext();
 	const {
-		mutateAsync: updateProjectName,
+		mutate: updateProjectName,
 		error,
 		isError,
 	} = trpc.project.updateProjectName.useMutation({
+		onSuccess: (data) => {
+			if (data) {
+				setActiveProject(data);
+			}
+		},
 		onError: () => console.log('there is an error'),
-		onSettled: async () => await ctx.user.getProjectsById.invalidate(),
+		onSettled: () => ctx.user.getProjectsById.invalidate(),
 	});
 
 	function handleNameInputChange(e: React.FormEvent<HTMLInputElement>) {

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styles from '../styles/LumberExpenseListItem.module.scss';
 import { calculateBoardFeet, calculateCostFromBF } from '../utils/calculationsUtils';
 import { trpc } from '../utils/trpc';
+import { ProjectType } from '../types/types';
 
 interface PropTypes {
 	id: string;
@@ -13,6 +14,7 @@ interface PropTypes {
 	length: number;
 	price: number;
 	tax: number;
+	setActiveProject: Dispatch<SetStateAction<ProjectType | null>>;
 }
 
 // TODO: Style the item container for alternating background colors
@@ -27,12 +29,18 @@ export default function LumberExpenseListItem({
 	length,
 	price,
 	tax,
+	setActiveProject,
 }: PropTypes) {
 	let boardFeet = calculateBoardFeet({ numOfPieces, thickness, width, length });
 	let cost = calculateCostFromBF({ boardFeet, price, tax });
 	const ctx = trpc.useContext();
 	const deleteLumber = trpc.lumber.deleteDimensionLumber.useMutation({
-		onSettled: () => ctx.user.getProjectsById.invalidate(),
+		onSuccess: (data) => {
+			if (data) {
+				setActiveProject(data);
+			}
+			ctx.user.getProjectsById.invalidate();
+		},
 	});
 
 	function handleDelete() {

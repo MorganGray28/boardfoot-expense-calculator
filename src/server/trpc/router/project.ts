@@ -57,6 +57,10 @@ export const projectRouter = router({
 							create: { ...input.values },
 						},
 					},
+					include: {
+						expenses: true,
+						lumber: true,
+					},
 				});
 				return project;
 			} catch (err) {
@@ -85,9 +89,13 @@ export const projectRouter = router({
 		)
 		.mutation(async ({ ctx, input }) => {
 			try {
-				const updated = await ctx.prisma.project.update({
+				return await ctx.prisma.project.update({
 					data: {
 						name: input.newName,
+					},
+					include: {
+						expenses: true,
+						lumber: true,
 					},
 					where: {
 						id: input.projectId,
