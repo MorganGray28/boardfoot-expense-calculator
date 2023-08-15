@@ -4,6 +4,7 @@ import styles from '../styles/addToProjectForm.module.scss';
 import { BoardFeetType, ProjectType } from '../types/types';
 import { trpc } from '../utils/trpc';
 import ProjectFormListItem from './ProjectFormListItem';
+import { calculateBoardFeet } from '../utils/calculationsUtils';
 
 type PropsType = {
 	values: BoardFeetType | null;
@@ -80,6 +81,14 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 			})
 			.map((project, index) => {
 				// FIXME: calculate the cost of all expenses and set equal to cost variable to be passed down
+
+				// add an array of all the unique species of lumber to be shown
+				let species: string[] = [];
+				project.lumber.forEach((l) => {
+					if (!species.includes(l.species.toLowerCase())) {
+						species.push(l.species.toLowerCase());
+					}
+				});
 				let cost = 0;
 				return (
 					<ProjectFormListItem
@@ -88,7 +97,7 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 						id={project.id}
 						key={index}
 						name={project.name}
-						// species={project.species}
+						species={species}
 						cost={cost}
 					/>
 				);
