@@ -1,4 +1,11 @@
 @use 'variables';
+@use 'mixins';
+
+.modalContainer {
+  position: relative;
+  @include mixins.modal-container;
+  min-height: 300px;
+}
 
 .container {
   min-height: 13rem;
