@@ -22,7 +22,7 @@ export function ActiveProjectForm({
 	let dropdownRef = useRef() as RefObject<HTMLDivElement>;
 
 	useEffect(() => {
-		const handler = (e: MouseEvent | TouchEvent): void => {
+		const handler = (e: MouseEvent): void => {
 			if (dropdownRef.current) {
 				if (!dropdownRef.current.contains(e.target as HTMLElement)) {
 					setDropdownOpen(false);
@@ -30,10 +30,10 @@ export function ActiveProjectForm({
 			}
 		};
 
-		window.addEventListener('mousedown', handler);
+		document.addEventListener('mousedown', handler);
 
 		return () => {
-			window.removeEventListener('mousedown', handler);
+			document.removeEventListener('mousedown', handler);
 		};
 	}, [dropdownRef]);
 

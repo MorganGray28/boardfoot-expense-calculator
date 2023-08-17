@@ -1,14 +1,14 @@
 @use 'variables';
 
 .container {
-  min-height: 10rem;
+  min-height: 13rem;
 }
 
 .flexContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 2rem;
+  padding-top: 1rem;
 }
 
 .selectInput {
