@@ -1,5 +1,5 @@
 import { router, protectedProcedure } from '../trpc';
-import { z } from 'zod';
+import { date, z } from 'zod';
 
 export const expenseRouter = router({
 	addExpense: protectedProcedure
@@ -87,6 +87,44 @@ export const expenseRouter = router({
 					},
 				});
 				return project;
+			} catch (err) {
+				console.log(err);
+			}
+		}),
+	editGenericExpense: protectedProcedure
+		.input(
+			z.object({
+				id: z.string(),
+				name: z.string(),
+				cost: z.number(),
+				amount: z.number(),
+			})
+		)
+		.mutation(async ({ ctx, input }) => {
+			try {
+				let updated = await ctx.prisma.expense.update({
+					where: {
+						id: input.id,
+					},
+					data: {
+						name: input.name,
+						amount: input.amount,
+						cost: input.cost,
+					},
+					include: {
+						project: {
+							include: {
+								expenses: {
+									orderBy: { createdAt: 'desc' },
+								},
+								lumber: {
+									orderBy: { createdAt: 'desc' },
+								},
+							},
+						},
+					},
+				});
+				return updated.project;
 			} catch (err) {
 				console.log(err);
 			}

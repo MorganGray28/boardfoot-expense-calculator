@@ -8,12 +8,20 @@ export const userRouter = router({
 				userId: input,
 			},
 			include: {
-				lumber: true,
-				expenses: true,
+				lumber: {
+					orderBy: {
+						createdAt: 'desc',
+					},
+				},
+				expenses: {
+					orderBy: {
+						createdAt: 'desc',
+					},
+				},
 			},
 			orderBy: [
 				{
-					updatedAt: 'desc',
+					createdAt: 'desc',
 				},
 			],
 		});

@@ -75,4 +75,48 @@ export const lumberRouter = router({
 			console.log(err);
 		}
 	}),
+	editDimensionLumber: protectedProcedure
+		.input(
+			z.object({
+				id: z.string(),
+				numOfPieces: z.number().positive().min(1),
+				thickness: z.number().positive(),
+				width: z.number().positive(),
+				length: z.number().positive(),
+				name: z.string().optional(),
+				species: z.string(),
+				price: z.number(),
+				tax: z.number(),
+			})
+		)
+		.mutation(async ({ ctx, input }) => {
+			let { numOfPieces, thickness, width, length, name, species, price, tax } = input;
+			try {
+				let updatedLumber = await ctx.prisma.lumber.update({
+					where: {
+						id: input.id,
+					},
+					data: { numOfPieces, thickness, width, length, name, species, price, tax },
+					include: {
+						project: {
+							include: {
+								expenses: {
+									orderBy: {
+										createdAt: 'desc',
+									},
+								},
+								lumber: {
+									orderBy: {
+										createdAt: 'desc',
+									},
+								},
+							},
+						},
+					},
+				});
+				return updatedLumber.project;
+			} catch (err) {
+				console.log('err');
+			}
+		}),
 });

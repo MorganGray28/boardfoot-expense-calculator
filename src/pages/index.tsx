@@ -11,11 +11,11 @@ import { ProjectType } from '../types/types';
 import { BoardFeetType } from '../types/types';
 import { trpc } from '../utils/trpc';
 
-// TODO: EDIT function for each Expense Item
 // TODO: Add Modal that confirms you want to delete a project
 // TODO: Add optional description below the active project form
 // TODO: Add project totals that break down lumber, expenses, consumables, and total cost for each project
 // TODO: Start styling components
+// FIXME: number inputs won't allow a value of ".0X"
 
 const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);

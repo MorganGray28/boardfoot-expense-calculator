@@ -4,6 +4,16 @@
   padding: 1rem;
   color: variables.$primary-blue;
   border-bottom: 1px solid variables.$primary-blue;
+
+  & form {
+    & label {
+      width: 45%;
+    }
+
+    & input {
+      width: 30%;
+    }
+  }
 }
 
 .name {
