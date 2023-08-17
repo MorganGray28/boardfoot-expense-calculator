@@ -11,11 +11,9 @@ import { ProjectType } from '../types/types';
 import { BoardFeetType } from '../types/types';
 import { trpc } from '../utils/trpc';
 
-// TODO: Take away the active project name in dashboard and add the EDIT/DELETE functionality to the ActiveProjectForm
 // TODO: EDIT function for each Expense Item
 // TODO: Add Modal that confirms you want to delete a project
 // TODO: Add optional description below the active project form
-// TODO: Create ExpenseTotals Component that displays material costs, consumable totals, and Project Expense Totals
 // TODO: Add project totals that break down lumber, expenses, consumables, and total cost for each project
 // TODO: Start styling components
 
