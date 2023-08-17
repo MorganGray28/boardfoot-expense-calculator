@@ -132,7 +132,7 @@ export function ActiveProjectForm({
 						</div>
 					</div>
 				</div>
-				{/* <p></p> */}
+				<p>{activeProject?.description}</p>
 			</div>
 		);
 	}
