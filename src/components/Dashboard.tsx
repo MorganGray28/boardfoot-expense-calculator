@@ -1,5 +1,4 @@
 import React, { useState, Dispatch, SetStateAction } from 'react';
-import { trpc } from '../utils/trpc';
 import { ProjectType } from '../types/types';
 import { ActiveProjectForm } from './ActiveProjectForm';
 import ExpenseAndConsumableGroup from './ExpenseAndConsumableGroup';
