@@ -1,22 +1,22 @@
 @use 'variables';
 
 .container {
-  min-height: 12rem;
-  text-align: center;
+  min-height: 10rem;
 }
 
-.header {
-  padding: 1rem 0 1rem 0;
-  font-size: .875rem;
-  font-weight: 600;
-  color: variables.$primary-blue;
+.flexContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2rem;
 }
 
 .selectInput {
   min-width: 10rem;
   border: 2px solid variables.$primary-blue;
-  border-radius: .5rem;
+  border-radius: 7px;
   padding: 1rem;
+  margin-right: 1rem;
   font-size: 1rem;
   font-weight: 600;
   color: variables.$primary-blue;
@@ -32,5 +32,77 @@
   &:focus {
     outline: 1px solid hsl(214, 55%, 50%);
     border: 2px solid hsl(214, 55%, 50%);
+  }
+}
+
+.menuContainer {
+  position: relative;
+}
+
+.svgContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  transition: background-color 300ms ease;
+
+  &:hover {
+  background-color: rgba(208, 208, 208, 0.178);
+  }
+
+  & svg {
+    height: 24px;
+  }
+}
+
+.dropdownContainer {
+  position: absolute;
+  left: 5px;
+  top: 50px;
+  width: 175px;
+  padding: 10px 0 10px 0;
+  border-radius: 7px;
+  box-shadow: 0px 0px 18px rgba(125, 125, 125, 0.22);
+  transition: all 200ms ease;
+
+  &.inactive {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-5px) scale(.9);
+  }
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(5px) scale(1);
+  }
+
+  &::before {
+    content: '';
+    background-color: white;
+    position: absolute;
+    width:10px;
+    height: 10px;
+    rotate: 45deg;
+    top: -5px;
+    left: 15px;
+  }
+}
+
+.dropdownButton {
+  background-color: transparent;
+  display: block;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  width: 100%;
+  padding: 5px 0 5px 15px;
+  text-align: start;
+  transition: background-color 400ms ease;
+
+  &:hover {
+    background-color: rgb(244, 244, 244);
   }
 }
