@@ -47,6 +47,7 @@ export type ProjectType = {
 	createdAt: Date;
 	id: string;
 	name: string;
+	description?: string | null;
 	updatedAt: Date;
 	userId: string;
 	lumber: LumberType[];
