@@ -22,9 +22,9 @@ export function ActiveProjectForm({
 	let dropdownRef = useRef() as RefObject<HTMLDivElement>;
 
 	useEffect(() => {
-		const handler = (e: MouseEvent): void => {
+		const handler = (e: Event): any => {
 			if (dropdownRef.current) {
-				if (!dropdownRef.current.contains(e.target as HTMLElement)) {
+				if (!dropdownRef.current.contains(e.target as Element)) {
 					setDropdownOpen(false);
 				}
 			}
@@ -67,8 +67,6 @@ export function ActiveProjectForm({
 		}
 	}
 
-	// function handleDropdownClick() {}
-
 	if (activeProject && isEditingProject) {
 		return (
 			<EditProjectNameForm
@@ -94,7 +92,6 @@ export function ActiveProjectForm({
 							</option>
 						))}
 					</select>
-					{/* <button onClick={() => setIsCreatingNewProject(true)}>New Project</button> */}
 
 					<div className={styles.menuContainer} ref={dropdownRef}>
 						<div className={styles.svgContainer} onClick={() => setDropdownOpen(!dropdownOpen)}>
@@ -135,6 +132,7 @@ export function ActiveProjectForm({
 						</div>
 					</div>
 				</div>
+				{/* <p></p> */}
 			</div>
 		);
 	}
