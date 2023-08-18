@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import styles from '../styles/ExpenseTable.module.scss';
 import ConsumableListItem from './ConsumableListItem';
 import { useSession } from 'next-auth/react';
@@ -12,10 +12,14 @@ type ConsumableInputType = {
 	[key: string | number]: string | number;
 };
 
+type PropsType = {
+	setTotalConsumableAmount: Dispatch<SetStateAction<number>>;
+};
+
 type ConsumableInputTypeWithId = ConsumableInputType & { userId: string };
 
-export default function ConsumableTable() {
-	const { data: session, status } = useSession();
+export default function ConsumableTable({ setTotalConsumableAmount }: PropsType) {
+	const { data: session } = useSession();
 	const [consumables, setConsumables] = useState<ConsumableInputType[]>([{ name: '', amount: 0, cost: 0 }]);
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -30,10 +34,14 @@ export default function ConsumableTable() {
 		},
 	});
 
+	let totalConsumable = 0;
+
 	const { data: consumableList } = trpc.consumable.getAllConsumables.useQuery(session?.user?.id!);
 	let consumableListArray: JSX.Element[] | null;
 	if (consumableList) {
 		consumableListArray = consumableList.map((consumable) => {
+			let percentage = consumable.amount * 0.01;
+			totalConsumable += consumable.cost * percentage;
 			return (
 				<ConsumableListItem
 					key={consumable.id}
@@ -47,6 +55,8 @@ export default function ConsumableTable() {
 	} else {
 		consumableListArray = null;
 	}
+
+	setTotalConsumableAmount(totalConsumable);
 
 	function handleOpenModal() {
 		setModalIsOpen(true);

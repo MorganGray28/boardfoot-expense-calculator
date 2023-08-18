@@ -11,8 +11,6 @@ import { ProjectType } from '../types/types';
 import { BoardFeetType } from '../types/types';
 import { trpc } from '../utils/trpc';
 
-// TODO: Add Modal that confirms you want to delete a project
-// TODO: Add project totals that break down lumber, expenses, consumables, and total cost for each project
 // TODO: Start styling components
 // FIXME: number inputs won't allow a value of ".0X"
 

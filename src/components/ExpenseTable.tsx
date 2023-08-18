@@ -10,11 +10,12 @@ import GenericExpenseListItem from './GenericExpenseListItem';
 interface PropsType {
 	activeProject: ProjectType | null;
 	setActiveProject: Dispatch<SetStateAction<ProjectType | null>>;
+	setTotalExpenseAmount: Dispatch<SetStateAction<number>>;
 }
 
 type ExpenseWithId = ExpenseType & { projectId: string };
 
-export default function ExpenseTable({ activeProject, setActiveProject }: PropsType) {
+export default function ExpenseTable({ activeProject, setActiveProject, setTotalExpenseAmount }: PropsType) {
 	const [modalOpen, setModalOpen] = useState(false);
 	const [expenses, setExpenses] = useState<ExpenseType[]>([{ amount: 0, name: '', cost: 0 }]);
 
@@ -172,6 +173,7 @@ export default function ExpenseTable({ activeProject, setActiveProject }: PropsT
 			);
 		});
 	}
+	setTotalExpenseAmount(totalExpense);
 
 	return (
 		<>

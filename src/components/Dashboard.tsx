@@ -5,6 +5,7 @@ import ExpenseAndConsumableGroup from './ExpenseAndConsumableGroup';
 import ExpenseTable from './ExpenseTable';
 import ConsumableTable from './ConsumableTable';
 import NewProjectForm from './NewProjectForm';
+import ProjectCostSummary from './ProjectCostSummary';
 
 type PropsType = {
 	projects: ProjectType[] | undefined;
@@ -15,6 +16,8 @@ type PropsType = {
 
 export default function Dashboard({ projects, activeProject, setActiveProject, isLoading }: PropsType) {
 	const [isCreatingNewProject, setIsCreatingNewProject] = useState(false);
+	const [totalExpenseAmount, setTotalExpenseAmount] = useState(0);
+	const [totalConsumableAmount, setTotalConsumableAmount] = useState(0);
 
 	if (projects?.length) {
 		return (
@@ -35,9 +38,14 @@ export default function Dashboard({ projects, activeProject, setActiveProject, i
 				)}
 
 				<ExpenseAndConsumableGroup>
-					<ExpenseTable activeProject={activeProject} setActiveProject={setActiveProject} />
-					<ConsumableTable />
+					<ExpenseTable
+						activeProject={activeProject}
+						setActiveProject={setActiveProject}
+						setTotalExpenseAmount={setTotalExpenseAmount}
+					/>
+					<ConsumableTable setTotalConsumableAmount={setTotalConsumableAmount} />
 				</ExpenseAndConsumableGroup>
+				<ProjectCostSummary totalExpenses={totalExpenseAmount} totalConsumables={totalConsumableAmount} />
 			</div>
 		);
 	} else if (isLoading) {
