@@ -9,10 +9,13 @@ type PropsType = {
 function ProjectCostSummary({ totalExpenses, totalConsumables }: PropsType) {
 	return (
 		<div className={styles.container}>
-			<p>Total Expenses for this project:</p>
+			<h5>Expenses for this project:</h5>
 			<p>${totalExpenses.toFixed(2)}</p>
-			<p>Total Consumable costs applied for this project:</p>
+			<h5>Consumable costs applied for this project:</h5>
 			<p>${totalConsumables.toFixed(2)}</p>
+
+			<h5>Total:</h5>
+			<p>${(totalExpenses + totalConsumables).toFixed(2)}</p>
 		</div>
 	);
 }

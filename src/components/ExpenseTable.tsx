@@ -203,8 +203,6 @@ export default function ExpenseTable({ activeProject, setActiveProject, setTotal
 				<div className={styles.list}>
 					{lumberListItems} {genericExpenseList}
 				</div>
-				<p>Total Expenses:</p>
-				<p>${totalExpense.toFixed(2)}</p>
 			</div>
 		</>
 	);
