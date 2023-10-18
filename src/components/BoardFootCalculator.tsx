@@ -74,11 +74,13 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 
 	return (
 		<div className={styles.container}>
-			<p className={styles.subheading}>Board Feet Calculator</p>
 			<form onSubmit={handleSubmit}>
 				<div className={styles.boardfootContainer}>
+					<p className={styles.subheading}>Board Feet Calculator</p>
 					<div className={styles.labelInputGroup}>
-						<label htmlFor='numOfPieces'>No. of Pieces</label>
+						<label className={styles.inputLabel} htmlFor='numOfPieces'>
+							No. of Pieces
+						</label>
 						<input
 							name='numOfPieces'
 							value={values.numOfPieces || ''}
@@ -87,7 +89,9 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 						/>
 					</div>
 					<div className={styles.labelInputGroup}>
-						<label htmlFor='thickness'>Thickness</label>
+						<label className={styles.inputLabel} htmlFor='thickness'>
+							Thickness
+						</label>
 						<div className={styles.inputUnitsGroup}>
 							<input name='thickness' value={values.thickness || ''} onChange={handleChange} type='number' />
 							<span>in</span>
@@ -99,14 +103,18 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 						</div>
 					</div>
 					<div className={styles.labelInputGroup}>
-						<label htmlFor='width'>Width</label>
+						<label className={styles.inputLabel} htmlFor='width'>
+							Width
+						</label>
 						<div className={styles.inputUnitsGroup}>
 							<input name='width' value={values.width || ''} onChange={handleChange} type='number' />
 							<span>in</span>
 						</div>
 					</div>
-					<div className={`${styles.labelInputGroup} ${styles.length} ${styles.borderBottom}`}>
-						<label htmlFor='length'>Length</label>
+					<div className={`${styles.labelInputGroup} ${styles.length}`}>
+						<label className={styles.inputLabel} htmlFor='length'>
+							Length
+						</label>
 						<div className={styles.inputUnitsGroup}>
 							<input name='length' value={values.length || ''} onChange={handleChange} type='number' />
 							<span>in</span>
@@ -122,33 +130,40 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 					Clear
 				</button>
 
-				<p className={styles.subheading}>Cost</p>
 				<div className={styles.boardfootContainer}>
+					<p className={styles.subheading}>Cost</p>
 					<div className={styles.labelInputGroup}>
-						<label htmlFor='name'>Description</label>
-						<p className={styles.optionalText}>(optional)</p>
+						<label className={styles.inputLabel} htmlFor='name'>
+							Description <span className={styles.optionalSpan}>(optional)</span>
+						</label>
 						<input
 							type='text'
 							id='name'
 							name='name'
 							onChange={handleChange}
 							value={values.name}
-							placeholder='Table Legs'
+							placeholder='e.g. Table Legs'
 						/>
 					</div>
 
 					<div className={styles.labelInputGroup}>
-						<label>Species</label>
+						<label className={styles.inputLabel} htmlFor='species'>
+							Species
+						</label>
 						<input type='text' name='species' onChange={handleChange} value={values.species} />
 					</div>
 
 					<div className={styles.labelInputGroup}>
-						<label>Price</label>
+						<label className={styles.inputLabel} htmlFor='price'>
+							Price
+						</label>
 						<input type='number' name='price' onChange={handleChange} value={values.price || ''} />
 					</div>
 
-					<div className={`${styles.labelInputGroup} ${styles.borderBottom}`}>
-						<label>Tax</label>
+					<div className={`${styles.labelInputGroup}`}>
+						<label className={styles.inputLabel} htmlFor='tax'>
+							Tax
+						</label>
 						<div className={styles.inputUnitsGroup}>
 							<input type='number' name='tax' onChange={handleChange} value={values.tax || ''} />
 							<span>%</span>

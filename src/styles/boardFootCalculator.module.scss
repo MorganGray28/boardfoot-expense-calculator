@@ -7,14 +7,7 @@
 	overflow-y: auto;
 	background-color: variables.$background-color;
 	color: variables.$primary-blue;
-	padding: 0 3rem;
-}
-
-.heading {
-	padding: 1.75rem 0 2rem 0;
-	font-size: 1.5rem;
-	font-weight: 700;
-	text-align: center;
+	padding: 4rem 3rem 0 3rem;
 }
 
 .boardfootContainer {
@@ -23,15 +16,15 @@
 	display: flex;
 	flex-direction: column;
 	border-radius: 13px;
-	padding: 1rem;
+	padding: 1.5rem;
 	box-shadow: 2px 3px 9px 2px variables.$divider-color;
 
 		input {
-	//FIXME: adjust the width of the inputs
+			margin-top: .25rem;
+			color: #0E0E0E;
 			font-family: 'Inter', sans-serif;
-			font-size: 1.5rem;
-			width: 6rem;
-			text-align: right;
+			font-size: 1rem;
+			width: 100%;
 			background: none;
 			border: none;
 			border-bottom: 1px solid variables.$primary-blue;
@@ -42,6 +35,18 @@
   			-webkit-appearance: none;
   			margin: 0;
 			}
+
+			// FIXME: chrome autofill will give a similar background, we need to differentiate more to not confuse the user about which input is in focus 
+			&:focus {
+				background-color: rgba(213, 223, 248, .3);
+				outline: none;
+				border-bottom: 1px solid #668EC2;
+				color: variables.$primary-blue;
+			}
+
+			&::placeholder {
+				color: rgb(156, 156, 156);
+			}
 		}
 
 		& input[type=number] {
@@ -51,8 +56,9 @@
 }
 
 .subheading {
-	margin-top: 1rem;
-	font-size: 1rem;
+	color: #424242;
+	text-align: center;
+	font-size: .875rem;
 	font-weight: 600;
 	padding-bottom: 1rem;
 }
@@ -60,39 +66,45 @@
 .labelInputGroup {
 	position: relative;
 	display: flex;
-	justify-content: space-between;
-	align-items: flex-end;
+	flex-direction: column;
+	justify-content: flex-start;
 	padding: 1rem .5rem;
 
 	// adds bold to total font
 	&:last-child {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
 		padding-bottom: 0;
 		font-weight: 600;
-		color: variables.$primary-blue;
+		color: #2C5387;
 	}
+}
+
+.inputLabel {
+	font-size: .875rem;
+	color: #757575;
 }
 
 .quarterThicknessContainer {
 	display: flex;
 	position: absolute;
-	bottom: -.375rem;
-	right: 0rem;
+	bottom: 25%;
+	right: 1.5rem;
 
 	& p {
 		padding-right: .75rem;
-		font-size: .9rem;
-		color: rgb(38, 38, 212);
+		font-size: 1rem;
+		color: #1698F6;
 		cursor: pointer;
 
 		&:hover {
-			color: rgb(0, 0, 167);
+			color: hsl(205, 93%, 40%)
 		}
 	}
 }
 
-.optionalText {
-	position: absolute;
-	bottom: 0;
+.optionalSpan {
 	font-size: .75rem;
 }
 
@@ -124,11 +136,11 @@
 	font-weight: 500;
 	border: none;
 	background: none;
-	margin: 1rem 0 1rem auto;
+	margin: 1.5rem 0 1.5rem auto;
 	padding: 0;
 	cursor: pointer;
 	text-decoration: underline;
-	color: rgba(224, 39, 55, 1);
+	color: #E02737;
 
 	&:hover {
 		color: rgb(173, 26, 38);

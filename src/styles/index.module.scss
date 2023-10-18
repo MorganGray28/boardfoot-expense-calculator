@@ -20,10 +20,11 @@
 }
 
 .navbar {
+  min-height: 4rem;
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 1rem 0;
+  padding: .75rem 0;
   border-bottom: 1px solid rgba(27, 66, 118, 0.178);
 
   & p {
@@ -35,7 +36,7 @@
 
   & h1 {
     flex-grow: 1;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 600;
     color: variables.$primary-blue;
   }
@@ -54,4 +55,5 @@
 .loginButton {
   @include mixins.outline-primary-button;
   right: 1rem;
+  padding: .5rem 1.5rem;
 }
