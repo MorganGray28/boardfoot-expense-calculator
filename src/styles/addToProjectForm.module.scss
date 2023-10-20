@@ -4,6 +4,7 @@
 .container {
   @include mixins.modal-container;
   min-height: auto;
+  position: relative;
 }
 
 .header {
@@ -43,6 +44,12 @@
   width: 100%;
   max-width: 100%;
   max-height: 400px;
+}
+
+.textfieldLabel {
+  @include mixins.input-label-font;
+  display: block;
+  padding-top: 1rem;
 }
 
 .projectList {

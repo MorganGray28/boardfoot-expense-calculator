@@ -150,7 +150,9 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 		formContent = (
 			<>
 				<h4 className={styles.header}>Create a New Project</h4>
-				<label htmlFor='newProjectName'>Name</label>
+				<label htmlFor='newProjectName' className={styles.textfieldLabel}>
+					Name
+				</label>
 				<input
 					id='newProjectName'
 					name='newProjectName'
@@ -159,7 +161,9 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 					className={`${styles.searchInput} ${styles.nameInput}`}
 					type='text'
 				/>
-				<label htmlFor='newProjectDescription'>Description (optional)</label>
+				<label htmlFor='newProjectDescription' className={styles.textfieldLabel}>
+					Description (optional)
+				</label>
 				<textarea
 					id='newProjectDescription'
 					name='newProjectDescription'

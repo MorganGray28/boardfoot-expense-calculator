@@ -67,7 +67,7 @@
 	right: 1.5rem;
 
 	& p {
-		padding-right: .75rem;
+		padding-right: 1rem;
 		font-size: 1rem;
 		color: #1698F6;
 		cursor: pointer;
@@ -125,11 +125,6 @@
 	@include mixins.primary-button;
 	margin: 1.5rem auto 1.5rem auto;
 	display: block;
-	transition: all 300ms ease;
-
-	&:hover {
-		background-color: darken($color: variables.$primary-blue, $amount: 5%);
-	}
 }
 
 .primaryButtonDisabled {

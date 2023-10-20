@@ -11,9 +11,15 @@
 
 @mixin primary-button {
   @include button;
-  background-color: variables.$primary-blue;
+  background-color: variables.$primary-button-blue;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.169);
   color: white;
   border: none;
+	transition: all 300ms ease;
+
+  &:hover, &:focus {
+		background-color: darken($color: #2A68BA, $amount: 8%);
+	}
 }
 
 @mixin primary-button-disabled {
