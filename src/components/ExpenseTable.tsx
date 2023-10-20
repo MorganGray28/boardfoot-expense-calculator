@@ -95,29 +95,44 @@ export default function ExpenseTable({ activeProject, setActiveProject, setTotal
 	let expensesFormList = expenses.map((expense, index) => {
 		return (
 			<div className={styles.expenseInputContainer} key={index}>
-				<input
-					type='number'
-					min={0}
-					name='amount'
-					value={expense.amount ? expense.amount : ''}
-					placeholder='amount'
-					onChange={(e) => handleChange(index, e)}
-				/>
-				<input
-					type='text'
-					name='name'
-					value={expense.name}
-					placeholder='name'
-					onChange={(e) => handleChange(index, e)}
-				/>
-				<input
-					type='number'
-					min={0}
-					name='cost'
-					value={expense.cost ? expense.cost : ''}
-					placeholder='cost'
-					onChange={(e) => handleChange(index, e)}
-				/>
+				<div className={styles.labelInputGroup}>
+					<label htmlFor='amount' className={styles.inputLabel}>
+						Amount
+					</label>
+					<input
+						className={styles.input}
+						type='number'
+						min={0}
+						name='amount'
+						value={expense.amount ? expense.amount : ''}
+						onChange={(e) => handleChange(index, e)}
+					/>
+				</div>
+				<div className={styles.labelInputGroup}>
+					<label htmlFor='name' className={styles.inputLabel}>
+						Name
+					</label>
+					<input
+						className={styles.input}
+						type='text'
+						name='name'
+						value={expense.name}
+						onChange={(e) => handleChange(index, e)}
+					/>
+				</div>
+				<div className={styles.labelInputGroup}>
+					<label htmlFor='cost' className={styles.inputLabel}>
+						Cost
+					</label>
+					<input
+						className={styles.input}
+						type='number'
+						min={0}
+						name='cost'
+						value={expense.cost ? expense.cost : ''}
+						onChange={(e) => handleChange(index, e)}
+					/>
+				</div>
 
 				<p>Total: </p>
 

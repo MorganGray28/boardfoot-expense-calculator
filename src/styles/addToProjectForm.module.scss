@@ -3,6 +3,7 @@
 
 .container {
   @include mixins.modal-container;
+  min-height: auto;
 }
 
 .header {

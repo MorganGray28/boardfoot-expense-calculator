@@ -54,9 +54,22 @@
 
 .expenseInputContainer {
   display: flex;
+  align-items: center;
   position: relative;
 
   & input {
     width: 100%;
   }
+}
+
+.inputLabel {
+  @include mixins.input-label-font;
+}
+
+.input {
+  @include mixins.input;
+}
+
+.labelInputGroup {
+  @include mixins.label-input-group;
 }

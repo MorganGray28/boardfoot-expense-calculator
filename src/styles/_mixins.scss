@@ -59,3 +59,39 @@
   min-height: 500px;
   background-color: white;
 }
+
+@mixin input-label-font {
+  font-size: .875rem;
+	color: #757575;
+}
+
+@mixin input {
+  color: #0E0E0E;
+	font-family: 'Inter', sans-serif;
+	font-size: 1rem;
+  background: none;
+  border: none;
+  border-bottom: 1px solid variables.$primary-blue;
+  transition: all 200ms ease;
+  border-radius: 3px 3px 0 0;
+  padding-left: .25rem;
+    &:focus {
+      background-color: rgba(213, 223, 248, .3);
+      outline: none;
+      border-bottom: 1px solid #668EC2;
+      color: variables.$primary-blue;
+    }
+
+    &::placeholder {
+      color: rgb(156, 156, 156);
+    }
+
+}
+
+@mixin label-input-group {
+  position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	padding: 1rem .5rem;
+}
