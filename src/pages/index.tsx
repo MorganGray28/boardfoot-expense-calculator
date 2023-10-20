@@ -13,6 +13,7 @@ import { trpc } from '../utils/trpc';
 
 // TODO: Start styling components
 // FIXME: number inputs won't allow a value of ".0X"
+// FIXME: add description input for new project creation
 
 const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);
