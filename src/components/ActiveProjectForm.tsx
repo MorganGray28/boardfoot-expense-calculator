@@ -155,7 +155,7 @@ export function ActiveProjectForm({
 							</div>
 						</div>
 					</div>
-					<p>{activeProject?.description}</p>
+					<p className={styles.description}>{activeProject?.description}</p>
 				</div>
 			</>
 		);

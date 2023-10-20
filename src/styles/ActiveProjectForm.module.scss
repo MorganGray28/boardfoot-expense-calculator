@@ -65,6 +65,7 @@
 }
 
 .dropdownContainer {
+  background-color: white;
   position: absolute;
   left: 5px;
   top: 50px;
@@ -112,4 +113,12 @@
   &:hover {
     background-color: rgb(244, 244, 244);
   }
+}
+
+.description {
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 2rem;
+  max-width: 75%;
+  font-style: italic;
 }
