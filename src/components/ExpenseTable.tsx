@@ -6,6 +6,9 @@ import { calculateBoardFeet, calculateCostFromBF } from '../utils/calculationsUt
 import Modal from './Modal';
 import { trpc } from '../utils/trpc';
 import GenericExpenseListItem from './GenericExpenseListItem';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 interface PropsType {
 	activeProject: ProjectType | null;
@@ -51,6 +54,12 @@ export default function ExpenseTable({ activeProject, setActiveProject, setTotal
 	}
 
 	function handleAddExpense() {
+		if (expenses.length > 20) {
+			alert(
+				"Can't add more expense entries at this time. Please submit these expenses and add the rest afterwards."
+			);
+			return;
+		}
 		let newInputField = { amount: 0, name: '', cost: 0 };
 		setExpenses([...expenses, newInputField]);
 	}
@@ -137,10 +146,18 @@ export default function ExpenseTable({ activeProject, setActiveProject, setTotal
 					/>
 				</div>
 
-				<p>Total: </p>
+				<div className={styles.expenseTotalContainer}>
+					<p>Total: </p>
+					<p>{expense.amount && expense.cost ? `${(expense.amount * expense.cost).toFixed(2)}` : '0'}</p>
+				</div>
 
-				<button type='button' onClick={(e) => handleDelete(index)}>
-					Delete
+				<button
+					type='button'
+					onClick={(e) => handleDelete(index)}
+					className={styles.iconDeleteButton}
+					title='delete'
+				>
+					<FontAwesomeIcon icon={faTrashCan} className={styles.deleteIcon} />
 				</button>
 			</div>
 		);
@@ -198,13 +215,18 @@ export default function ExpenseTable({ activeProject, setActiveProject, setTotal
 			<Modal open={modalOpen} onClose={() => setModalOpen(false)}>
 				<div className={styles.modalContainer}>
 					<h4 className={styles.header}>Add New Project Expenses</h4>
-					<form onSubmit={(e) => handleSubmit(e)}>{expensesFormList}</form>
-					<button onClick={handleAddExpense}>Add Another Expense</button>
+					<form onSubmit={(e) => handleSubmit(e)} className={styles.addExpenseForm}>
+						{expensesFormList}
+					</form>
+					<button onClick={handleAddExpense} className={styles.addExpenseBtn}>
+						<FontAwesomeIcon icon={faPlus} className={styles.addIcon} />
+						Add Another Expense
+					</button>
 					<div className={styles.btngroup}>
-						<button className='cancel-btn' type='button' onClick={handleCancelExpenses}>
+						<button className={styles.dangerBtn} type='button' onClick={handleCancelExpenses}>
 							Cancel
 						</button>
-						<button className='done-btn' type='submit' onClick={(e) => handleSubmit(e)}>
+						<button className={styles.approveBtn} type='submit' onClick={(e) => handleSubmit(e)}>
 							Done
 						</button>
 					</div>

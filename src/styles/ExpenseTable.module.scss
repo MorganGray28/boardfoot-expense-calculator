@@ -4,7 +4,31 @@
 .modalContainer {
   position: relative;
   @include mixins.modal-container;
-  min-width: 38rem;
+  min-width: 45rem;
+  height: 650px;
+}
+
+.addExpenseForm {
+  max-height: 65%;
+  overflow-y: auto;
+  padding-right: .5rem;
+  margin: 1rem 0;
+
+  // scrollbar custom
+  &::-webkit-scrollbar-thumb
+    {
+      @include mixins.scrollbar-thumb;
+    }
+    
+    &::-webkit-scrollbar-track
+    {
+      @include mixins.scrollbar-track;
+    }
+    
+    &::-webkit-scrollbar
+    {
+      @include mixins.scrollbar;
+    }
 }
 
 .header {
@@ -74,6 +98,29 @@
   justify-content: space-between;
 }
 
+.addExpenseBtn {
+  @include mixins.primary-button;
+  display: flex;
+  align-items: center;
+  padding: .5rem 1rem;
+
+  & svg {
+    margin-right: .5rem;
+  }
+}
+
+.addIcon {
+  width: 1.25rem;
+}
+
+.dangerBtn {
+  @include mixins.outline-danger-button;
+}
+
+.approveBtn {
+  @include mixins.primary-button;
+}
+
 .expenseInputContainer {
   display: flex;
   align-items: center;
@@ -90,8 +137,36 @@
 
 .input {
   @include mixins.input;
+  margin-top: .25rem;
 }
 
 .labelInputGroup {
   @include mixins.label-input-group;
+}
+
+.expenseTotalContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.iconDeleteButton {
+  @include mixins.iconButton;
+  margin-left: .5rem;
+
+  &:focus {
+    outline: 2px solid variables.$danger-red-hover;
+    outline-offset: 2px;
+  }
+
+  &:hover, &:focus {
+    .deleteIcon {
+      color: variables.$danger-red-hover;
+    }
+  }
+}
+
+.deleteIcon {
+  @include mixins.dangerIcon;
+  width: 1.25rem;
 }

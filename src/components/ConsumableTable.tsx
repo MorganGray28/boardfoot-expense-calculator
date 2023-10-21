@@ -4,6 +4,9 @@ import ConsumableListItem from './ConsumableListItem';
 import { useSession } from 'next-auth/react';
 import Modal from './Modal';
 import { trpc } from '../utils/trpc';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 
 type ConsumableInputType = {
 	name: string;
@@ -121,37 +124,64 @@ export default function ConsumableTable({ setTotalConsumableAmount }: PropsType)
 	let consumablesFormList = consumables.map((consumable, index) => {
 		return (
 			<div className={styles.expenseInputContainer} key={index}>
-				<input
-					type='number'
-					autoComplete='off'
-					min={0}
-					name='amount'
-					value={consumable.amount ? consumable.amount : ''}
-					placeholder='Percentage of cost to apply'
-					onChange={(e) => handleChange(index, e)}
-				/>
-				<input
-					type='text'
-					autoComplete='off'
-					name='name'
-					value={consumable.name}
-					placeholder='consumable name'
-					onChange={(e) => handleChange(index, e)}
-				/>
-				<input
-					type='number'
-					autoComplete='off'
-					min={0}
-					name='cost'
-					value={consumable.cost ? consumable.cost : ''}
-					placeholder='cost'
-					onChange={(e) => handleChange(index, e)}
-				/>
+				<div className={styles.labelInputGroup}>
+					<label htmlFor='amount' className={styles.inputLabel}>
+						Percentage Applied
+					</label>
+					<input
+						className={styles.input}
+						type='number'
+						autoComplete='off'
+						min={0}
+						name='amount'
+						value={consumable.amount ? consumable.amount : ''}
+						onChange={(e) => handleChange(index, e)}
+					/>
+				</div>
+				<div className={styles.labelInputGroup}>
+					<label htmlFor='name' className={styles.inputLabel}>
+						Name
+					</label>
+					<input
+						className={styles.input}
+						type='text'
+						autoComplete='off'
+						name='name'
+						value={consumable.name}
+						onChange={(e) => handleChange(index, e)}
+					/>
+				</div>
+				<div className={styles.labelInputGroup}>
+					<label htmlFor='cost' className={styles.inputLabel}>
+						Cost
+					</label>
+					<input
+						className={styles.input}
+						type='number'
+						autoComplete='off'
+						min={0}
+						name='cost'
+						value={consumable.cost ? consumable.cost : ''}
+						onChange={(e) => handleChange(index, e)}
+					/>
+				</div>
 
-				<p>Total: </p>
+				<div className={styles.expenseTotalContainer}>
+					<p>Total: </p>
+					<p>
+						{consumable.amount && consumable.cost
+							? `${((consumable.amount / 100) * consumable.cost).toFixed(2)}`
+							: '0'}
+					</p>
+				</div>
 
-				<button type='button' onClick={(e) => handleDelete(index)}>
-					Delete
+				<button
+					type='button'
+					onClick={(e) => handleDelete(index)}
+					className={styles.iconDeleteButton}
+					title='delete'
+				>
+					<FontAwesomeIcon icon={faTrashCan} className={styles.deleteIcon} />
 				</button>
 			</div>
 		);
@@ -163,13 +193,16 @@ export default function ConsumableTable({ setTotalConsumableAmount }: PropsType)
 				<div className={styles.modalContainer}>
 					<h4 className={styles.header}>Add New Consumables</h4>
 
-					<form>{consumablesFormList}</form>
-					<button onClick={handleAddConsumable}>Add Another Consumable</button>
+					<form className={styles.addExpenseForm}>{consumablesFormList}</form>
+					<button onClick={handleAddConsumable} className={styles.addExpenseBtn}>
+						<FontAwesomeIcon icon={faPlus} className={styles.addIcon} />
+						Add Another Consumable
+					</button>
 					<div className={styles.btngroup}>
-						<button className='cancel-btn' onClick={handleCancelConsumables}>
+						<button className={styles.dangerBtn} onClick={handleCancelConsumables}>
 							Cancel
 						</button>
-						<button className='done-btn' onClick={handleSubmitConsumables}>
+						<button className={styles.approveBtn} onClick={handleSubmitConsumables}>
 							Done
 						</button>
 					</div>
