@@ -5,5 +5,5 @@ interface PropsType {
 }
 
 export default function ExpenseAndConsumableGroup({ children }: PropsType) {
-	return <div style={{ display: 'flex', justifyContent: 'space-around' }}>{children}</div>;
+	return <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>{children}</div>;
 }

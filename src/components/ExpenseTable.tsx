@@ -211,9 +211,11 @@ export default function ExpenseTable({ activeProject, setActiveProject, setTotal
 				<div className={styles.categoryContainer}>
 					<div className={styles.flexGroup}>
 						<h4 className={styles.category}>Project Expenses</h4>
-						<p className={styles.categoryDescription}>List of all expenses for this Project</p>
+						<p className={styles.categoryDescription}>Lumber and Project-specific costs</p>
 					</div>
-					<button onClick={handleClick}>Add Expense</button>
+					<button onClick={handleClick} className={styles.addButton}>
+						Add Expense
+					</button>
 				</div>
 				<div className={styles.list}>
 					{lumberListItems} {genericExpenseList}

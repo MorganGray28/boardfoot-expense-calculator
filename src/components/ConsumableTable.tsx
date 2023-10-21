@@ -176,9 +176,11 @@ export default function ConsumableTable({ setTotalConsumableAmount }: PropsType)
 				<div className={styles.categoryContainer}>
 					<div className={styles.flexGroup}>
 						<h4 className={styles.category}>Consumables</h4>
-						<p className={styles.categoryDescription}>Apply consumable costs to this Project</p>
+						<p className={styles.categoryDescription}>Apply consumables costs to Project</p>
 					</div>
-					<button onClick={handleOpenModal}>Add Consumable</button>
+					<button onClick={handleOpenModal} className={styles.addButton}>
+						Add Consumable
+					</button>
 				</div>
 				<div className={styles.list}>{consumableListArray}</div>
 			</div>
