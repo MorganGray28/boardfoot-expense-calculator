@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import styles from '../styles/ConsumableListItem.module.scss';
 import { trpc } from '../utils/trpc';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 
 type InputFieldsType = {
 	name: string;
@@ -106,9 +109,16 @@ export default function ConsumableListItem({ name, amount, cost, id }: PropsType
 				<h2 className={styles.name}>{name}</h2>
 				<p className={styles.percentage}>{amount}%</p>
 				<p className={styles.cost}>${cost.toFixed(2)}</p>
-				<button onClick={() => setIsEditing(true)}>Edit</button>
-				<button onClick={handleDelete} disabled={isDeleting}>
-					X
+				<button onClick={() => setIsEditing(true)} className={styles.iconEditButton} title='edit'>
+					<FontAwesomeIcon icon={faPenToSquare} className={styles.editIcon} />
+				</button>
+				<button
+					onClick={handleDelete}
+					disabled={isDeleting}
+					className={styles.iconDeleteButton}
+					title='delete'
+				>
+					<FontAwesomeIcon icon={faTrashCan} className={styles.deleteIcon} />
 				</button>
 			</div>
 		);

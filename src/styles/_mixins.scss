@@ -158,7 +158,7 @@
 }
 
 @mixin editIcon {
-  color: variables.$primary-button-blue;
+  color: variables.$primary-blue;
   transition: color 300ms ease;
 
   &:hover, &:focus, &:active {

@@ -58,6 +58,12 @@
     outline: 2px solid variables.$primary-button-blue;
     outline-offset: 2px;
   }
+
+  &:hover, &:focus {
+    .editIcon {
+      color: variables.$primary-button-blue;
+    }
+  }
 }
 
 .iconDeleteButton {
