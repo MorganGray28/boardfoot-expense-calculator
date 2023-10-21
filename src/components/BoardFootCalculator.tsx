@@ -83,6 +83,7 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 						</label>
 						<input
 							name='numOfPieces'
+							autoComplete='off'
 							value={values.numOfPieces || ''}
 							onChange={handleChange}
 							type='number'
@@ -93,7 +94,13 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 							Thickness
 						</label>
 						<div className={styles.inputUnitsGroup}>
-							<input name='thickness' value={values.thickness || ''} onChange={handleChange} type='number' />
+							<input
+								name='thickness'
+								autoComplete='off'
+								value={values.thickness || ''}
+								onChange={handleChange}
+								type='number'
+							/>
 							<span>in</span>
 						</div>
 						<div className={styles.quarterThicknessContainer}>
@@ -107,7 +114,13 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 							Width
 						</label>
 						<div className={styles.inputUnitsGroup}>
-							<input name='width' value={values.width || ''} onChange={handleChange} type='number' />
+							<input
+								name='width'
+								autoComplete='off'
+								value={values.width || ''}
+								onChange={handleChange}
+								type='number'
+							/>
 							<span>in</span>
 						</div>
 					</div>
@@ -116,7 +129,13 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 							Length
 						</label>
 						<div className={styles.inputUnitsGroup}>
-							<input name='length' value={values.length || ''} onChange={handleChange} type='number' />
+							<input
+								name='length'
+								autoComplete='off'
+								value={values.length || ''}
+								onChange={handleChange}
+								type='number'
+							/>
 							<span>in</span>
 						</div>
 					</div>
@@ -138,6 +157,7 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 						</label>
 						<input
 							type='text'
+							autoComplete='off'
 							id='name'
 							name='name'
 							onChange={handleChange}
@@ -150,14 +170,26 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 						<label className={styles.inputLabel} htmlFor='species'>
 							Species
 						</label>
-						<input type='text' name='species' onChange={handleChange} value={values.species} />
+						<input
+							type='text'
+							autoComplete='off'
+							name='species'
+							onChange={handleChange}
+							value={values.species}
+						/>
 					</div>
 
 					<div className={styles.labelInputGroup}>
 						<label className={styles.inputLabel} htmlFor='price'>
 							Price
 						</label>
-						<input type='number' name='price' onChange={handleChange} value={values.price || ''} />
+						<input
+							type='number'
+							autoComplete='off'
+							name='price'
+							onChange={handleChange}
+							value={values.price || ''}
+						/>
 					</div>
 
 					<div className={`${styles.labelInputGroup}`}>
@@ -165,7 +197,13 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 							Tax
 						</label>
 						<div className={styles.inputUnitsGroup}>
-							<input type='number' name='tax' onChange={handleChange} value={values.tax || ''} />
+							<input
+								type='number'
+								autoComplete='off'
+								name='tax'
+								onChange={handleChange}
+								value={values.tax || ''}
+							/>
 							<span>%</span>
 						</div>
 					</div>

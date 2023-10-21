@@ -75,11 +75,23 @@ function GenericExpenseListItem({ id, name, cost, amount, setActiveProject }: Pr
 			<div className={styles.container}>
 				<form onSubmit={(e) => handleSubmit(e)} noValidate>
 					<label htmlFor='amount'>Amount</label>
-					<input type='number' name='amount' value={values.amount || ''} onChange={handleChange} />
+					<input
+						type='number'
+						autoComplete='off'
+						name='amount'
+						value={values.amount || ''}
+						onChange={handleChange}
+					/>
 					<label htmlFor='name'>Name</label>
-					<input type='text' name='name' value={values.name} onChange={handleChange} />
+					<input type='text' autoComplete='off' name='name' value={values.name} onChange={handleChange} />
 					<label htmlFor='cost'>Cost</label>
-					<input type='number' name='cost' value={values.cost || ''} onChange={handleChange} />
+					<input
+						type='number'
+						autoComplete='off'
+						name='cost'
+						value={values.cost || ''}
+						onChange={handleChange}
+					/>
 
 					<button type='button' onClick={handleCancel}>
 						Cancel

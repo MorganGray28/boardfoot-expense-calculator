@@ -41,6 +41,7 @@ function NewProjectForm({ cancel, setActiveProject, setIsCreatingNewProject }: P
 			<label htmlFor='newProject'>New Project Name</label>
 			<input
 				id='newProject'
+				autoComplete='off'
 				type='text'
 				placeholder='enter project name'
 				value={newProjectName}

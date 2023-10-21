@@ -207,6 +207,7 @@ function EditProjectNameForm({
 			<label htmlFor='projectName'>Edit Project Name</label>
 			<input
 				type='text'
+				autoComplete='off'
 				id='projectName'
 				name='projectName'
 				value={projectNameInput}

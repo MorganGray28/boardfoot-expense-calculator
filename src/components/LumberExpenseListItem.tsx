@@ -108,21 +108,69 @@ export default function LumberExpenseListItem({
 			<div className={styles.container}>
 				<form onSubmit={(e) => handleSubmit(e)} noValidate>
 					<label htmlFor='numOfPieces'>No. of Pieces</label>
-					<input name='numOfPieces' type='number' value={values.numOfPieces || ''} onChange={handleChange} />
+					<input
+						name='numOfPieces'
+						autoComplete='off'
+						type='number'
+						value={values.numOfPieces || ''}
+						onChange={handleChange}
+					/>
 					<label htmlFor='thickness'>Thickness</label>
-					<input name='thickness' type='number' value={values.thickness || ''} onChange={handleChange} />
+					<input
+						name='thickness'
+						autoComplete='off'
+						type='number'
+						value={values.thickness || ''}
+						onChange={handleChange}
+					/>
 					<label htmlFor='width'>Width</label>
-					<input name='width' type='number' value={values.width || ''} onChange={handleChange} />
+					<input
+						name='width'
+						autoComplete='off'
+						type='number'
+						value={values.width || ''}
+						onChange={handleChange}
+					/>
 					<label htmlFor='length'>Length</label>
-					<input name='length' type='number' value={values.length || ''} onChange={handleChange} />
+					<input
+						name='length'
+						autoComplete='off'
+						type='number'
+						value={values.length || ''}
+						onChange={handleChange}
+					/>
 					<label htmlFor='name'>Description</label>
-					<input name='name' type='text' value={values.name || ''} onChange={handleChange} />
+					<input
+						name='name'
+						autoComplete='off'
+						type='text'
+						value={values.name || ''}
+						onChange={handleChange}
+					/>
 					<label htmlFor='species'>Species</label>
-					<input name='species' type='text' value={values.species || ''} onChange={handleChange} />
+					<input
+						name='species'
+						autoComplete='off'
+						type='text'
+						value={values.species || ''}
+						onChange={handleChange}
+					/>
 					<label htmlFor='price'>Price</label>
-					<input name='price' type='number' value={values.price || ''} onChange={handleChange} />
+					<input
+						name='price'
+						autoComplete='off'
+						type='number'
+						value={values.price || ''}
+						onChange={handleChange}
+					/>
 					<label htmlFor='tax'>Tax</label>
-					<input name='tax' type='number' value={values.tax || ''} onChange={handleChange} />
+					<input
+						name='tax'
+						autoComplete='off'
+						type='number'
+						value={values.tax || ''}
+						onChange={handleChange}
+					/>
 
 					<button type='button' onClick={handleCancel}>
 						Cancel

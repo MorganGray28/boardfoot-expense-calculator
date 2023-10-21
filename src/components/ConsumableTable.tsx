@@ -123,6 +123,7 @@ export default function ConsumableTable({ setTotalConsumableAmount }: PropsType)
 			<div className={styles.expenseInputContainer} key={index}>
 				<input
 					type='number'
+					autoComplete='off'
 					min={0}
 					name='amount'
 					value={consumable.amount ? consumable.amount : ''}
@@ -131,6 +132,7 @@ export default function ConsumableTable({ setTotalConsumableAmount }: PropsType)
 				/>
 				<input
 					type='text'
+					autoComplete='off'
 					name='name'
 					value={consumable.name}
 					placeholder='consumable name'
@@ -138,6 +140,7 @@ export default function ConsumableTable({ setTotalConsumableAmount }: PropsType)
 				/>
 				<input
 					type='number'
+					autoComplete='off'
 					min={0}
 					name='cost'
 					value={consumable.cost ? consumable.cost : ''}

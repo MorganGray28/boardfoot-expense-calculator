@@ -67,10 +67,18 @@ export default function ConsumableListItem({ name, amount, cost, id }: PropsType
 		return (
 			<div className={styles.container}>
 				<form className={styles.editForm} onSubmit={handleSubmit} noValidate>
-					<input type='text' name='name' id='name' value={editInputFields.name} onChange={handleChange} />
+					<input
+						type='text'
+						autoComplete='off'
+						name='name'
+						id='name'
+						value={editInputFields.name}
+						onChange={handleChange}
+					/>
 					<input
 						type='number'
 						name='amount'
+						autoComplete='off'
 						id='amount'
 						value={editInputFields.amount || ''}
 						onChange={handleChange}
@@ -78,6 +86,7 @@ export default function ConsumableListItem({ name, amount, cost, id }: PropsType
 					<input
 						type='number'
 						name='cost'
+						autoComplete='off'
 						id='cost'
 						value={editInputFields.cost || ''}
 						onChange={handleChange}

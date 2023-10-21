@@ -102,6 +102,7 @@ export default function ExpenseTable({ activeProject, setActiveProject, setTotal
 					<input
 						className={styles.input}
 						type='number'
+						autoComplete='off'
 						min={0}
 						name='amount'
 						value={expense.amount ? expense.amount : ''}
@@ -115,6 +116,7 @@ export default function ExpenseTable({ activeProject, setActiveProject, setTotal
 					<input
 						className={styles.input}
 						type='text'
+						autoComplete='off'
 						name='name'
 						value={expense.name}
 						onChange={(e) => handleChange(index, e)}
@@ -127,6 +129,7 @@ export default function ExpenseTable({ activeProject, setActiveProject, setTotal
 					<input
 						className={styles.input}
 						type='number'
+						autoComplete='off'
 						min={0}
 						name='cost'
 						value={expense.cost ? expense.cost : ''}
