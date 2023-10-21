@@ -21,6 +21,10 @@
   padding-bottom: .5rem;
 }
 
+.labelInputGroup {
+  @include mixins.label-input-group;
+}
+
 .flexContainer {
   font-size: .875rem;
   display: flex;
