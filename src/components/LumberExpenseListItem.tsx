@@ -4,6 +4,9 @@ import { calculateBoardFeet, calculateCostFromBF } from '../utils/calculationsUt
 import { checkForIdenticalObjects } from '../utils/utils';
 import { trpc } from '../utils/trpc';
 import { ProjectType } from '../types/types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 
 interface PropTypes {
 	id: string;
@@ -191,10 +194,19 @@ export default function LumberExpenseListItem({
 					<p className={styles.boardFeet}>{boardFeet} BF</p>
 					<p className={styles.cost}>${cost.toFixed(2)}</p>
 				</div>
-				<button onClick={() => setIsEditingExpense(true)}>Edit</button>
-				<button onClick={handleDelete} disabled={deleteLumber.isLoading}>
-					Delete
-				</button>
+				<div className={styles.buttonGroup}>
+					<button onClick={() => setIsEditingExpense(true)} className={styles.iconEditButton} title='edit'>
+						<FontAwesomeIcon icon={faPenToSquare} className={styles.editIcon} />
+					</button>
+					<button
+						onClick={handleDelete}
+						disabled={deleteLumber.isLoading}
+						className={styles.iconDeleteButton}
+						title='delete'
+					>
+						<FontAwesomeIcon icon={faTrashCan} className={styles.deleteIcon} />
+					</button>
+				</div>
 			</div>
 		);
 	}

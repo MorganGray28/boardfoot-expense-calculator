@@ -1,4 +1,5 @@
 @use 'variables';
+@use 'mixins';
 
 .container {
   padding: 1rem;
@@ -38,4 +39,45 @@
 
 .cost {
   font-weight: 600;
+}
+
+// Edit and Delete Icons/Buttons
+
+.buttonGroup {
+  @include mixins.editDeleteButtonGroup;
+}
+
+.iconEditButton {
+  @include mixins.iconButton;
+
+  &:focus {
+    outline: 2px solid variables.$primary-button-blue;
+    outline-offset: 2px;
+  }
+}
+
+.iconDeleteButton {
+  @include mixins.iconButton;
+  margin-left: .5rem;
+
+  &:focus {
+    outline: 2px solid variables.$danger-red-hover;
+    outline-offset: 2px;
+  }
+
+  &:hover, &:focus {
+    .deleteIcon {
+      color: variables.$danger-red-hover;
+    }
+  }
+}
+
+.editIcon {
+  @include mixins.editIcon;
+  width: 1.5rem;
+}
+
+.deleteIcon {
+  @include mixins.dangerIcon;
+  width: 1.25rem;
 }

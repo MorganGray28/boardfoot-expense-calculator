@@ -140,3 +140,34 @@
   width: 8px;
   background-color: rgb(236 236 236);
 }
+
+// icons & icon buttons
+@mixin editDeleteButtonGroup {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1.5rem;
+}
+
+@mixin dangerIcon {
+  color: variables.$danger-red;
+  transition: color 300ms ease;
+
+  &:hover, &:focus, &:active {
+    color: variables.$danger-red-hover;
+  }
+}
+
+@mixin editIcon {
+  color: variables.$primary-button-blue;
+  transition: color 300ms ease;
+
+  &:hover, &:focus, &:active {
+    color: variables.$primary-button-blue;
+  }
+}
+
+@mixin iconButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

@@ -3,6 +3,9 @@ import styles from '../styles/GenericExpenseListItem.module.scss';
 import { trpc } from '../utils/trpc';
 import { ProjectType } from '../types/types';
 import { checkForIdenticalObjects } from '../utils/utils';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 
 type PropsType = {
 	id: string;
@@ -112,10 +115,19 @@ function GenericExpenseListItem({ id, name, cost, amount, setActiveProject }: Pr
 						<p className={styles.listItem}>${(amount * cost).toFixed(2)}</p>
 					</div>
 				</div>
-				<button onClick={() => setIsEditingExpense(true)}>Edit</button>
-				<button onClick={handleDelete} disabled={deleteExpense.isLoading}>
-					Delete
-				</button>
+				<div className={styles.buttonGroup}>
+					<button onClick={() => setIsEditingExpense(true)} className={styles.iconEditButton} title='edit'>
+						<FontAwesomeIcon icon={faPenToSquare} className={styles.editIcon} />
+					</button>
+					<button
+						onClick={handleDelete}
+						disabled={deleteExpense.isLoading}
+						className={styles.iconDeleteButton}
+						title='delete'
+					>
+						<FontAwesomeIcon icon={faTrashCan} className={styles.deleteIcon} />
+					</button>
+				</div>
 			</div>
 		);
 	}

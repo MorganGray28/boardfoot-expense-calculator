@@ -14,6 +14,7 @@ import { trpc } from '../utils/trpc';
 // TODO: Start styling components
 // FIXME: number inputs won't allow a value of ".0X"
 // FIXME: add description input for new project creation
+// TODO: Make Edit and Delete Icon Buttons more reusable and DRY
 
 const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);
