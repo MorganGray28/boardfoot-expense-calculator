@@ -17,6 +17,10 @@
     h1 {
       text-align: center;
     }
+
+  @media (max-width: 1920px) {
+    padding: 0 2rem;
+  }
 }
 
 .navbar {

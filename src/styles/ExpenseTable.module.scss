@@ -37,6 +37,14 @@
 
 .container {
   width: 600px;
+
+  @media (max-width: 1920px) {
+    width: 450px;
+  }
+
+  @media (max-width: 1620px) {
+    width: 375px;
+  }
 }
 
 .addButton {
@@ -51,6 +59,11 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+
+  @media (max-width: 1620px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .category {
@@ -63,7 +76,11 @@
   padding-top: .2rem;
   font-weight: 400;
   font-size: .875rem;
-  color: variables.$secondary-blue
+  color: variables.$secondary-blue;
+
+  @media (max-width: 1620px) {
+    padding-bottom: .5rem;
+  }
 }
 
 .list {

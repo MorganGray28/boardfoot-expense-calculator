@@ -7,7 +7,7 @@
 	overflow-y: auto;
 	background-color: variables.$background-color;
 	color: variables.$primary-blue;
-	padding: 4rem 3rem 0 3rem;
+	padding: 4rem 1.5rem 0 1.5rem;
 }
 
 .boardfootContainer {
@@ -23,9 +23,6 @@
 			@include mixins.input;
 			margin-top: .25rem;
 			width: 100%;
-
-			// FIXME: chrome autofill will give a similar background, we need to differentiate more to not confuse the user about which input is in focus 
-			
 		}
 
 		& input[type=number] {
@@ -74,6 +71,14 @@
 
 		&:hover {
 			color: hsl(205, 93%, 40%)
+		}
+
+		@media (max-width: 1620px) {
+			padding-right: .5rem;
+		}
+
+		@media (max-width: 1200px) {
+			display: none;
 		}
 	}
 }

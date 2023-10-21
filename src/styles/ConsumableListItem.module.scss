@@ -68,10 +68,8 @@
 
 .editIcon {
   @include mixins.editIcon;
-  width: 1.5rem;
 }
 
 .deleteIcon {
   @include mixins.dangerIcon;
-  width: 1.25rem;
 }
