@@ -12,7 +12,12 @@
 }
 
 .container {
-  width: 430px;
+  width: 600px;
+}
+
+.addButton {
+  @include mixins.primary-button;
+  padding: .75rem 1.5rem;
 }
 
 .categoryContainer {
@@ -21,6 +26,7 @@
   margin-bottom: .5rem;
   display: flex;
   justify-content: space-between;
+  align-items: end;
 }
 
 .category {
@@ -43,26 +49,17 @@
 
     &::-webkit-scrollbar-thumb
     {
-        border-radius: 8px;
-        -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1);
-        background-color: rgb(206, 206, 206);
-    
-        &:hover {
-        background-color: hsl(0, 0%, 76%);
-        }
+      @include mixins.scrollbar-thumb;
     }
     
     &::-webkit-scrollbar-track
     {
-        -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,0.1);
-        border-radius: 15px;
-        background-color: rgb(241, 241, 241);
+      @include mixins.scrollbar-track;
     }
     
     &::-webkit-scrollbar
     {
-        width: 8px;
-        background-color: rgb(236 236 236);
+      @include mixins.scrollbar;
     }
 }
 

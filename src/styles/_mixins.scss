@@ -12,13 +12,14 @@
 @mixin primary-button {
   @include button;
   background-color: variables.$primary-button-blue;
-  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.169);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.169);
   color: white;
   border: none;
 	transition: all 300ms ease;
 
-  &:hover, &:focus {
+  &:hover, &:active, &:focus {
 		background-color: darken($color: #2A68BA, $amount: 8%);
+    box-shadow: 0px 4px 16px rgba(21, 64, 216, 0.463);
 	}
   &:focus {
     outline: 1px solid #0e2a4f;
@@ -58,7 +59,7 @@
   box-shadow: 0px 0px 4px rgba(114, 53, 53, 0.169);
 
   &:active, &:hover, &:focus {
-    box-shadow: 0px 0px 12px rgba(182, 74, 74, 0.468);
+    box-shadow: 0px 4px 12px rgba(182, 74, 74, 0.468);
     border: 1px solid #ff3e6b;
     color: #ff3e6b;
   }
@@ -116,4 +117,26 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	padding: 1rem .5rem;
+}
+
+// custom scrollbar 
+@mixin scrollbar-thumb {
+  border-radius: 8px;
+  -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1);
+  background-color: rgb(206, 206, 206);
+
+    &:hover {
+    background-color: hsl(0, 0%, 76%);
+    }
+}
+
+@mixin scrollbar-track {
+  -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,0.1);
+  border-radius: 15px;
+  background-color: rgb(241, 241, 241);
+}
+
+@mixin scrollbar {
+  width: 8px;
+  background-color: rgb(236 236 236);
 }

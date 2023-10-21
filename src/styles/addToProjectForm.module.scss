@@ -57,6 +57,21 @@
   height: 400px;
   overflow-y: auto;
   margin-bottom: 1rem;
+
+  &::-webkit-scrollbar-thumb
+    {
+      @include mixins.scrollbar-thumb;
+    }
+    
+    &::-webkit-scrollbar-track
+    {
+      @include mixins.scrollbar-track;
+    }
+    
+    &::-webkit-scrollbar
+    { 
+      @include mixins.scrollbar;
+    }
 }
 
 .buttonGroup {
