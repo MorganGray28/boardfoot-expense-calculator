@@ -1,5 +1,10 @@
+:root {
+  font-size: 16px;
+}
+
 html,
 body {
+  min-height: 100vh;
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -16,19 +21,23 @@ a {
   font-family: inherit;
 }
 
-/* Responsive Breakpoints */
+/* Responsive Breakpoints 
 
-  /* XL */
-  /* 
+  XL
   @media (max-width: 1920px) {} 
-  */
 
-  /* LG */
-  /* 
+
+  LG
   @media (max-width: 1620px) {} 
-  */
+ 
+  MD
+  @media (max-width: 1200px) {} 
+
+  SM
+  @media (max-width: 900px) {} 
+
+  XS 
+  @media (max-width: 765px) {} 
 
 
-
-
-/*  */
+*/

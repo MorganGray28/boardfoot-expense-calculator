@@ -221,11 +221,7 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 					</div>
 				</div>
 
-				<button
-					disabled={!session}
-					type='submit'
-					className={session ? styles.primaryButton : styles.primaryButtonDisabled}
-				>
+				<button disabled={!session} type='submit' className={styles.primaryButton}>
 					Add to Project
 				</button>
 				{!session && <p className={styles.helpMessage}>please sign in to add lumber to a project</p>}

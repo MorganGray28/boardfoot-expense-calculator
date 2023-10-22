@@ -8,6 +8,11 @@
 	background-color: variables.$background-color;
 	color: variables.$primary-blue;
 	padding: 4rem 1.5rem 0 1.5rem;
+
+	@media (max-width: 900px) {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
 }
 
 .boardfootContainer {
@@ -28,6 +33,11 @@
 		& input[type=number] {
 			appearance: textfield;
 			-moz-appearance: textfield;	
+		}
+
+		@media (max-width: 900px) {
+			padding: .5rem;
+			border-radius: 8px;
 		}
 }
 
@@ -124,19 +134,27 @@
 	&:hover {
 		color: rgb(173, 26, 38);
 	}
+
+	@media (max-width: 1200px) {
+		margin-top: .5rem;
+		margin-bottom: .5rem;
+	}
 }
 
 .primaryButton {
 	@include mixins.primary-button;
 	margin: 1.5rem auto 1.5rem auto;
 	display: block;
-}
 
-.primaryButtonDisabled {
-	@include mixins.primary-button-disabled;
-	margin: 1.5rem auto 1.5rem auto;
-	display: block;
-	cursor: default;
+	&:disabled {
+		@include mixins.primary-button-disabled;
+		cursor: default;
+	}
+
+	@media (max-width: 900px) {
+		width: 100%;
+		margin-bottom: .5rem;
+	}
 }
 
 .helpMessage {
