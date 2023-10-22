@@ -2,8 +2,6 @@ import React, { useState, Dispatch, SetStateAction } from 'react';
 import { ProjectType } from '../types/types';
 import { ActiveProjectForm } from './ActiveProjectForm';
 import ExpenseAndConsumableGroup from './ExpenseAndConsumableGroup';
-import ExpenseTable from './ExpenseTable';
-import ConsumableTable from './ConsumableTable';
 import NewProjectForm from './NewProjectForm';
 import ProjectCostSummary from './ProjectCostSummary';
 
@@ -37,14 +35,13 @@ export default function Dashboard({ projects, activeProject, setActiveProject, i
 					/>
 				)}
 
-				<ExpenseAndConsumableGroup>
-					<ExpenseTable
-						activeProject={activeProject}
-						setActiveProject={setActiveProject}
-						setTotalExpenseAmount={setTotalExpenseAmount}
-					/>
-					<ConsumableTable setTotalConsumableAmount={setTotalConsumableAmount} />
-				</ExpenseAndConsumableGroup>
+				<ExpenseAndConsumableGroup
+					activeProject={activeProject}
+					setActiveProject={setActiveProject}
+					setTotalExpenseAmount={setTotalExpenseAmount}
+					setTotalConsumableAmount={setTotalConsumableAmount}
+				/>
+
 				<ProjectCostSummary totalExpenses={totalExpenseAmount} totalConsumables={totalConsumableAmount} />
 			</div>
 		);

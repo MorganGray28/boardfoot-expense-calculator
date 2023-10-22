@@ -8,6 +8,10 @@
 .calculatorContainer {
   max-width: 500px;
 	width: 35%;
+
+  @media (max-width: 1200px) {
+    width: 55%;
+  }
 }
 
 .projectContainer {

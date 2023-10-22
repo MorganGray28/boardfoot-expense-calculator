@@ -35,7 +35,10 @@
   @include mixins.modal-header;
 }
 
+
+
 .container {
+  display: block;
   width: 600px;
 
   @media (max-width: 1920px) {
@@ -44,6 +47,23 @@
 
   @media (max-width: 1620px) {
     width: 375px;
+  }
+
+  @media (max-width: 1200px) {
+    width: 500px;
+  }
+}
+
+.active {
+  display: block;
+}
+
+.inactive {
+  display: none;
+
+  // media query disregards active tab styling to show all tabs above 1200px breakpoint
+  @media (min-width: 1200px) {
+    display: block;
   }
 }
 
@@ -84,7 +104,7 @@
 }
 
 .list {
-  max-height: 30rem;
+  height: 30rem;
   padding-right: .5rem;
   overflow-y: auto;
 

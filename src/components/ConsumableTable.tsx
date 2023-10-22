@@ -17,11 +17,12 @@ type ConsumableInputType = {
 
 type PropsType = {
 	setTotalConsumableAmount: Dispatch<SetStateAction<number>>;
+	activeTab: boolean;
 };
 
 type ConsumableInputTypeWithId = ConsumableInputType & { userId: string };
 
-export default function ConsumableTable({ setTotalConsumableAmount }: PropsType) {
+export default function ConsumableTable({ setTotalConsumableAmount, activeTab }: PropsType) {
 	const { data: session } = useSession();
 	const [consumables, setConsumables] = useState<ConsumableInputType[]>([{ name: '', amount: 0, cost: 0 }]);
 	const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -208,7 +209,11 @@ export default function ConsumableTable({ setTotalConsumableAmount }: PropsType)
 					</div>
 				</div>
 			</Modal>
-			<div className={styles.container}>
+			<div
+				className={
+					activeTab ? `${styles.container} ${styles.active}` : `${styles.container} ${styles.inactive}`
+				}
+			>
 				<div className={styles.categoryContainer}>
 					<div className={styles.flexGroup}>
 						<h4 className={styles.category}>Consumables</h4>

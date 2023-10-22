@@ -1,8 +1,45 @@
+@use 'variables';
+
 .flexContainer {
   display: flex;
   justify-content: space-around;
 
-  // @media (max-width: 1200px) {
-    
-  // }
+  @media (max-width: 1200px) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.tabGroup {
+
+  @media (min-width: 1200px) {
+    display: none;
+  }
+}
+
+.tabLabel {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 2rem;
+}
+
+.labelContainer {
+  display: flex;
+  justify-content: center;
+  
+  & p {
+    font-size: .875rem;
+    padding: 0 1rem;
+  }
+}
+
+.activeTabLabel {
+  color: variables.$primary-button-blue;
+  transition: color 300ms ease;
+}
+
+.inactiveTabLabel {
+  color: variables.$border-bottom-grey;
+  transition: color 300ms ease;
+
 }
