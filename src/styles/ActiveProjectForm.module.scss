@@ -13,6 +13,7 @@
 
   @media (max-width: 1200px) {
     padding-bottom: 2rem;
+    min-height: 11rem;
   }
 }
 
@@ -25,6 +26,8 @@
   @media (max-width: 1620px) {
     padding-top: 2rem;
   }
+
+  
 }
 
 .selectInput {
@@ -130,4 +133,9 @@
   padding-top: 2rem;
   max-width: 75%;
   font-style: italic;
+
+  @media (max-width: 1200px) {
+    padding-top: .5rem;
+    max-width: 100%;
+  }
 }
