@@ -59,11 +59,11 @@
 }
 
 .inactive {
-  display: none;
-
+  display: block;
+  
   // media query disregards active tab styling to show all tabs above 1200px breakpoint
-  @media (min-width: 1200px) {
-    display: block;
+  @media (max-width: 1200px) {
+    display: none;
   }
 }
 
