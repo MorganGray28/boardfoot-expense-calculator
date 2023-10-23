@@ -102,6 +102,7 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 							No. of Pieces
 						</label>
 						<input
+							id='numOfPieces'
 							name='numOfPieces'
 							autoComplete='off'
 							value={values.numOfPieces || ''}
@@ -115,6 +116,7 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 						</label>
 						<div className={styles.inputUnitsGroup}>
 							<input
+								id='thickness'
 								name='thickness'
 								autoComplete='off'
 								value={values.thickness || ''}
@@ -135,6 +137,7 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 						</label>
 						<div className={styles.inputUnitsGroup}>
 							<input
+								id='width'
 								name='width'
 								autoComplete='off'
 								value={values.width || ''}
@@ -150,6 +153,7 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 						</label>
 						<div className={styles.inputUnitsGroup}>
 							<input
+								id='length'
 								name='length'
 								autoComplete='off'
 								value={values.length || ''}
@@ -191,6 +195,7 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 							Species
 						</label>
 						<input
+							id='species'
 							type='text'
 							autoComplete='off'
 							name='species'
@@ -204,6 +209,7 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 							Price
 						</label>
 						<input
+							id='price'
 							type='number'
 							autoComplete='off'
 							name='price'
@@ -218,6 +224,7 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 						</label>
 						<div className={styles.inputUnitsGroup}>
 							<input
+								id='tax'
 								type='number'
 								autoComplete='off'
 								name='tax'

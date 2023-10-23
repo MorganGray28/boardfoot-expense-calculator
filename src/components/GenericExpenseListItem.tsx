@@ -82,17 +82,26 @@ function GenericExpenseListItem({ id, name, cost, amount, setActiveProject }: Pr
 						<input
 							type='number'
 							autoComplete='off'
+							id='amount'
 							name='amount'
 							value={values.amount || ''}
 							onChange={handleChange}
 						/>
 					</div>
 					<label htmlFor='name'>Name</label>
-					<input type='text' autoComplete='off' name='name' value={values.name} onChange={handleChange} />
+					<input
+						type='text'
+						autoComplete='off'
+						name='name'
+						id='name'
+						value={values.name}
+						onChange={handleChange}
+					/>
 					<label htmlFor='cost'>Cost</label>
 					<input
 						type='number'
 						autoComplete='off'
+						id='cost'
 						name='cost'
 						value={values.cost || ''}
 						onChange={handleChange}

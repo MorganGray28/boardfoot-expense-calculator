@@ -112,6 +112,7 @@ export default function LumberExpenseListItem({
 				<form onSubmit={(e) => handleSubmit(e)} noValidate>
 					<label htmlFor='numOfPieces'>No. of Pieces</label>
 					<input
+						id='numOfPieces'
 						name='numOfPieces'
 						autoComplete='off'
 						type='number'
@@ -120,6 +121,7 @@ export default function LumberExpenseListItem({
 					/>
 					<label htmlFor='thickness'>Thickness</label>
 					<input
+						id='thickness'
 						name='thickness'
 						autoComplete='off'
 						type='number'
@@ -128,6 +130,7 @@ export default function LumberExpenseListItem({
 					/>
 					<label htmlFor='width'>Width</label>
 					<input
+						id='width'
 						name='width'
 						autoComplete='off'
 						type='number'
@@ -136,6 +139,7 @@ export default function LumberExpenseListItem({
 					/>
 					<label htmlFor='length'>Length</label>
 					<input
+						id='length'
 						name='length'
 						autoComplete='off'
 						type='number'
@@ -144,6 +148,7 @@ export default function LumberExpenseListItem({
 					/>
 					<label htmlFor='name'>Description</label>
 					<input
+						id='name'
 						name='name'
 						autoComplete='off'
 						type='text'
@@ -152,6 +157,7 @@ export default function LumberExpenseListItem({
 					/>
 					<label htmlFor='species'>Species</label>
 					<input
+						id='species'
 						name='species'
 						autoComplete='off'
 						type='text'
@@ -160,6 +166,7 @@ export default function LumberExpenseListItem({
 					/>
 					<label htmlFor='price'>Price</label>
 					<input
+						id='price'
 						name='price'
 						autoComplete='off'
 						type='number'
@@ -168,6 +175,7 @@ export default function LumberExpenseListItem({
 					/>
 					<label htmlFor='tax'>Tax</label>
 					<input
+						id='tax'
 						name='tax'
 						autoComplete='off'
 						type='number'

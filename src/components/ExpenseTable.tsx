@@ -1,4 +1,4 @@
-import React, { Dispatch, FormEvent, SetStateAction, useState } from 'react';
+import React, { Dispatch, FormEvent, SetStateAction, useEffect, useState } from 'react';
 import styles from '../styles/ExpenseTable.module.scss';
 import { ProjectType, ExpenseType } from '../types/types';
 import LumberExpenseListItem from './LumberExpenseListItem';
@@ -110,7 +110,7 @@ export default function ExpenseTable({
 	let expensesFormList = expenses.map((expense, index) => {
 		return (
 			<div className={styles.expenseInputContainer} key={index}>
-				<div className={styles.labelInputGroup}>
+				<div className={`${styles.labelInputGroup} ${styles.flexShrink}`}>
 					<label htmlFor='amount' className={styles.inputLabel}>
 						Amount
 					</label>
@@ -119,6 +119,7 @@ export default function ExpenseTable({
 						type='number'
 						autoComplete='off'
 						min={0}
+						id='amount'
 						name='amount'
 						value={expense.amount ? expense.amount : ''}
 						onChange={(e) => handleChange(index, e)}
@@ -132,12 +133,13 @@ export default function ExpenseTable({
 						className={styles.input}
 						type='text'
 						autoComplete='off'
+						id='name'
 						name='name'
 						value={expense.name}
 						onChange={(e) => handleChange(index, e)}
 					/>
 				</div>
-				<div className={styles.labelInputGroup}>
+				<div className={`${styles.labelInputGroup} ${styles.flexShrink}`}>
 					<label htmlFor='cost' className={styles.inputLabel}>
 						Cost
 					</label>
@@ -146,6 +148,7 @@ export default function ExpenseTable({
 						type='number'
 						autoComplete='off'
 						min={0}
+						id='cost'
 						name='cost'
 						value={expense.cost ? expense.cost : ''}
 						onChange={(e) => handleChange(index, e)}
@@ -214,7 +217,11 @@ export default function ExpenseTable({
 			);
 		});
 	}
-	setTotalExpenseAmount(totalExpense);
+
+	// moved setTotalExpenseAmount to useEffect to avoid queueing update in dashboard parent component
+	useEffect(() => {
+		setTotalExpenseAmount(totalExpense);
+	}, [activeProject]);
 
 	return (
 		<>

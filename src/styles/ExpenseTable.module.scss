@@ -92,8 +92,8 @@
   @include mixins.primary-button;
   display: none;
   padding: 0;
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
 
   @media (max-width: 490px) {
     display: block;
@@ -117,6 +117,10 @@
 
   @media (max-width: 1200px) {
     flex-direction: row;
+  }
+
+  @media (max-width: 490px) {
+    align-items: flex-end;
   }
 }
 
@@ -222,6 +226,10 @@
 .input {
   @include mixins.input;
   margin-top: .25rem;
+}
+
+.flexShrink {
+  flex-shrink: 3;
 }
 
 .labelInputGroup {

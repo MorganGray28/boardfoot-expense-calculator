@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import styles from '../styles/ExpenseTable.module.scss';
 import ConsumableListItem from './ConsumableListItem';
 import { useSession } from 'next-auth/react';
@@ -60,7 +60,9 @@ export default function ConsumableTable({ setTotalConsumableAmount, activeTab }:
 		consumableListArray = null;
 	}
 
-	setTotalConsumableAmount(totalConsumable);
+	useEffect(() => {
+		setTotalConsumableAmount(totalConsumable);
+	}, [consumableList]);
 
 	function handleOpenModal() {
 		setModalIsOpen(true);
@@ -134,6 +136,7 @@ export default function ConsumableTable({ setTotalConsumableAmount, activeTab }:
 						type='number'
 						autoComplete='off'
 						min={0}
+						id='amount'
 						name='amount'
 						value={consumable.amount ? consumable.amount : ''}
 						onChange={(e) => handleChange(index, e)}
@@ -147,6 +150,7 @@ export default function ConsumableTable({ setTotalConsumableAmount, activeTab }:
 						className={styles.input}
 						type='text'
 						autoComplete='off'
+						id='name'
 						name='name'
 						value={consumable.name}
 						onChange={(e) => handleChange(index, e)}
@@ -161,6 +165,7 @@ export default function ConsumableTable({ setTotalConsumableAmount, activeTab }:
 						type='number'
 						autoComplete='off'
 						min={0}
+						id='cost'
 						name='cost'
 						value={consumable.cost ? consumable.cost : ''}
 						onChange={(e) => handleChange(index, e)}
