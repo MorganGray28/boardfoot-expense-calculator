@@ -109,10 +109,18 @@ function GenericExpenseListItem({ id, name, cost, amount, setActiveProject }: Pr
 		return (
 			<div className={styles.container}>
 				<div className={styles.flexContainer}>
-					<p className={styles.listItem}>{amount}</p>
-					<p className={styles.listItem}>${cost}/each</p>
-					<p className={styles.listItem}>{name}</p>
-					<div className='flex-vertical-container'>
+					<div className={styles.listItemContainer}>
+						<p className={styles.listItem}>{amount}</p>
+					</div>
+					<div className={styles.listItemContainer}>
+						<p className={styles.listItem}>{name}</p>
+					</div>
+					<div className={styles.listItemContainer}>
+						<p className={styles.listItem}>
+							${cost} <br /> /each
+						</p>
+					</div>
+					<div className={styles.listItemContainer}>
 						<p className={styles.listItem}>Total:</p>
 						<p className={styles.listItem}>${(amount * cost).toFixed(2)}</p>
 					</div>

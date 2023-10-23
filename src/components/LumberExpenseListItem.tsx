@@ -189,7 +189,7 @@ export default function LumberExpenseListItem({
 				<div className={styles.flexContainer}>
 					<div className={styles.speciesThicknessGroup}>
 						<p className={styles.species}>{species}</p>
-						<p className={styles.thickness}>{thickness}"</p>
+						<p className={styles.thickness}>{thickness}" thick</p>
 					</div>
 					<p className={styles.boardFeet}>{boardFeet} BF</p>
 					<p className={styles.cost}>${cost.toFixed(2)}</p>
