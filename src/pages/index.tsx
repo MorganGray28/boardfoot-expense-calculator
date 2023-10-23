@@ -22,6 +22,7 @@ import { trpc } from '../utils/trpc';
 // TODO: Style Edit Consumable form and inputs
 // TODO: Style Expense and Consumable List Items alternating backgrounds
 // TODO: Adjust Flex container size for sensible space usage in Add Expense Form
+// FIXME: Adjust modal responsive width for mobile use
 
 const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);

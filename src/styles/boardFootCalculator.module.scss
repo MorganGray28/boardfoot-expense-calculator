@@ -10,6 +10,11 @@
 	background-color: variables.$background-color;
 	color: variables.$primary-blue;
 	padding: 4rem 1.5rem 0 1.5rem;
+	transition: width 300ms ease;
+
+	& .sidebarIcon {
+		display: none;
+	}
 
 	@media (max-width: 1200px) {
     width: 55%;
@@ -21,10 +26,45 @@
     width: 42%;
 	}
 
-	//  @media (max-width: 765px) {
-  //   position: fixed;
-  //   width: 45px;
-  // }
+	 @media (max-width: 765px) {
+    position: fixed;
+    width: 45px;
+		padding: 1rem 0 0 0;
+		
+		& form {
+			display: none;
+		}
+
+		& .sidebarIcon {
+			display: block;
+		}
+  }
+}
+
+.sidebarIcon {
+	color: rgb(27, 50, 227);
+	width: 2rem;
+	display: block;
+	margin-top: 0;
+	margin: 1rem auto 0 auto;
+}
+
+.sidebarOpen {
+	@media (max-width: 765px) {
+    position: fixed;
+    width: 65%;
+		padding: 0 1rem 0 1rem;
+		z-index: 2;
+		
+		& form {
+			display: block;
+		}
+
+		& .sidebarIcon {
+		color: rgb(7, 7, 7);
+		margin: 1rem 0 0 auto;
+		}
+  }
 }
 
 .boardfootContainer {

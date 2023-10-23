@@ -4,6 +4,8 @@ import { BoardFeetType } from '../types/types';
 import { calculateBoardFeet } from '../utils/calculationsUtils';
 import styles from '../styles/boardFootCalculator.module.scss';
 import { trpc } from '../utils/trpc';
+import { faCalculator, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type PropsType = {
 	handleModal: (values: BoardFeetType) => void;
@@ -23,6 +25,7 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 
 	const { data: session } = useSession();
 
+	const [sidebarOpen, setSidebarOpen] = useState(false);
 	const [values, setValues] = useState(initialValues);
 	let boardFeet: number | undefined = 0;
 	let preTax = 0;
@@ -72,8 +75,25 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 		handleClearForm();
 	}
 
+	/* Mobile Sidebar Design
+	- use state to track whether sidebar is open or not
+	- if sidebar is closed, width of container should just allow for Calculator icon
+	- if sidebar is open, adjust the width and display the inner contents
+	- conditionally set className on container based on sideBarOpen being true
+
+	
+	- IMPORTANT CONSIDERATION: if a user isn't logged in/no session, then we need to display the BF calculator by default 
+
+	*/
+
 	return (
-		<div className={styles.container}>
+		<div className={sidebarOpen ? `${styles.sidebarOpen} ${styles.container}` : `${styles.container}`}>
+			<FontAwesomeIcon
+				onClick={() => setSidebarOpen(!sidebarOpen)}
+				className={styles.sidebarIcon}
+				icon={sidebarOpen ? faXmark : faCalculator}
+				size='xs'
+			/>{' '}
 			<form onSubmit={handleSubmit}>
 				<div className={styles.boardfootContainer}>
 					<p className={styles.subheading}>Board Feet Calculator</p>
