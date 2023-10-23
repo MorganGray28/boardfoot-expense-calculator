@@ -4,15 +4,27 @@
 .container {
 	min-height: 100vh;
 	height: 100%;
+	max-width: 500px;
+	width: 35%;
 	overflow-y: auto;
 	background-color: variables.$background-color;
 	color: variables.$primary-blue;
 	padding: 4rem 1.5rem 0 1.5rem;
 
+	@media (max-width: 1200px) {
+    width: 55%;
+  }
+
 	@media (max-width: 900px) {
 		padding-left: 1rem;
 		padding-right: 1rem;
+    width: 42%;
 	}
+
+	//  @media (max-width: 765px) {
+  //   position: fixed;
+  //   width: 45px;
+  // }
 }
 
 .boardfootContainer {

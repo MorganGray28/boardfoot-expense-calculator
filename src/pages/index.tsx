@@ -60,9 +60,7 @@ const Home: NextPage = () => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<div className={styles.dashboard}>
-				<div className={styles.calculatorContainer}>
-					<BoardFootCalculator handleModal={handleOpen} />
-				</div>
+				<BoardFootCalculator handleModal={handleOpen} />
 				<div className={styles.projectContainer}>
 					<nav className={styles.navbar}>
 						<h1>Woodworking Expense Tracker</h1>
