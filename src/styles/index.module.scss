@@ -17,6 +17,10 @@
     padding: 0 2rem;
   }
 
+  @media (max-width: 1200px) {
+    padding: 0 1rem;
+  }
+
   @media (max-width: 900px) {
     padding: 0 .5rem;
   }
@@ -34,6 +38,11 @@
   padding: .75rem 0;
   border-bottom: 1px solid rgba(27, 66, 118, 0.178);
 
+  @media (max-width: 1200px) {
+    min-height: auto;
+    padding: .5rem 0;
+  }
+
   & p {
     font-size: 1.375rem;
     font-weight: 600;
@@ -46,6 +55,10 @@
     font-size: 1.25rem;
     font-weight: 600;
     color: variables.$primary-blue;
+
+    @media (max-width: 1200px) {
+      font-size: 1rem;
+    }
   }
 }
 

@@ -222,6 +222,9 @@ export default function ConsumableTable({ setTotalConsumableAmount, activeTab }:
 					<button onClick={handleOpenModal} className={styles.addButton}>
 						Add Consumable
 					</button>
+					<button onClick={handleOpenModal} className={styles.mobileAddButton}>
+						<FontAwesomeIcon icon={faPlus} className={styles.addIcon} />
+					</button>
 				</div>
 				<div className={styles.list}>{consumableListArray}</div>
 			</div>

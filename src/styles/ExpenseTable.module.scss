@@ -6,6 +6,10 @@
   @include mixins.modal-container;
   min-width: 45rem;
   height: 650px;
+
+  @media (max-width: 900px) {
+    min-width: 10rem;
+  }
 }
 
 .addExpenseForm {
@@ -56,6 +60,10 @@
   @media (max-width: 900px) {
     width: 400px;
   }
+
+  @media (max-width: 490px) {
+    width: 90%;
+  }
 }
 
 .active {
@@ -74,6 +82,24 @@
 .addButton {
   @include mixins.primary-button;
   padding: .75rem 1.5rem;
+
+  @media (max-width: 490px) {
+    display: none;
+  }
+}
+
+.mobileAddButton {
+  @include mixins.primary-button;
+  display: none;
+  padding: 0;
+  width: 3rem;
+  height: 3rem;
+
+  @media (max-width: 490px) {
+    display: block;
+    border-radius: 50%;
+  }
+
 }
 
 .categoryContainer {
@@ -88,12 +114,20 @@
     flex-direction: column;
     align-items: flex-start;
   }
+
+  @media (max-width: 1200px) {
+    flex-direction: row;
+  }
 }
 
 .category {
   text-align: start;
   color: variables.$primary-blue;
   font-weight: 600;
+
+  @media (max-width: 1200px) {
+    font-size: .875rem;
+  }
 }
 
 .categoryDescription {
@@ -104,6 +138,10 @@
 
   @media (max-width: 1620px) {
     padding-bottom: .5rem;
+  }
+
+  @media (max-width: 1200px) {
+    font-size: .75rem;
   }
 }
 
@@ -152,6 +190,7 @@
 
 .addIcon {
   width: 1.25rem;
+  height: 1.25rem;
 }
 
 .dangerBtn {
@@ -169,6 +208,10 @@
 
   & input {
     width: 100%;
+  }
+
+  @media (max-width: 900px) {
+    align-items: flex-end;
   }
 }
 

@@ -3,7 +3,6 @@
 
 .container {
 	min-height: 100vh;
-	height: 100%;
 	max-width: 500px;
 	width: 35%;
 	overflow-y: auto;
@@ -18,11 +17,10 @@
 
 	@media (max-width: 1200px) {
     width: 55%;
+		padding: 1rem 1rem 0 1rem;
   }
 
 	@media (max-width: 900px) {
-		padding-left: 1rem;
-		padding-right: 1rem;
     width: 42%;
 	}
 
@@ -65,6 +63,10 @@
 		margin: 1rem 0 0 auto;
 		}
   }
+
+	@media (max-width: 490px) {
+		width: 80%;
+	}
 }
 
 .boardfootContainer {
@@ -87,7 +89,7 @@
 			-moz-appearance: textfield;	
 		}
 
-		@media (max-width: 900px) {
+		@media (max-width: 1200px) {
 			padding: .5rem;
 			border-radius: 8px;
 		}
@@ -99,6 +101,10 @@
 	font-size: .875rem;
 	font-weight: 600;
 	padding-bottom: 1rem;
+
+	@media (max-width: 1200px) {
+		padding-bottom: .5rem;
+	}
 }
 
 .labelInputGroup {
@@ -116,7 +122,11 @@
 }
 
 .inputLabel {
-	@include mixins.input-label-font
+	@include mixins.input-label-font;
+
+	@media (max-width: 900px) {
+		font-size: .875rem;
+	}
 }
 
 .quarterThicknessContainer {
@@ -201,6 +211,10 @@
 	&:disabled {
 		@include mixins.primary-button-disabled;
 		cursor: default;
+	}
+	
+	@media (max-width: 1200px) {
+		margin: .875rem auto;
 	}
 
 	@media (max-width: 900px) {

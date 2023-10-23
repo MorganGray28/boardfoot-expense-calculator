@@ -12,8 +12,8 @@
   padding-bottom: 5rem;
 
   @media (max-width: 1200px) {
-    padding-bottom: 2rem;
-    min-height: 11rem;
+    padding-bottom: 1.5rem;
+    min-height: 9rem;
   }
 }
 
@@ -31,7 +31,7 @@
 }
 
 .selectInput {
-  min-width: 10rem;
+  // min-width: 10rem;
   border: 2px solid variables.$primary-blue;
   border-radius: 7px;
   padding: 1rem;
@@ -51,6 +51,13 @@
   &:focus {
     outline: 1px solid hsl(214, 55%, 50%);
     border: 2px solid hsl(214, 55%, 50%);
+  }
+
+  @media (max-width: 1200px) {
+    border-width: 1px;
+    font-size: .875rem;
+    padding: .5rem;
+    margin-right: .25rem;
   }
 }
 
@@ -74,6 +81,11 @@
   & svg {
     height: 24px;
   }
+
+  @media (max-width:1200px) {
+    width: 24px;
+    height: 24px;
+  }
 }
 
 .dropdownContainer {
@@ -86,6 +98,18 @@
   border-radius: 7px;
   box-shadow: 0px 0px 18px rgba(125, 125, 125, 0.22);
   transition: all 200ms ease;
+
+  @media (max-width: 900px) {
+    width: max-content;
+    padding: .5rem .5rem;
+    left: -.5rem;
+    top: 2rem;
+  }
+
+  @media (max-width: 490px) {
+    left: -6rem;
+    border-radius: 5px;
+  }
 
   &.inactive {
     opacity: 0;
@@ -108,6 +132,10 @@
     rotate: 45deg;
     top: -5px;
     left: 15px;
+
+    @media (max-width: 490px) {
+      left: 6.5rem;
+    }
   }
 }
 
@@ -125,6 +153,10 @@
   &:hover {
     background-color: rgb(244, 244, 244);
   }
+
+  @media (max-width: 1200px) {
+    font-size: .875rem;
+  }
 }
 
 .description {
@@ -137,5 +169,6 @@
   @media (max-width: 1200px) {
     padding-top: .5rem;
     max-width: 100%;
+    font-size: .75rem;
   }
 }

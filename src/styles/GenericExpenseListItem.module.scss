@@ -6,11 +6,20 @@
   color: variables.$primary-blue;
   border-bottom: 1px solid variables.$primary-blue;
   font-size: .875rem;
+
+  @media (max-width: 1200px) {
+    padding: .5rem;
+    font-size: .75rem;
+  }
 }
 
 .listItem {
   font-weight: 600;
   text-transform: capitalize;
+
+  @media (max-width: 1200px) {
+    font-size: .875rem;
+  }
 }
 
 .name {

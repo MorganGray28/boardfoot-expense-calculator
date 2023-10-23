@@ -251,6 +251,9 @@ export default function ExpenseTable({
 					<button onClick={handleClick} className={styles.addButton}>
 						Add Expense
 					</button>
+					<button onClick={handleClick} className={styles.mobileAddButton}>
+						<FontAwesomeIcon icon={faPlus} className={styles.addIcon} />
+					</button>
 				</div>
 				<div className={styles.list}>
 					{lumberListItems} {genericExpenseList}

@@ -23,6 +23,8 @@ import { trpc } from '../utils/trpc';
 // TODO: Style Expense and Consumable List Items alternating backgrounds
 // TODO: Adjust Flex container size for sensible space usage in Add Expense Form
 // FIXME: Adjust modal responsive width for mobile use
+// FIXME: Mobile Responsive: move sign out to expandable sidebar and change calculator to hamburger menu
+// FIXME: Mobile Responsive: fix expense list issues with categories text running into each other
 
 const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);
