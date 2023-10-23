@@ -6,14 +6,19 @@
   color: variables.$primary-blue;
   border-bottom: 1px solid variables.$primary-blue;
 
-  & form {
-    & label {
-      width: 45%;
-    }
+  // & form {
+  //   & label {
+  //     width: 45%;
+  //   }
 
-    & input {
-      width: 30%;
-    }
+  //   & input {
+  //     width: 30%;
+  //   }
+  // }
+
+  @media (max-width: 490px) {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 }
 
@@ -43,6 +48,40 @@
 
 .cost {
   font-weight: 600;
+}
+
+// Edit Lumber Item Form elements
+
+.formFlexWrapper {
+  @include mixins.formFlexWrapper;
+  padding-bottom: .25rem;
+}
+
+.labelInputGroup {
+  @include mixins.label-input-group;
+  justify-content: space-between;
+}
+
+.inputLabel {
+  @include mixins.input-label-font;
+  width: 100%;
+}
+
+.input {
+  @include mixins.editItemInput;
+}
+
+.formButtonGroup {
+  @include mixins.formButtonGroup;
+  padding-top: 1rem;
+}
+
+.dangerBtn {
+  @include mixins.cancelChangesButton;
+}
+
+.approveBtn {
+  @include mixins.saveChangesButton;
 }
 
 // Edit and Delete Icons/Buttons

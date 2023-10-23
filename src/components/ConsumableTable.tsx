@@ -128,7 +128,7 @@ export default function ConsumableTable({ setTotalConsumableAmount, activeTab }:
 		return (
 			<div className={styles.expenseInputContainer} key={index}>
 				<div className={styles.labelInputGroup}>
-					<label htmlFor='amount' className={styles.inputLabel}>
+					<label htmlFor={'amount' + index} className={styles.inputLabel}>
 						Percentage Applied
 					</label>
 					<input
@@ -136,28 +136,28 @@ export default function ConsumableTable({ setTotalConsumableAmount, activeTab }:
 						type='number'
 						autoComplete='off'
 						min={0}
-						id='amount'
+						id={'amount' + index}
 						name='amount'
 						value={consumable.amount ? consumable.amount : ''}
 						onChange={(e) => handleChange(index, e)}
 					/>
 				</div>
 				<div className={styles.labelInputGroup}>
-					<label htmlFor='name' className={styles.inputLabel}>
+					<label htmlFor={'name' + index} className={styles.inputLabel}>
 						Name
 					</label>
 					<input
 						className={styles.input}
 						type='text'
 						autoComplete='off'
-						id='name'
+						id={'name' + index}
 						name='name'
 						value={consumable.name}
 						onChange={(e) => handleChange(index, e)}
 					/>
 				</div>
 				<div className={styles.labelInputGroup}>
-					<label htmlFor='cost' className={styles.inputLabel}>
+					<label htmlFor={'cost' + index} className={styles.inputLabel}>
 						Cost
 					</label>
 					<input
@@ -165,7 +165,7 @@ export default function ConsumableTable({ setTotalConsumableAmount, activeTab }:
 						type='number'
 						autoComplete='off'
 						min={0}
-						id='cost'
+						id={'cost' + index}
 						name='cost'
 						value={consumable.cost ? consumable.cost : ''}
 						onChange={(e) => handleChange(index, e)}

@@ -256,6 +256,10 @@
       color: variables.$danger-red-hover;
     }
   }
+
+  @media (max-width: 490px) {
+  margin-left: 0;
+  }
 }
 
 .deleteIcon {

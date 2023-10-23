@@ -110,83 +110,133 @@ export default function LumberExpenseListItem({
 		return (
 			<div className={styles.container}>
 				<form onSubmit={(e) => handleSubmit(e)} noValidate>
-					<label htmlFor='numOfPieces'>No. of Pieces</label>
-					<input
-						id='numOfPieces'
-						name='numOfPieces'
-						autoComplete='off'
-						type='number'
-						value={values.numOfPieces || ''}
-						onChange={handleChange}
-					/>
-					<label htmlFor='thickness'>Thickness</label>
-					<input
-						id='thickness'
-						name='thickness'
-						autoComplete='off'
-						type='number'
-						value={values.thickness || ''}
-						onChange={handleChange}
-					/>
-					<label htmlFor='width'>Width</label>
-					<input
-						id='width'
-						name='width'
-						autoComplete='off'
-						type='number'
-						value={values.width || ''}
-						onChange={handleChange}
-					/>
-					<label htmlFor='length'>Length</label>
-					<input
-						id='length'
-						name='length'
-						autoComplete='off'
-						type='number'
-						value={values.length || ''}
-						onChange={handleChange}
-					/>
-					<label htmlFor='name'>Description</label>
-					<input
-						id='name'
-						name='name'
-						autoComplete='off'
-						type='text'
-						value={values.name || ''}
-						onChange={handleChange}
-					/>
-					<label htmlFor='species'>Species</label>
-					<input
-						id='species'
-						name='species'
-						autoComplete='off'
-						type='text'
-						value={values.species || ''}
-						onChange={handleChange}
-					/>
-					<label htmlFor='price'>Price</label>
-					<input
-						id='price'
-						name='price'
-						autoComplete='off'
-						type='number'
-						value={values.price || ''}
-						onChange={handleChange}
-					/>
-					<label htmlFor='tax'>Tax</label>
-					<input
-						id='tax'
-						name='tax'
-						autoComplete='off'
-						type='number'
-						value={values.tax || ''}
-						onChange={handleChange}
-					/>
+					<div className={styles.formFlexWrapper}>
+						<div className={styles.labelInputGroup}>
+							<label className={styles.inputLabel} htmlFor='numOfPieces'>
+								No. of Pieces
+							</label>
+							<input
+								className={styles.input}
+								id='numOfPieces'
+								name='numOfPieces'
+								autoComplete='off'
+								type='number'
+								value={values.numOfPieces || ''}
+								onChange={handleChange}
+							/>
+						</div>
+						<div className={styles.labelInputGroup}>
+							<label className={styles.inputLabel} htmlFor='thickness'>
+								Thickness
+							</label>
+							<input
+								className={styles.input}
+								id='thickness'
+								name='thickness'
+								autoComplete='off'
+								type='number'
+								value={values.thickness || ''}
+								onChange={handleChange}
+							/>
+						</div>
+						<div className={styles.labelInputGroup}>
+							<label className={styles.inputLabel} htmlFor='width'>
+								Width
+							</label>
+							<input
+								className={styles.input}
+								id='width'
+								name='width'
+								autoComplete='off'
+								type='number'
+								value={values.width || ''}
+								onChange={handleChange}
+							/>
+						</div>
+					</div>
+					<div className={styles.formFlexWrapper}>
+						<div className={styles.labelInputGroup}>
+							<label className={styles.inputLabel} htmlFor='length'>
+								Length
+							</label>
+							<input
+								className={styles.input}
+								id='length'
+								name='length'
+								autoComplete='off'
+								type='number'
+								value={values.length || ''}
+								onChange={handleChange}
+							/>
+						</div>
+						<div className={styles.labelInputGroup}>
+							<label className={styles.inputLabel} htmlFor='price'>
+								Price
+							</label>
+							<input
+								className={styles.input}
+								id='price'
+								name='price'
+								autoComplete='off'
+								type='number'
+								value={values.price || ''}
+								onChange={handleChange}
+							/>
+						</div>
+						<div className={styles.labelInputGroup}>
+							<label className={styles.inputLabel} htmlFor='tax'>
+								Tax
+							</label>
+							<input
+								className={styles.input}
+								id='tax'
+								name='tax'
+								autoComplete='off'
+								type='number'
+								value={values.tax || ''}
+								onChange={handleChange}
+							/>
+						</div>
+					</div>
+					<div className={styles.formFlexWrapper}>
+						<div className={styles.labelInputGroup}>
+							<label className={styles.inputLabel} htmlFor='name'>
+								Description
+							</label>
+							<input
+								className={styles.input}
+								id='name'
+								name='name'
+								autoComplete='off'
+								type='text'
+								value={values.name || ''}
+								onChange={handleChange}
+							/>
+						</div>
+						<div className={styles.labelInputGroup}>
+							<label className={styles.inputLabel} htmlFor='species'>
+								Species
+							</label>
+							<input
+								className={styles.input}
+								id='species'
+								name='species'
+								autoComplete='off'
+								type='text'
+								value={values.species || ''}
+								onChange={handleChange}
+							/>
+						</div>
+					</div>
 
-					<button type='button' onClick={handleCancel}>
-						Cancel
-					</button>
-					<button type='submit'>Done</button>
+					<div className={styles.formButtonGroup}>
+						<button className={styles.dangerBtn} type='button' onClick={handleCancel}>
+							Cancel
+						</button>
+						<button className={styles.approveBtn} type='submit'>
+							Save
+						</button>
+					</div>
 				</form>
 			</div>
 		);

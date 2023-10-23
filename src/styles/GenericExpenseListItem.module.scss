@@ -44,6 +44,22 @@
   @include mixins.label-input-group;
 }
 
+.inputLabel {
+  @include mixins.input-label-font;
+}
+
+.input {
+  @include mixins.editItemInput;
+}
+
+.flexShrink {
+  flex-shrink: 3;
+}
+
+.inputFlexContainer {
+  @include mixins.formFlexWrapper;
+}
+
 .flexContainer {
   font-size: .875rem;
   display: flex;
@@ -64,8 +80,20 @@
   font-weight: 600;
 }
 
-// Edit and Delete Icons/Buttons
+// Cancel and Confirm change buttons
+.formButtonGroup {
+  @include mixins.formButtonGroup;
+}
 
+.dangerBtn {
+  @include mixins.cancelChangesButton;
+}
+
+.approveBtn {
+  @include mixins.saveChangesButton;
+}
+
+// Edit and Delete Icons/Buttons
 .buttonGroup {
   @include mixins.editDeleteButtonGroup;
 }

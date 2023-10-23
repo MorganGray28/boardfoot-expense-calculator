@@ -70,36 +70,58 @@ export default function ConsumableListItem({ name, amount, cost, id }: PropsType
 		return (
 			<div className={styles.container}>
 				<form className={styles.editForm} onSubmit={handleSubmit} noValidate>
-					<input
-						type='text'
-						autoComplete='off'
-						name='name'
-						id='name'
-						value={editInputFields.name}
-						onChange={handleChange}
-					/>
-					<input
-						type='number'
-						name='amount'
-						autoComplete='off'
-						id='amount'
-						value={editInputFields.amount || ''}
-						onChange={handleChange}
-					/>
-					<input
-						type='number'
-						name='cost'
-						autoComplete='off'
-						id='cost'
-						value={editInputFields.cost || ''}
-						onChange={handleChange}
-					/>
-					<button type='button' onClick={handleCancel}>
-						Cancel
-					</button>
-					<button type='submit' disabled={isLoading}>
-						Done
-					</button>
+					<div className={styles.inputFlexContainer}>
+						<div className={`${styles.labelInputGroup} ${styles.flexShrink}`}>
+							<label htmlFor='amount' className={styles.inputLabel}>
+								Amount
+							</label>
+							<input
+								className={styles.input}
+								type='number'
+								name='amount'
+								autoComplete='off'
+								id='amount'
+								value={editInputFields.amount || ''}
+								onChange={handleChange}
+							/>
+						</div>
+						<div className={styles.labelInputGroup}>
+							<label htmlFor='name' className={styles.inputLabel}>
+								Name
+							</label>
+							<input
+								className={styles.input}
+								type='text'
+								autoComplete='off'
+								name='name'
+								id='name'
+								value={editInputFields.name}
+								onChange={handleChange}
+							/>
+						</div>
+						<div className={`${styles.labelInputGroup} ${styles.flexShrink}`}>
+							<label htmlFor='cost' className={styles.inputLabel}>
+								Cost
+							</label>
+							<input
+								className={styles.input}
+								type='number'
+								name='cost'
+								autoComplete='off'
+								id='cost'
+								value={editInputFields.cost || ''}
+								onChange={handleChange}
+							/>
+						</div>
+					</div>
+					<div className={styles.formButtonGroup}>
+						<button className={styles.dangerBtn} type='button' onClick={handleCancel}>
+							Cancel
+						</button>
+						<button className={styles.approveBtn} type='submit' disabled={isLoading}>
+							Done
+						</button>
+					</div>
 				</form>
 			</div>
 		);

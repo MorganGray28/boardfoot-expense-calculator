@@ -77,40 +77,59 @@ function GenericExpenseListItem({ id, name, cost, amount, setActiveProject }: Pr
 		return (
 			<div className={styles.container}>
 				<form onSubmit={(e) => handleSubmit(e)} noValidate>
-					<div className={styles.labelInputGroup}>
-						<label htmlFor='amount'>Amount</label>
-						<input
-							type='number'
-							autoComplete='off'
-							id='amount'
-							name='amount'
-							value={values.amount || ''}
-							onChange={handleChange}
-						/>
+					<div className={styles.inputFlexContainer}>
+						<div className={`${styles.labelInputGroup} ${styles.flexShrink}`}>
+							<label htmlFor='amount' className={styles.inputLabel}>
+								Amount
+							</label>
+							<input
+								className={styles.input}
+								type='number'
+								autoComplete='off'
+								id='amount'
+								name='amount'
+								value={values.amount || ''}
+								onChange={handleChange}
+							/>
+						</div>
+						<div className={styles.labelInputGroup}>
+							<label htmlFor='name' className={styles.inputLabel}>
+								Name
+							</label>
+							<input
+								className={styles.input}
+								type='text'
+								autoComplete='off'
+								name='name'
+								id='name'
+								value={values.name}
+								onChange={handleChange}
+							/>
+						</div>
+						<div className={`${styles.labelInputGroup} ${styles.flexShrink}`}>
+							<label htmlFor='cost' className={styles.inputLabel}>
+								Cost
+							</label>
+							<input
+								className={styles.input}
+								type='number'
+								autoComplete='off'
+								id='cost'
+								name='cost'
+								value={values.cost || ''}
+								onChange={handleChange}
+							/>
+						</div>
 					</div>
-					<label htmlFor='name'>Name</label>
-					<input
-						type='text'
-						autoComplete='off'
-						name='name'
-						id='name'
-						value={values.name}
-						onChange={handleChange}
-					/>
-					<label htmlFor='cost'>Cost</label>
-					<input
-						type='number'
-						autoComplete='off'
-						id='cost'
-						name='cost'
-						value={values.cost || ''}
-						onChange={handleChange}
-					/>
 
-					<button type='button' onClick={handleCancel}>
-						Cancel
-					</button>
-					<button type='submit'>Done</button>
+					<div className={styles.formButtonGroup}>
+						<button className={styles.dangerBtn} type='button' onClick={handleCancel}>
+							Cancel
+						</button>
+						<button className={styles.approveBtn} type='submit'>
+							Save
+						</button>
+					</div>
 				</form>
 			</div>
 		);

@@ -111,7 +111,7 @@ export default function ExpenseTable({
 		return (
 			<div className={styles.expenseInputContainer} key={index}>
 				<div className={`${styles.labelInputGroup} ${styles.flexShrink}`}>
-					<label htmlFor='amount' className={styles.inputLabel}>
+					<label htmlFor={'amount' + index} className={styles.inputLabel}>
 						Amount
 					</label>
 					<input
@@ -119,28 +119,28 @@ export default function ExpenseTable({
 						type='number'
 						autoComplete='off'
 						min={0}
-						id='amount'
+						id={'amount' + index}
 						name='amount'
 						value={expense.amount ? expense.amount : ''}
 						onChange={(e) => handleChange(index, e)}
 					/>
 				</div>
 				<div className={styles.labelInputGroup}>
-					<label htmlFor='name' className={styles.inputLabel}>
+					<label htmlFor={'name' + index} className={styles.inputLabel}>
 						Name
 					</label>
 					<input
 						className={styles.input}
 						type='text'
 						autoComplete='off'
-						id='name'
+						id={'name' + index}
 						name='name'
 						value={expense.name}
 						onChange={(e) => handleChange(index, e)}
 					/>
 				</div>
 				<div className={`${styles.labelInputGroup} ${styles.flexShrink}`}>
-					<label htmlFor='cost' className={styles.inputLabel}>
+					<label htmlFor={'cost' + index} className={styles.inputLabel}>
 						Cost
 					</label>
 					<input
@@ -148,7 +148,7 @@ export default function ExpenseTable({
 						type='number'
 						autoComplete='off'
 						min={0}
-						id='cost'
+						id={'cost' + index}
 						name='cost'
 						value={expense.cost ? expense.cost : ''}
 						onChange={(e) => handleChange(index, e)}

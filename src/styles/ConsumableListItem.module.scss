@@ -33,6 +33,40 @@
   font-size: inherit;
 }
 
+.labelInputGroup {
+  @include mixins.label-input-group;
+}
+
+.inputLabel {
+  @include mixins.input-label-font;
+}
+
+.input {
+  @include mixins.editItemInput;
+}
+
+.flexShrink {
+  flex-shrink: 3;
+}
+
+.inputFlexContainer {
+  @include mixins.formFlexWrapper;
+}
+
+// Cancel and Confirm change buttons
+.formButtonGroup {
+  @include mixins.formButtonGroup;
+}
+
+.dangerBtn {
+  @include mixins.cancelChangesButton
+}
+
+.approveBtn {
+  @include mixins.saveChangesButton
+}
+
+
 // Edit and Delete Buttons
 .iconEditButton {
   @include mixins.iconButton;
