@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import type { z } from 'zod';
 import type { BoardFeetSchema } from '../server/trpc/router/lumber';
 
 export type BoardFeetType = z.infer<typeof BoardFeetSchema>;
