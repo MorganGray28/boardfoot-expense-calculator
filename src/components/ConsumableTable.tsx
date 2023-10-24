@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { type Dispatch, type SetStateAction, useEffect, useState } from 'react';
 import styles from '../styles/ExpenseTable.module.scss';
 import ConsumableListItem from './ConsumableListItem';
 import { useSession } from 'next-auth/react';
@@ -40,11 +40,15 @@ export default function ConsumableTable({ setTotalConsumableAmount, activeTab }:
 
 	let totalConsumable = 0;
 
-	const { data: consumableList } = trpc.consumable.getAllConsumables.useQuery(session?.user?.id!);
+	let consumableList;
+	if (session?.user?.id) {
+		consumableList = trpc.consumable.getAllConsumables.useQuery(session?.user?.id).data;
+	}
+	// const { data: consumableList } = trpc.consumable.getAllConsumables.useQuery(session?.user?.id!);
 	let consumableListArray: JSX.Element[] | null;
 	if (consumableList) {
 		consumableListArray = consumableList.map((consumable) => {
-			let percentage = consumable.amount * 0.01;
+			const percentage = consumable.amount * 0.01;
 			totalConsumable += consumable.cost * percentage;
 			return (
 				<ConsumableListItem
@@ -62,15 +66,15 @@ export default function ConsumableTable({ setTotalConsumableAmount, activeTab }:
 
 	useEffect(() => {
 		setTotalConsumableAmount(totalConsumable);
-	}, [consumableList]);
+	}, [consumableList, setTotalConsumableAmount, totalConsumable]);
 
 	function handleOpenModal() {
 		setModalIsOpen(true);
 	}
 
 	function handleChange(index: number, e: React.FormEvent<HTMLInputElement>) {
-		let data = [...consumables];
-		let property = e.currentTarget.name;
+		const data = [...consumables];
+		const property = e.currentTarget.name;
 		if (data && data[index]) {
 			if (property === 'amount' || property === 'cost') {
 				data[index]![property] = parseFloat(parseFloat(e.currentTarget.value).toFixed(2));
@@ -82,12 +86,12 @@ export default function ConsumableTable({ setTotalConsumableAmount, activeTab }:
 	}
 
 	function handleAddConsumable() {
-		let newInputField = { name: '', amount: 0, cost: 0 };
+		const newInputField = { name: '', amount: 0, cost: 0 };
 		setConsumables([...consumables, newInputField]);
 	}
 
 	function handleDelete(index: number) {
-		let data = [...consumables];
+		const data = [...consumables];
 		data.splice(index, 1);
 		setConsumables(data);
 	}
@@ -101,7 +105,7 @@ export default function ConsumableTable({ setTotalConsumableAmount, activeTab }:
 		e.preventDefault();
 		// check if there are any invalid fields, if so, alert user to use valid inputs
 		let invalidInput = false;
-		for (let consumable of consumables) {
+		for (const consumable of consumables) {
 			if (consumable.amount <= 0 || consumable.cost < 0 || !consumable.name) {
 				invalidInput = true;
 			}
@@ -111,9 +115,9 @@ export default function ConsumableTable({ setTotalConsumableAmount, activeTab }:
 			alert("Please make sure the consumable inputs aren't blank or invalid");
 		} else {
 			let consumablesWithUserId;
-			if (session && session.user) {
+			if (session && session.user && session.user.id) {
 				consumablesWithUserId = consumables.map((consumable) => {
-					consumable.userId = session!.user!.id!;
+					consumable.userId = session!.user!.id;
 					return consumable as ConsumableInputTypeWithId;
 				});
 			}
@@ -124,7 +128,7 @@ export default function ConsumableTable({ setTotalConsumableAmount, activeTab }:
 		}
 	}
 
-	let consumablesFormList = consumables.map((consumable, index) => {
+	const consumablesFormList = consumables.map((consumable, index) => {
 		return (
 			<div className={styles.expenseInputContainer} key={index}>
 				<div className={styles.labelInputGroup}>
@@ -183,7 +187,7 @@ export default function ConsumableTable({ setTotalConsumableAmount, activeTab }:
 
 				<button
 					type='button'
-					onClick={(e) => handleDelete(index)}
+					onClick={() => handleDelete(index)}
 					className={styles.iconDeleteButton}
 					title='delete'
 				>

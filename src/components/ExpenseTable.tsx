@@ -1,6 +1,6 @@
-import React, { Dispatch, FormEvent, SetStateAction, useEffect, useState } from 'react';
+import React, { type Dispatch, type FormEvent, type SetStateAction, useEffect, useState } from 'react';
 import styles from '../styles/ExpenseTable.module.scss';
-import { ProjectType, ExpenseType } from '../types/types';
+import type { ProjectType, ExpenseType } from '../types/types';
 import LumberExpenseListItem from './LumberExpenseListItem';
 import { calculateBoardFeet, calculateCostFromBF } from '../utils/calculationsUtils';
 import Modal from './Modal';
@@ -47,8 +47,8 @@ export default function ExpenseTable({
 	}
 
 	function handleChange(index: number, e: React.FormEvent<HTMLInputElement>) {
-		let data = [...expenses];
-		let property = e.currentTarget.name;
+		const data = [...expenses];
+		const property = e.currentTarget.name;
 		if (data && data[index]) {
 			if (property === 'amount' || property === 'cost') {
 				data[index]![property] = parseFloat(parseFloat(e.currentTarget.value).toFixed(2));
@@ -66,12 +66,12 @@ export default function ExpenseTable({
 			);
 			return;
 		}
-		let newInputField = { amount: 0, name: '', cost: 0 };
+		const newInputField = { amount: 0, name: '', cost: 0 };
 		setExpenses([...expenses, newInputField]);
 	}
 
 	function handleDelete(index: number) {
-		let data = [...expenses];
+		const data = [...expenses];
 		data.splice(index, 1);
 		setExpenses(data);
 	}
@@ -85,7 +85,7 @@ export default function ExpenseTable({
 		e.preventDefault();
 		// check if there are any invalid fields, if so, alert user to use valid inputs
 		let invalidInput = false;
-		for (let expense of expenses) {
+		for (const expense of expenses) {
 			if (expense.amount <= 0 || expense.cost < 0 || !expense.name) {
 				invalidInput = true;
 			}
@@ -96,7 +96,7 @@ export default function ExpenseTable({
 		} else {
 			if (activeProject && activeProject.id) {
 				// add projectId to our ExpenseType
-				let expensesWithProjectId = expenses.map((expense) => {
+				const expensesWithProjectId = expenses.map((expense) => {
 					expense.projectId! = activeProject.id;
 					return expense as ExpenseWithId;
 				});
@@ -107,7 +107,7 @@ export default function ExpenseTable({
 		// set expenses state to our initial single expense object
 	}
 
-	let expensesFormList = expenses.map((expense, index) => {
+	const expensesFormList = expenses.map((expense, index) => {
 		return (
 			<div className={styles.expenseInputContainer} key={index}>
 				<div className={`${styles.labelInputGroup} ${styles.flexShrink}`}>
@@ -162,7 +162,7 @@ export default function ExpenseTable({
 
 				<button
 					type='button'
-					onClick={(e) => handleDelete(index)}
+					onClick={() => handleDelete(index)}
 					className={styles.iconDeleteButton}
 					title='delete'
 				>
@@ -178,13 +178,13 @@ export default function ExpenseTable({
 	let totalExpense = 0;
 	if (activeProject) {
 		lumberListItems = activeProject.lumber.map((l) => {
-			let boardFeet = calculateBoardFeet({
+			const boardFeet = calculateBoardFeet({
 				numOfPieces: l.numOfPieces,
 				thickness: l.thickness,
 				width: l.width,
 				length: l.length,
 			});
-			let cost = calculateCostFromBF({ boardFeet: boardFeet, price: l.price, tax: l.tax });
+			const cost = calculateCostFromBF({ boardFeet: boardFeet, price: l.price, tax: l.tax });
 			totalExpense += cost;
 			return (
 				<LumberExpenseListItem
@@ -221,7 +221,7 @@ export default function ExpenseTable({
 	// moved setTotalExpenseAmount to useEffect to avoid queueing update in dashboard parent component
 	useEffect(() => {
 		setTotalExpenseAmount(totalExpense);
-	}, [activeProject]);
+	}, [activeProject, setTotalExpenseAmount, totalExpense]);
 
 	return (
 		<>

@@ -1,6 +1,7 @@
-import React, { useState, Dispatch, SetStateAction, useRef, RefObject, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import type { Dispatch, SetStateAction, RefObject } from 'react';
 import styles from '../styles/ActiveProjectForm.module.scss';
-import { ProjectType } from '../types/types';
+import type { ProjectType } from '../types/types';
 import { trpc } from '../utils/trpc';
 import Modal from './Modal';
 
@@ -21,10 +22,10 @@ export function ActiveProjectForm({
 	const [isEditingProject, setIsEditingProject] = useState(false);
 	const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
 
-	let dropdownRef = useRef() as RefObject<HTMLDivElement>;
+	const dropdownRef = useRef() as RefObject<HTMLDivElement>;
 
 	useEffect(() => {
-		const handler = (e: Event): any => {
+		const handler = (e: Event) => {
 			if (dropdownRef.current) {
 				if (!dropdownRef.current.contains(e.target as Element)) {
 					setDropdownOpen(false);
@@ -68,7 +69,7 @@ export function ActiveProjectForm({
 		if (!e.target.value) {
 			setActiveProject(null);
 		}
-		let newActiveProject = projects.filter((p) => p.id === e.target.value);
+		const newActiveProject = projects.filter((p) => p.id === e.target.value);
 		if (newActiveProject && newActiveProject[0]) {
 			setActiveProject(newActiveProject[0]);
 		}
@@ -176,11 +177,7 @@ function EditProjectNameForm({
 	const [projectNameInput, setProjectNameInput] = useState(projectName);
 
 	const ctx = trpc.useContext();
-	const {
-		mutate: updateProjectName,
-		error,
-		isError,
-	} = trpc.project.updateProjectName.useMutation({
+	const { mutate: updateProjectName, error } = trpc.project.updateProjectName.useMutation({
 		onSuccess: (data) => {
 			if (data) {
 				setActiveProject(data);

@@ -1,5 +1,5 @@
-import React, { useState, Dispatch, SetStateAction } from 'react';
-import { ProjectType } from '../types/types';
+import React, { useState, type Dispatch, type SetStateAction } from 'react';
+import type { ProjectType } from '../types/types';
 import { ActiveProjectForm } from './ActiveProjectForm';
 import ExpenseAndConsumableGroup from './ExpenseAndConsumableGroup';
 import NewProjectForm from './NewProjectForm';

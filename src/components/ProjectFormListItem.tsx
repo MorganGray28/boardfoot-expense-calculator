@@ -1,5 +1,5 @@
 import React from 'react';
-import { BoardFeetType } from '../types/types';
+import type { BoardFeetType } from '../types/types';
 import styles from '../styles/ProjectFormListItem.module.scss';
 
 type PropsType = {

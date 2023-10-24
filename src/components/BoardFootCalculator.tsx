@@ -1,9 +1,8 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { type ChangeEvent, type FormEvent, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import { BoardFeetType } from '../types/types';
+import type { BoardFeetType } from '../types/types';
 import { calculateBoardFeet } from '../utils/calculationsUtils';
 import styles from '../styles/boardFootCalculator.module.scss';
-import { trpc } from '../utils/trpc';
 import { faCalculator, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -48,8 +47,6 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 			}
 		}
 	}
-
-	const postLumber = trpc.lumber.addDimensionLumber.useMutation();
 
 	function handleChange(e: ChangeEvent<HTMLInputElement>) {
 		if (e.target.name === 'species' || e.target.name === 'name') {

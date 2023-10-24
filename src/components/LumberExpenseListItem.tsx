@@ -1,9 +1,9 @@
-import React, { useState, Dispatch, SetStateAction, ChangeEvent } from 'react';
+import React, { useState, type Dispatch, type SetStateAction, type ChangeEvent } from 'react';
 import styles from '../styles/LumberExpenseListItem.module.scss';
 import { calculateBoardFeet, calculateCostFromBF } from '../utils/calculationsUtils';
 import { checkForIdenticalObjects } from '../utils/utils';
 import { trpc } from '../utils/trpc';
-import { ProjectType } from '../types/types';
+import type { ProjectType } from '../types/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
@@ -48,8 +48,8 @@ export default function LumberExpenseListItem({
 	};
 	const [values, setValues] = useState(initialValues);
 
-	let boardFeet = calculateBoardFeet({ numOfPieces, thickness, width, length });
-	let cost = calculateCostFromBF({ boardFeet, price, tax });
+	const boardFeet = calculateBoardFeet({ numOfPieces, thickness, width, length });
+	const cost = calculateCostFromBF({ boardFeet, price, tax });
 	const ctx = trpc.useContext();
 	const deleteLumber = trpc.lumber.deleteDimensionLumber.useMutation({
 		onSuccess: (data) => {
@@ -247,7 +247,10 @@ export default function LumberExpenseListItem({
 				<div className={styles.flexContainer}>
 					<div className={styles.speciesThicknessGroup}>
 						<p className={styles.species}>{species}</p>
-						<p className={styles.thickness}>{thickness}" thick</p>
+						<p className={styles.thickness}>
+							{thickness}
+							{`"`} thick
+						</p>
 					</div>
 					<p className={styles.boardFeet}>{boardFeet} BF</p>
 					<p className={styles.cost}>${cost.toFixed(2)}</p>

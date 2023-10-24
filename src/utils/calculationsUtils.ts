@@ -18,12 +18,12 @@ type CostPropsType = {
 };
 
 export function calculateCostFromBF({ boardFeet, price, tax }: CostPropsType) {
-	let cost = parseFloat((boardFeet * price).toFixed(2));
+	const cost = parseFloat((boardFeet * price).toFixed(2));
 	if (!tax) {
 		return cost;
 	} else {
 		// might use formattedTax in the future if I decide to display tax separately
-		let formattedTax = parseFloat(((tax / 100) * cost).toFixed(2));
+		// const formattedTax = parseFloat(((tax / 100) * cost).toFixed(2));
 		let postTax = (tax / 100) * cost + cost;
 		postTax = parseFloat(postTax.toFixed(2));
 		return postTax;

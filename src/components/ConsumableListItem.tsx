@@ -22,7 +22,7 @@ export default function ConsumableListItem({ name, amount, cost, id }: PropsType
 		onSuccess: () => ctx.consumable.getAllConsumables.invalidate(),
 		onSettled: () => setIsEditing(false),
 	});
-	let { isLoading } = updateConsumable;
+	const { isLoading } = updateConsumable;
 	const { mutateAsync: deleteConsumable, isLoading: isDeleting } =
 		trpc.consumable.deleteConsumable.useMutation({
 			onSuccess: () => ctx.consumable.getAllConsumables.invalidate(),
@@ -30,12 +30,12 @@ export default function ConsumableListItem({ name, amount, cost, id }: PropsType
 
 	function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
 		const key = e.currentTarget.name as keyof InputFieldsType;
-		let updatedData = { ...editInputFields };
+		const updatedData = { ...editInputFields };
 		if (key === 'name') {
 			updatedData[key] = e.currentTarget.value;
 		} else {
 			if (e.currentTarget.value) {
-				let formattedNumber = parseFloat(parseFloat(e.currentTarget.value).toFixed(2));
+				const formattedNumber = parseFloat(parseFloat(e.currentTarget.value).toFixed(2));
 				updatedData[key] = formattedNumber;
 			} else {
 				updatedData[key] = 0;

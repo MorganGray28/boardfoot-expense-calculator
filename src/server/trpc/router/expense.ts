@@ -1,5 +1,5 @@
 import { router, protectedProcedure } from '../trpc';
-import { date, z } from 'zod';
+import { z } from 'zod';
 
 export const expenseRouter = router({
 	addExpense: protectedProcedure
@@ -13,7 +13,7 @@ export const expenseRouter = router({
 		)
 		.mutation(async ({ ctx, input }) => {
 			try {
-				let expense = await ctx.prisma.expense.create({
+				const expense = await ctx.prisma.expense.create({
 					data: input,
 					include: {
 						project: {
@@ -31,7 +31,7 @@ export const expenseRouter = router({
 		}),
 	deleteExpense: protectedProcedure.input(z.string()).mutation(async ({ ctx, input }) => {
 		try {
-			let deleted = await ctx.prisma.expense.delete({
+			const deleted = await ctx.prisma.expense.delete({
 				where: {
 					id: input,
 				},
@@ -45,7 +45,7 @@ export const expenseRouter = router({
 				},
 			});
 
-			let updatedProject = await ctx.prisma.project.findFirst({
+			const updatedProject = await ctx.prisma.project.findFirst({
 				where: {
 					id: deleted.project.id,
 				},
@@ -72,12 +72,12 @@ export const expenseRouter = router({
 		)
 		.mutation(async ({ ctx, input }) => {
 			try {
-				let projectId = input[0]?.projectId;
+				const projectId = input[0]?.projectId;
 
 				await ctx.prisma.expense.createMany({
 					data: input,
 				});
-				let project = await ctx.prisma.project.findFirst({
+				const project = await ctx.prisma.project.findFirst({
 					where: {
 						id: projectId,
 					},
@@ -102,7 +102,7 @@ export const expenseRouter = router({
 		)
 		.mutation(async ({ ctx, input }) => {
 			try {
-				let updated = await ctx.prisma.expense.update({
+				const updated = await ctx.prisma.expense.update({
 					where: {
 						id: input.id,
 					},

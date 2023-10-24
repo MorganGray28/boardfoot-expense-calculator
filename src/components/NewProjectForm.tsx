@@ -1,6 +1,6 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { type Dispatch, type SetStateAction, useState } from 'react';
 import { trpc } from '../utils/trpc';
-import { ProjectType } from '../types/types';
+import type { ProjectType } from '../types/types';
 
 type PropsType = {
 	cancel: boolean;
@@ -30,7 +30,7 @@ function NewProjectForm({ cancel, setActiveProject, setIsCreatingNewProject }: P
 
 	async function handleSubmitNewProject() {
 		if (newProjectName) {
-			const newProject = await addNewProject(newProjectName);
+			await addNewProject(newProjectName);
 		} else {
 			alert('Please fill out the Project Name input');
 		}

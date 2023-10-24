@@ -1,7 +1,7 @@
-import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import React, { type ChangeEvent, type Dispatch, type SetStateAction, useState } from 'react';
 import styles from '../styles/GenericExpenseListItem.module.scss';
 import { trpc } from '../utils/trpc';
-import { ProjectType } from '../types/types';
+import type { ProjectType } from '../types/types';
 import { checkForIdenticalObjects } from '../utils/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';

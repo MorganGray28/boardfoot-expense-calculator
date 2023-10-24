@@ -47,7 +47,7 @@ export const lumberRouter = router({
 		}),
 	deleteDimensionLumber: protectedProcedure.input(z.string()).mutation(async ({ ctx, input }) => {
 		try {
-			let deleted = await ctx.prisma.lumber.delete({
+			const deleted = await ctx.prisma.lumber.delete({
 				where: {
 					id: input,
 				},
@@ -60,7 +60,7 @@ export const lumberRouter = router({
 					},
 				},
 			});
-			let updatedProject = await ctx.prisma.project.findFirst({
+			const updatedProject = await ctx.prisma.project.findFirst({
 				where: {
 					id: deleted.project.id,
 				},
@@ -90,9 +90,9 @@ export const lumberRouter = router({
 			})
 		)
 		.mutation(async ({ ctx, input }) => {
-			let { numOfPieces, thickness, width, length, name, species, price, tax } = input;
+			const { numOfPieces, thickness, width, length, name, species, price, tax } = input;
 			try {
-				let updatedLumber = await ctx.prisma.lumber.update({
+				const updatedLumber = await ctx.prisma.lumber.update({
 					where: {
 						id: input.id,
 					},

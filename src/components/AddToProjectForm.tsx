@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/react';
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { type Dispatch, type SetStateAction, useState } from 'react';
 import styles from '../styles/addToProjectForm.module.scss';
-import { BoardFeetType, ProjectType } from '../types/types';
+import type { BoardFeetType, ProjectType } from '../types/types';
 import { trpc } from '../utils/trpc';
 import ProjectFormListItem from './ProjectFormListItem';
 import { calculateBoardFeet, calculateCostFromBF } from '../utils/calculationsUtils';
@@ -18,9 +18,12 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 	const [newProjectName, setNewProjectName] = useState('');
 	const [newProjectDescription, setNewProjectDescription] = useState('');
 	const { data: session } = useSession();
-	const projectList: ProjectType[] | undefined = trpc.user.getProjectsById.useQuery(session?.user?.id!, {
-		enabled: session?.user !== undefined,
-	}).data;
+	let projectList: ProjectType[] | undefined;
+	if (session?.user?.id) {
+		projectList = trpc.user.getProjectsById.useQuery(session?.user?.id, {
+			enabled: session?.user !== undefined,
+		}).data;
+	}
 	const ctx = trpc.useContext();
 
 	const addLumber = trpc.lumber.addDimensionLumber.useMutation({
@@ -49,13 +52,9 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 		}
 	}
 
-	async function handleCreateNewProjectWithLumber(input: {
-		name: string;
-		description: string;
-		values: BoardFeetType | null;
-	}) {
+	async function handleCreateNewProjectWithLumber(values: BoardFeetType | null) {
 		if (values) {
-			let newProject = await addNewProjectWithLumber.mutateAsync({
+			await addNewProjectWithLumber.mutateAsync({
 				name: newProjectName,
 				description: newProjectDescription,
 				values,
@@ -73,9 +72,9 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 	if (projectList) {
 		// mapping over our projectList to calculate and sum up each project's cost for lumber and expenses
 		projectsWithCost = projectList.map((project) => {
-			let projectFormatted = { ...project, cost: 0 };
+			const projectFormatted = { ...project, cost: 0 };
 			projectFormatted.lumber.forEach((l) => {
-				let bf = calculateBoardFeet({
+				const bf = calculateBoardFeet({
 					numOfPieces: l.numOfPieces,
 					thickness: l.thickness,
 					width: l.width,
@@ -102,7 +101,7 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 			})
 			.map((project, index) => {
 				// add an array of all the unique species of lumber to be shown
-				let species: string[] = [];
+				const species: string[] = [];
 				project.lumber.forEach((l) => {
 					if (!species.includes(l.species.toLowerCase())) {
 						species.push(l.species.toLowerCase());
@@ -176,16 +175,7 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 					<button className={styles.dangerBtn} onClick={() => handleCancelNewProject()}>
 						Cancel
 					</button>
-					<button
-						className={styles.approveBtn}
-						onClick={() =>
-							handleCreateNewProjectWithLumber({
-								name: newProjectName,
-								description: newProjectDescription,
-								values,
-							})
-						}
-					>
+					<button className={styles.approveBtn} onClick={() => handleCreateNewProjectWithLumber(values)}>
 						Done
 					</button>
 				</div>

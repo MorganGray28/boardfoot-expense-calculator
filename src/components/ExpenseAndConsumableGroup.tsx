@@ -1,5 +1,5 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import { ProjectType } from '../types/types';
+import React, { type Dispatch, type SetStateAction, useState } from 'react';
+import type { ProjectType } from '../types/types';
 import styles from '../styles/ExpenseAndConsumableGroup.module.scss';
 import ExpenseTable from './ExpenseTable';
 import ConsumableTable from './ConsumableTable';

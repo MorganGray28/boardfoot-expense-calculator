@@ -7,8 +7,7 @@ import BoardFootCalculator from '../components/BoardFootCalculator';
 import Modal from '../components/Modal';
 import AddToProjectForm from '../components/AddToProjectForm';
 import Dashboard from '../components/Dashboard';
-import { ProjectType } from '../types/types';
-import { BoardFeetType } from '../types/types';
+import type { ProjectType, BoardFeetType } from '../types/types';
 import { trpc } from '../utils/trpc';
 
 // FIXME: number inputs won't allow a value of ".0X"
@@ -22,9 +21,10 @@ import { trpc } from '../utils/trpc';
 
 const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);
-	const { data: session, status } = useSession();
+	const { data: session } = useSession();
 	const [currentCalculatorValues, setCurrentCalculatorValues] = useState<BoardFeetType | null>(null);
 	const [activeProject, setActiveProject] = useState<ProjectType | null>(null);
+
 	const { data: projectList, isLoading } = trpc.user.getProjectsById.useQuery(session?.user?.id!, {
 		enabled: session?.user?.id !== undefined,
 		onSuccess: (data) => {
