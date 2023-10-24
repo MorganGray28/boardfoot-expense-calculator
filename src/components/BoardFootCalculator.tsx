@@ -232,12 +232,10 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 						</div>
 					</div>
 
-					{values.tax !== 0 && (
-						<div className={`${styles.tax}`}>
-							<p>${preTax}</p>
-							<p>+ ${formattedTax}</p>
-						</div>
-					)}
+					<div className={`${styles.tax}`}>
+						<p>${preTax}</p>
+						<p>+ ${formattedTax || 0} tax</p>
+					</div>
 
 					<div className={styles.labelInputGroup}>
 						<p>Total Cost:</p>
