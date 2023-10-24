@@ -75,7 +75,7 @@ export default function ConsumableTable({ setTotalConsumableAmount, activeTab }:
 	function handleChange(index: number, e: React.FormEvent<HTMLInputElement>) {
 		const data = [...consumables];
 		const property = e.currentTarget.name;
-		if (data && data[index]) {
+		if (data.length && data[index]) {
 			if (property === 'amount' || property === 'cost') {
 				data[index]![property] = parseFloat(parseFloat(e.currentTarget.value).toFixed(2));
 			} else {

@@ -25,7 +25,7 @@ const Home: NextPage = () => {
 	const [currentCalculatorValues, setCurrentCalculatorValues] = useState<BoardFeetType | null>(null);
 	const [activeProject, setActiveProject] = useState<ProjectType | null>(null);
 
-	const { data: projectList, isLoading } = trpc.user.getProjectsById.useQuery(session?.user?.id!, {
+	const { data: projectList, isLoading } = trpc.user.getProjectsById.useQuery(session?.user?.id as string, {
 		enabled: session?.user?.id !== undefined,
 		onSuccess: (data) => {
 			setActiveProject(activeProject ?? data[0] ?? null);
