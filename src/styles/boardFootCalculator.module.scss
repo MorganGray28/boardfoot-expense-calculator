@@ -2,6 +2,7 @@
 @use 'mixins';
 
 .container {
+	min-height: 100vh;
 	height: 100%;
 	max-width: 500px;
 	width: 35%;
