@@ -92,11 +92,11 @@ export function ActiveProjectForm({
 						<p className={styles.deleteModalMessage}>
 							Are you sure you want to delete this project and all its expenses?
 						</p>
-						<div>
-							<button onClick={() => setDeleteModalIsOpen(false)} className={styles.deleteCancelButton}>
+						<div className={styles.buttonGroup}>
+							<button onClick={() => setDeleteModalIsOpen(false)} className={styles.approveBtn}>
 								Cancel
 							</button>
-							<button onClick={handleDeleteProject} className={styles.deleteDangerButton}>
+							<button onClick={handleDeleteProject} className={styles.dangerBtn}>
 								Delete
 							</button>
 						</div>
