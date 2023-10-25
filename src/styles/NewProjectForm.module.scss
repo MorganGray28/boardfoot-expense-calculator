@@ -1,0 +1,60 @@
+@use 'mixins';
+@use 'variables';
+
+.inputGroup {
+  display: flex;
+}
+
+.textfieldLabel {
+  @include mixins.input-label-font;
+  display: block;
+  padding-top: 1rem;
+  text-align: center;
+
+  &:first-child {
+    padding: 0;
+  }
+}
+
+.searchInput {
+  width: 100%;
+  font-size: 1rem;
+  color: variables.$primary-blue;
+  padding: 1rem 0 1rem .5rem;
+  border-radius: .5rem;
+  border: 2px solid variables.$primary-blue;
+
+  &:active, &:focus {
+    border: 2px solid variables.$primary-blue-hover-text;
+    outline: none;
+    color: variables.$primary-blue-hover-text;
+
+    &::placeholder {
+      color: variables.$primary-blue-hover-text;
+    }
+  }
+
+  &::placeholder {
+    color: variables.$primary-blue;
+  }
+}
+
+.descriptionInput {
+  width: 100%;
+  max-width: 100%;
+  max-height: 200px;
+  margin: 0;
+}
+
+.formButtonGroup {
+  @include mixins.formButtonGroup;
+  padding-top: 1rem;
+}
+
+.dangerBtn {
+  @include mixins.cancelChangesButton;
+}
+
+.approveBtn {
+  @include mixins.saveChangesButton;
+}
