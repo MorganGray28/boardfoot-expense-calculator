@@ -11,10 +11,8 @@ import type { ProjectType, BoardFeetType } from '../types/types';
 import { trpc } from '../utils/trpc';
 
 // FIXME: number inputs won't allow a value of ".0X"
-// FIXME: add description input for new project creation
 // TODO: Make Edit and Delete Icon Buttons more reusable and DRY
 // TODO: Style ActiveProjectForm's ADD, EDIT, and DELETE dropdown buttons
-// TODO: Style ActiveProjectForm's ADD, EDIT, and DELETE inputs/modals
 // TODO: Style Expense and Consumable List Items alternating backgrounds
 // TODO: Adjust Flex container size for sensible space usage in Add Expense Form
 // FIXME: Mobile Responsive: move sign out to expandable sidebar and change calculator to hamburger menu
