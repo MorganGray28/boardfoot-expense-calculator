@@ -169,7 +169,7 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 					value={newProjectDescription}
 					onChange={(e) => setNewProjectDescription(e.target.value)}
 					className={`${styles.searchInput} ${styles.descriptionInput}`}
-				></textarea>
+				/>
 
 				<div className={styles.buttonGroup}>
 					<button className={styles.dangerBtn} onClick={() => handleCancelNewProject()}>

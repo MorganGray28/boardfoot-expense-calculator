@@ -18,6 +18,8 @@ import { trpc } from '../utils/trpc';
 // TODO: Style Expense and Consumable List Items alternating backgrounds
 // TODO: Adjust Flex container size for sensible space usage in Add Expense Form
 // FIXME: Mobile Responsive: move sign out to expandable sidebar and change calculator to hamburger menu
+// FIXME: Make BF Calc add to project disabled when all the necessary fields aren't completed
+// FIXME: Make edit Expense and Consumable disabled when all the necessary fields aren't completed
 
 const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);

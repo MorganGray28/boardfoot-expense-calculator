@@ -13,21 +13,23 @@ export const projectRouter = router({
 		});
 	}),
 
-	createProject: protectedProcedure.input(z.string()).mutation(async ({ ctx, input }) => {
-		const userId = ctx.session.user.id;
-		try {
-			const project = await ctx.prisma.project.create({
-				data: { name: input, userId },
-				include: {
-					lumber: true,
-					expenses: true,
-				},
-			});
-			return project;
-		} catch (err) {
-			console.log(err);
-		}
-	}),
+	createProject: protectedProcedure
+		.input(z.object({ name: z.string(), description: z.string() }))
+		.mutation(async ({ ctx, input }) => {
+			const userId = ctx.session.user.id;
+			try {
+				const project = await ctx.prisma.project.create({
+					data: { name: input.name, description: input.description, userId },
+					include: {
+						lumber: true,
+						expenses: true,
+					},
+				});
+				return project;
+			} catch (err) {
+				console.log(err);
+			}
+		}),
 
 	createProjectWithLumber: protectedProcedure
 		.input(
@@ -85,6 +87,7 @@ export const projectRouter = router({
 			z.object({
 				projectId: z.string(),
 				newName: z.string(),
+				newDescription: z.string().optional(),
 			})
 		)
 		.mutation(async ({ ctx, input }) => {
@@ -92,6 +95,7 @@ export const projectRouter = router({
 				return await ctx.prisma.project.update({
 					data: {
 						name: input.newName,
+						description: input.newDescription,
 					},
 					include: {
 						expenses: true,
