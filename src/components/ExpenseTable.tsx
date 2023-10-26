@@ -147,10 +147,11 @@ export default function ExpenseTable({
 						className={styles.input}
 						type='number'
 						autoComplete='off'
-						min={0}
+						min={0.01}
+						step='any'
 						id={'cost' + index}
 						name='cost'
-						value={expense.cost ? expense.cost : ''}
+						value={expense.cost || ''}
 						onChange={(e) => handleChange(index, e)}
 					/>
 				</div>
