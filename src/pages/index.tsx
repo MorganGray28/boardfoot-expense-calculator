@@ -18,6 +18,7 @@ import { trpc } from '../utils/trpc';
 // FIXME: Mobile Responsive: move sign out to expandable sidebar and change calculator to hamburger menu
 // FIXME: Make BF Calc add to project disabled when all the necessary fields aren't completed
 // FIXME: Make edit Expense and Consumable disabled when all the necessary fields aren't completed
+// FIXME: make generic expense list items share style module from lumber expense item styles so we can correctly display odd/even background colors for each item instead of breaking it up for each type of expense
 
 const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);

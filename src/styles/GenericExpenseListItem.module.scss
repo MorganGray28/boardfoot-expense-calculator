@@ -2,10 +2,15 @@
 @use 'mixins';
 
 .container {
+  background-color: #f7f7f7;
   padding: 1rem;
   color: variables.$primary-blue;
   border-bottom: 1px solid variables.$primary-blue;
   font-size: .875rem;
+
+  &:nth-of-type(even) {
+    background-color: rgb(255, 255, 255);
+  }
 
   @media (max-width: 1200px) {
     padding: .5rem;

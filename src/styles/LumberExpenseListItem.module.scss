@@ -2,19 +2,14 @@
 @use 'mixins';
 
 .container {
+  background-color: #f7f7f7;
+
   padding: 1rem;
   color: variables.$primary-blue;
   border-bottom: 1px solid variables.$primary-blue;
-
-  // & form {
-  //   & label {
-  //     width: 45%;
-  //   }
-
-  //   & input {
-  //     width: 30%;
-  //   }
-  // }
+    &:nth-of-type(even) {
+      background-color: rgb(255, 255, 255);
+    }
 
   @media (max-width: 490px) {
     padding-left: 0.5rem;
