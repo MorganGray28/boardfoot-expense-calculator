@@ -207,7 +207,6 @@ function EditProjectNameForm({
 	}
 
 	function handleSubmit(e: React.FormEvent) {
-		console.log(newProjectDescription);
 		e.preventDefault();
 		updateProjectName({ projectId: id, newName: projectNameInput, newDescription: newProjectDescription });
 		if (!error) {

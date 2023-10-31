@@ -33,7 +33,8 @@ function NewProjectForm({ cancel, setActiveProject, setIsCreatingNewProject }: P
 	}
 
 	// FIXME: revise the alert to something better when no name is entered
-	async function handleSubmitNewProject() {
+	async function handleSubmitNewProject(e: React.FormEvent<HTMLFormElement>) {
+		e.preventDefault();
 		if (newProjectName) {
 			await addNewProject({ name: newProjectName, description: newProjectDescription });
 		} else {
@@ -42,45 +43,42 @@ function NewProjectForm({ cancel, setActiveProject, setIsCreatingNewProject }: P
 	}
 
 	return (
-		<>
-			<label className={styles.textfieldLabel} htmlFor='newProjectName'>
-				Project Name
-			</label>
-			<input
-				className={`${styles.searchInput} ${styles.nameInput}`}
-				id='newProjectName'
-				autoComplete='off'
-				type='text'
-				placeholder='enter project name'
-				value={newProjectName}
-				onChange={(e) => setNewProjectName(e.target.value)}
-			/>
-			<label htmlFor='newProjectDescription' className={styles.textfieldLabel}>
-				Project Description (optional)
-			</label>
-			<textarea
-				id='newProjectDescription'
-				name='projectDescription'
-				value={newProjectDescription}
-				onChange={(e) => setNewProjectDescription(e.target.value)}
-				className={`${styles.searchInput} ${styles.descriptionInput}`}
-			/>
-			<div className={styles.formButtonGroup}>
-				{cancel && (
-					<button className={styles.dangerBtn} type='button' onClick={handleCancelNewProject}>
-						Cancel
+		<div className={styles.flexContainer}>
+			<form onSubmit={(e) => handleSubmitNewProject(e)}>
+				<label className={styles.textfieldLabel} htmlFor='newProjectName'>
+					Project Name
+				</label>
+				<input
+					className={`${styles.searchInput} ${styles.nameInput}`}
+					id='newProjectName'
+					autoComplete='off'
+					type='text'
+					placeholder='enter project name'
+					value={newProjectName}
+					onChange={(e) => setNewProjectName(e.target.value)}
+				/>
+				<label htmlFor='newProjectDescription' className={styles.textfieldLabel}>
+					Project Description (optional)
+				</label>
+				<textarea
+					id='newProjectDescription'
+					name='projectDescription'
+					value={newProjectDescription}
+					onChange={(e) => setNewProjectDescription(e.target.value)}
+					className={`${styles.searchInput} ${styles.descriptionInput}`}
+				/>
+				<div className={styles.formButtonGroup}>
+					{cancel && (
+						<button className={styles.dangerBtn} type='button' onClick={handleCancelNewProject}>
+							Cancel
+						</button>
+					)}
+					<button className={styles.approveBtn} disabled={isCreating} type='submit'>
+						Create
 					</button>
-				)}
-				<button
-					className={styles.approveBtn}
-					disabled={isCreating}
-					onClick={() => handleSubmitNewProject()}
-					type='submit'
-				>
-					Create Project
-				</button>
-			</div>
-		</>
+				</div>
+			</form>
+		</div>
 	);
 }
 

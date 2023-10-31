@@ -1,6 +1,17 @@
 @use 'mixins';
 @use 'variables';
 
+.flexContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 4rem;
+
+  @media (max-width: 1620px) {
+    padding-top: 2rem;
+  }
+}
+
 .inputGroup {
   display: flex;
 }
