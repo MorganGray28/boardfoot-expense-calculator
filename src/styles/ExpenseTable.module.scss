@@ -96,7 +96,9 @@
   height: 2rem;
 
   @media (max-width: 490px) {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 50%;
   }
 

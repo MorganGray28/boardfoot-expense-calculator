@@ -27,9 +27,7 @@
 	}
 
 	 @media (max-width: 765px) {
-    position: fixed;
-    width: 45px;
-		padding: 1rem 0 0 0;
+    display: none;
 		
 		& form {
 			display: none;

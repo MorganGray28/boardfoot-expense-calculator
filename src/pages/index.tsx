@@ -9,6 +9,14 @@ import AddToProjectForm from '../components/AddToProjectForm';
 import Dashboard from '../components/Dashboard';
 import type { ProjectType, BoardFeetType } from '../types/types';
 import { trpc } from '../utils/trpc';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+
+// FIXME: add calculator icon to top left for mobile
+// TODO: add dropdown menu for avator mobile icon to sign Out
+// FIXME: convert alert messages to Toast messages for better error awareness
+// TODO: design more easily legible active tab styling for expenses and consumables
+// TODO: Make total expense component to show cost breakdown
 
 // FIXME: number inputs won't allow a value of ".0X"
 // TODO: Make Edit and Delete Icon Buttons more reusable and DRY
@@ -63,13 +71,19 @@ const Home: NextPage = () => {
 					<nav className={styles.navbar}>
 						<h1>Woodworking Expense Tracker</h1>
 						{session ? (
-							<button onClick={handleSignOut} className={styles.loginButton}>
-								Sign Out
-							</button>
+							<>
+								<button onClick={handleSignOut} className={styles.loginButton}>
+									Sign Out
+								</button>
+								<FontAwesomeIcon className={styles.avatarIcon} icon={faUser} />
+							</>
 						) : (
-							<button onClick={handleSignIn} className={styles.loginButton}>
-								Sign In
-							</button>
+							<>
+								<button onClick={handleSignIn} className={styles.loginButton}>
+									Sign In
+								</button>
+								<FontAwesomeIcon className={styles.avatarIcon} icon={faUser} />
+							</>
 						)}
 					</nav>
 					<main>
