@@ -13,6 +13,7 @@ import { trpc } from '../utils/trpc';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import hamburgerIcon from '../../public/hamburger-icon.svg';
+import hamburgerCloseIcon from '../../public/hamburger-close-icon.svg';
 
 // FIXME: add calculator icon to top left for mobile
 // TODO: reduce the width of expense/consumable container on phone mobile
@@ -73,14 +74,15 @@ const Home: NextPage = () => {
 				<BoardFootCalculator handleModal={handleOpen} />
 				<div className={styles.projectContainer}>
 					<nav className={styles.navbar}>
-						<Image
+						{/* <Image
 							className={styles.hamburgerIcon}
-							src={hamburgerIcon}
+							src={sidebarOpen ? hamburgerCloseIcon : hamburgerIcon}
+							onClick={() => setSidebarOpen(!sidebarOpen)}
 							width={22}
 							height={22}
 							alt='menu icon'
 							priority
-						/>
+						/> */}
 						<h1>Woodworking Expense Tracker</h1>
 						{session ? (
 							<>

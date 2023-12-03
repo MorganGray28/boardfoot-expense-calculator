@@ -88,173 +88,187 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 	*/
 
 	return (
-		<div className={sidebarOpen ? `${styles.sidebarOpen} ${styles.container}` : `${styles.container}`}>
-			<Image
-				className={styles.sidebarIcon}
-				onClick={() => setSidebarOpen(!sidebarOpen)}
-				src={!sidebarOpen ? hamburgerIcon : hamburgerCloseIcon}
-				alt='hamburger menu icon'
-				width={22}
-				height={22}
-			/>
-			<form onSubmit={handleSubmit}>
-				<div className={styles.boardfootContainer}>
-					<p className={styles.subheading}>Board Feet Calculator</p>
-					<div className={styles.labelInputGroup}>
-						<label className={styles.inputLabel} htmlFor='numOfPieces'>
-							No. of Pieces
-						</label>
-						<input
-							id='numOfPieces'
-							name='numOfPieces'
-							autoComplete='off'
-							value={values.numOfPieces || ''}
-							onChange={handleChange}
-							type='number'
-						/>
-					</div>
-					<div className={styles.labelInputGroup}>
-						<label className={styles.inputLabel} htmlFor='thickness'>
-							Thickness
-						</label>
-						<div className={styles.inputUnitsGroup}>
+		<>
+			{!sidebarOpen && (
+				<Image
+					className={styles.hamburgerIcon}
+					onClick={() => setSidebarOpen(!sidebarOpen)}
+					src={hamburgerIcon}
+					alt='hamburger menu icon'
+					width={22}
+					height={22}
+				/>
+			)}
+			<div className={sidebarOpen ? `${styles.sidebarOpen} ${styles.container}` : `${styles.container}`}>
+				{sidebarOpen && (
+					<Image
+						className={styles.sidebarIcon}
+						onClick={() => setSidebarOpen(!sidebarOpen)}
+						src={hamburgerCloseIcon}
+						alt='hamburger menu close icon'
+						width={22}
+						height={22}
+					/>
+				)}
+				<form onSubmit={handleSubmit}>
+					<div className={styles.boardfootContainer}>
+						<p className={styles.subheading}>Board Feet Calculator</p>
+						<div className={styles.labelInputGroup}>
+							<label className={styles.inputLabel} htmlFor='numOfPieces'>
+								No. of Pieces
+							</label>
 							<input
-								id='thickness'
-								name='thickness'
+								id='numOfPieces'
+								name='numOfPieces'
 								autoComplete='off'
-								value={values.thickness || ''}
+								value={values.numOfPieces || ''}
 								onChange={handleChange}
 								type='number'
 							/>
-							<span>in</span>
 						</div>
-						<div className={styles.quarterThicknessContainer}>
-							<p onClick={() => setValues({ ...values, thickness: 1 })}>4/4</p>
-							<p onClick={() => setValues({ ...values, thickness: 1.5 })}>6/4</p>
-							<p onClick={() => setValues({ ...values, thickness: 2 })}>8/4</p>
+						<div className={styles.labelInputGroup}>
+							<label className={styles.inputLabel} htmlFor='thickness'>
+								Thickness
+							</label>
+							<div className={styles.inputUnitsGroup}>
+								<input
+									id='thickness'
+									name='thickness'
+									autoComplete='off'
+									value={values.thickness || ''}
+									onChange={handleChange}
+									type='number'
+								/>
+								<span>in</span>
+							</div>
+							<div className={styles.quarterThicknessContainer}>
+								<p onClick={() => setValues({ ...values, thickness: 1 })}>4/4</p>
+								<p onClick={() => setValues({ ...values, thickness: 1.5 })}>6/4</p>
+								<p onClick={() => setValues({ ...values, thickness: 2 })}>8/4</p>
+							</div>
+						</div>
+						<div className={styles.labelInputGroup}>
+							<label className={styles.inputLabel} htmlFor='width'>
+								Width
+							</label>
+							<div className={styles.inputUnitsGroup}>
+								<input
+									id='width'
+									name='width'
+									autoComplete='off'
+									value={values.width || ''}
+									onChange={handleChange}
+									type='number'
+								/>
+								<span>in</span>
+							</div>
+						</div>
+						<div className={`${styles.labelInputGroup} ${styles.length}`}>
+							<label className={styles.inputLabel} htmlFor='length'>
+								Length
+							</label>
+							<div className={styles.inputUnitsGroup}>
+								<input
+									id='length'
+									name='length'
+									autoComplete='off'
+									value={values.length || ''}
+									onChange={handleChange}
+									type='number'
+								/>
+								<span>in</span>
+							</div>
+						</div>
+						<div className={styles.labelInputGroup}>
+							<p>Total:</p>
+							<p>{boardFeet} BF</p>
 						</div>
 					</div>
-					<div className={styles.labelInputGroup}>
-						<label className={styles.inputLabel} htmlFor='width'>
-							Width
-						</label>
-						<div className={styles.inputUnitsGroup}>
+
+					<button className={styles.clearButton} type='button' onClick={handleClearForm}>
+						Clear
+					</button>
+
+					<div className={styles.boardfootContainer}>
+						<p className={styles.subheading}>Cost</p>
+						<div className={styles.labelInputGroup}>
+							<label className={styles.inputLabel} htmlFor='name'>
+								Description <span className={styles.optionalSpan}>(optional)</span>
+							</label>
 							<input
-								id='width'
-								name='width'
+								type='text'
 								autoComplete='off'
-								value={values.width || ''}
+								id='name'
+								name='name'
 								onChange={handleChange}
-								type='number'
+								value={values.name}
+								placeholder='e.g. Table Legs'
 							/>
-							<span>in</span>
 						</div>
-					</div>
-					<div className={`${styles.labelInputGroup} ${styles.length}`}>
-						<label className={styles.inputLabel} htmlFor='length'>
-							Length
-						</label>
-						<div className={styles.inputUnitsGroup}>
+
+						<div className={styles.labelInputGroup}>
+							<label className={styles.inputLabel} htmlFor='species'>
+								Species
+							</label>
 							<input
-								id='length'
-								name='length'
+								id='species'
+								type='text'
 								autoComplete='off'
-								value={values.length || ''}
+								name='species'
 								onChange={handleChange}
-								type='number'
+								value={values.species}
 							/>
-							<span>in</span>
 						</div>
-					</div>
-					<div className={styles.labelInputGroup}>
-						<p>Total:</p>
-						<p>{boardFeet} BF</p>
-					</div>
-				</div>
 
-				<button className={styles.clearButton} type='button' onClick={handleClearForm}>
-					Clear
-				</button>
-
-				<div className={styles.boardfootContainer}>
-					<p className={styles.subheading}>Cost</p>
-					<div className={styles.labelInputGroup}>
-						<label className={styles.inputLabel} htmlFor='name'>
-							Description <span className={styles.optionalSpan}>(optional)</span>
-						</label>
-						<input
-							type='text'
-							autoComplete='off'
-							id='name'
-							name='name'
-							onChange={handleChange}
-							value={values.name}
-							placeholder='e.g. Table Legs'
-						/>
-					</div>
-
-					<div className={styles.labelInputGroup}>
-						<label className={styles.inputLabel} htmlFor='species'>
-							Species
-						</label>
-						<input
-							id='species'
-							type='text'
-							autoComplete='off'
-							name='species'
-							onChange={handleChange}
-							value={values.species}
-						/>
-					</div>
-
-					<div className={styles.labelInputGroup}>
-						<label className={styles.inputLabel} htmlFor='price'>
-							Price
-						</label>
-						<input
-							id='price'
-							type='number'
-							autoComplete='off'
-							name='price'
-							onChange={handleChange}
-							value={values.price || ''}
-						/>
-					</div>
-
-					<div className={`${styles.labelInputGroup}`}>
-						<label className={styles.inputLabel} htmlFor='tax'>
-							Tax
-						</label>
-						<div className={styles.inputUnitsGroup}>
+						<div className={styles.labelInputGroup}>
+							<label className={styles.inputLabel} htmlFor='price'>
+								Price
+							</label>
 							<input
-								id='tax'
+								id='price'
 								type='number'
 								autoComplete='off'
-								name='tax'
+								name='price'
 								onChange={handleChange}
-								value={values.tax || ''}
+								value={values.price || ''}
 							/>
-							<span>%</span>
+						</div>
+
+						<div className={`${styles.labelInputGroup}`}>
+							<label className={styles.inputLabel} htmlFor='tax'>
+								Tax
+							</label>
+							<div className={styles.inputUnitsGroup}>
+								<input
+									id='tax'
+									type='number'
+									autoComplete='off'
+									name='tax'
+									onChange={handleChange}
+									value={values.tax || ''}
+								/>
+								<span>%</span>
+							</div>
+						</div>
+
+						<div className={`${styles.tax}`}>
+							<p>${preTax}</p>
+							<p>+ ${formattedTax || 0} tax</p>
+						</div>
+
+						<div className={styles.labelInputGroup}>
+							<p>Total Cost:</p>
+							<p>${totalCost}</p>
 						</div>
 					</div>
 
-					<div className={`${styles.tax}`}>
-						<p>${preTax}</p>
-						<p>+ ${formattedTax || 0} tax</p>
-					</div>
-
-					<div className={styles.labelInputGroup}>
-						<p>Total Cost:</p>
-						<p>${totalCost}</p>
-					</div>
-				</div>
-
-				<button disabled={!session} type='submit' className={styles.primaryButton}>
-					Add to Project
-				</button>
-				{!session && <p className={styles.helpMessage}>please sign in to add lumber to a project</p>}
-			</form>
-		</div>
+					<button disabled={!session} type='submit' className={styles.primaryButton}>
+						Add to Project
+					</button>
+					{!session && <p className={styles.helpMessage}>please sign in to add lumber to a project</p>}
+				</form>
+			</div>
+		</>
 	);
 }
 
