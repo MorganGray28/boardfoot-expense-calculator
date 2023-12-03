@@ -89,8 +89,10 @@
 }
 
 .profileMenuOpen {
+  display: block;
   visibility: visible;
   opacity: 1;
+  transition: opacity 300ms ease;
 }
 
 .hamburgerIcon {
@@ -123,6 +125,8 @@
 
 .avatarIcon {
   display: none;
+  color: variables.$primary-blue;
+  z-index: 3;
   width: 1.25rem;
   height: auto;
 

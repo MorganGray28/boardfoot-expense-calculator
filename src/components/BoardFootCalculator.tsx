@@ -4,8 +4,6 @@ import { useSession } from 'next-auth/react';
 import type { BoardFeetType } from '../types/types';
 import { calculateBoardFeet } from '../utils/calculationsUtils';
 import styles from '../styles/boardFootCalculator.module.scss';
-import { faCalculator, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import hamburgerCloseIcon from '../../public/hamburger-close-icon.svg';
 import hamburgerIcon from '../../public/hamburger-icon.svg';
@@ -87,7 +85,7 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 		<>
 			{!sidebarOpen && (
 				<Image
-					priority
+					// priority
 					className={styles.hamburgerIcon}
 					onClick={() => setSidebarOpen(!sidebarOpen)}
 					src={hamburgerIcon}
@@ -99,7 +97,7 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 			<div className={sidebarOpen ? `${styles.sidebarOpen} ${styles.container}` : `${styles.container}`}>
 				{sidebarOpen && (
 					<Image
-						priority
+						// priority
 						className={styles.sidebarIcon}
 						onClick={() => setSidebarOpen(!sidebarOpen)}
 						src={hamburgerCloseIcon}

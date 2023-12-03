@@ -1,7 +1,7 @@
 import styles from '../styles/index.module.scss';
 import { type NextPage } from 'next';
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, type RefObject } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import BoardFootCalculator from '../components/BoardFootCalculator';
 import Modal from '../components/Modal';
@@ -40,6 +40,24 @@ const Home: NextPage = () => {
 		},
 	});
 
+	const profileDropdownRef = useRef() as RefObject<HTMLDivElement>;
+
+	useEffect(() => {
+		const handler = (e: Event) => {
+			if (profileDropdownRef.current) {
+				if (!profileDropdownRef.current.contains(e.target as Element)) {
+					setProfileMenuOpen(false);
+				}
+			}
+		};
+
+		document.addEventListener('mousedown', handler);
+
+		return () => {
+			document.removeEventListener('mousedown', handler);
+		};
+	}, [profileDropdownRef]);
+
 	function handleSignIn() {
 		signIn();
 	}
@@ -55,6 +73,14 @@ const Home: NextPage = () => {
 	function handleOpen(values: BoardFeetType) {
 		setCurrentCalculatorValues(values);
 		setModalOpen(true);
+	}
+
+	function handleProfileMenu() {
+		if (profileMenuOpen) {
+			setProfileMenuOpen(false);
+		} else {
+			setProfileMenuOpen(true);
+		}
 	}
 
 	return (
@@ -74,33 +100,31 @@ const Home: NextPage = () => {
 								<button onClick={handleSignOut} className={styles.loginButton}>
 									Sign Out
 								</button>
-								<FontAwesomeIcon
-									onClick={() => setProfileMenuOpen(!profileMenuOpen)}
-									className={styles.avatarIcon}
-									icon={faUser}
-								/>
+								<div className='profileMenuContainer' ref={profileDropdownRef}>
+									<FontAwesomeIcon onClick={handleProfileMenu} className={styles.avatarIcon} icon={faUser} />
+									<div
+										className={
+											profileMenuOpen
+												? `${styles.profileMenuOpen} ${styles.profileDropdownMenu}`
+												: `${styles.profileDropdownMenu}`
+										}
+									>
+										{session ? (
+											<p onClick={handleSignOut}>Sign Out</p>
+										) : (
+											<p onClick={handleSignIn}>Sign In</p>
+										)}
+									</div>
+								</div>
 							</>
 						) : (
 							<>
 								<button onClick={handleSignIn} className={styles.loginButton}>
 									Sign In
 								</button>
-								<FontAwesomeIcon
-									onClick={() => setProfileMenuOpen(!profileMenuOpen)}
-									className={styles.avatarIcon}
-									icon={faUser}
-								/>
+								<FontAwesomeIcon onClick={handleProfileMenu} className={styles.avatarIcon} icon={faUser} />
 							</>
 						)}
-						<div
-							className={
-								profileMenuOpen
-									? `${styles.profileMenuOpen} ${styles.profileDropdownMenu}`
-									: `${styles.profileDropdownMenu}`
-							}
-						>
-							{session ? <p onClick={handleSignOut}>Sign Out</p> : <p onClick={handleSignIn}>Sign In</p>}
-						</div>
 					</nav>
 					<main>
 						<Modal open={modalOpen} onClose={handleClose}>
