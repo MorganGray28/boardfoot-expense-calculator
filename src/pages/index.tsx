@@ -12,19 +12,14 @@ import { trpc } from '../utils/trpc';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-// TODO: add dropdown menu for avator mobile icon to sign Out
 // FIXME: convert alert messages to Toast messages for better error awareness
 // TODO: Make total expense component to show cost breakdown
-
 // FIXME: number inputs won't allow a value of ".0X"
 // TODO: Make Edit and Delete Icon Buttons more reusable and DRY
 // TODO: Style ActiveProjectForm's ADD, EDIT, and DELETE dropdown buttons
 // TODO: Style Expense and Consumable List Items alternating backgrounds
-// TODO: Adjust Flex container size for sensible space usage in Add Expense Form
-// FIXME: Mobile Responsive: move sign out to expandable sidebar and change calculator to hamburger menu
 // FIXME: Make BF Calc add to project disabled when all the necessary fields aren't completed
 // FIXME: Make edit Expense and Consumable disabled when all the necessary fields aren't completed
-// FIXME: make generic expense list items share style module from lumber expense item styles so we can correctly display odd/even background colors for each item instead of breaking it up for each type of expense
 
 const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);
