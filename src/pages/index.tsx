@@ -1,6 +1,5 @@
 import styles from '../styles/index.module.scss';
 import { type NextPage } from 'next';
-import Image from 'next/image';
 import Head from 'next/head';
 import React, { useState } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
@@ -12,15 +11,9 @@ import type { ProjectType, BoardFeetType } from '../types/types';
 import { trpc } from '../utils/trpc';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import hamburgerIcon from '../../public/hamburger-icon.svg';
-import hamburgerCloseIcon from '../../public/hamburger-close-icon.svg';
 
-// FIXME: add calculator icon to top left for mobile
-// TODO: reduce the width of expense/consumable container on phone mobile
-// TODO: increase mobile edit and delete icons for expense/consumable items
 // TODO: add dropdown menu for avator mobile icon to sign Out
 // FIXME: convert alert messages to Toast messages for better error awareness
-// TODO: design more easily legible active tab styling for expenses and consumables
 // TODO: Make total expense component to show cost breakdown
 
 // FIXME: number inputs won't allow a value of ".0X"
@@ -35,6 +28,7 @@ import hamburgerCloseIcon from '../../public/hamburger-close-icon.svg';
 
 const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);
+	const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 	const { data: session } = useSession();
 	const [currentCalculatorValues, setCurrentCalculatorValues] = useState<BoardFeetType | null>(null);
 	const [activeProject, setActiveProject] = useState<ProjectType | null>(null);
@@ -74,31 +68,39 @@ const Home: NextPage = () => {
 				<BoardFootCalculator handleModal={handleOpen} />
 				<div className={styles.projectContainer}>
 					<nav className={styles.navbar}>
-						{/* <Image
-							className={styles.hamburgerIcon}
-							src={sidebarOpen ? hamburgerCloseIcon : hamburgerIcon}
-							onClick={() => setSidebarOpen(!sidebarOpen)}
-							width={22}
-							height={22}
-							alt='menu icon'
-							priority
-						/> */}
 						<h1>Woodworking Expense Tracker</h1>
 						{session ? (
 							<>
 								<button onClick={handleSignOut} className={styles.loginButton}>
 									Sign Out
 								</button>
-								<FontAwesomeIcon className={styles.avatarIcon} icon={faUser} />
+								<FontAwesomeIcon
+									onClick={() => setProfileMenuOpen(!profileMenuOpen)}
+									className={styles.avatarIcon}
+									icon={faUser}
+								/>
 							</>
 						) : (
 							<>
 								<button onClick={handleSignIn} className={styles.loginButton}>
 									Sign In
 								</button>
-								<FontAwesomeIcon className={styles.avatarIcon} icon={faUser} />
+								<FontAwesomeIcon
+									onClick={() => setProfileMenuOpen(!profileMenuOpen)}
+									className={styles.avatarIcon}
+									icon={faUser}
+								/>
 							</>
 						)}
+						<div
+							className={
+								profileMenuOpen
+									? `${styles.profileMenuOpen} ${styles.profileDropdownMenu}`
+									: `${styles.profileDropdownMenu}`
+							}
+						>
+							{session ? <p onClick={handleSignOut}>Sign Out</p> : <p onClick={handleSignIn}>Sign In</p>}
+						</div>
 					</nav>
 					<main>
 						<Modal open={modalOpen} onClose={handleClose}>

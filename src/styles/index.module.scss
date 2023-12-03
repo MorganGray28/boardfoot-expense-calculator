@@ -31,6 +31,7 @@
 }
 
 .navbar {
+  position: relative;
   min-height: 4rem;
   width: 100%;
   display: flex;
@@ -60,6 +61,36 @@
       font-size: 1rem;
     }
   }
+}
+
+.profileDropdownMenu {
+  display: none;
+
+  @media (max-width: 765px) {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    background-color: variables.$background-color;
+    position: absolute;
+    right: .25rem;
+    top: 2.25rem;
+    cursor: pointer;
+    z-index: 2;
+    transition: opacity 300ms ease;
+  
+    & p {
+      color: variables.$primary-button-blue;
+      font-size: 1rem;
+      font-weight: 400;
+      padding: .75rem;
+    }
+  }
+
+}
+
+.profileMenuOpen {
+  visibility: visible;
+  opacity: 1;
 }
 
 .hamburgerIcon {
