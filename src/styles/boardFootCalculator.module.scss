@@ -14,7 +14,7 @@
 	transition: width 300ms ease;
 
 	& .sidebarIcon {
-		display: none;
+		display: block;
 	}
 
 	@media (max-width: 1200px) {

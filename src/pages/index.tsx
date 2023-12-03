@@ -1,5 +1,6 @@
 import styles from '../styles/index.module.scss';
 import { type NextPage } from 'next';
+import Image from 'next/image';
 import Head from 'next/head';
 import React, { useState } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
@@ -11,8 +12,11 @@ import type { ProjectType, BoardFeetType } from '../types/types';
 import { trpc } from '../utils/trpc';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import hamburgerIcon from '../../public/hamburger-icon.svg';
 
 // FIXME: add calculator icon to top left for mobile
+// TODO: reduce the width of expense/consumable container on phone mobile
+// TODO: increase mobile edit and delete icons for expense/consumable items
 // TODO: add dropdown menu for avator mobile icon to sign Out
 // FIXME: convert alert messages to Toast messages for better error awareness
 // TODO: design more easily legible active tab styling for expenses and consumables
@@ -69,6 +73,14 @@ const Home: NextPage = () => {
 				<BoardFootCalculator handleModal={handleOpen} />
 				<div className={styles.projectContainer}>
 					<nav className={styles.navbar}>
+						<Image
+							className={styles.hamburgerIcon}
+							src={hamburgerIcon}
+							width={22}
+							height={22}
+							alt='menu icon'
+							priority
+						/>
 						<h1>Woodworking Expense Tracker</h1>
 						{session ? (
 							<>

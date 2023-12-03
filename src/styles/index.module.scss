@@ -62,6 +62,14 @@
   }
 }
 
+.hamburgerIcon {
+  display: none;
+
+  @media (max-width: 765px) {
+    display: block;
+  }
+}
+
 .username {
   text-decoration: underline;
   color: variables.$primary-blue;

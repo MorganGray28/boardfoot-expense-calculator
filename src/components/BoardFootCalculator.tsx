@@ -1,10 +1,14 @@
 import React, { type ChangeEvent, type FormEvent, useState } from 'react';
+import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import type { BoardFeetType } from '../types/types';
 import { calculateBoardFeet } from '../utils/calculationsUtils';
 import styles from '../styles/boardFootCalculator.module.scss';
 import { faCalculator, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import hamburgerCloseIcon from '../../public/hamburger-close-icon.svg';
+import hamburgerIcon from '../../public/hamburger-icon.svg';
 
 type PropsType = {
 	handleModal: (values: BoardFeetType) => void;
@@ -85,12 +89,14 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 
 	return (
 		<div className={sidebarOpen ? `${styles.sidebarOpen} ${styles.container}` : `${styles.container}`}>
-			<FontAwesomeIcon
-				onClick={() => setSidebarOpen(!sidebarOpen)}
+			<Image
 				className={styles.sidebarIcon}
-				icon={sidebarOpen ? faXmark : faCalculator}
-				size='xs'
-			/>{' '}
+				onClick={() => setSidebarOpen(!sidebarOpen)}
+				src={!sidebarOpen ? hamburgerIcon : hamburgerCloseIcon}
+				alt='hamburger menu icon'
+				width={22}
+				height={22}
+			/>
 			<form onSubmit={handleSubmit}>
 				<div className={styles.boardfootContainer}>
 					<p className={styles.subheading}>Board Feet Calculator</p>
