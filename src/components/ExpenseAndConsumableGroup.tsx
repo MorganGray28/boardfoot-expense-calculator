@@ -17,14 +17,13 @@ export default function ExpenseAndConsumableGroup({
 	setTotalExpenseAmount,
 	setTotalConsumableAmount,
 }: PropsType) {
-	const [activeTab, setActiveTab] = useState<0 | 1 | 2>(1);
+	const [activeTab, setActiveTab] = useState<1 | 2>(1);
 
 	return (
 		<div className={styles.flexContainer}>
 			<div className={styles.tabGroup}>
 				<div className={styles.tabLabel}>
 					<div className={styles.labelContainer}>
-						{/* <p onClick={() => setActiveTab(0)}>Board Foot Calculator</p> */}
 						<p
 							onClick={() => setActiveTab(1)}
 							className={activeTab === 1 ? `${styles.activeTabLabel}` : `${styles.inactiveTabLabel}`}
