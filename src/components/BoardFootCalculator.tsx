@@ -72,16 +72,12 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 
 	function handleSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
+		setSidebarOpen(false);
 		handleModal(values);
 		handleClearForm();
 	}
 
 	/* Mobile Sidebar Design
-	- use state to track whether sidebar is open or not
-	- if sidebar is closed, width of container should just allow for Calculator icon
-	- if sidebar is open, adjust the width and display the inner contents
-	- conditionally set className on container based on sideBarOpen being true
-
 	
 	- IMPORTANT CONSIDERATION: if a user isn't logged in/no session, then we need to display the BF calculator by default 
 
