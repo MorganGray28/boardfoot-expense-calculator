@@ -221,10 +221,6 @@
   @media (max-width: 1620px) {
     width: 1rem;
   }
-
-  @media (max-width: 1200px) {
-    width: .875rem;
-  }
 }
 
 @mixin editIcon {
@@ -238,10 +234,6 @@
 
   @media (max-width: 1620px) {
     width: 1.25rem;
-  }
-
-  @media (max-width: 1200px) {
-    width: .875rem;
   }
 }
 
