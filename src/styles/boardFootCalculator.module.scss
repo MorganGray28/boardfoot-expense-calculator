@@ -40,9 +40,14 @@
 }
 
 .hamburgerIcon {
+	display: none;
 	position: absolute;
 	top: .5rem;
 	left: 1rem;
+
+	@media (max-width: 765px) {
+		display: block;
+	}
 }
 
 .sidebarIcon {
