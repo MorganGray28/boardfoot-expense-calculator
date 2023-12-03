@@ -100,7 +100,7 @@ const Home: NextPage = () => {
 								<button onClick={handleSignOut} className={styles.loginButton}>
 									Sign Out
 								</button>
-								<div className='profileMenuContainer' ref={profileDropdownRef}>
+								<div className={styles.profileMenuContainer} ref={profileDropdownRef}>
 									<FontAwesomeIcon onClick={handleProfileMenu} className={styles.avatarIcon} icon={faUser} />
 									<div
 										className={
@@ -109,11 +109,7 @@ const Home: NextPage = () => {
 												: `${styles.profileDropdownMenu}`
 										}
 									>
-										{session ? (
-											<p onClick={handleSignOut}>Sign Out</p>
-										) : (
-											<p onClick={handleSignIn}>Sign In</p>
-										)}
+										<p onClick={handleSignOut}>Sign Out</p>
 									</div>
 								</div>
 							</>
@@ -122,7 +118,18 @@ const Home: NextPage = () => {
 								<button onClick={handleSignIn} className={styles.loginButton}>
 									Sign In
 								</button>
-								<FontAwesomeIcon onClick={handleProfileMenu} className={styles.avatarIcon} icon={faUser} />
+								<div className={styles.profileMenuContainer} ref={profileDropdownRef}>
+									<FontAwesomeIcon onClick={handleProfileMenu} className={styles.avatarIcon} icon={faUser} />
+									<div
+										className={
+											profileMenuOpen
+												? `${styles.profileMenuOpen} ${styles.profileDropdownMenu}`
+												: `${styles.profileDropdownMenu}`
+										}
+									>
+										<p onClick={handleSignIn}>Sign In</p>
+									</div>
+								</div>
 							</>
 						)}
 					</nav>

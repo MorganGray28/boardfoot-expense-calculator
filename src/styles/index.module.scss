@@ -60,6 +60,18 @@
     @media (max-width: 1200px) {
       font-size: 1rem;
     }
+
+    @media (max-width: 440px) {
+      font-size: .875rem;
+    }
+  }
+}
+
+.profileMenuContainer {
+  display: none;
+
+  @media (max-width: 765px) {
+    display: block;
   }
 }
 
