@@ -87,6 +87,7 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 		<>
 			{!sidebarOpen && (
 				<Image
+					priority
 					className={styles.hamburgerIcon}
 					onClick={() => setSidebarOpen(!sidebarOpen)}
 					src={hamburgerIcon}
@@ -98,6 +99,7 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 			<div className={sidebarOpen ? `${styles.sidebarOpen} ${styles.container}` : `${styles.container}`}>
 				{sidebarOpen && (
 					<Image
+						priority
 						className={styles.sidebarIcon}
 						onClick={() => setSidebarOpen(!sidebarOpen)}
 						src={hamburgerCloseIcon}
