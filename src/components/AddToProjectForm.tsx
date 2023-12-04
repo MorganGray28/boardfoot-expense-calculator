@@ -1,5 +1,6 @@
 import { useSession } from 'next-auth/react';
 import React, { type Dispatch, type SetStateAction, useState } from 'react';
+import toast from 'react-hot-toast';
 import styles from '../styles/addToProjectForm.module.scss';
 import type { BoardFeetType, ProjectType } from '../types/types';
 import { trpc } from '../utils/trpc';
@@ -30,10 +31,12 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 		onSuccess: (data) => {
 			if (data) {
 				setActiveProject(data.project);
+				toast.success('Lumber added to Project');
 			}
 			ctx.user.getProjectsById.invalidate();
 		},
 		onSettled: () => onClose(),
+		onError: (err) => toast.error('Error: unable to add lumber to project'),
 	});
 
 	const addNewProjectWithLumber = trpc.project.createProjectWithLumber.useMutation({
@@ -44,6 +47,7 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 			ctx.user.getProjectsById.invalidate();
 		},
 		onSettled: () => onClose(),
+		onError: () => toast.error('Error: Please resubmit'),
 	});
 
 	function handleClick(id: string, values: BoardFeetType | null) {
