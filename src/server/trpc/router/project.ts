@@ -1,3 +1,4 @@
+import { TRPCError } from '@trpc/server';
 import { router, protectedProcedure } from '../trpc';
 import { z } from 'zod';
 
@@ -27,7 +28,11 @@ export const projectRouter = router({
 				});
 				return project;
 			} catch (err) {
-				console.log(err);
+				if (err instanceof TRPCError) {
+					throw new TRPCError(err);
+				} else {
+					throw new Error();
+				}
 			}
 		}),
 
@@ -66,7 +71,12 @@ export const projectRouter = router({
 				});
 				return project;
 			} catch (err) {
-				console.log(err);
+				// console.log(err);
+				if (err instanceof TRPCError) {
+					throw new TRPCError(err);
+				} else {
+					throw new Error();
+				}
 			}
 		}),
 
@@ -78,7 +88,11 @@ export const projectRouter = router({
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			if (err instanceof TRPCError) {
+				throw new TRPCError(err);
+			} else {
+				throw new Error();
+			}
 		}
 	}),
 
@@ -106,7 +120,11 @@ export const projectRouter = router({
 					},
 				});
 			} catch (err) {
-				console.log(err);
+				if (err instanceof TRPCError) {
+					throw new TRPCError(err);
+				} else {
+					throw new Error();
+				}
 			}
 		}),
 });

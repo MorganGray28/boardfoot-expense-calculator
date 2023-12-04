@@ -1,4 +1,5 @@
 import { router, protectedProcedure } from '../trpc';
+import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
 export const expenseRouter = router({
@@ -26,7 +27,11 @@ export const expenseRouter = router({
 				});
 				return expense.project;
 			} catch (err) {
-				console.log(err);
+				if (err instanceof TRPCError) {
+					throw new TRPCError(err);
+				} else {
+					throw new Error();
+				}
 			}
 		}),
 	deleteExpense: protectedProcedure.input(z.string()).mutation(async ({ ctx, input }) => {
@@ -56,7 +61,11 @@ export const expenseRouter = router({
 			});
 			return updatedProject;
 		} catch (err) {
-			console.log(err);
+			if (err instanceof TRPCError) {
+				throw new TRPCError(err);
+			} else {
+				throw new Error();
+			}
 		}
 	}),
 	addManyExpenses: protectedProcedure
@@ -88,7 +97,11 @@ export const expenseRouter = router({
 				});
 				return project;
 			} catch (err) {
-				console.log(err);
+				if (err instanceof TRPCError) {
+					throw new TRPCError(err);
+				} else {
+					throw new Error();
+				}
 			}
 		}),
 	editGenericExpense: protectedProcedure
@@ -126,7 +139,11 @@ export const expenseRouter = router({
 				});
 				return updated.project;
 			} catch (err) {
-				console.log(err);
+				if (err instanceof TRPCError) {
+					throw new TRPCError(err);
+				} else {
+					throw new Error();
+				}
 			}
 		}),
 });

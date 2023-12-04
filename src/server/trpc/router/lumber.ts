@@ -1,4 +1,5 @@
 import { router, protectedProcedure } from '../trpc';
+import { TRPCError, type DefaultErrorShape } from '@trpc/server';
 import { z } from 'zod';
 
 export const BoardFeetSchema = z.object({
@@ -42,7 +43,11 @@ export const lumberRouter = router({
 					},
 				});
 			} catch (err) {
-				throw err;
+				if (err instanceof TRPCError) {
+					throw new TRPCError(err);
+				} else {
+					throw new Error();
+				}
 			}
 		}),
 	deleteDimensionLumber: protectedProcedure.input(z.string()).mutation(async ({ ctx, input }) => {
@@ -72,7 +77,11 @@ export const lumberRouter = router({
 
 			return updatedProject;
 		} catch (err) {
-			console.log(err);
+			if (err instanceof TRPCError) {
+				throw new TRPCError(err);
+			} else {
+				throw new Error();
+			}
 		}
 	}),
 	editDimensionLumber: protectedProcedure
@@ -116,7 +125,11 @@ export const lumberRouter = router({
 				});
 				return updatedLumber.project;
 			} catch (err) {
-				console.log('err');
+				if (err instanceof TRPCError) {
+					throw new TRPCError(err);
+				} else {
+					throw new Error();
+				}
 			}
 		}),
 });

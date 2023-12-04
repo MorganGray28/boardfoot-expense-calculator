@@ -1,4 +1,5 @@
 import { router, protectedProcedure } from '../trpc';
+import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
 export const consumableRouter = router({
@@ -17,7 +18,11 @@ export const consumableRouter = router({
 			try {
 				await ctx.prisma.consumable.createMany({ data: input });
 			} catch (err) {
-				console.log(err);
+				if (err instanceof TRPCError) {
+					throw new TRPCError(err);
+				} else {
+					throw new Error();
+				}
 			}
 		}),
 	getAllConsumables: protectedProcedure.input(z.string()).query(async ({ ctx, input }) => {
@@ -48,7 +53,11 @@ export const consumableRouter = router({
 					},
 				});
 			} catch (err) {
-				console.log(err);
+				if (err instanceof TRPCError) {
+					throw new TRPCError(err);
+				} else {
+					throw new Error();
+				}
 			}
 		}),
 	deleteConsumable: protectedProcedure.input(z.string()).mutation(async ({ ctx, input }) => {
@@ -59,7 +68,11 @@ export const consumableRouter = router({
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			if (err instanceof TRPCError) {
+				throw new TRPCError(err);
+			} else {
+				throw new Error();
+			}
 		}
 	}),
 });
