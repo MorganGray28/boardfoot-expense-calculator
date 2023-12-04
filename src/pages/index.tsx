@@ -13,13 +13,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 // FIXME: convert alert messages to Toast messages for better error awareness
-// TODO: Make total expense component to show cost breakdown
+// TODO: Add empty form input styles and toast messages for BF Calculator
+// TODO: Design logged out main about page in Figma
+// TODO: implement logged out main page
+// TODO: better loading state
 // FIXME: number inputs won't allow a value of ".0X"
-// TODO: Make Edit and Delete Icon Buttons more reusable and DRY
-// TODO: Style ActiveProjectForm's ADD, EDIT, and DELETE dropdown buttons
-// TODO: Style Expense and Consumable List Items alternating backgrounds
-// FIXME: Make BF Calc add to project disabled when all the necessary fields aren't completed
 // FIXME: Make edit Expense and Consumable disabled when all the necessary fields aren't completed
+// TODO: Style ActiveProjectForm's ADD, EDIT, and DELETE dropdown buttons
+// TODO: Make Edit and Delete Icon Buttons more reusable and DRY
 
 const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);
