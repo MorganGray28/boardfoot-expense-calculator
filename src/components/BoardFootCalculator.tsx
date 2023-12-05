@@ -24,8 +24,7 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 		tax: 0,
 	};
 
-	// FIXME: rename errorValues to initialErrorValues to better differentiate from our inputErrors state variable name
-	const errorValues = {
+	const initialInputErrorValues = {
 		numOfPieces: false,
 		thickness: false,
 		width: false,
@@ -37,7 +36,7 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 
 	const [sidebarOpen, setSidebarOpen] = useState(false);
 	const [values, setValues] = useState(initialValues);
-	const [inputErrors, setInputErrors] = useState(errorValues);
+	const [inputErrors, setInputErrors] = useState(initialInputErrorValues);
 	let boardFeet: number | undefined = 0;
 	let preTax = 0;
 	let postTax = 0;
