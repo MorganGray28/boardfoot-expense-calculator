@@ -97,27 +97,37 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 		let isValid = true;
 		if (!values.numOfPieces) {
 			isValid = false;
-			setInputErrors({ ...inputErrors, numOfPieces: true });
+			setInputErrors((prevState) => {
+				return { ...prevState, numOfPieces: true };
+			});
 		}
 
 		if (!values.thickness) {
 			isValid = false;
-			setInputErrors({ ...inputErrors, thickness: true });
+			setInputErrors((prevState) => {
+				return { ...prevState, thickness: true };
+			});
 		}
 
 		if (!values.width) {
 			isValid = false;
-			setInputErrors({ ...inputErrors, width: true });
+			setInputErrors((prevState) => {
+				return { ...prevState, width: true };
+			});
 		}
 
 		if (!values.length) {
 			isValid = false;
-			setInputErrors({ ...inputErrors, length: true });
+			setInputErrors((prevState) => {
+				return { ...prevState, length: true };
+			});
 		}
 
 		if (!values.species) {
 			isValid = false;
-			setInputErrors({ ...inputErrors, species: true });
+			setInputErrors((prevState) => {
+				return { ...prevState, species: true };
+			});
 		}
 
 		if (isValid) {
@@ -155,7 +165,11 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 				<form onSubmit={handleSubmit}>
 					<div className={styles.boardfootContainer}>
 						<p className={styles.subheading}>Board Feet Calculator</p>
-						<div className={styles.labelInputGroup}>
+						<div
+							className={
+								`${styles.labelInputGroup}` + (inputErrors.numOfPieces ? ` ${styles.inputError}` : '')
+							}
+						>
 							<label className={styles.inputLabel} htmlFor='numOfPieces'>
 								No. of Pieces
 							</label>
@@ -168,7 +182,9 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 								type='number'
 							/>
 						</div>
-						<div className={styles.labelInputGroup}>
+						<div
+							className={`${styles.labelInputGroup}` + (inputErrors.thickness ? ` ${styles.inputError}` : '')}
+						>
 							<label className={styles.inputLabel} htmlFor='thickness'>
 								Thickness
 							</label>
@@ -184,12 +200,33 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 								<span>in</span>
 							</div>
 							<div className={styles.quarterThicknessContainer}>
-								<p onClick={() => setValues({ ...values, thickness: 1 })}>4/4</p>
-								<p onClick={() => setValues({ ...values, thickness: 1.5 })}>6/4</p>
-								<p onClick={() => setValues({ ...values, thickness: 2 })}>8/4</p>
+								<p
+									onClick={() => {
+										setValues({ ...values, thickness: 1 });
+										setInputErrors({ ...inputErrors, thickness: false });
+									}}
+								>
+									4/4
+								</p>
+								<p
+									onClick={() => {
+										setValues({ ...values, thickness: 1.5 });
+										setInputErrors({ ...inputErrors, thickness: false });
+									}}
+								>
+									6/4
+								</p>
+								<p
+									onClick={() => {
+										setValues({ ...values, thickness: 2 });
+										setInputErrors({ ...inputErrors, thickness: false });
+									}}
+								>
+									8/4
+								</p>
 							</div>
 						</div>
-						<div className={styles.labelInputGroup}>
+						<div className={`${styles.labelInputGroup}` + (inputErrors.width ? ` ${styles.inputError}` : '')}>
 							<label className={styles.inputLabel} htmlFor='width'>
 								Width
 							</label>
@@ -205,7 +242,12 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 								<span>in</span>
 							</div>
 						</div>
-						<div className={`${styles.labelInputGroup} ${styles.length}`}>
+						<div
+							className={
+								`${styles.labelInputGroup} ${styles.length}` +
+								(inputErrors.length ? ` ${styles.inputError}` : '')
+							}
+						>
 							<label className={styles.inputLabel} htmlFor='length'>
 								Length
 							</label>
@@ -248,7 +290,9 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 							/>
 						</div>
 
-						<div className={styles.labelInputGroup}>
+						<div
+							className={`${styles.labelInputGroup}` + (inputErrors.species ? ` ${styles.inputError}` : '')}
+						>
 							<label className={styles.inputLabel} htmlFor='species'>
 								Species
 							</label>

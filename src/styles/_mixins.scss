@@ -242,3 +242,14 @@
   border: none;
   cursor: pointer;
 }
+
+@mixin inputError {
+  & .inputLabel {
+		color: variables.$danger-red;	
+	}
+
+	& input, & input:active, & input:focus {
+		background-color: rgba(224, 39, 55, .08);
+		border-bottom: 1px solid variables.$danger-red;
+	}
+}
