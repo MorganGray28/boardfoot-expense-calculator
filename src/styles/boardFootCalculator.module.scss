@@ -248,7 +248,11 @@
 }
 
 .inputError {
-	@include mixins.inputError
+	@include mixins.inputError;
+}
+
+.inputLabelFlexGroup {
+	@include mixins.inputErrorFlexGroup;
 }
 
 .container::-webkit-scrollbar-thumb

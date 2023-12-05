@@ -159,9 +159,12 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 			<>
 				<h4 className={styles.header}>Create a New Project</h4>
 				<div className={projectNameError ? `${styles.textfieldError}` : ''}>
-					<label htmlFor='newProjectName' className={styles.textfieldLabel}>
-						Name
-					</label>
+					<div className={styles.inputLabelFlexGroup}>
+						<label htmlFor='newProjectName' className={styles.textfieldLabel}>
+							Name
+						</label>
+						{projectNameError && <p className={styles.errorMessage}>*Required</p>}
+					</div>
 					<input
 						id='newProjectName'
 						name='newProjectName'

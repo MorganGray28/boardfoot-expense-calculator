@@ -272,3 +272,16 @@
 		border: 2px solid variables.$danger-red;
 	}
 }
+
+@mixin inputErrorFlexGroup {
+  display: flex;
+
+	& label {
+		flex-grow: 1;
+	}
+
+	.errorMessage {
+		font-size: .875rem;
+		color: variables.$danger-red;
+	}
+}

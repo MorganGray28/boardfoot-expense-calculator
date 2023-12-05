@@ -13,6 +13,7 @@ type PropsType = {
 function NewProjectForm({ cancel, setActiveProject, setIsCreatingNewProject }: PropsType) {
 	const [newProjectName, setNewProjectName] = useState('');
 	const [newProjectDescription, setNewProjectDescription] = useState('');
+	const [projectNameError, setProjectNameError] = useState(false);
 
 	const ctx = trpc.useContext();
 	const { mutateAsync: addNewProject, isLoading: isCreating } = trpc.project.createProject.useMutation({
@@ -33,6 +34,7 @@ function NewProjectForm({ cancel, setActiveProject, setIsCreatingNewProject }: P
 		setIsCreatingNewProject(false);
 		setNewProjectName('');
 		setNewProjectDescription('');
+		setProjectNameError(false);
 	}
 
 	async function handleSubmitNewProject(e: React.FormEvent<HTMLFormElement>) {
@@ -40,6 +42,7 @@ function NewProjectForm({ cancel, setActiveProject, setIsCreatingNewProject }: P
 		if (newProjectName) {
 			await addNewProject({ name: newProjectName, description: newProjectDescription });
 		} else {
+			setProjectNameError(true);
 			toast.error('Please fill out the Project Name', {
 				id: 'emptyProjectName',
 			});
@@ -49,18 +52,26 @@ function NewProjectForm({ cancel, setActiveProject, setIsCreatingNewProject }: P
 	return (
 		<div className={styles.flexContainer}>
 			<form onSubmit={(e) => handleSubmitNewProject(e)}>
-				<label className={styles.textfieldLabel} htmlFor='newProjectName'>
-					Project Name
-				</label>
-				<input
-					className={`${styles.searchInput} ${styles.nameInput}`}
-					id='newProjectName'
-					autoComplete='off'
-					type='text'
-					placeholder='enter project name'
-					value={newProjectName}
-					onChange={(e) => setNewProjectName(e.target.value)}
-				/>
+				<div className={projectNameError ? `${styles.textfieldError}` : ''}>
+					<div className={styles.inputLabelFlexGroup}>
+						<label className={styles.textfieldLabel} htmlFor='newProjectName'>
+							Project Name
+						</label>
+						{projectNameError && <p className={styles.errorMessage}>*Required</p>}
+					</div>
+					<input
+						className={`${styles.searchInput} ${styles.nameInput}`}
+						id='newProjectName'
+						autoComplete='off'
+						type='text'
+						placeholder='enter project name'
+						value={newProjectName}
+						onChange={(e) => {
+							setNewProjectName(e.target.value);
+							setProjectNameError(false);
+						}}
+					/>
+				</div>
 				<label htmlFor='newProjectDescription' className={styles.textfieldLabel}>
 					Project Description (optional)
 				</label>

@@ -24,6 +24,7 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 		tax: 0,
 	};
 
+	// FIXME: rename errorValues to initialErrorValues to better differentiate from our inputErrors state variable name
 	const errorValues = {
 		numOfPieces: false,
 		thickness: false,
@@ -170,9 +171,12 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 								`${styles.labelInputGroup}` + (inputErrors.numOfPieces ? ` ${styles.inputError}` : '')
 							}
 						>
-							<label className={styles.inputLabel} htmlFor='numOfPieces'>
-								No. of Pieces
-							</label>
+							<div className={styles.inputLabelFlexGroup}>
+								<label className={styles.inputLabel} htmlFor='numOfPieces'>
+									No. of Pieces
+								</label>
+								{inputErrors.numOfPieces && <p className={styles.errorMessage}>*Required</p>}
+							</div>
 							<input
 								id='numOfPieces'
 								name='numOfPieces'
@@ -185,9 +189,12 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 						<div
 							className={`${styles.labelInputGroup}` + (inputErrors.thickness ? ` ${styles.inputError}` : '')}
 						>
-							<label className={styles.inputLabel} htmlFor='thickness'>
-								Thickness
-							</label>
+							<div className={styles.inputLabelFlexGroup}>
+								<label className={styles.inputLabel} htmlFor='thickness'>
+									Thickness
+								</label>
+								{inputErrors.thickness && <p className={styles.errorMessage}>*Required</p>}
+							</div>
 							<div className={styles.inputUnitsGroup}>
 								<input
 									id='thickness'
@@ -227,9 +234,12 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 							</div>
 						</div>
 						<div className={`${styles.labelInputGroup}` + (inputErrors.width ? ` ${styles.inputError}` : '')}>
-							<label className={styles.inputLabel} htmlFor='width'>
-								Width
-							</label>
+							<div className={styles.inputLabelFlexGroup}>
+								<label className={styles.inputLabel} htmlFor='width'>
+									Width
+								</label>
+								{inputErrors.width && <p className={styles.errorMessage}>*Required</p>}
+							</div>
 							<div className={styles.inputUnitsGroup}>
 								<input
 									id='width'
@@ -248,9 +258,12 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 								(inputErrors.length ? ` ${styles.inputError}` : '')
 							}
 						>
-							<label className={styles.inputLabel} htmlFor='length'>
-								Length
-							</label>
+							<div className={styles.inputLabelFlexGroup}>
+								<label className={styles.inputLabel} htmlFor='length'>
+									Length
+								</label>
+								{inputErrors.length && <p className={styles.errorMessage}>*Required</p>}
+							</div>
 							<div className={styles.inputUnitsGroup}>
 								<input
 									id='length'
@@ -293,9 +306,12 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 						<div
 							className={`${styles.labelInputGroup}` + (inputErrors.species ? ` ${styles.inputError}` : '')}
 						>
-							<label className={styles.inputLabel} htmlFor='species'>
-								Species
-							</label>
+							<div className={styles.inputLabelFlexGroup}>
+								<label className={styles.inputLabel} htmlFor='species'>
+									Species
+								</label>
+								{inputErrors.species && <p className={styles.errorMessage}>*Required</p>}
+							</div>
 							<input
 								id='species'
 								type='text'

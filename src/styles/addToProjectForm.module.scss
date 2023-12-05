@@ -81,6 +81,12 @@
   padding: 0 .5rem;
 }
 
+.inputLabelFlexGroup {
+  @include mixins.inputErrorFlexGroup;
+
+  align-items: flex-end;
+}
+
 .dangerBtn {
   @include mixins.outline-danger-button;
 }
