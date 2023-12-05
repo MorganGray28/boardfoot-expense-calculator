@@ -248,8 +248,27 @@
 		color: variables.$danger-red;	
 	}
 
+  & .textfieldLabel {
+		color: variables.$danger-red;	
+	}
+
 	& input, & input:active, & input:focus {
 		background-color: rgba(224, 39, 55, .08);
 		border-bottom: 1px solid variables.$danger-red;
+	}
+}
+
+@mixin textfieldError {
+  & .inputLabel {
+		color: variables.$danger-red;	
+	}
+
+  & .textfieldLabel {
+		color: variables.$danger-red;	
+	}
+
+	& input, & input:active, & input:focus {
+		background-color: rgba(224, 39, 55, .08);
+		border: 2px solid variables.$danger-red;
 	}
 }

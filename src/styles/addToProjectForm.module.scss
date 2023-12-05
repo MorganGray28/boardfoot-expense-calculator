@@ -88,3 +88,7 @@
 .approveBtn {
   @include mixins.primary-button;
 }
+
+.textfieldError {
+  @include mixins.textfieldError;
+}

@@ -18,6 +18,7 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 	const [isCreatingNew, setIsCreatingNew] = useState(false);
 	const [newProjectName, setNewProjectName] = useState('');
 	const [newProjectDescription, setNewProjectDescription] = useState('');
+	const [projectNameError, setProjectNameError] = useState(false);
 	const { data: session } = useSession();
 	let projectList: ProjectType[] | undefined;
 	if (session?.user?.id) {
@@ -65,7 +66,8 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 				values,
 			});
 		} else {
-			toast.error("Please make sure Project Name and lumber values aren't empty or invalid");
+			setProjectNameError(true);
+			// toast.error("Please make sure Project Name and lumber values aren't empty or invalid");
 		}
 	}
 
@@ -156,17 +158,22 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 		formContent = (
 			<>
 				<h4 className={styles.header}>Create a New Project</h4>
-				<label htmlFor='newProjectName' className={styles.textfieldLabel}>
-					Name
-				</label>
-				<input
-					id='newProjectName'
-					name='newProjectName'
-					value={newProjectName}
-					onChange={(e) => setNewProjectName(e.target.value)}
-					className={`${styles.searchInput} ${styles.nameInput}`}
-					type='text'
-				/>
+				<div className={projectNameError ? `${styles.textfieldError}` : ''}>
+					<label htmlFor='newProjectName' className={styles.textfieldLabel}>
+						Name
+					</label>
+					<input
+						id='newProjectName'
+						name='newProjectName'
+						value={newProjectName}
+						onChange={(e) => {
+							setNewProjectName(e.target.value);
+							setProjectNameError(false);
+						}}
+						className={`${styles.searchInput} ${styles.nameInput}`}
+						type='text'
+					/>
+				</div>
 				<label htmlFor='newProjectDescription' className={styles.textfieldLabel}>
 					Description (optional)
 				</label>
