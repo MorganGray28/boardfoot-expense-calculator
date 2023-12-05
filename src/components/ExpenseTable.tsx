@@ -9,6 +9,7 @@ import GenericExpenseListItem from './GenericExpenseListItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import toast from 'react-hot-toast';
 
 interface PropsType {
 	activeProject: ProjectType | null;
@@ -35,11 +36,13 @@ export default function ExpenseTable({
 			if (data) {
 				setActiveProject(data);
 			}
+			toast.success('Expense Added!');
 			ctx.user.getProjectsById.invalidate();
 		},
 		onSettled: () => {
 			setModalOpen(false);
 		},
+		onError: () => toast.error('Error, please try again'),
 	});
 
 	function handleClick() {
@@ -60,9 +63,11 @@ export default function ExpenseTable({
 	}
 
 	function handleAddExpense() {
+		// add limit to keep user from adding large amounts of entries at once
 		if (expenses.length > 20) {
-			alert(
-				"Can't add more expense entries at this time. Please submit these expenses and add the rest afterwards."
+			toast.error(
+				"Can't add more expense entries at this time. Please submit these expenses and add the rest afterwards.",
+				{ id: 'expenseEntriesExceeded', duration: 5000 }
 			);
 			return;
 		}
@@ -92,7 +97,7 @@ export default function ExpenseTable({
 		}
 		// submit expenses array to backend trpc route to createMany expenses for our active project
 		if (invalidInput) {
-			alert("Please make sure the expense inputs aren't blank or invalid");
+			toast.error("Please make sure the expense inputs aren't blank or invalid");
 		} else {
 			if (activeProject && activeProject.id) {
 				// add projectId to our ExpenseType

@@ -7,6 +7,7 @@ import { trpc } from '../utils/trpc';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import toast from 'react-hot-toast';
 
 type ConsumableInputType = {
 	name: string;
@@ -32,10 +33,12 @@ export default function ConsumableTable({ setTotalConsumableAmount, activeTab }:
 	const addConsumables = trpc.consumable.addNewConsumables.useMutation({
 		onSuccess: () => {
 			ctx.consumable.getAllConsumables.invalidate();
+			toast.success('Consumable Added!');
 		},
 		onSettled: () => {
 			setModalIsOpen(false);
 		},
+		onError: () => toast.error('Error, please try again'),
 	});
 
 	let totalConsumable = 0;
@@ -86,6 +89,14 @@ export default function ConsumableTable({ setTotalConsumableAmount, activeTab }:
 	}
 
 	function handleAddConsumable() {
+		// add limit to keep user from adding large amounts of entries at once
+		if (consumables.length > 20) {
+			toast.error(
+				"Can't add more consumable entries at this time. Please submit these consumables and add the rest afterwards.",
+				{ id: 'consumableEntriesExceeded', duration: 5000 }
+			);
+			return;
+		}
 		const newInputField = { name: '', amount: 0, cost: 0 };
 		setConsumables([...consumables, newInputField]);
 	}
@@ -112,7 +123,7 @@ export default function ConsumableTable({ setTotalConsumableAmount, activeTab }:
 		}
 		// submit expenses array to backend trpc route to createMany expenses
 		if (invalidInput) {
-			alert("Please make sure the consumable inputs aren't blank or invalid");
+			toast.error("Please make sure the consumable inputs aren't blank or invalid");
 		} else {
 			let consumablesWithUserId;
 			if (session && session.user && session.user.id) {

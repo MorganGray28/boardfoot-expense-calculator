@@ -45,6 +45,7 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 				setActiveProject(data);
 			}
 			ctx.user.getProjectsById.invalidate();
+			toast.success('Project created!');
 		},
 		onSettled: () => onClose(),
 		onError: () => toast.error('Error: Please resubmit'),

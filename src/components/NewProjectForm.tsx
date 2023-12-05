@@ -26,6 +26,7 @@ function NewProjectForm({ cancel, setActiveProject, setIsCreatingNewProject }: P
 			setIsCreatingNewProject(false);
 			ctx.user.getProjectsById.invalidate();
 		},
+		onError: () => toast.error('Error, was unable to create Project'),
 	});
 
 	function handleCancelNewProject() {

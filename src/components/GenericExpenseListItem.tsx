@@ -6,6 +6,7 @@ import { checkForIdenticalObjects } from '../utils/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import toast from 'react-hot-toast';
 
 type PropsType = {
 	id: string;
@@ -26,6 +27,7 @@ function GenericExpenseListItem({ id, name, cost, amount, setActiveProject }: Pr
 				setActiveProject(data);
 			}
 			ctx.user.getProjectsById.invalidate();
+			toast.success('Deleted!');
 		},
 	});
 
@@ -36,6 +38,7 @@ function GenericExpenseListItem({ id, name, cost, amount, setActiveProject }: Pr
 			if (data) {
 				setActiveProject(data);
 			}
+			toast.success('Updated!');
 		},
 	});
 
@@ -64,7 +67,7 @@ function GenericExpenseListItem({ id, name, cost, amount, setActiveProject }: Pr
 	function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
 		if (!values.amount || !values.cost || !values.name) {
-			alert('Please fill inputs');
+			toast.error('Please fill in inputs');
 		} else if (checkForIdenticalObjects(values, initialValues)) {
 			setIsEditingExpense(false);
 		} else {

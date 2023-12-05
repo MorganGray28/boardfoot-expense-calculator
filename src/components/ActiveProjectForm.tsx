@@ -4,6 +4,7 @@ import styles from '../styles/ActiveProjectForm.module.scss';
 import type { ProjectType } from '../types/types';
 import { trpc } from '../utils/trpc';
 import Modal from './Modal';
+import toast from 'react-hot-toast';
 
 interface PropsType {
 	projects: ProjectType[];
@@ -45,6 +46,10 @@ export function ActiveProjectForm({
 		onSuccess: () => {
 			setActiveProject(null);
 			ctx.user.getProjectsById.invalidate();
+			toast.success('Project deleted');
+		},
+		onError: () => {
+			toast.error('Error, please try again');
 		},
 	});
 
@@ -191,8 +196,9 @@ function EditProjectNameForm({
 			if (data) {
 				setActiveProject(data);
 			}
+			toast.success('Project was updated!');
 		},
-		onError: () => console.log('there is an error'),
+		onError: () => toast.error('Error, please try again'),
 		onSettled: () => ctx.user.getProjectsById.invalidate(),
 	});
 

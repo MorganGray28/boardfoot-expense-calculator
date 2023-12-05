@@ -11,8 +11,8 @@ import type { ProjectType, BoardFeetType } from '../types/types';
 import { trpc } from '../utils/trpc';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import toast from 'react-hot-toast';
 
-// FIXME: convert alert messages to Toast messages for better error awareness
 // FIXME: in bf calc create new project, bug allows empty project name
 // TODO: Add empty form input styles and toast messages for BF Calculator
 // TODO: Design logged out main about page in Figma
@@ -36,6 +36,7 @@ const Home: NextPage = () => {
 		onSuccess: (data) => {
 			setActiveProject(activeProject ?? data[0] ?? null);
 		},
+		onError: () => toast.error('Error, something went wrong'),
 	});
 
 	const profileDropdownRef = useRef() as RefObject<HTMLDivElement>;
