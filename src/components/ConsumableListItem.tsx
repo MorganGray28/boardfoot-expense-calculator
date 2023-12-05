@@ -4,6 +4,7 @@ import { trpc } from '../utils/trpc';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import toast from 'react-hot-toast';
 
 type InputFieldsType = {
 	name: string;
@@ -60,7 +61,7 @@ export default function ConsumableListItem({ name, amount, cost, id }: PropsType
 		if (name === editInputFields.name && cost === editInputFields.cost && amount === editInputFields.amount) {
 			setIsEditing(false);
 		} else if (!editInputFields.name || !editInputFields.cost || !editInputFields.amount) {
-			alert('Please fill out empty input fields');
+			toast.error('Please fill out empty input fields');
 		} else {
 			updateConsumable.mutateAsync({ ...editInputFields, id });
 		}

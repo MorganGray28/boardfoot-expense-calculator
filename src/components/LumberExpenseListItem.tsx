@@ -7,6 +7,7 @@ import type { ProjectType } from '../types/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import toast from 'react-hot-toast';
 
 interface PropTypes {
 	id: string;
@@ -20,8 +21,6 @@ interface PropTypes {
 	tax: number;
 	setActiveProject: Dispatch<SetStateAction<ProjectType | null>>;
 }
-
-// TODO: Style the item container for alternating background colors
 
 export default function LumberExpenseListItem({
 	id,
@@ -57,7 +56,9 @@ export default function LumberExpenseListItem({
 				setActiveProject(data);
 			}
 			ctx.user.getProjectsById.invalidate();
+			toast.success('Deleted!');
 		},
+		onError: () => toast.error('Error, please try again'),
 	});
 
 	const editLumberExpense = trpc.lumber.editDimensionLumber.useMutation({
@@ -67,7 +68,9 @@ export default function LumberExpenseListItem({
 			if (data) {
 				setActiveProject(data);
 			}
+			toast.success('Updated!');
 		},
+		onError: () => toast.error('Error, please try again'),
 	});
 
 	function handleDelete() {
@@ -97,7 +100,7 @@ export default function LumberExpenseListItem({
 		e.preventDefault();
 		// Check to see if any of the required values are empty or unchanged from initial values to avoid unnecessary api call
 		if (!values.length || !values.numOfPieces || !values.species || !values.thickness || !values.width) {
-			alert('Please fill out required inputs');
+			toast.error('Please fill out required inputs');
 		} else if (checkForIdenticalObjects(values, initialValues)) {
 			setIsEditingExpense(false);
 		} else {

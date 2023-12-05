@@ -1,4 +1,5 @@
 import React, { type Dispatch, type SetStateAction, useState } from 'react';
+import toast from 'react-hot-toast';
 import { trpc } from '../utils/trpc';
 import type { ProjectType } from '../types/types';
 import styles from '../styles/NewProjectForm.module.scss';
@@ -18,12 +19,14 @@ function NewProjectForm({ cancel, setActiveProject, setIsCreatingNewProject }: P
 		onSuccess: (data) => {
 			if (data) {
 				setActiveProject(data);
+				toast.success('Project Created', { duration: 2000 });
 			}
 			setNewProjectName('');
 			setNewProjectDescription('');
 			setIsCreatingNewProject(false);
 			ctx.user.getProjectsById.invalidate();
 		},
+		onError: () => toast.error('Error, was unable to create Project'),
 	});
 
 	function handleCancelNewProject() {
@@ -32,13 +35,14 @@ function NewProjectForm({ cancel, setActiveProject, setIsCreatingNewProject }: P
 		setNewProjectDescription('');
 	}
 
-	// FIXME: revise the alert to something better when no name is entered
 	async function handleSubmitNewProject(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		if (newProjectName) {
 			await addNewProject({ name: newProjectName, description: newProjectDescription });
 		} else {
-			alert('Please fill out the Project Name input');
+			toast.error('Please fill out the Project Name', {
+				id: 'emptyProjectName',
+			});
 		}
 	}
 

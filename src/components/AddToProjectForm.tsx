@@ -1,5 +1,6 @@
 import { useSession } from 'next-auth/react';
 import React, { type Dispatch, type SetStateAction, useState } from 'react';
+import toast from 'react-hot-toast';
 import styles from '../styles/addToProjectForm.module.scss';
 import type { BoardFeetType, ProjectType } from '../types/types';
 import { trpc } from '../utils/trpc';
@@ -30,10 +31,12 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 		onSuccess: (data) => {
 			if (data) {
 				setActiveProject(data.project);
+				toast.success('Lumber added to Project');
 			}
 			ctx.user.getProjectsById.invalidate();
 		},
 		onSettled: () => onClose(),
+		onError: (err) => toast.error('Error: unable to add lumber to project'),
 	});
 
 	const addNewProjectWithLumber = trpc.project.createProjectWithLumber.useMutation({
@@ -42,8 +45,10 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 				setActiveProject(data);
 			}
 			ctx.user.getProjectsById.invalidate();
+			toast.success('Project created!');
 		},
 		onSettled: () => onClose(),
+		onError: (err) => toast.error('Error: Please resubmit'),
 	});
 
 	function handleClick(id: string, values: BoardFeetType | null) {
@@ -53,12 +58,14 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 	}
 
 	async function handleCreateNewProjectWithLumber(values: BoardFeetType | null) {
-		if (values) {
+		if (values && newProjectName) {
 			await addNewProjectWithLumber.mutateAsync({
 				name: newProjectName,
 				description: newProjectDescription,
 				values,
 			});
+		} else {
+			toast.error("Please make sure Project Name and lumber values aren't empty or invalid");
 		}
 	}
 
