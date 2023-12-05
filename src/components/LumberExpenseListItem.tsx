@@ -47,6 +47,15 @@ export default function LumberExpenseListItem({
 	};
 	const [values, setValues] = useState(initialValues);
 
+	const initialInputErrorValues = {
+		numOfPieces: false,
+		thickness: false,
+		width: false,
+		length: false,
+		species: false,
+	};
+	const [inputErrors, setInputErrors] = useState(initialInputErrorValues);
+
 	const boardFeet = calculateBoardFeet({ numOfPieces, thickness, width, length });
 	const cost = calculateCostFromBF({ boardFeet, price, tax });
 	const ctx = trpc.useContext();
@@ -80,9 +89,22 @@ export default function LumberExpenseListItem({
 	function handleChange(e: ChangeEvent<HTMLInputElement>) {
 		if (e.target.name === 'species' || e.target.name === 'name') {
 			setValues({ ...values, [e.target.name]: e.target.value });
+
+			if (e.target.name === 'species') {
+				setInputErrors({ ...inputErrors, species: false });
+			}
 		} else if (e.target.name === 'numOfPieces') {
 			setValues({ ...values, [e.target.name]: parseInt(e.target.value) });
+			setInputErrors({ ...inputErrors, numOfPieces: false });
 		} else {
+			if (e.target.name === 'thickness') {
+				setInputErrors({ ...inputErrors, thickness: false });
+			} else if (e.target.name === 'width') {
+				setInputErrors({ ...inputErrors, width: false });
+			} else if (e.target.name === 'length') {
+				setInputErrors({ ...inputErrors, length: false });
+			}
+
 			if (!e.target.value) {
 				setValues({ ...values, [e.target.name]: 0 });
 			} else {
@@ -98,9 +120,45 @@ export default function LumberExpenseListItem({
 
 	function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
+		let isValid = true;
+
 		// Check to see if any of the required values are empty or unchanged from initial values to avoid unnecessary api call
 		if (!values.length || !values.numOfPieces || !values.species || !values.thickness || !values.width) {
-			toast.error('Please fill out required inputs');
+			if (!values.numOfPieces) {
+				isValid = false;
+				setInputErrors((prevState) => {
+					return { ...prevState, numOfPieces: true };
+				});
+			}
+
+			if (!values.thickness) {
+				isValid = false;
+				setInputErrors((prevState) => {
+					return { ...prevState, thickness: true };
+				});
+			}
+
+			if (!values.width) {
+				isValid = false;
+				setInputErrors((prevState) => {
+					return { ...prevState, width: true };
+				});
+			}
+
+			if (!values.length) {
+				isValid = false;
+				setInputErrors((prevState) => {
+					return { ...prevState, length: true };
+				});
+			}
+
+			if (!values.species) {
+				isValid = false;
+				setInputErrors((prevState) => {
+					return { ...prevState, species: true };
+				});
+			}
+			toast.error('Please fill out required inputs', { id: `expenseError${id}` });
 		} else if (checkForIdenticalObjects(values, initialValues)) {
 			setIsEditingExpense(false);
 		} else {
@@ -114,7 +172,11 @@ export default function LumberExpenseListItem({
 			<div className={styles.container}>
 				<form onSubmit={(e) => handleSubmit(e)} noValidate>
 					<div className={styles.formFlexWrapper}>
-						<div className={styles.labelInputGroup}>
+						<div
+							className={
+								`${styles.labelInputGroup}` + (inputErrors.numOfPieces ? ` ${styles.inputError}` : '')
+							}
+						>
 							<label className={styles.inputLabel} htmlFor='numOfPieces'>
 								No. of Pieces
 							</label>
@@ -128,7 +190,9 @@ export default function LumberExpenseListItem({
 								onChange={handleChange}
 							/>
 						</div>
-						<div className={styles.labelInputGroup}>
+						<div
+							className={`${styles.labelInputGroup}` + (inputErrors.thickness ? ` ${styles.inputError}` : '')}
+						>
 							<label className={styles.inputLabel} htmlFor='thickness'>
 								Thickness
 							</label>
@@ -142,7 +206,7 @@ export default function LumberExpenseListItem({
 								onChange={handleChange}
 							/>
 						</div>
-						<div className={styles.labelInputGroup}>
+						<div className={`${styles.labelInputGroup}` + (inputErrors.width ? ` ${styles.inputError}` : '')}>
 							<label className={styles.inputLabel} htmlFor='width'>
 								Width
 							</label>
@@ -158,7 +222,9 @@ export default function LumberExpenseListItem({
 						</div>
 					</div>
 					<div className={styles.formFlexWrapper}>
-						<div className={styles.labelInputGroup}>
+						<div
+							className={`${styles.labelInputGroup}` + (inputErrors.length ? ` ${styles.inputError}` : '')}
+						>
 							<label className={styles.inputLabel} htmlFor='length'>
 								Length
 							</label>
@@ -216,7 +282,9 @@ export default function LumberExpenseListItem({
 								onChange={handleChange}
 							/>
 						</div>
-						<div className={styles.labelInputGroup}>
+						<div
+							className={`${styles.labelInputGroup}` + (inputErrors.species ? ` ${styles.inputError}` : '')}
+						>
 							<label className={styles.inputLabel} htmlFor='species'>
 								Species
 							</label>
