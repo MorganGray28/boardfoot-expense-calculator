@@ -48,7 +48,7 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 			toast.success('Project created!');
 		},
 		onSettled: () => onClose(),
-		onError: () => toast.error('Error: Please resubmit'),
+		onError: (err) => toast.error('Error: Please resubmit'),
 	});
 
 	function handleClick(id: string, values: BoardFeetType | null) {
@@ -58,7 +58,7 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 	}
 
 	async function handleCreateNewProjectWithLumber(values: BoardFeetType | null) {
-		if (values) {
+		if (values && newProjectName) {
 			await addNewProjectWithLumber.mutateAsync({
 				name: newProjectName,
 				description: newProjectDescription,
