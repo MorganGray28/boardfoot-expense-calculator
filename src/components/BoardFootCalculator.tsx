@@ -24,10 +24,19 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 		tax: 0,
 	};
 
+	const errorValues = {
+		numOfPieces: false,
+		thickness: false,
+		width: false,
+		length: false,
+		species: false,
+	};
+
 	const { data: session } = useSession();
 
 	const [sidebarOpen, setSidebarOpen] = useState(false);
 	const [values, setValues] = useState(initialValues);
+	const [inputErrors, setInputErrors] = useState(errorValues);
 	let boardFeet: number | undefined = 0;
 	let preTax = 0;
 	let postTax = 0;
@@ -53,9 +62,23 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 	function handleChange(e: ChangeEvent<HTMLInputElement>) {
 		if (e.target.name === 'species' || e.target.name === 'name') {
 			setValues({ ...values, [e.target.name]: e.target.value });
+
+			// if changing input that is required, reset error state for that input when user changes its value
+			if (e.target.name === 'species') {
+				setInputErrors({ ...inputErrors, species: false });
+			}
 		} else if (e.target.name === 'numOfPieces') {
 			setValues({ ...values, [e.target.name]: parseInt(e.target.value) });
+			setInputErrors({ ...inputErrors, numOfPieces: false });
 		} else {
+			if (e.target.name === 'thickness') {
+				setInputErrors({ ...inputErrors, thickness: false });
+			} else if (e.target.name === 'width') {
+				setInputErrors({ ...inputErrors, width: false });
+			} else if (e.target.name === 'length') {
+				setInputErrors({ ...inputErrors, length: false });
+			}
+
 			if (!e.target.value) {
 				setValues({ ...values, [e.target.name]: 0 });
 			} else {
@@ -70,16 +93,39 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 
 	function handleSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
-		setSidebarOpen(false);
-		handleModal(values);
-		handleClearForm();
+
+		let isValid = true;
+		if (!values.numOfPieces) {
+			isValid = false;
+			setInputErrors({ ...inputErrors, numOfPieces: true });
+		}
+
+		if (!values.thickness) {
+			isValid = false;
+			setInputErrors({ ...inputErrors, thickness: true });
+		}
+
+		if (!values.width) {
+			isValid = false;
+			setInputErrors({ ...inputErrors, width: true });
+		}
+
+		if (!values.length) {
+			isValid = false;
+			setInputErrors({ ...inputErrors, length: true });
+		}
+
+		if (!values.species) {
+			isValid = false;
+			setInputErrors({ ...inputErrors, species: true });
+		}
+
+		if (isValid) {
+			setSidebarOpen(false);
+			handleModal(values);
+			handleClearForm();
+		}
 	}
-
-	/* Mobile Sidebar Design
-	
-	- IMPORTANT CONSIDERATION: if a user isn't logged in/no session, then we need to display the BF calculator by default 
-
-	*/
 
 	return (
 		<>
