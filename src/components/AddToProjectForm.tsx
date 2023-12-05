@@ -64,6 +64,8 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 				description: newProjectDescription,
 				values,
 			});
+		} else {
+			toast.error("Please make sure Project Name and lumber values aren't empty or invalid");
 		}
 	}
 
