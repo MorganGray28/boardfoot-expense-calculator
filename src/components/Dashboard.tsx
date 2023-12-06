@@ -19,7 +19,7 @@ export default function Dashboard({ projects, activeProject, setActiveProject, i
 
 	if (projects?.length) {
 		return (
-			<div>
+			<div style={{ minHeight: '100vh' }}>
 				{isCreatingNewProject ? (
 					<NewProjectForm
 						cancel={true}
