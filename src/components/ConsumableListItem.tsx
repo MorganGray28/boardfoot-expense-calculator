@@ -18,6 +18,13 @@ export default function ConsumableListItem({ name, amount, cost, id }: PropsType
 	const [isEditing, setIsEditing] = useState(false);
 	const [editInputFields, setEditInputFields] = useState<InputFieldsType>({ name, amount, cost });
 
+	const initialInputErrorValues = {
+		name: false,
+		amount: false,
+		cost: false,
+	};
+	const [inputErrors, setInputErrors] = useState(initialInputErrorValues);
+
 	const ctx = trpc.useContext();
 	const updateConsumable = trpc.consumable.updateConsumable.useMutation({
 		onSuccess: () => ctx.consumable.getAllConsumables.invalidate(),
@@ -32,6 +39,9 @@ export default function ConsumableListItem({ name, amount, cost, id }: PropsType
 	function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
 		const key = e.currentTarget.name as keyof InputFieldsType;
 		const updatedData = { ...editInputFields };
+		if (inputErrors[key]) {
+			setInputErrors({ ...inputErrors, [key]: false });
+		}
 		if (key === 'name') {
 			updatedData[key] = e.currentTarget.value;
 		} else {
@@ -56,13 +66,34 @@ export default function ConsumableListItem({ name, amount, cost, id }: PropsType
 
 	function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
+		let isValid = true;
 
 		// if nothing is changed, we don't make an api call
 		if (name === editInputFields.name && cost === editInputFields.cost && amount === editInputFields.amount) {
 			setIsEditing(false);
 		} else if (!editInputFields.name || !editInputFields.cost || !editInputFields.amount) {
+			if (!editInputFields.name) {
+				setInputErrors((prevState) => {
+					return { ...prevState, name: true };
+				});
+				isValid = false;
+			}
+
+			if (!editInputFields.cost) {
+				setInputErrors((prevState) => {
+					return { ...prevState, cost: true };
+				});
+				isValid = false;
+			}
+
+			if (!editInputFields.amount) {
+				setInputErrors((prevState) => {
+					return { ...prevState, amount: true };
+				});
+				isValid = false;
+			}
 			toast.error('Please fill out empty input fields');
-		} else {
+		} else if (isValid) {
 			updateConsumable.mutateAsync({ ...editInputFields, id });
 		}
 	}
@@ -72,9 +103,14 @@ export default function ConsumableListItem({ name, amount, cost, id }: PropsType
 			<div className={styles.container}>
 				<form className={styles.editForm} onSubmit={handleSubmit} noValidate>
 					<div className={styles.inputFlexContainer}>
-						<div className={`${styles.labelInputGroup} ${styles.flexShrink}`}>
+						<div
+							className={
+								`${styles.labelInputGroup} ${styles.flexShrink}` +
+								(inputErrors.amount ? ` ${styles.inputError}` : '')
+							}
+						>
 							<label htmlFor='amount' className={styles.inputLabel}>
-								Amount
+								Percentage Applied
 							</label>
 							<input
 								className={styles.input}
@@ -86,7 +122,7 @@ export default function ConsumableListItem({ name, amount, cost, id }: PropsType
 								onChange={handleChange}
 							/>
 						</div>
-						<div className={styles.labelInputGroup}>
+						<div className={`${styles.labelInputGroup}` + (inputErrors.name ? ` ${styles.inputError}` : '')}>
 							<label htmlFor='name' className={styles.inputLabel}>
 								Name
 							</label>
@@ -100,7 +136,12 @@ export default function ConsumableListItem({ name, amount, cost, id }: PropsType
 								onChange={handleChange}
 							/>
 						</div>
-						<div className={`${styles.labelInputGroup} ${styles.flexShrink}`}>
+						<div
+							className={
+								`${styles.labelInputGroup} ${styles.flexShrink}` +
+								(inputErrors.cost ? ` ${styles.inputError}` : '')
+							}
+						>
 							<label htmlFor='cost' className={styles.inputLabel}>
 								Cost
 							</label>

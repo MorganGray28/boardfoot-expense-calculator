@@ -20,6 +20,14 @@ function GenericExpenseListItem({ id, name, cost, amount, setActiveProject }: Pr
 	const [isEditingExpense, setIsEditingExpense] = useState(false);
 	const initialValues = { name, cost, amount };
 	const [values, setValues] = useState(initialValues);
+
+	const initialInputErrorValues = {
+		name: false,
+		cost: false,
+		amount: false,
+	};
+	const [inputErrors, setInputErrors] = useState(initialInputErrorValues);
+
 	const ctx = trpc.useContext();
 	const deleteExpense = trpc.expense.deleteExpense.useMutation({
 		onSuccess: (data) => {
@@ -53,6 +61,9 @@ function GenericExpenseListItem({ id, name, cost, amount, setActiveProject }: Pr
 	}
 
 	function handleChange(e: ChangeEvent<HTMLInputElement>) {
+		setInputErrors((prevState) => {
+			return { ...prevState, [e.target.name]: false };
+		});
 		if (e.target.name === 'name') {
 			setValues({ ...values, [e.target.name]: e.target.value });
 		} else {
@@ -66,11 +77,32 @@ function GenericExpenseListItem({ id, name, cost, amount, setActiveProject }: Pr
 
 	function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
+		let isValid = true;
 		if (!values.amount || !values.cost || !values.name) {
+			if (!values.amount) {
+				setInputErrors((prevState) => {
+					return { ...prevState, amount: true };
+				});
+				isValid = false;
+			}
+
+			if (!values.cost) {
+				setInputErrors((prevState) => {
+					return { ...prevState, cost: true };
+				});
+				isValid = false;
+			}
+
+			if (!values.name) {
+				setInputErrors((prevState) => {
+					return { ...prevState, name: true };
+				});
+				isValid = false;
+			}
 			toast.error('Please fill in inputs');
 		} else if (checkForIdenticalObjects(values, initialValues)) {
 			setIsEditingExpense(false);
-		} else {
+		} else if (isValid) {
 			editGenericExpense.mutate({ ...values, id });
 			setIsEditingExpense(false);
 		}
@@ -81,7 +113,12 @@ function GenericExpenseListItem({ id, name, cost, amount, setActiveProject }: Pr
 			<div className={styles.container}>
 				<form onSubmit={(e) => handleSubmit(e)} noValidate>
 					<div className={styles.inputFlexContainer}>
-						<div className={`${styles.labelInputGroup} ${styles.flexShrink}`}>
+						<div
+							className={
+								`${styles.labelInputGroup} ${styles.flexShrink}` +
+								(inputErrors.amount ? ` ${styles.inputError}` : '')
+							}
+						>
 							<label htmlFor='amount' className={styles.inputLabel}>
 								Amount
 							</label>
@@ -95,7 +132,7 @@ function GenericExpenseListItem({ id, name, cost, amount, setActiveProject }: Pr
 								onChange={handleChange}
 							/>
 						</div>
-						<div className={styles.labelInputGroup}>
+						<div className={`${styles.labelInputGroup}` + (inputErrors.name ? ` ${styles.inputError}` : '')}>
 							<label htmlFor='name' className={styles.inputLabel}>
 								Name
 							</label>
@@ -109,7 +146,12 @@ function GenericExpenseListItem({ id, name, cost, amount, setActiveProject }: Pr
 								onChange={handleChange}
 							/>
 						</div>
-						<div className={`${styles.labelInputGroup} ${styles.flexShrink}`}>
+						<div
+							className={
+								`${styles.labelInputGroup} ${styles.flexShrink}` +
+								(inputErrors.cost ? ` ${styles.inputError}` : '')
+							}
+						>
 							<label htmlFor='cost' className={styles.inputLabel}>
 								Cost
 							</label>
