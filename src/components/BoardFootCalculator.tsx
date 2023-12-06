@@ -24,10 +24,19 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 		tax: 0,
 	};
 
+	const initialInputErrorValues = {
+		numOfPieces: false,
+		thickness: false,
+		width: false,
+		length: false,
+		species: false,
+	};
+
 	const { data: session } = useSession();
 
 	const [sidebarOpen, setSidebarOpen] = useState(false);
 	const [values, setValues] = useState(initialValues);
+	const [inputErrors, setInputErrors] = useState(initialInputErrorValues);
 	let boardFeet: number | undefined = 0;
 	let preTax = 0;
 	let postTax = 0;
@@ -53,9 +62,23 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 	function handleChange(e: ChangeEvent<HTMLInputElement>) {
 		if (e.target.name === 'species' || e.target.name === 'name') {
 			setValues({ ...values, [e.target.name]: e.target.value });
+
+			// if changing input that is required, reset error state for that input when user changes its value
+			if (e.target.name === 'species') {
+				setInputErrors({ ...inputErrors, species: false });
+			}
 		} else if (e.target.name === 'numOfPieces') {
 			setValues({ ...values, [e.target.name]: parseInt(e.target.value) });
+			setInputErrors({ ...inputErrors, numOfPieces: false });
 		} else {
+			if (e.target.name === 'thickness') {
+				setInputErrors({ ...inputErrors, thickness: false });
+			} else if (e.target.name === 'width') {
+				setInputErrors({ ...inputErrors, width: false });
+			} else if (e.target.name === 'length') {
+				setInputErrors({ ...inputErrors, length: false });
+			}
+
 			if (!e.target.value) {
 				setValues({ ...values, [e.target.name]: 0 });
 			} else {
@@ -70,16 +93,49 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 
 	function handleSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
-		setSidebarOpen(false);
-		handleModal(values);
-		handleClearForm();
+
+		let isValid = true;
+		if (!values.numOfPieces) {
+			isValid = false;
+			setInputErrors((prevState) => {
+				return { ...prevState, numOfPieces: true };
+			});
+		}
+
+		if (!values.thickness) {
+			isValid = false;
+			setInputErrors((prevState) => {
+				return { ...prevState, thickness: true };
+			});
+		}
+
+		if (!values.width) {
+			isValid = false;
+			setInputErrors((prevState) => {
+				return { ...prevState, width: true };
+			});
+		}
+
+		if (!values.length) {
+			isValid = false;
+			setInputErrors((prevState) => {
+				return { ...prevState, length: true };
+			});
+		}
+
+		if (!values.species) {
+			isValid = false;
+			setInputErrors((prevState) => {
+				return { ...prevState, species: true };
+			});
+		}
+
+		if (isValid) {
+			setSidebarOpen(false);
+			handleModal(values);
+			handleClearForm();
+		}
 	}
-
-	/* Mobile Sidebar Design
-	
-	- IMPORTANT CONSIDERATION: if a user isn't logged in/no session, then we need to display the BF calculator by default 
-
-	*/
 
 	return (
 		<>
@@ -109,10 +165,17 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 				<form onSubmit={handleSubmit}>
 					<div className={styles.boardfootContainer}>
 						<p className={styles.subheading}>Board Feet Calculator</p>
-						<div className={styles.labelInputGroup}>
-							<label className={styles.inputLabel} htmlFor='numOfPieces'>
-								No. of Pieces
-							</label>
+						<div
+							className={
+								`${styles.labelInputGroup}` + (inputErrors.numOfPieces ? ` ${styles.inputError}` : '')
+							}
+						>
+							<div className={styles.inputLabelFlexGroup}>
+								<label className={styles.inputLabel} htmlFor='numOfPieces'>
+									No. of Pieces
+								</label>
+								{inputErrors.numOfPieces && <p className={styles.errorMessage}>*Required</p>}
+							</div>
 							<input
 								id='numOfPieces'
 								name='numOfPieces'
@@ -122,10 +185,15 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 								type='number'
 							/>
 						</div>
-						<div className={styles.labelInputGroup}>
-							<label className={styles.inputLabel} htmlFor='thickness'>
-								Thickness
-							</label>
+						<div
+							className={`${styles.labelInputGroup}` + (inputErrors.thickness ? ` ${styles.inputError}` : '')}
+						>
+							<div className={styles.inputLabelFlexGroup}>
+								<label className={styles.inputLabel} htmlFor='thickness'>
+									Thickness
+								</label>
+								{inputErrors.thickness && <p className={styles.errorMessage}>*Required</p>}
+							</div>
 							<div className={styles.inputUnitsGroup}>
 								<input
 									id='thickness'
@@ -138,15 +206,39 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 								<span>in</span>
 							</div>
 							<div className={styles.quarterThicknessContainer}>
-								<p onClick={() => setValues({ ...values, thickness: 1 })}>4/4</p>
-								<p onClick={() => setValues({ ...values, thickness: 1.5 })}>6/4</p>
-								<p onClick={() => setValues({ ...values, thickness: 2 })}>8/4</p>
+								<p
+									onClick={() => {
+										setValues({ ...values, thickness: 1 });
+										setInputErrors({ ...inputErrors, thickness: false });
+									}}
+								>
+									4/4
+								</p>
+								<p
+									onClick={() => {
+										setValues({ ...values, thickness: 1.5 });
+										setInputErrors({ ...inputErrors, thickness: false });
+									}}
+								>
+									6/4
+								</p>
+								<p
+									onClick={() => {
+										setValues({ ...values, thickness: 2 });
+										setInputErrors({ ...inputErrors, thickness: false });
+									}}
+								>
+									8/4
+								</p>
 							</div>
 						</div>
-						<div className={styles.labelInputGroup}>
-							<label className={styles.inputLabel} htmlFor='width'>
-								Width
-							</label>
+						<div className={`${styles.labelInputGroup}` + (inputErrors.width ? ` ${styles.inputError}` : '')}>
+							<div className={styles.inputLabelFlexGroup}>
+								<label className={styles.inputLabel} htmlFor='width'>
+									Width
+								</label>
+								{inputErrors.width && <p className={styles.errorMessage}>*Required</p>}
+							</div>
 							<div className={styles.inputUnitsGroup}>
 								<input
 									id='width'
@@ -159,10 +251,18 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 								<span>in</span>
 							</div>
 						</div>
-						<div className={`${styles.labelInputGroup} ${styles.length}`}>
-							<label className={styles.inputLabel} htmlFor='length'>
-								Length
-							</label>
+						<div
+							className={
+								`${styles.labelInputGroup} ${styles.length}` +
+								(inputErrors.length ? ` ${styles.inputError}` : '')
+							}
+						>
+							<div className={styles.inputLabelFlexGroup}>
+								<label className={styles.inputLabel} htmlFor='length'>
+									Length
+								</label>
+								{inputErrors.length && <p className={styles.errorMessage}>*Required</p>}
+							</div>
 							<div className={styles.inputUnitsGroup}>
 								<input
 									id='length'
@@ -202,10 +302,15 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 							/>
 						</div>
 
-						<div className={styles.labelInputGroup}>
-							<label className={styles.inputLabel} htmlFor='species'>
-								Species
-							</label>
+						<div
+							className={`${styles.labelInputGroup}` + (inputErrors.species ? ` ${styles.inputError}` : '')}
+						>
+							<div className={styles.inputLabelFlexGroup}>
+								<label className={styles.inputLabel} htmlFor='species'>
+									Species
+								</label>
+								{inputErrors.species && <p className={styles.errorMessage}>*Required</p>}
+							</div>
 							<input
 								id='species'
 								type='text'

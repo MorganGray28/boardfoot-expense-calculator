@@ -85,6 +85,10 @@
   font-weight: 600;
 }
 
+.inputError {
+	@include mixins.inputError;
+}
+
 // Cancel and Confirm change buttons
 .formButtonGroup {
   @include mixins.formButtonGroup;

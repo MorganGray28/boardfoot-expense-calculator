@@ -117,7 +117,7 @@ export default function ConsumableTable({ setTotalConsumableAmount, activeTab }:
 		// check if there are any invalid fields, if so, alert user to use valid inputs
 		let invalidInput = false;
 		for (const consumable of consumables) {
-			if (consumable.amount <= 0 || consumable.cost < 0 || !consumable.name) {
+			if (consumable.amount <= 0 || consumable.cost <= 0 || !consumable.name) {
 				invalidInput = true;
 			}
 		}

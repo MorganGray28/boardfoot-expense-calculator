@@ -91,7 +91,7 @@ export default function ExpenseTable({
 		// check if there are any invalid fields, if so, alert user to use valid inputs
 		let invalidInput = false;
 		for (const expense of expenses) {
-			if (expense.amount <= 0 || expense.cost < 0 || !expense.name) {
+			if (expense.amount <= 0 || expense.cost <= 0 || !expense.name) {
 				invalidInput = true;
 			}
 		}

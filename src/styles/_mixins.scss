@@ -242,3 +242,46 @@
   border: none;
   cursor: pointer;
 }
+
+@mixin inputError {
+  & .inputLabel {
+		color: variables.$danger-red;	
+	}
+
+  & .textfieldLabel {
+		color: variables.$danger-red;	
+	}
+
+	& input, & input:active, & input:focus {
+		background-color: rgba(224, 39, 55, .08);
+		border-bottom: 1px solid variables.$danger-red;
+	}
+}
+
+@mixin textfieldError {
+  & .inputLabel {
+		color: variables.$danger-red;	
+	}
+
+  & .textfieldLabel {
+		color: variables.$danger-red;	
+	}
+
+	& input, & input:active, & input:focus {
+		background-color: rgba(224, 39, 55, .08);
+		border: 2px solid variables.$danger-red;
+	}
+}
+
+@mixin inputErrorFlexGroup {
+  display: flex;
+
+	& label {
+		flex-grow: 1;
+	}
+
+	.errorMessage {
+		font-size: .875rem;
+		color: variables.$danger-red;
+	}
+}

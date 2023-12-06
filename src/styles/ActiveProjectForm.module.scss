@@ -208,11 +208,18 @@
   @include mixins.input-label-font;
   display: block;
   padding-top: 1rem;
-  text-align: center;
 
   &:first-child {
     padding: 0;
   }
+}
+
+.textfieldError {
+  @include mixins.textfieldError;
+}
+
+.inputLabelFlexGroup {
+  @include mixins.inputErrorFlexGroup;
 }
 
 .searchInput {

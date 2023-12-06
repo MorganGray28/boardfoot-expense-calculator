@@ -186,12 +186,13 @@ function EditProjectNameForm({
 	setIsEditingProject: Dispatch<SetStateAction<boolean>>;
 }) {
 	const [projectNameInput, setProjectNameInput] = useState(projectName);
+	const [projectNameError, setProjectNameError] = useState(false);
 	const [newProjectDescription, setNewProjectDescription] = useState<string | undefined>(
 		projectDescription || ''
 	);
 
 	const ctx = trpc.useContext();
-	const { mutate: updateProjectName, error } = trpc.project.updateProjectName.useMutation({
+	const { mutate: updateProjectName } = trpc.project.updateProjectName.useMutation({
 		onSuccess: (data) => {
 			if (data) {
 				setActiveProject(data);
@@ -204,6 +205,9 @@ function EditProjectNameForm({
 
 	function handleNameInputChange(e: React.FormEvent<HTMLInputElement>) {
 		setProjectNameInput(e.currentTarget.value);
+		if (projectNameError) {
+			setProjectNameError(false);
+		}
 	}
 
 	function handleCancel() {
@@ -214,26 +218,34 @@ function EditProjectNameForm({
 
 	function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
-		updateProjectName({ projectId: id, newName: projectNameInput, newDescription: newProjectDescription });
-		if (!error) {
+		if (projectNameInput) {
+			updateProjectName({ projectId: id, newName: projectNameInput, newDescription: newProjectDescription });
 			setIsEditingProject(false);
+		} else {
+			setProjectNameError(true);
 		}
 	}
 
 	return (
 		<form className={styles.editProjectForm} onSubmit={(e) => handleSubmit(e)}>
-			<label className={styles.textfieldLabel} htmlFor='projectName'>
-				Edit Project Name
-			</label>
-			<input
-				className={`${styles.searchInput} ${styles.nameInput}`}
-				type='text'
-				autoComplete='off'
-				id='projectName'
-				name='projectName'
-				value={projectNameInput}
-				onChange={(e) => handleNameInputChange(e)}
-			/>
+			<div className={projectNameError ? `${styles.textfieldError}` : ''}>
+				<div className={styles.inputLabelFlexGroup}>
+					<label className={styles.textfieldLabel} htmlFor='projectName'>
+						Edit Project Name
+					</label>
+					{projectNameError && <p className={styles.errorMessage}>*Required</p>}
+				</div>
+
+				<input
+					className={`${styles.searchInput} ${styles.nameInput}`}
+					type='text'
+					autoComplete='off'
+					id='projectName'
+					name='projectName'
+					value={projectNameInput}
+					onChange={(e) => handleNameInputChange(e)}
+				/>
+			</div>
 			<label htmlFor='editProjectDescription' className={styles.textfieldLabel}>
 				Edit Project Description
 			</label>

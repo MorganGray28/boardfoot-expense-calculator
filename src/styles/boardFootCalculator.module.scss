@@ -245,6 +245,14 @@
 	font-size: .875rem;
 }
 
+.inputError {
+	@include mixins.inputError;
+}
+
+.inputLabelFlexGroup {
+	@include mixins.inputErrorFlexGroup;
+}
+
 .container::-webkit-scrollbar-thumb
 {
     border-radius: 10px;
@@ -268,3 +276,4 @@
     width: 10px;
     background-color: rgb(236 236 236);
 }
+
