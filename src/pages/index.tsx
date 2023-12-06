@@ -13,6 +13,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import toast from 'react-hot-toast';
 
+// FIXME: disable buttons while mutations are loading to keep from making multiple api calls
+
 // TODO: Design logged out main about page in Figma
 // TODO: Design pojectcostsummary component
 // TODO: implement logged out main page
