@@ -1,0 +1,60 @@
+@use '../styles/variables';
+
+.section {
+  padding: 4rem 9rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.header {
+  font-size: 3.5rem;
+  max-width: 17ch;
+  color: variables.$primary-blue;
+  padding-bottom: 2rem;
+}
+
+.magicFont {
+  background: linear-gradient(180deg, rgb(64, 174, 253) 9.16%, #0020bf 120.02%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
+
+.subheader {
+  color: rgba(46, 72, 107, 0.85);
+  font-size: 1.125rem;
+  max-width: 30ch;
+  padding-bottom: 2rem;
+}
+
+.signInButton {
+  font-size: 1rem;
+  font-weight: 400;
+  background-color: transparent;
+  padding: .875rem 2rem;
+  color: #4178E1;
+  border: 2px solid #4178E1;
+  border-radius: 7px;
+  transition: all 300ms ease;
+
+  &:hover,&:focus {
+    color: hsl(0, 0%, 100%);
+    background-color: hsl(213, 86%, 55%);
+    border-color: hsl(213, 86%, 55%);
+    transform: scale(1.07);
+    box-shadow: 7px 6px 28px rgba(65, 121, 224, 0.55);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.screenshotImage {
+  // padding: 2rem;
+  // border: 2px solid rgba(45, 111, 197, 0.831);
+  // border-radius: 2rem;
+  width: 850px;
+  height: auto;
+}

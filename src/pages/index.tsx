@@ -12,6 +12,7 @@ import { trpc } from '../utils/trpc';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import toast from 'react-hot-toast';
+import LandingPage from '../components/LandingPage';
 
 // TODO: Design pojectcostsummary component
 // TODO: Design logged out main about page in Figma
@@ -110,9 +111,9 @@ const Home: NextPage = () => {
 							</>
 						) : (
 							<>
-								<button onClick={handleSignIn} className={styles.loginButton}>
+								{/* <button onClick={handleSignIn} className={styles.loginButton}>
 									Sign In
-								</button>
+								</button> */}
 								<div className={styles.profileMenuContainer} ref={profileDropdownRef}>
 									<FontAwesomeIcon onClick={handleProfileMenu} className={styles.avatarIcon} icon={faUser} />
 									<div
@@ -144,7 +145,8 @@ const Home: NextPage = () => {
 								setActiveProject={setActiveProject}
 							/>
 						) : (
-							<p>log in to save and track your expenses</p>
+							<LandingPage />
+							// <p>log in to save and track your expenses</p>
 						)}
 					</main>
 				</div>
