@@ -11,10 +11,6 @@
 	padding: 4rem 1.5rem 0 1.5rem;
 	transition: width 300ms ease;
 
-	& .sidebarIcon {
-		display: block;
-	}
-
 	@media (max-width: 1200px) {
     width: 55%;
 		padding: 1rem 1rem 0 1rem;
@@ -29,10 +25,6 @@
 		
 		& form {
 			display: none;
-		}
-
-		& .sidebarIcon {
-			display: block;
 		}
   }
 }
@@ -50,10 +42,13 @@
 }
 
 .sidebarIcon {
+	display: none;
 	color: rgb(27, 50, 227);
 	width: 2rem;
-	display: block;
-	// margin: 1rem auto 4rem auto;
+
+	@media (max-width: 765px) {
+		display: block;
+	}
 
 	@media (max-width: 490px) {
 		margin-top: 0;
@@ -63,7 +58,11 @@
 .sidebarOpen {
 	@media (max-width: 765px) {
 		display: block;
+		min-height: 100vh;
     position: fixed;
+		top: 0;
+		left: 0;
+		bottom: 0;
     width: 65%;
 		padding: 1rem 1rem 0 1rem;
 		z-index: 2;
@@ -188,7 +187,6 @@
 
 .inputUnitsGroup {
 	display: flex;
-	//FIXME: adjust the width of the inputs
 	justify-content: flex-end;
 	align-items: flex-end;
 	& span {
