@@ -13,13 +13,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import toast from 'react-hot-toast';
 
-// FIXME: disable buttons while mutations are loading to keep from making multiple api calls
-
 // TODO: Design logged out main about page in Figma
 // TODO: Design pojectcostsummary component
 // TODO: implement logged out main page
 // TODO: better loading for initial sign In
-// TODO: implement loading spinner on button when submitting, also change/close modals after load is complete to avoid loading dashboard before changes are made
 // FIXME: number inputs won't allow a value of ".0X"
 // TODO: Style ActiveProjectForm's ADD, EDIT, and DELETE dropdown buttons
 // TODO: Make Edit and Delete Icon Buttons more reusable and DRY

@@ -1,5 +1,5 @@
 import { router, protectedProcedure } from '../trpc';
-import { TRPCError, type DefaultErrorShape } from '@trpc/server';
+import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
 export const BoardFeetSchema = z.object({

@@ -39,7 +39,7 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 			ctx.user.getProjectsById.invalidate();
 		},
 		onSettled: () => onClose(),
-		onError: (err) => toast.error('Error: unable to add lumber to project'),
+		onError: () => toast.error('Error: unable to add lumber to project'),
 	});
 
 	const addNewProjectWithLumber = trpc.project.createProjectWithLumber.useMutation({
@@ -51,7 +51,7 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 			toast.success('Project created!');
 		},
 		onSettled: () => onClose(),
-		onError: (err) => toast.error('Error: Please resubmit'),
+		onError: () => toast.error('Error: Please resubmit'),
 	});
 
 	function handleClick(id: string, values: BoardFeetType | null) {

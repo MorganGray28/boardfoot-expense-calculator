@@ -162,7 +162,7 @@ export default function LumberExpenseListItem({
 			toast.error('Please fill out required inputs', { id: `expenseError${id}` });
 		} else if (checkForIdenticalObjects(values, initialValues)) {
 			setIsEditingExpense(false);
-		} else {
+		} else if (isValid) {
 			// call a trpc api call to submit an update call
 			editLumberExpense.mutate({ ...values, id });
 		}

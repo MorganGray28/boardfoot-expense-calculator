@@ -1,5 +1,5 @@
 'use client';
-import React, { ButtonHTMLAttributes } from 'react';
+import React from 'react';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import styles from './Button.module.scss';
 
@@ -20,8 +20,6 @@ function Button({
 	children,
 	...props
 }: PropsType) {
-	let buttonClass = color + '-' + variant;
-
 	return (
 		<button
 			disabled={isLoading}
