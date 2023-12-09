@@ -20,6 +20,8 @@ function Button({
 	children,
 	...props
 }: PropsType) {
+	const buttonClass = color + '-' + variant;
+
 	return (
 		<button
 			disabled={isLoading}
