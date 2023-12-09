@@ -13,12 +13,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import toast from 'react-hot-toast';
 
-// TODO: Design logged out main about page in Figma
 // TODO: Design pojectcostsummary component
+// TODO: Design logged out main about page in Figma
 // TODO: implement logged out main page
-// TODO: better loading for initial sign In
+// TODO: better initial page loading UI
 // FIXME: number inputs won't allow a value of ".0X"
-// TODO: Style ActiveProjectForm's ADD, EDIT, and DELETE dropdown buttons
 // TODO: Make Edit and Delete Icon Buttons more reusable and DRY
 
 const Home: NextPage = () => {

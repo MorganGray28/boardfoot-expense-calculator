@@ -7,6 +7,9 @@ import Modal from './Modal';
 import toast from 'react-hot-toast';
 import Button from './ui/Buttons/Button';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+
 interface PropsType {
 	projects: ProjectType[];
 	activeProject: ProjectType | null;
@@ -134,12 +137,15 @@ export function ActiveProjectForm({
 					</div>
 					<div className={styles.dropdownContainer + ' ' + (dropdownOpen ? styles.active : styles.inactive)}>
 						<button className={styles.dropdownButton} onClick={() => setIsCreatingNewProject(true)}>
+							<FontAwesomeIcon icon={faPlus} className={styles.addIcon} />
 							New Project
 						</button>
 						<button className={styles.dropdownButton} onClick={handleEditProject}>
+							<FontAwesomeIcon icon={faPenToSquare} className={styles.editIcon} />
 							Edit Project
 						</button>
 						<button className={styles.dropdownButton} onClick={handleDeleteModal} disabled={isDeleting}>
+							<FontAwesomeIcon icon={faTrash} className={styles.trashIcon} />
 							Delete Project
 						</button>
 					</div>

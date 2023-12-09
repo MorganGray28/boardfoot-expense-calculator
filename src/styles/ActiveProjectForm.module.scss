@@ -116,7 +116,7 @@
   position: absolute;
   left: 5px;
   top: 50px;
-  width: 175px;
+  width: 200px;
   padding: 10px 0 10px 0;
   border-radius: 7px;
   box-shadow: 0px 0px 18px rgba(125, 125, 125, 0.22);
@@ -164,7 +164,9 @@
 
 .dropdownButton {
   background-color: transparent;
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
   outline: none;
   border: none;
   font-size: 1rem;
@@ -173,8 +175,22 @@
   text-align: start;
   transition: background-color 400ms ease;
 
+  & svg {
+    border-radius: 50%;
+    width: 1.25rem;
+    height: 1.25rem;
+
+    & path {
+      fill: variables.$primary-blue;
+    }
+  }
+
   &:hover {
     background-color: rgb(244, 244, 244);
+
+    & path {
+      fill: variables.$primary-blue-hover-text;
+    }
   }
 
   @media (max-width: 1200px) {

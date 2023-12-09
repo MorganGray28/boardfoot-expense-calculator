@@ -53,8 +53,6 @@ export default function Dashboard({ projects, activeProject, setActiveProject, i
 		);
 	} else {
 		return (
-			// TODO: Change this to a more inviting initial create your first project input
-			// TODO: Also, incorporate Project Description in creating new project
 			<div>
 				<NewProjectForm
 					cancel={false}
