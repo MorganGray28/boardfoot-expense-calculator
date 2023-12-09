@@ -6,6 +6,8 @@ import type { BoardFeetType, ProjectType } from '../types/types';
 import { trpc } from '../utils/trpc';
 import ProjectFormListItem from './ProjectFormListItem';
 import { calculateBoardFeet, calculateCostFromBF } from '../utils/calculationsUtils';
+import LoadingSpinner from './ui/LoadingSpinner/LoadingSpinner';
+import Button from './ui/Buttons/Button';
 
 type PropsType = {
 	values: BoardFeetType | null;
@@ -28,7 +30,7 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 	}
 	const ctx = trpc.useContext();
 
-	const addLumber = trpc.lumber.addDimensionLumber.useMutation({
+	const { isLoading: isLoadingAddLumber, mutate: addLumber } = trpc.lumber.addDimensionLumber.useMutation({
 		onSuccess: (data) => {
 			if (data) {
 				setActiveProject(data.project);
@@ -54,7 +56,7 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 
 	function handleClick(id: string, values: BoardFeetType | null) {
 		if (values) {
-			addLumber.mutate({ ...values, projectId: id });
+			addLumber({ ...values, projectId: id });
 		}
 	}
 
@@ -143,7 +145,16 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 					type='text'
 					placeholder='Search Projects'
 				/>
-				<ul className={styles.projectList}>{filteredProjectListItems}</ul>
+
+				<ul className={styles.projectList}>
+					{isLoadingAddLumber ? (
+						<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+							<LoadingSpinner type='standalone' />
+						</div>
+					) : (
+						filteredProjectListItems
+					)}
+				</ul>
 				<div className={styles.buttonGroup}>
 					<button onClick={onClose} className={styles.dangerBtn}>
 						Cancel
@@ -192,9 +203,14 @@ function AddToProjectForm({ values, onClose, setActiveProject }: PropsType) {
 					<button className={styles.dangerBtn} onClick={() => handleCancelNewProject()}>
 						Cancel
 					</button>
-					<button className={styles.approveBtn} onClick={() => handleCreateNewProjectWithLumber(values)}>
+
+					<Button
+						onClick={() => handleCreateNewProjectWithLumber(values)}
+						isLoading={addNewProjectWithLumber.isLoading}
+						loadingText='Creating...'
+					>
 						Done
-					</button>
+					</Button>
 				</div>
 			</>
 		);

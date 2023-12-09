@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import toast from 'react-hot-toast';
+import Button from './ui/Buttons/Button';
 
 type InputFieldsType = {
 	name: string;
@@ -27,13 +28,19 @@ export default function ConsumableListItem({ name, amount, cost, id }: PropsType
 
 	const ctx = trpc.useContext();
 	const updateConsumable = trpc.consumable.updateConsumable.useMutation({
-		onSuccess: () => ctx.consumable.getAllConsumables.invalidate(),
+		onSuccess: () => {
+			ctx.consumable.getAllConsumables.invalidate();
+			toast.success('Updated!');
+		},
 		onSettled: () => setIsEditing(false),
 	});
 	const { isLoading } = updateConsumable;
 	const { mutateAsync: deleteConsumable, isLoading: isDeleting } =
 		trpc.consumable.deleteConsumable.useMutation({
-			onSuccess: () => ctx.consumable.getAllConsumables.invalidate(),
+			onSuccess: () => {
+				ctx.consumable.getAllConsumables.invalidate();
+				toast.success('Deleted!');
+			},
 		});
 
 	function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -157,12 +164,12 @@ export default function ConsumableListItem({ name, amount, cost, id }: PropsType
 						</div>
 					</div>
 					<div className={styles.formButtonGroup}>
-						<button className={styles.dangerBtn} type='button' onClick={handleCancel}>
+						<Button size='small' type='button' variant='outlined' color='danger' onClick={handleCancel}>
 							Cancel
-						</button>
-						<button className={styles.approveBtn} type='submit' disabled={isLoading}>
+						</Button>
+						<Button size='small' type='submit' isLoading={isLoading} loadingText='Saving...'>
 							Done
-						</button>
+						</Button>
 					</div>
 				</form>
 			</div>

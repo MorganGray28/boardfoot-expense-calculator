@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import { trpc } from '../utils/trpc';
 import type { ProjectType } from '../types/types';
 import styles from '../styles/NewProjectForm.module.scss';
+import Button from './ui/Buttons/Button';
 
 type PropsType = {
 	cancel: boolean;
@@ -51,7 +52,7 @@ function NewProjectForm({ cancel, setActiveProject, setIsCreatingNewProject }: P
 
 	return (
 		<div className={styles.flexContainer}>
-			<form onSubmit={(e) => handleSubmitNewProject(e)}>
+			<form className={styles.newProjectForm} onSubmit={(e) => handleSubmitNewProject(e)}>
 				<div className={projectNameError ? `${styles.textfieldError}` : ''}>
 					<div className={styles.inputLabelFlexGroup}>
 						<label className={styles.textfieldLabel} htmlFor='newProjectName'>
@@ -84,13 +85,13 @@ function NewProjectForm({ cancel, setActiveProject, setIsCreatingNewProject }: P
 				/>
 				<div className={styles.formButtonGroup}>
 					{cancel && (
-						<button className={styles.dangerBtn} type='button' onClick={handleCancelNewProject}>
+						<Button variant='outlined' color='danger' type='button' onClick={handleCancelNewProject}>
 							Cancel
-						</button>
+						</Button>
 					)}
-					<button className={styles.approveBtn} disabled={isCreating} type='submit'>
+					<Button isLoading={isCreating} type='submit' loadingText='Creating...'>
 						Create
-					</button>
+					</Button>
 				</div>
 			</form>
 		</div>

@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import toast from 'react-hot-toast';
+import Button from './ui/Buttons/Button';
 
 type ConsumableInputType = {
 	name: string;
@@ -220,12 +221,10 @@ export default function ConsumableTable({ setTotalConsumableAmount, activeTab }:
 						Add Another Consumable
 					</button>
 					<div className={styles.btngroup}>
-						<button className={styles.dangerBtn} onClick={handleCancelConsumables}>
+						<Button variant='outlined' color='danger' onClick={handleCancelConsumables}>
 							Cancel
-						</button>
-						<button className={styles.approveBtn} onClick={handleSubmitConsumables}>
-							Done
-						</button>
+						</Button>
+						<Button onClick={handleSubmitConsumables}>Done</Button>
 					</div>
 				</div>
 			</Modal>

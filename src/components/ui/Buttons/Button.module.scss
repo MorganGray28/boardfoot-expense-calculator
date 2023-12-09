@@ -1,0 +1,42 @@
+@use '../../../styles/mixins';
+
+.button {
+  @include mixins.button;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.primary-contained {
+  @include mixins.primary-button;
+}
+
+.danger-contained {
+  @include mixins.danger-button;
+}
+
+.primary-outlined {
+  @include mixins.outline-primary-button;
+}
+
+.danger-outlined {
+  @include mixins.outline-danger-button;
+  background-color: transparent;
+}
+
+.small {
+  padding: 1rem 1.5rem;
+}
+
+.medium {
+  padding: 1rem 2rem;
+}
+
+.large {
+  padding: 1rem 3rem;
+}
+
+.full {
+  display: block;
+  width: 100%;
+}

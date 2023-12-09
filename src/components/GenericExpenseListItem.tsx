@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import toast from 'react-hot-toast';
+import Button from './ui/Buttons/Button';
 
 type PropsType = {
 	id: string;
@@ -104,7 +105,6 @@ function GenericExpenseListItem({ id, name, cost, amount, setActiveProject }: Pr
 			setIsEditingExpense(false);
 		} else if (isValid) {
 			editGenericExpense.mutate({ ...values, id });
-			setIsEditingExpense(false);
 		}
 	}
 
@@ -171,9 +171,9 @@ function GenericExpenseListItem({ id, name, cost, amount, setActiveProject }: Pr
 						<button className={styles.dangerBtn} type='button' onClick={handleCancel}>
 							Cancel
 						</button>
-						<button className={styles.approveBtn} type='submit'>
+						<Button type='submit' isLoading={editGenericExpense.isLoading} loadingText='Saving...'>
 							Save
-						</button>
+						</Button>
 					</div>
 				</form>
 			</div>

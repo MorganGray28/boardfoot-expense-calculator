@@ -7,6 +7,7 @@ import styles from '../styles/boardFootCalculator.module.scss';
 
 import hamburgerCloseIcon from '../../public/hamburger-close-icon.svg';
 import hamburgerIcon from '../../public/hamburger-icon.svg';
+import Button from './ui/Buttons/Button';
 
 type PropsType = {
 	handleModal: (values: BoardFeetType) => void;

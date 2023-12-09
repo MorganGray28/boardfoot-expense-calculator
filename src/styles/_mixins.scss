@@ -3,6 +3,7 @@
 @mixin button {
 	font-family: 'Quicksand', sans-serif;
   padding: 1rem 2rem;
+  border: none;
   border-radius: 7px;
 	font-size: .875rem;
 	font-weight: 500;
@@ -41,17 +42,33 @@
   background: none;
   border: 1px solid variables.$primary-blue;
   color: variables.$primary-blue;
-  transition: all 200ms ease;
+  transition: all 300ms ease;
 
-  &:hover {
+  &:hover, &:active, &:focus {
     background-color: variables.$primary-blue-hover-bg;
     border: 1px solid variables.$primary-blue-hover-text;
     color: variables.$primary-blue-hover-text;
+    box-shadow: 0px 4px 16px rgba(21, 63, 216, 0.282);
   }
 
-  &:active {
-    background-color: darken(variables.$primary-blue-hover-bg, 40%);
-    color: darken(variables.$primary-blue-hover-text, 40%);
+  &:focus {
+    outline: 1px solid #0e2a4f;
+  }
+}
+
+@mixin danger-button {
+  @include button;
+  background-color: #DA2F58;
+  color: white;
+  transition: all 300ms ease;
+
+  &:active, &:hover, &:focus {
+    box-shadow: 0px 4px 12px rgba(182, 74, 74, 0.468);
+    background-color: #e8345e;
+  }
+
+  &:focus {
+    outline: 1px solid #ff3e6b;
   }
 }
 
@@ -144,6 +161,22 @@
     padding: .5rem .25rem;
     padding-bottom: 0;
 	}
+}
+
+@mixin editProjectForm {
+  width: 35%;
+
+  @media (max-width: 1200px) {
+    width: 45%;
+  }
+
+  @media (max-width: 765px) {
+    width: 55%;
+  }
+
+  @media (max-width: 490px) {
+    width: 80%;
+  }
 }
 
 // custom scrollbar 

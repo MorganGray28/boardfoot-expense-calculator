@@ -5,6 +5,7 @@ import type { ProjectType } from '../types/types';
 import { trpc } from '../utils/trpc';
 import Modal from './Modal';
 import toast from 'react-hot-toast';
+import Button from './ui/Buttons/Button';
 
 interface PropsType {
 	projects: ProjectType[];
@@ -155,12 +156,10 @@ export function ActiveProjectForm({
 						Are you sure you want to delete this project and all its expenses?
 					</p>
 					<div className={styles.buttonGroup}>
-						<button onClick={() => setDeleteModalIsOpen(false)} className={styles.approveBtn}>
-							Cancel
-						</button>
-						<button onClick={handleDeleteProject} className={styles.dangerBtn}>
+						<Button onClick={() => setDeleteModalIsOpen(false)}>Cancel</Button>
+						<Button disabled={isDeleting} variant='outlined' color='danger' onClick={handleDeleteProject}>
 							Delete
-						</button>
+						</Button>
 					</div>
 				</div>
 			</Modal>
@@ -192,12 +191,13 @@ function EditProjectNameForm({
 	);
 
 	const ctx = trpc.useContext();
-	const { mutate: updateProjectName } = trpc.project.updateProjectName.useMutation({
+	const { mutate: updateProjectName, isLoading: isUpdating } = trpc.project.updateProjectName.useMutation({
 		onSuccess: (data) => {
 			if (data) {
 				setActiveProject(data);
 			}
 			toast.success('Project was updated!');
+			setIsEditingProject(false);
 		},
 		onError: () => toast.error('Error, please try again'),
 		onSettled: () => ctx.user.getProjectsById.invalidate(),
@@ -220,7 +220,6 @@ function EditProjectNameForm({
 		e.preventDefault();
 		if (projectNameInput) {
 			updateProjectName({ projectId: id, newName: projectNameInput, newDescription: newProjectDescription });
-			setIsEditingProject(false);
 		} else {
 			setProjectNameError(true);
 		}
@@ -257,12 +256,12 @@ function EditProjectNameForm({
 				className={`${styles.searchInput} ${styles.descriptionInput}`}
 			/>
 			<div className={styles.formButtonGroup}>
-				<button className={styles.dangerBtn} type='button' onClick={handleCancel}>
+				<Button variant='outlined' color='danger' size='small' type='button' onClick={handleCancel}>
 					Cancel
-				</button>
-				<button className={styles.approveBtn} type='submit'>
+				</Button>
+				<Button size='small' type='submit' isLoading={isUpdating} loadingText='Saving...'>
 					Save
-				</button>
+				</Button>
 			</div>
 		</form>
 	);

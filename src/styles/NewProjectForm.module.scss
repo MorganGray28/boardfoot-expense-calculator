@@ -5,11 +5,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 4rem;
+  padding-bottom: 5rem;
 
   @media (max-width: 1620px) {
     padding-top: 2rem;
   }
+
+  @media (max-width: 1200px) {
+    padding-bottom: 1.5rem;
+    min-height: 9rem;
+  }
+}
+
+.newProjectForm {
+  @include mixins.editProjectForm;
 }
 
 .inputGroup {

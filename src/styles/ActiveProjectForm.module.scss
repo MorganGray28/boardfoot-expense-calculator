@@ -196,10 +196,10 @@
   }
 }
 
-// Edit Project Name and Description 
-// .editProjectForm {
-  
-// }
+.editProjectForm {
+  @include mixins.editProjectForm;
+}
+
 .inputGroup {
   display: flex;
 }

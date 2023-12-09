@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import toast from 'react-hot-toast';
+import Button from './ui/Buttons/Button';
 
 interface PropTypes {
 	id: string;
@@ -301,12 +302,12 @@ export default function LumberExpenseListItem({
 					</div>
 
 					<div className={styles.formButtonGroup}>
-						<button className={styles.dangerBtn} type='button' onClick={handleCancel}>
+						<Button onClick={handleCancel} type='button' variant='outlined' color='danger'>
 							Cancel
-						</button>
-						<button className={styles.approveBtn} type='submit'>
+						</Button>
+						<Button isLoading={editLumberExpense.isLoading} loadingText='Saving...' type='submit'>
 							Save
-						</button>
+						</Button>
 					</div>
 				</form>
 			</div>
