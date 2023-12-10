@@ -4,6 +4,7 @@ import { ActiveProjectForm } from './ActiveProjectForm';
 import ExpenseAndConsumableGroup from './ExpenseAndConsumableGroup';
 import NewProjectForm from './NewProjectForm';
 import ProjectCostSummary from './ProjectCostSummary';
+import LoadingSpinner from './ui/LoadingSpinner/LoadingSpinner';
 
 type PropsType = {
 	projects: ProjectType[] | undefined;
@@ -47,8 +48,8 @@ export default function Dashboard({ projects, activeProject, setActiveProject, i
 		);
 	} else if (isLoading) {
 		return (
-			<div>
-				<p>Loading...</p>
+			<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+				<LoadingSpinner type='standalone' />
 			</div>
 		);
 	} else {

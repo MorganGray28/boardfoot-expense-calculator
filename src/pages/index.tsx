@@ -15,7 +15,6 @@ import toast from 'react-hot-toast';
 import LandingPage from '../components/LandingPage';
 
 // TODO: redesign pojectcostsummary component
-// TODO: better initial page loading UI
 // FIXME: number inputs won't allow a value of ".0X"
 // FIXME: Add additional authentication methods (facebook, etc)
 
