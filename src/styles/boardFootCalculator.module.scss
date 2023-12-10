@@ -92,6 +92,7 @@
 
 .calculatorForm {
 	height: calc(100vh - 2rem);
+	padding-right: .25rem;
 	overflow-y: auto;
 }
 
@@ -262,7 +263,7 @@
 	@include mixins.inputErrorFlexGroup;
 }
 
-.container::-webkit-scrollbar-thumb
+.calculatorForm::-webkit-scrollbar-thumb
 {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1);
@@ -273,14 +274,14 @@
 		}
 }
 
-.container::-webkit-scrollbar-track
+.calculatorForm::-webkit-scrollbar-track
 {
     -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,0.1);
     border-radius: 10px;
     background-color: rgb(236, 236, 236);
 }
 
-.container::-webkit-scrollbar
+.calculatorForm::-webkit-scrollbar
 {
     width: 10px;
     background-color: rgb(236 236 236);

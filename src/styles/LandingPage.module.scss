@@ -19,16 +19,29 @@
 .section {
   padding-bottom: 8rem;
   display: flex;
+  align-items: flex-start;
   justify-content: space-evenly;
 }
 
 .sectionTwo {
-  gap: 3rem;
+  gap: 1.5rem;
   justify-content: center;
-  align-items: start;
+  flex-direction: column;
+  align-items: center;
+
+  .header {
+    @media (max-width: 1200px) {
+      text-align: center;
+    }
+  }
 
   .subheader {
     max-width: 40ch;
+
+    @media (max-width: 1200px) {
+      max-width: 28ch;
+      text-align: center;
+    }
   }
 }
 
@@ -142,6 +155,6 @@
   }
 
   @media (max-width: 1200px) {
-    width: 200px;
+    display: none;
   }
 }

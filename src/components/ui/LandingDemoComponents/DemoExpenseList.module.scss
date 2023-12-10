@@ -1,0 +1,493 @@
+@use '../../../styles/variables';
+@use '../../../styles/mixins';
+
+.DemoExpenseList {
+  box-shadow: 8px 5px 15px #9292924a;
+  border: 2px solid variables.$primary-blue;
+  border-radius: 20px;
+  padding: 2rem;
+
+  @media (max-width: 1200px) {
+    display: none;
+  }
+}
+
+.container {
+  display: block;
+  width: 475px;
+
+  @media (max-width: 1920px) {
+    width: 450px;
+  }
+
+  @media (max-width: 1620px) {
+    width: 375px;
+  }
+
+  @media (max-width: 1200px) {
+    width: 250px;
+    // width: 500px;
+  }
+
+  @media (max-width: 900px) {
+    // width: 400px;
+  }
+
+  @media (max-width: 490px) {
+    // width: 90%;
+  }
+}
+
+.categoryContainer {
+  border-bottom: 1px solid rgba(13, 55, 105, 0.247);
+  padding-bottom: .5rem;
+  margin-bottom: .5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  @media (max-width: 1620px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  @media (max-width: 1200px) {
+    flex-direction: row;
+  }
+
+  @media (max-width: 490px) {
+    align-items: flex-end;
+  }
+}
+
+.category {
+  text-align: start;
+  color: variables.$primary-blue;
+  font-weight: 600;
+
+  @media (max-width: 1200px) {
+    font-size: .875rem;
+  }
+}
+
+.categoryDescription {
+  padding-top: .2rem;
+  font-weight: 400;
+  font-size: .875rem;
+  color: variables.$secondary-blue;
+
+  @media (max-width: 1620px) {
+    padding-bottom: .5rem;
+  }
+
+  @media (max-width: 1200px) {
+    font-size: .75rem;
+  }
+}
+
+.list {
+  padding-right: .5rem;
+  overflow-y: auto;
+
+    &::-webkit-scrollbar-thumb
+    {
+      @include mixins.scrollbar-thumb;
+    }
+    
+    &::-webkit-scrollbar-track
+    {
+      @include mixins.scrollbar-track;
+    }
+    
+    &::-webkit-scrollbar
+    {
+      @include mixins.scrollbar;
+    }
+}
+
+.btngroup {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.addExpenseBtn {
+  @include mixins.primary-button;
+  display: flex;
+  align-items: center;
+  padding: .5rem 1rem;
+
+  & svg {
+    margin-right: .5rem;
+  }
+}
+
+.addIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.dangerBtn {
+  @include mixins.outline-danger-button;
+}
+
+.approveBtn {
+  @include mixins.primary-button;
+}
+
+.expenseInputContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  & input {
+    width: 100%;
+  }
+
+  @media (max-width: 900px) {
+    align-items: flex-end;
+  }
+}
+
+.inputLabel {
+  @include mixins.input-label-font;
+}
+
+.input {
+  @include mixins.input;
+  margin-top: .25rem;
+}
+
+.flexShrink {
+  flex-shrink: 3;
+}
+
+.labelInputGroup {
+  @include mixins.label-input-group;
+}
+
+.expenseTotalContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.iconDeleteButton {
+  @include mixins.iconButton;
+  margin-left: .5rem;
+
+  &:focus {
+    outline: 2px solid variables.$danger-red-hover;
+    outline-offset: 2px;
+  }
+
+  &:hover, &:focus {
+    .deleteIcon {
+      color: variables.$danger-red-hover;
+    }
+  }
+
+  @media (max-width: 490px) {
+  margin-left: 0;
+  }
+}
+
+.deleteIcon {
+  @include mixins.dangerIcon;
+  width: 1.25rem;
+}
+
+// ************************* Demo Lumber Item Styling *************************
+
+.itemContainer {
+  background-color: #f7f7f7;
+  padding: 1rem;
+  color: variables.$primary-blue;
+  border-bottom: 1px solid variables.$primary-blue;
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+
+    &:nth-of-type(even) {
+      background-color: rgb(255, 255, 255);
+    }
+
+  h2 {
+    font-size: 1rem;
+    text-align: center;
+  }
+  @media (max-width:1200px) {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+}
+
+.itemName {
+  text-transform: capitalize;
+  font-size: 1rem;
+  color: variables.$primary-blue;
+  text-align: center;
+  padding-bottom: .5rem;
+}
+
+.itemFlexContainer {
+  font-size: .875rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.itemSpecies {
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.itemBoardFeet {
+  font-weight: 600;
+}
+
+.itemCost {
+  font-weight: 600;
+}
+
+// Edit Lumber Item Form elements
+
+.itemFormFlexWrapper {
+  @include mixins.formFlexWrapper;
+  padding-bottom: .25rem;
+}
+
+.itemLabelInputGroup {
+  @include mixins.label-input-group;
+  justify-content: space-between;
+}
+
+.itemInputLabel {
+  @include mixins.input-label-font;
+  width: 100%;
+}
+
+.itemInput {
+  @include mixins.editItemInput;
+}
+
+.itemFormButtonGroup {
+  @include mixins.formButtonGroup;
+  padding-top: 1rem;
+}
+
+.itemDangerBtn {
+  @include mixins.cancelChangesButton;
+}
+
+.itemApproveBtn {
+  @include mixins.saveChangesButton;
+}
+
+// Edit and Delete Icons/Buttons
+
+.itemButtonGroup {
+  @include mixins.editDeleteButtonGroup;
+}
+
+.itemIconEditButton {
+  @include mixins.iconButton;
+
+  &:focus {
+    outline: 2px solid variables.$primary-button-blue;
+    outline-offset: 2px;
+  }
+
+  &:hover, &:focus {
+    .editIcon {
+      color: variables.$primary-button-blue;
+    }
+  }
+}
+
+.itemIconDeleteButton {
+  @include mixins.iconButton;
+  margin-left: .5rem;
+
+  &:focus {
+    outline: 2px solid variables.$danger-red-hover;
+    outline-offset: 2px;
+  }
+
+  &:hover, &:focus {
+    .deleteIcon {
+      color: variables.$danger-red-hover;
+    }
+  }
+}
+
+.itemInputError {
+	@include mixins.inputError;
+}
+
+.itemEditIcon {
+  @include mixins.editIcon;
+}
+
+.itemDeleteIcon {
+  @include mixins.dangerIcon;
+}
+
+// ************************* Demo Generic Item Styling *************************
+
+.genericContainer {
+  background-color: #f7f7f7;
+  padding: 1rem;
+  color: variables.$primary-blue;
+  border-bottom: 1px solid variables.$primary-blue;
+  font-size: .875rem;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  &:nth-of-type(even) {
+    background-color: rgb(255, 255, 255);
+  }
+
+  @media (max-width: 1200px) {
+    padding: .5rem;
+    font-size: .75rem;
+  }
+}
+
+.genericListItemContainer {
+  text-wrap: wrap;
+  width: 20%;
+
+  &:last-of-type .genericListItem {
+    text-align: end;
+    font-weight: 700;
+  }
+}
+
+.genericListItem {
+  font-weight: 500;
+  text-transform: capitalize;
+
+  @media (max-width: 1200px) {
+    font-size: .875rem;
+  }
+}
+
+.genericName {
+  text-transform: capitalize;
+  font-size: 1rem;
+  color: variables.$primary-blue;
+  text-align: center;
+  padding-bottom: .5rem;
+}
+
+.genericLabelInputGroup {
+  @include mixins.label-input-group;
+}
+
+.genericInputLabel {
+  @include mixins.input-label-font;
+}
+
+.genericInput {
+  @include mixins.editItemInput;
+}
+
+.genericFlexShrink {
+  flex-shrink: 3;
+}
+
+.genericInputFlexContainer {
+  @include mixins.formFlexWrapper;
+}
+
+.genericFlexContainer {
+  font-size: .875rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.genericSpecies {
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.genericBoardFeet {
+  font-weight: 600;
+}
+
+.genericCost {
+  font-weight: 600;
+}
+
+.genericInputError {
+	@include mixins.inputError;
+}
+
+// Cancel and Confirm change buttons
+.genericFormButtonGroup {
+  @include mixins.formButtonGroup;
+}
+
+.genericDangerBtn {
+  @include mixins.cancelChangesButton;
+}
+
+.genericApproveBtn {
+  @include mixins.saveChangesButton;
+}
+
+// Edit and Delete Icons/Buttons
+.genericButtonGroup {
+  @include mixins.editDeleteButtonGroup;
+}
+
+.genericIconEditButton {
+  @include mixins.iconButton;
+
+  &:focus {
+    outline: 2px solid variables.$primary-button-blue;
+    outline-offset: 2px;
+  }
+
+  &:hover, &:focus {
+    .genericEditIcon {
+      color: variables.$primary-button-blue;
+    }
+  }
+}
+
+.genericiconDeleteButton {
+  @include mixins.iconButton;
+  margin-left: .5rem;
+
+  &:focus {
+    outline: 2px solid variables.$danger-red-hover;
+    outline-offset: 2px;
+  }
+
+  &:hover, &:focus {
+    .genericDeleteIcon {
+      color: variables.$danger-red-hover;
+    }
+  }
+}
+
+.genericEditIcon {
+  @include mixins.editIcon;
+  width: 1.5rem;
+}
+
+.genericDeleteIcon {
+  @include mixins.dangerIcon;
+  width: 1.25rem;
+}

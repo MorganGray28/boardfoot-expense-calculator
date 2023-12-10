@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import styles from '../styles/LandingPage.module.scss';
 import bfCalculatorIcon from '../../public/bf-calculator-icon.svg';
+import DemoExpenseList from './ui/LandingDemoComponents/DemoExpenseList';
 
 type PropsType = {
 	signIn: () => void;
@@ -22,15 +23,7 @@ function LandingPage({ signIn }: PropsType) {
 						Sign In
 					</button>
 				</div>
-
-				{/* FIXME: Replace this screenshot image with live component showing interactive list */}
-				<Image
-					className={styles.screenshotImage}
-					src={'/expense-tracking.jpg'}
-					alt='screenshot showing woodworking expenses'
-					width={1065}
-					height={590}
-				/>
+				<DemoExpenseList />
 			</div>
 
 			<div className={`${styles.section} ${styles.sectionTwo}`}>
@@ -48,8 +41,6 @@ function LandingPage({ signIn }: PropsType) {
 						calculator.
 					</p>
 				</div>
-
-				{/* FIXME: Replace this screenshot image with live component showing interactive list */}
 			</div>
 
 			<div className={`${styles.section} ${styles.sectionThree}`}>
