@@ -14,13 +14,10 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import toast from 'react-hot-toast';
 import LandingPage from '../components/LandingPage';
 
-// TODO: Design pojectcostsummary component
-// TODO: Design logged out main about page in Figma
-// TODO: implement logged out main page
+// TODO: redesign pojectcostsummary component
 // TODO: better initial page loading UI
 // FIXME: number inputs won't allow a value of ".0X"
 // FIXME: Add additional authentication methods (facebook, etc)
-// TODO: Make Edit and Delete Icon Buttons more reusable and DRY
 
 const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);
