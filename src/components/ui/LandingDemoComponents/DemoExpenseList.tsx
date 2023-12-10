@@ -27,11 +27,11 @@ function DemoExpenseList() {
 				<div className={styles.list}>
 					{/* {lumberListItems} {genericExpenseList} */}
 					{demoLumberItems.map((i) => (
-						<DemoLumberItem {...i} />
+						<DemoLumberItem {...i} key={i.name} />
 					))}
 
 					{genericExpenseItems.map((i) => (
-						<DemoGeneralExpenseItem {...i} />
+						<DemoGeneralExpenseItem {...i} key={i.name} />
 					))}
 				</div>
 			</div>
