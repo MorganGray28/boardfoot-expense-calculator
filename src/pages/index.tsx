@@ -19,6 +19,7 @@ import LandingPage from '../components/LandingPage';
 // TODO: implement logged out main page
 // TODO: better initial page loading UI
 // FIXME: number inputs won't allow a value of ".0X"
+// FIXME: Add additional authentication methods (facebook, etc)
 // TODO: Make Edit and Delete Icon Buttons more reusable and DRY
 
 const Home: NextPage = () => {
@@ -145,7 +146,7 @@ const Home: NextPage = () => {
 								setActiveProject={setActiveProject}
 							/>
 						) : (
-							<LandingPage />
+							<LandingPage signIn={handleSignIn} />
 							// <p>log in to save and track your expenses</p>
 						)}
 					</main>
