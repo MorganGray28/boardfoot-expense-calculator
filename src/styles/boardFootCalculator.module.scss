@@ -5,7 +5,6 @@
 	max-width: 500px;
 	width: 35%;
 	margin: 0;
-	overflow: auto;
 	background-color: variables.$background-color;
 	color: variables.$primary-blue;
 	padding: 4rem 1.5rem 0 1.5rem;
@@ -83,6 +82,17 @@
 	@media (max-width: 490px) {
 		width: 80%;
 	}
+}
+
+.stickyContainer {
+	position: sticky;
+	top: 2rem;
+
+}
+
+.calculatorForm {
+	height: calc(100vh - 2rem);
+	overflow-y: auto;
 }
 
 .boardfootContainer {
@@ -238,6 +248,7 @@
 }
 
 .helpMessage {
+	padding-bottom: 2rem;
 	text-align: center;
 	color: variables.$secondary-blue;
 	font-size: .875rem;
