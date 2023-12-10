@@ -37,15 +37,15 @@ function LandingPage({ signIn }: PropsType) {
 				<div className={styles.blurbBlock}>
 					<h2 className={styles.header}>Calculate Board Feet measurements for Dimensional Lumber</h2>
 					<p className={styles.subheader}>
-						Whether you're planning a build or pricing lumber at the mill, quickly add up the costs using our
-						calculator.
+						Whether you&apos;re planning a build or pricing lumber at the mill, quickly add up the costs using
+						our calculator.
 					</p>
 				</div>
 			</div>
 
 			<div className={`${styles.section} ${styles.sectionThree}`}>
 				<div className={styles.blurbBlock}>
-					<h2 className={styles.header}>Add your Consumables once and they'll apply to all projects</h2>
+					<h2 className={styles.header}>Add your Consumables once and they&apos;ll apply to all projects</h2>
 					<p className={styles.subheader}>
 						It takes a lot of supplies to build a project. Incorporate them into your billing by applying a
 						percentage of their cost towards each project.
