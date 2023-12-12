@@ -23,6 +23,15 @@
   justify-content: space-evenly;
 }
 
+.sectionOne {
+
+  @media (max-width: 1200px) {
+    gap: 4rem;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
 .sectionTwo {
   gap: 1.5rem;
   justify-content: center;
@@ -80,10 +89,12 @@
 }
 
 .header {
+  opacity: 0;
   font-size: 2.5rem;
   max-width: 17ch;
   color: variables.$primary-blue;
   padding-bottom: 2rem;
+  animation: fadeIn 800ms ease forwards;
 
   @media (max-width: 1620px) {
     font-size: 2rem;
@@ -92,6 +103,18 @@
   @media (max-width: 1200px) {
     font-size: 1.75rem;
     padding-bottom: 1.25rem;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0%);
   }
 }
 
@@ -104,6 +127,9 @@
 }
 
 .subheader {
+  opacity: 0;
+  animation: fadeIn 1.2s forwards;
+  animation-delay: 100ms;
   color: rgba(46, 72, 107, 0.85);
   font-size: 1rem;
   max-width: 30ch;
@@ -111,6 +137,7 @@
 }
 
 .signInButton {
+  opacity: 0;
   font-size: 1rem;
   font-weight: 400;
   background-color: transparent;
@@ -119,6 +146,8 @@
   border: 2px solid #4178E1;
   border-radius: 7px;
   transition: all 300ms ease;
+  animation: fadeIn 1.2s ease forwards;
+  animation-delay: 200ms;
 
   &:hover,&:focus {
     color: hsl(0, 0%, 100%);

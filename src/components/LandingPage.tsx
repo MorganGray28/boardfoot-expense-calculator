@@ -28,6 +28,7 @@ function LandingPage({ signIn }: PropsType) {
 
 			<div className={`${styles.section} ${styles.sectionTwo}`}>
 				<Image
+					priority
 					className={styles.calculatorIcon}
 					src={bfCalculatorIcon}
 					alt='calculator illustration'

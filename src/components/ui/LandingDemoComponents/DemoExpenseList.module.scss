@@ -2,13 +2,19 @@
 @use '../../../styles/mixins';
 
 .DemoExpenseList {
+  opacity: 0;
   box-shadow: 8px 5px 15px #9292924a;
   border: 2px solid variables.$primary-blue;
   border-radius: 20px;
   padding: 2rem;
+  animation: fadeIn 1.5s ease forwards 1;
 
   @media (max-width: 1200px) {
-    display: none;
+    // display: none;
+  }
+
+  @media (max-width: 490px) {
+    padding: 1.5rem;
   }
 }
 
@@ -34,7 +40,7 @@
   }
 
   @media (max-width: 490px) {
-    // width: 90%;
+    width: 100%;
   }
 }
 
@@ -87,7 +93,7 @@
 
 .list {
   padding-right: .5rem;
-  overflow-y: auto;
+  overflow: hidden;
 
     &::-webkit-scrollbar-thumb
     {
@@ -103,6 +109,26 @@
     {
       @include mixins.scrollbar;
     }
+
+    .itemContainer {
+      animation: itemFadeIn 700ms ease forwards;
+    }
+
+    & :nth-child(1) {
+      animation-delay: 200ms;
+    }
+
+    & :nth-child(2) {
+      animation-delay: 400ms;
+    }
+
+    & :nth-child(3) {
+      animation-delay: 600ms;
+    }
+
+  @media (max-width: 490px) {
+    padding-right: 0;
+  }
 }
 
 .btngroup {
@@ -208,6 +234,7 @@
   padding: 1rem;
   color: variables.$primary-blue;
   border-bottom: 1px solid variables.$primary-blue;
+  opacity: 0;  
 
     &:last-of-type {
       border-bottom: none;
@@ -220,6 +247,10 @@
   h2 {
     font-size: 1rem;
     text-align: center;
+
+    @media (max-width: 490px) {
+      font-size: .875rem;
+    } 
   }
   @media (max-width:1200px) {
     padding-left: 0.5rem;
@@ -241,6 +272,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 490px) {
+    font-size: .75rem;
+  }
 }
 
 .itemSpecies {
@@ -342,11 +377,14 @@
 // ************************* Demo Generic Item Styling *************************
 
 .genericContainer {
+  opacity: 0;
   background-color: #f7f7f7;
   padding: 1rem;
   color: variables.$primary-blue;
   border-bottom: 1px solid variables.$primary-blue;
   font-size: .875rem;
+  animation: itemFadeIn 700ms ease forwards;
+  animation-delay: 800ms;
 
   &:last-of-type {
     border-bottom: none;
@@ -359,6 +397,11 @@
   @media (max-width: 1200px) {
     padding: .5rem;
     font-size: .75rem;
+  }
+
+  @media (max-width: 490px) {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
@@ -379,6 +422,14 @@
   @media (max-width: 1200px) {
     font-size: .875rem;
   }
+
+  @media (max-width: 490px) {
+    font-size: .75rem;
+  }
+}
+
+.flexGrow {
+  flex-grow: 1;
 }
 
 .genericName {
@@ -490,4 +541,28 @@
 .genericDeleteIcon {
   @include mixins.dangerIcon;
   width: 1.25rem;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(20%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes itemFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(100%) scale(1.2);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }

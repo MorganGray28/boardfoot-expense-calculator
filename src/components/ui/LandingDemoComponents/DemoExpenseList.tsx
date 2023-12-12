@@ -25,7 +25,6 @@ function DemoExpenseList() {
 				</button> */}
 				</div>
 				<div className={styles.list}>
-					{/* {lumberListItems} {genericExpenseList} */}
 					{demoLumberItems.map((i) => (
 						<DemoLumberItem {...i} key={i.name} />
 					))}
@@ -83,7 +82,7 @@ function DemoGeneralExpenseItem({ amount, name, cost }: { amount: number; name: 
 				<div className={styles.genericListItemContainer}>
 					<p className={styles.genericListItem}>{amount}</p>
 				</div>
-				<div className={styles.genericListItemContainer}>
+				<div className={`${styles.genericListItemContainer} ${styles.flexGrow}`}>
 					<p className={styles.genericListItem}>{name}</p>
 				</div>
 				<div className={styles.genericListItemContainer}>
@@ -92,7 +91,6 @@ function DemoGeneralExpenseItem({ amount, name, cost }: { amount: number; name: 
 					</p>
 				</div>
 				<div className={styles.genericListItemContainer}>
-					{/* <p className={styles.genericListItem}>Total:</p> */}
 					<p className={styles.genericListItem}>${(amount * cost).toFixed(2)}</p>
 				</div>
 			</div>
