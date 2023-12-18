@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import toast from 'react-hot-toast';
 import LandingPage from '../components/LandingPage';
+import LoadingSpinner from '../components/ui/LoadingSpinner/LoadingSpinner';
 
 // TODO: redesign pojectcostsummary component
 // FIXME: number inputs won't allow a value of ".0X"
@@ -21,7 +22,7 @@ import LandingPage from '../components/LandingPage';
 const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);
 	const [profileMenuOpen, setProfileMenuOpen] = useState(false);
-	const { data: session } = useSession();
+	const { data: session, status: sessionStatus } = useSession();
 	const [currentCalculatorValues, setCurrentCalculatorValues] = useState<BoardFeetType | null>(null);
 	const [activeProject, setActiveProject] = useState<ProjectType | null>(null);
 
@@ -76,6 +77,14 @@ const Home: NextPage = () => {
 		}
 	}
 
+	if (sessionStatus === 'loading') {
+		return (
+			<div style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+				<LoadingSpinner type='standalone' />
+			</div>
+		);
+	}
+
 	return (
 		<>
 			<Head>
@@ -108,9 +117,6 @@ const Home: NextPage = () => {
 							</>
 						) : (
 							<>
-								{/* <button onClick={handleSignIn} className={styles.loginButton}>
-									Sign In
-								</button> */}
 								<div className={styles.profileMenuContainer} ref={profileDropdownRef}>
 									<FontAwesomeIcon onClick={handleProfileMenu} className={styles.avatarIcon} icon={faUser} />
 									<div
@@ -143,7 +149,6 @@ const Home: NextPage = () => {
 							/>
 						) : (
 							<LandingPage signIn={handleSignIn} />
-							// <p>log in to save and track your expenses</p>
 						)}
 					</main>
 				</div>
