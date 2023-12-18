@@ -23,12 +23,7 @@ function LandingPage({ signIn }: PropsType) {
 						Sign In
 					</button>
 				</div>
-				<div>
-					<DemoExpenseList />
-					<p className={styles.exampleSubtext}>
-						Calculate hardwood costs and add other project-specific expenses
-					</p>
-				</div>
+				<DemoExpenseList />
 			</div>
 
 			<div className={`${styles.section} ${styles.sectionTwo}`}>

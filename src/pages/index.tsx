@@ -16,6 +16,8 @@ import LandingPage from '../components/LandingPage';
 import LoadingSpinner from '../components/ui/LoadingSpinner/LoadingSpinner';
 
 // TODO: redesign pojectcostsummary component
+// TODO: redesign dashboard for users with no projects and empty Consumables
+// TODO: add delete user account option under profile icon
 // FIXME: number inputs won't allow a value of ".0X"
 // FIXME: Add additional authentication methods (facebook, etc)
 
