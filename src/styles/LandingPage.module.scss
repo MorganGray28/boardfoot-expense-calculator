@@ -79,8 +79,10 @@
 }
 
 .calculatorIcon {
+  opacity: 0;
   fill: linear-gradient(180deg, rgb(64, 174, 253) 9.16%, #0020bf 120.02%);
   margin-top: 2rem;
+  animation: fadeIn 800ms ease forwards;
 
   @media (max-width: 1620px) {
     width: 4rem;
@@ -118,6 +120,18 @@
   }
 }
 
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .magicFont {
   background: linear-gradient(180deg, rgb(64, 174, 253) 9.16%, #0020bf 120.02%);
   background-clip: text;
@@ -136,29 +150,40 @@
   padding-bottom: 2rem;
 }
 
+.exampleSubtext {
+  text-align: center;
+  opacity: 0;
+  animation: fadeInSlide 1.2s forwards;
+  animation-delay: 300ms;
+  color: rgba(46, 72, 107, 0.85);
+  font-size: 1rem;
+  padding-top: 1.25rem;
+}
+
 .signInButton {
   opacity: 0;
   font-size: 1rem;
   font-weight: 400;
-  background-color: transparent;
   padding: .875rem 2rem;
-  color: #4178E1;
-  border: 2px solid #4178E1;
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(213, 86%, 55%);
+  // border: 1px solid hsl(213, 86%, 55%);
+  border: none;
   border-radius: 7px;
   transition: all 300ms ease;
   animation: fadeIn 1.2s ease forwards;
   animation-delay: 200ms;
 
   &:hover,&:focus {
-    color: hsl(0, 0%, 100%);
-    background-color: hsl(213, 86%, 55%);
-    border-color: hsl(213, 86%, 55%);
-    transform: scale(1.07);
+    background-color: hsl(213, 85%, 48%);
+    transform: scale(1.5);
     box-shadow: 7px 6px 28px rgba(65, 121, 224, 0.55);
   }
 
   &:focus {
-    outline: none;
+    transition: none;
+    outline: 2px solid hsl(213, 85%, 48%);
+    outline-offset: 2px;
   }
 
   &:active {
