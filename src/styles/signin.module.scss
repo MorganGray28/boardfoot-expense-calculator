@@ -14,8 +14,8 @@
   flex-direction: column;
   align-items: center;
   background-color: rgb(255, 255, 255);
-  min-height: 30%;
-  min-width: 20%;
+  // min-height: 30%;
+  // min-width: 20%;
   padding: 2rem 3rem;
   border-radius: 15px;
   box-shadow: 5px 5px 25px rgba(128, 128, 128, 0.243);
@@ -23,7 +23,7 @@
 
 .header {
   font-size: 2rem;
-  padding-bottom: .5rem;
+  padding-bottom: .75rem;
   color: #222222;
 }
 
@@ -36,8 +36,11 @@
 }
 
 .providerButton {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   width: 100%;
-  font-size: .875rem;
+  font-size: 1rem;
   font-weight: 500;
   padding: 1rem;
   background-color: transparent;
@@ -47,8 +50,13 @@
   border-radius: 5px;
   transition: all 300ms ease ;
 
+  img {
+    width: 1.5rem;
+    height: auto;
+  }
+
   &:hover {
-    color: rgb(44, 44, 198);
+    color: rgb(8, 18, 213);
     border-color: rgb(44, 44, 198);
   }
 }
