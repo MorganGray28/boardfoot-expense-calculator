@@ -150,7 +150,7 @@
   position: relative;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
+	justify-content: space-between;
 	padding: 1rem .5rem;
 
   @media (max-width: 1200px) {
@@ -236,6 +236,11 @@
   justify-content: flex-end;
   padding-top: 1.5rem;
 
+  & svg {
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+
   @media (max-width: 1200px) {
     padding-top: .5rem;
   }
@@ -245,7 +250,6 @@
   color: variables.$danger-red;
   transition: color 300ms ease;
   width: 1.25rem;
-  margin-left: 1rem;
 
   &:hover, &:focus, &:active {
     color: variables.$danger-red-hover;
@@ -274,6 +278,11 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
+
+  & svg {
+    height: 1.25rem;
+    width: 1.25rem;
+  }
 }
 
 @mixin inputError {

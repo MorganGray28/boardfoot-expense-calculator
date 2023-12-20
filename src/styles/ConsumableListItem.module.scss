@@ -90,6 +90,11 @@
       color: variables.$primary-button-blue;
     }
   }
+
+  @media (max-width: 765px) {
+    margin-left: 1rem;
+    
+  }
 }
 
 .iconDeleteButton {
