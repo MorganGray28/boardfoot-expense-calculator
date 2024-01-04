@@ -55,6 +55,9 @@ export function ActiveProjectForm({
 		onError: () => {
 			toast.error('Error, please try again');
 		},
+		onSettled: () => {
+			setDeleteModalIsOpen(false);
+		},
 	});
 
 	function handleEditProject() {
@@ -71,7 +74,7 @@ export function ActiveProjectForm({
 		if (activeProject) {
 			deleteProject(activeProject.id);
 		}
-		setDeleteModalIsOpen(false);
+		// setDeleteModalIsOpen(false);
 	}
 
 	function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
@@ -163,7 +166,13 @@ export function ActiveProjectForm({
 					</p>
 					<div className={styles.buttonGroup}>
 						<Button onClick={() => setDeleteModalIsOpen(false)}>Cancel</Button>
-						<Button disabled={isDeleting} variant='outlined' color='danger' onClick={handleDeleteProject}>
+						<Button
+							isLoading={isDeleting}
+							loadingText='Deleting'
+							variant='outlined'
+							color='danger'
+							onClick={handleDeleteProject}
+						>
 							Delete
 						</Button>
 					</div>
