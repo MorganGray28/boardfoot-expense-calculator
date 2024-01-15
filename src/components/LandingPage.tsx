@@ -67,7 +67,7 @@ function LandingPage({ signIn }: PropsType) {
 				<div className={styles.blurbBlock}>
 					<h2 className={styles.header}>Sign in using an existing account</h2>
 					<p className={styles.subheader}>
-						No need to keep track of another login account, sign in using your google or facebook account
+						No need to keep track of another login account, sign in using your Google or Discord account
 					</p>
 					<button onClick={signIn} className={styles.signInButton}>
 						Get Started
