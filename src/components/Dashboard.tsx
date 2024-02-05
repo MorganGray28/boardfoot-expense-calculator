@@ -39,11 +39,13 @@ export default function Dashboard({ projects, activeProject, setActiveProject, i
 				<ExpenseAndConsumableGroup
 					activeProject={activeProject}
 					setActiveProject={setActiveProject}
+					totalExpenses={totalExpenseAmount}
+					totalConsumables={totalConsumableAmount}
 					setTotalExpenseAmount={setTotalExpenseAmount}
 					setTotalConsumableAmount={setTotalConsumableAmount}
 				/>
 
-				<ProjectCostSummary totalExpenses={totalExpenseAmount} totalConsumables={totalConsumableAmount} />
+				{/* <ProjectCostSummary totalExpenses={totalExpenseAmount} totalConsumables={totalConsumableAmount} /> */}
 			</div>
 		);
 	} else if (isLoading) {
