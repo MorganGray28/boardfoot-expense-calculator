@@ -10,7 +10,7 @@ function DemoExpenseList() {
 		{ name: 'Table Stretchers', species: 'Walnut', thickness: 1, boardFeet: 2.78, cost: 56.49 },
 	];
 
-	const genericExpenseItems = [{ name: 'z-clip fasteners', amount: 6, cost: 0.65 }];
+	const genericExpenseItems = [{ name: 'z-clips', amount: 6, cost: 0.65 }];
 	return (
 		<div className={styles.DemoExpenseList}>
 			<div className={styles.container}>
