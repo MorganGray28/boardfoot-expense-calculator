@@ -24,10 +24,11 @@ import LoadingSpinner from '../components/ui/LoadingSpinner/LoadingSpinner';
 const Home: NextPage = () => {
 	const [modalOpen, setModalOpen] = useState(false);
 	const [profileMenuOpen, setProfileMenuOpen] = useState(false);
-	const { data: session, status: sessionStatus } = useSession();
 	const [currentCalculatorValues, setCurrentCalculatorValues] = useState<BoardFeetType | null>(null);
 	const [activeProject, setActiveProject] = useState<ProjectType | null>(null);
+	const [signInLoading, setsignInLoading] = useState(false);
 
+	const { data: session, status: sessionStatus } = useSession();
 	const { data: projectList, isLoading } = trpc.user.getProjectsById.useQuery(session?.user?.id as string, {
 		enabled: session?.user?.id !== undefined,
 		onSuccess: (data) => {
@@ -56,6 +57,7 @@ const Home: NextPage = () => {
 
 	function handleSignIn() {
 		signIn();
+		setsignInLoading(true);
 	}
 
 	function handleSignOut() {
@@ -150,7 +152,7 @@ const Home: NextPage = () => {
 								setActiveProject={setActiveProject}
 							/>
 						) : (
-							<LandingPage signIn={handleSignIn} />
+							<LandingPage signIn={handleSignIn} isLoading={signInLoading} />
 						)}
 					</main>
 				</div>

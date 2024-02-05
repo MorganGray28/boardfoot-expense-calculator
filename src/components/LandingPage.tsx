@@ -6,9 +6,10 @@ import DemoExpenseList from './ui/LandingDemoComponents/DemoExpenseList';
 
 type PropsType = {
 	signIn: () => void;
+	isLoading: boolean;
 };
 
-function LandingPage({ signIn }: PropsType) {
+function LandingPage({ signIn, isLoading }: PropsType) {
 	return (
 		<div className={styles.container}>
 			<div className={`${styles.section} ${styles.sectionOne}`}>
@@ -19,7 +20,7 @@ function LandingPage({ signIn }: PropsType) {
 					<p className={styles.subheader}>
 						Are you letting unnoticed expenses go unaccounted for when you send out the bill?
 					</p>
-					<button onClick={signIn} className={styles.signInButton}>
+					<button onClick={signIn} disabled={isLoading} className={styles.signInButton}>
 						Sign In
 					</button>
 				</div>
@@ -69,7 +70,7 @@ function LandingPage({ signIn }: PropsType) {
 					<p className={styles.subheader}>
 						No need to keep track of another login account, sign in using your Google or Discord account
 					</p>
-					<button onClick={signIn} className={styles.signInButton}>
+					<button onClick={signIn} disabled={isLoading} className={styles.signInButton}>
 						Get Started
 					</button>
 				</div>
