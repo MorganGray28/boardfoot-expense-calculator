@@ -10,15 +10,20 @@
 }
 
 .container {
+  min-width: 28rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: rgb(255, 255, 255);
-  // min-height: 30%;
-  // min-width: 20%;
   padding: 2rem 3rem;
   border-radius: 15px;
   box-shadow: 5px 5px 25px rgba(128, 128, 128, 0.243);
+
+  @media (max-width: 540px) {
+    padding: 1.5rem 2rem;
+    min-width: 0;
+    min-height: 0;
+  }
 }
 
 .header {
@@ -32,11 +37,13 @@
 }
 
 .providerList {
+  width: 100%;
   padding: 2rem 0;
 }
 
 .providerButton {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 1rem;
   width: 100%;
