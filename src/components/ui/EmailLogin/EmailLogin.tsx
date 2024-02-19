@@ -1,6 +1,8 @@
 'use client';
 import React, { useState } from 'react';
 import styles from './EmailLogin.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 import { signIn } from 'next-auth/react';
 
@@ -18,10 +20,12 @@ function EmailLogin() {
 				type='text'
 				id='email'
 				value={email}
+				placeholder='Email Address'
 				onChange={(e) => setEmail(e.target.value)}
 			/>
 			<button className={styles.providerButton} onClick={(e) => handleEmailSubmit(e)}>
-				Continue with email
+				<FontAwesomeIcon className={styles.emailIcon} icon={faEnvelope} />
+				Continue with Email
 			</button>
 		</>
 	);
