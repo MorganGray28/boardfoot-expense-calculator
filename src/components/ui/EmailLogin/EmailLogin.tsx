@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import styles from './EmailLogin.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import toast from 'react-hot-toast';
 
 import { signIn } from 'next-auth/react';
 
@@ -11,7 +12,11 @@ function EmailLogin() {
 
 	function handleEmailSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
 		e.preventDefault();
-		signIn('resend', { email, callbackUrl: '/' });
+		if (!email) {
+			toast.error('please enter valid email address');
+		} else {
+			signIn('resend', { email, callbackUrl: '/' });
+		}
 	}
 	return (
 		<>
