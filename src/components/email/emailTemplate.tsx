@@ -1,53 +1,89 @@
-import { Body, Container, Head, Heading, Html, Link, Preview } from '@react-email/components';
+import {
+	Body,
+	Container,
+	Head,
+	Heading,
+	Html,
+	Button,
+	Preview,
+	Section,
+	Text,
+	Hr,
+} from '@react-email/components';
 import * as React from 'react';
 
-interface WaitlistEmailProps {
+type MagicLinkEmailType = {
 	url: string;
-}
+	identifier: string;
+};
 
-export const WaitlistEmail: React.FC<WaitlistEmailProps> = ({ url }) => (
+export const MagicLinkEmail: React.FC<MagicLinkEmailType> = ({ url, identifier }) => (
 	<Html>
 		<Head />
-		<Preview>Magic Link to sign in to Woodworking Expense Calculator</Preview>
+		<Preview>Magic Link sign in for Woodworking Expense Tracker</Preview>
 		<Body style={main}>
 			<Container style={container}>
-				<Heading style={h1}>Log in to start tracking your Woodworking Expenses</Heading>
-				<Link href={url} target='_blank'>
-					Click here to login using magic link
-				</Link>
-				{/* <Text style={text}>
-				</Text> */}
+				<Heading style={h1}>Woodworking Expense Tracker</Heading>
+				<Hr style={divider} />
+				<Text style={text}>Hello, {identifier}</Text>
+				<Text style={text}>Sign in to start tracking your woodworking expenses</Text>
+				<Section style={btnContainer}>
+					<Button style={button} href={url} target='_blank'>
+						Sign In
+					</Button>
+				</Section>
 			</Container>
 		</Body>
 	</Html>
 );
 
-export default WaitlistEmail;
+export default MagicLinkEmail;
 
 const main = {
 	backgroundColor: '#ffffff',
-	margin: '0 auto',
-
 	fontFamily:
-		"-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+		'-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
 };
 
 const container = {
-	margin: 'auto',
-	padding: '96px 20px 64px',
+	border: '1px solid rgba(0,0,0,.08)',
+	borderRadius: '9px',
+	margin: '0 auto',
+	padding: '32px 24px 42px 24px',
 };
 
 const h1 = {
-	color: '#222',
-	fontSize: '24px',
-	fontWeight: '600',
-	lineHeight: '40px',
-	margin: '0 0 20px',
+	textAlign: 'center' as const,
+	fontSize: '1.5rem',
+	fontWeight: '400',
+	paddingBottom: '.75rem',
+	color: '#32436d',
 };
 
-// const text = {
-// 	color: '#aaaaaa',
-// 	fontSize: '14px',
-// 	lineHeight: '24px',
-// 	margin: '0 0 40px',
-// };
+const divider = {
+	borderColor: '#e6ebf1',
+	margin: '24px 0',
+};
+
+const btnContainer = {
+	textAlign: 'center' as const,
+};
+
+const text = {
+	color: '#525f7f',
+	textAlign: 'center' as const,
+	fontSize: '16px',
+	lineHeight: '26px',
+};
+
+const button = {
+	backgroundColor: '#1b4276',
+	borderRadius: '5px',
+	color: '#fff',
+	fontSize: '16px',
+	textDecoration: 'none',
+	textAlign: 'center' as const,
+	display: 'block',
+	marginTop: '64px',
+	padding: '12px 24px',
+};

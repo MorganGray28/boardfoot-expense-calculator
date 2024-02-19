@@ -1,6 +1,6 @@
 import { SendVerificationRequestParams } from 'next-auth/providers';
 import { resend } from '../lib/resend';
-import { WaitlistEmail } from '../components/email/emailTemplate';
+import { MagicLinkEmail } from '../components/email/emailTemplate';
 
 export default async function sendVerificationRequest(params: SendVerificationRequestParams) {
 	const { identifier, url } = params;
@@ -12,7 +12,7 @@ export default async function sendVerificationRequest(params: SendVerificationRe
 			to: identifier,
 			subject: `Log in to ${host}`,
 			text: text({ url, host }),
-			react: WaitlistEmail({ url }),
+			react: MagicLinkEmail({ url, identifier }),
 		});
 	} catch (error) {
 		console.log(error);
