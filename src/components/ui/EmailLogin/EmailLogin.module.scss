@@ -1,0 +1,32 @@
+@use '/src/styles/mixins';
+@use '/src/styles/variables';
+
+.emailLabel {
+  font-weight: 400;
+  font-size: .875rem;
+  color: variables.$primary-blue;
+}
+
+.emailInput {
+  @include mixins.input;
+  margin-top: 1rem;
+  background-color: rgba(16, 77, 191, 0.03);
+  border-bottom: 1px solid rgba(101, 102, 146, 0.5);;
+  width: 100%;
+  height: 2.5rem;
+  margin-bottom: 1rem;
+  font-size: .875rem;
+
+  &::placeholder {
+    color: rgba(108, 108, 153, 0.51);
+  }
+}
+
+.providerButton {
+  @include mixins.providerButton;
+
+  & svg {
+    font-size: 1.25rem;
+    color: variables.$primary-blue;
+  }
+}
