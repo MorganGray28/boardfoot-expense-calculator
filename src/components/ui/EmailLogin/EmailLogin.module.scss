@@ -1,0 +1,12 @@
+@use '/src/styles/mixins';
+@use '/src/styles/variables';
+
+.emailInput {
+  width: 100%;
+  height: 2rem;
+  margin-bottom: 1rem;
+}
+
+.providerButton {
+  @include mixins.providerButton;
+}
