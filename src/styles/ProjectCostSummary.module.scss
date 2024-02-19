@@ -2,6 +2,7 @@
 
 .ProjectCostSummary {
   padding-bottom: 5rem;
+  width: 100%;
 }
 
 .header {
@@ -14,8 +15,6 @@
 }
 
 .container {
-  width: 75%;
-  margin: 0 auto;
   padding: 2rem 3rem;
   border: 2px solid #DAD9F4;
   border-radius: 1.125rem;
@@ -26,7 +25,6 @@
 
   @media (max-width: 490px) {
     padding: 1rem;
-    width: 85%;
   }
 }
 

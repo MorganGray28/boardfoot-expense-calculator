@@ -324,7 +324,7 @@ function BoardFootCalculator({ handleModal }: PropsType) {
 							</div>
 							<div className={styles.labelInputGroup}>
 								<label className={styles.inputLabel} htmlFor='price'>
-									Price
+									Price / BF
 								</label>
 								<input
 									id='price'
