@@ -3,8 +3,8 @@ import type { ProjectType } from '../types/types';
 import { ActiveProjectForm } from './ActiveProjectForm';
 import ExpenseAndConsumableGroup from './ExpenseAndConsumableGroup';
 import NewProjectForm from './NewProjectForm';
-import ProjectCostSummary from './ProjectCostSummary';
 import LoadingSpinner from './ui/LoadingSpinner/LoadingSpinner';
+import styles from '../styles/Dashboard.module.scss';
 
 type PropsType = {
 	projects: ProjectType[] | undefined;
@@ -39,11 +39,13 @@ export default function Dashboard({ projects, activeProject, setActiveProject, i
 				<ExpenseAndConsumableGroup
 					activeProject={activeProject}
 					setActiveProject={setActiveProject}
+					totalExpenses={totalExpenseAmount}
+					totalConsumables={totalConsumableAmount}
 					setTotalExpenseAmount={setTotalExpenseAmount}
 					setTotalConsumableAmount={setTotalConsumableAmount}
 				/>
 
-				<ProjectCostSummary totalExpenses={totalExpenseAmount} totalConsumables={totalConsumableAmount} />
+				{/* <ProjectCostSummary totalExpenses={totalExpenseAmount} totalConsumables={totalConsumableAmount} /> */}
 			</div>
 		);
 	} else if (isLoading) {
@@ -54,7 +56,8 @@ export default function Dashboard({ projects, activeProject, setActiveProject, i
 		);
 	} else {
 		return (
-			<div>
+			<div style={{ paddingTop: '4rem' }}>
+				<p className={styles.newProjectMessage}>Create a New Project</p>
 				<NewProjectForm
 					cancel={false}
 					setActiveProject={setActiveProject}

@@ -54,15 +54,7 @@
   }
 
   @media (max-width: 1200px) {
-    width: 500px;
-  }
-
-  @media (max-width: 900px) {
-    width: 400px;
-  }
-
-  @media (max-width: 490px) {
-    width: 90%;
+    width: 100%;
   }
 }
 
@@ -153,7 +145,6 @@
 
 .list {
   height: 30rem;
-  padding-right: .5rem;
   overflow-y: auto;
   background-color: rgba(224, 224, 224, 0.1);
 
