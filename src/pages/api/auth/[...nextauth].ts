@@ -34,7 +34,7 @@ export const authOptions: NextAuthOptions = {
 	],
 	pages: {
 		signIn: '/auth/signin',
-		// verifyRequest: '/auth/emailVerification',
+		verifyRequest: '/auth/emailVerification',
 	},
 };
 
