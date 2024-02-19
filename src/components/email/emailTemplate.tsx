@@ -3,10 +3,9 @@ import * as React from 'react';
 
 interface WaitlistEmailProps {
 	url: string;
-	host: string;
 }
 
-export const WaitlistEmail: React.FC<WaitlistEmailProps> = ({ url, host }) => (
+export const WaitlistEmail: React.FC<WaitlistEmailProps> = ({ url }) => (
 	<Html>
 		<Head />
 		<Preview>Magic Link to sign in to Woodworking Expense Calculator</Preview>
@@ -46,9 +45,9 @@ const h1 = {
 	margin: '0 0 20px',
 };
 
-const text = {
-	color: '#aaaaaa',
-	fontSize: '14px',
-	lineHeight: '24px',
-	margin: '0 0 40px',
-};
+// const text = {
+// 	color: '#aaaaaa',
+// 	fontSize: '14px',
+// 	lineHeight: '24px',
+// 	margin: '0 0 40px',
+// };

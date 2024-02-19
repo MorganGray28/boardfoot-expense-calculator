@@ -12,7 +12,7 @@ export default async function sendVerificationRequest(params: SendVerificationRe
 			to: identifier,
 			subject: `Log in to ${host}`,
 			text: text({ url, host }),
-			react: WaitlistEmail({ url, host }),
+			react: WaitlistEmail({ url }),
 		});
 	} catch (error) {
 		console.log(error);
