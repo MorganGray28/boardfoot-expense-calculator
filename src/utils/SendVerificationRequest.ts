@@ -1,4 +1,4 @@
-import { SendVerificationRequestParams } from 'next-auth/providers';
+import type { SendVerificationRequestParams } from 'next-auth/providers';
 import { resend } from '../lib/resend';
 import { MagicLinkEmail } from '../components/email/emailTemplate';
 

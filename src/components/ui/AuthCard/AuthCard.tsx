@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef } from 'react';
+import React from 'react';
 import styles from './AuthCard.module.scss';
 
 function AuthCard({ children }: { children: React.ReactNode }) {
