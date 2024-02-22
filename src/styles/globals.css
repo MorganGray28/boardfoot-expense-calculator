@@ -20,24 +20,3 @@ a {
   box-sizing: border-box;
   font-family: inherit;
 }
-
-/* Responsive Breakpoints 
-
-  XL
-  @media (max-width: 1920px) {} 
-
-
-  LG
-  @media (max-width: 1620px) {} 
- 
-  MD
-  @media (max-width: 1200px) {} 
-
-  SM
-  @media (max-width: 900px) {} 
-
-  XS 
-  @media (max-width: 765px) {} 
-
-
-*/

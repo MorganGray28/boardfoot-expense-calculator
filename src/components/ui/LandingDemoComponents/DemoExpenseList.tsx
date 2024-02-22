@@ -1,7 +1,5 @@
 import React from 'react';
 import styles from './DemoExpenseList.module.scss';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 function DemoExpenseList() {
 	const demoLumberItems = [
@@ -19,10 +17,6 @@ function DemoExpenseList() {
 						<h4 className={styles.category}>Project Expenses</h4>
 						<p className={styles.categoryDescription}>Lumber and Project-specific costs</p>
 					</div>
-					{/* <button className={styles.addButton}>Add Expense</button>
-				<button className={styles.mobileAddButton}>
-					<FontAwesomeIcon icon={faPlus} className={styles.addIcon} />
-				</button> */}
 				</div>
 				<div className={styles.list}>
 					{demoLumberItems.map((i) => (
@@ -63,14 +57,6 @@ function DemoLumberItem({ name, species, thickness, boardFeet, cost }: DemoLumbe
 				<p className={styles.itemBoardFeet}>{boardFeet} BF</p>
 				<p className={styles.itemCost}>${cost}</p>
 			</div>
-			{/* <div className={styles.itemButtonGroup}>
-				<button className={styles.itemIconEditButton} title='edit'>
-					<FontAwesomeIcon icon={faPenToSquare} className={styles.itemEditIcon} />
-				</button>
-				<button className={styles.itemIconDeleteButton} title='delete'>
-					<FontAwesomeIcon icon={faTrashCan} className={styles.itemDeleteIcon} />
-				</button>
-			</div> */}
 		</div>
 	);
 }
@@ -94,19 +80,6 @@ function DemoGeneralExpenseItem({ amount, name, cost }: { amount: number; name: 
 					<p className={styles.genericListItem}>${(amount * cost).toFixed(2)}</p>
 				</div>
 			</div>
-			{/* <div className={styles.buttonGroup}>
-				<button onClick={() => setIsEditingExpense(true)} className={styles.iconEditButton} title='edit'>
-					<FontAwesomeIcon icon={faPenToSquare} className={styles.editIcon} />
-				</button>
-				<button
-					onClick={handleDelete}
-					disabled={deleteExpense.isLoading}
-					className={styles.iconDeleteButton}
-					title='delete'
-				>
-					<FontAwesomeIcon icon={faTrashCan} className={styles.deleteIcon} />
-				</button>
-			</div> */}
 		</div>
 	);
 }
