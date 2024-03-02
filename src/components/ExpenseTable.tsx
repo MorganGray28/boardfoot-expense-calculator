@@ -52,11 +52,12 @@ export default function ExpenseTable({
 	function handleChange(index: number, e: React.FormEvent<HTMLInputElement>) {
 		const data = [...expenses];
 		const property = e.currentTarget.name;
-		if (data && data[index]) {
+		const key = data[index];
+		if (key) {
 			if (property === 'amount' || property === 'cost') {
-				data[index]![property] = parseFloat(parseFloat(e.currentTarget.value).toFixed(2));
+				key[property] = parseFloat(parseFloat(e.currentTarget.value).toFixed(2));
 			} else {
-				data[index]![property] = e.currentTarget.value;
+				key[property] = e.currentTarget.value;
 			}
 		}
 		setExpenses(data);
